@@ -114,6 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\IndexPageModel.cs" />
+    <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
+    <Compile Include="Services\Interfaces\IPayDayService.cs" />
+    <Compile Include="PageBuilders\PageBuilder.cs" />
+    <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Web.PageBuilders;
 
 namespace Web.Controllers
 {
@@ -17,51 +18,5 @@ namespace Web.Controllers
             return View(pageModel);
         }
 
-    }
-
-    public interface IPageBuilder
-    {
-        IndexPageModel Build();
-    }
-
-    public class PageBuilder : IPageBuilder
-    {
-        private readonly IPayDayService _payDayService;
-
-        public PageBuilder(IPayDayService payDayService)
-        {
-            _payDayService = payDayService;
-        }
-
-        public IndexPageModel Build()
-        {
-            var payDayString = _payDayService.IsPayDay ? "YES!!1!" : "No =(";
-
-            return new IndexPageModel(payDayString);
-        }
-    }
-
-    public interface IPayDayService
-    {
-        bool IsPayDay { get; }
-    }
-
-    public class PayDayService : IPayDayService
-    {
-        public bool IsPayDay
-        {
-            get { return false; }
-        }
-    }
-
-    public class IndexPageModel
-    {
-        public IndexPageModel(
-            string payDayString)
-        {
-            PayDayString = payDayString;
-        }
-
-        public string PayDayString { get; private set; }
     }
 }

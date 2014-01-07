@@ -1,6 +1,8 @@
 ﻿using Castle.Core;
 using Castle.Windsor;
 using Web.Controllers;
+using Web.PageBuilders;
+using Web.Services;
 
 namespace Web.Plumbing
 {
