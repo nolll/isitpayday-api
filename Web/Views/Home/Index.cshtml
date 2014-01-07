@@ -1,0 +1,143 @@
+﻿@model Web.Controllers.IndexPageModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Is it payday?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="title" content="Is it payday?" />
+<meta name="keywords" content="pay day payday" />
+<meta name="description" content="Find out if today is payday" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="image_src" href="/money.jpg" />
+<link href="/styles.css" rel="stylesheet"/><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</head>
+    <body>
+
+<h1>Is it payday?</h1>
+<p class="status"><span>@Model.PayDayString</span></p>
+@*
+<div class="settings">
+
+	<form action="/" method="get">
+	<div class="settings">
+	
+		<h2>Settings</h2>
+		
+		<h3>Country</h3>
+		<div class="country-info">
+			<?php
+			if($activeForm == "country"){
+				$countryList = $geoHandler->getCountryList();
+			?>
+				<p>
+					<select id="input_country" name="country">
+					<?php
+						for($i = 0; $i < count($countryList); $i++){
+							$c = $countryList[$i];
+							$selectStr = strtolower($c->code) == strtolower($location->country->code) ? " selected=\"selected\"" : "";
+					?>
+							<option value="<?php echo $c->code?>"<?php echo $selectStr?>><?php echo $c->name?></option>
+					<?php
+						}
+					?>
+					</select>
+				</p>
+			<?php
+			} else {
+			?>
+				<p>
+					<?php echo $location->country->name?>
+					<a href="/?change=country" class="change-country">Change</a>
+				</p>
+			<?php
+			}
+			?>
+		</div>
+		
+		<h3>Timezone</h3>
+		<div class="timezone-info">
+			<?php
+			if($activeForm == "timezone"){
+			?>
+				<p>
+					<select id="input_timezone" name="timezone">
+					<?php
+						$timezoneList = $geoHandler->getTimezones();
+						for($i = 0; $i <= count($timezoneList); $i++){
+							$tz = $timezoneList[$i];
+							$selectStr = strtolower($tz) == strtolower($location->timezone) ? " selected=\"selected\"" : "";
+					?>
+							<option value="<?php echo $tz?>"<?php echo $selectStr?>><?php echo $tz?></option>
+					<?php
+						}
+					?>
+					</select>
+				</p>
+			<?php
+			} else {
+			?>
+				<p>
+					<?php echo $location->timezone?>
+					<a href="/?change=timezone" class="change-timezone">Change</a>
+				</p>
+			<?php
+			}
+			?>
+		</div>
+
+		<h3>Payday</h3>
+		<div class="payday-info">
+			<?php
+			if($activeForm == "payday"){
+			?>
+				<p>
+					<select id="input_payday" name="payday">
+					<?php
+						for($i = 1; $i <= 31; $i++){
+							$selected = $i == $payday ? " selected=\"selected\"" : "";
+					?>
+							<option value="<?php echo $i?>"<?php echo $selected?>><?php echo $i?></option>
+					<?php	
+						}
+					?>
+					</select>
+				</p>
+			<?php
+			} else {
+			?>
+				<p>
+					<?php echo $payday?>
+					<a href="/?change=payday" class="change-payday">Change</a>
+				</p>
+			<?php
+			}
+			?>
+		</div>
+		
+		<noscript>
+			<button type="submit">Save</button>
+		</noscript>
+		
+	</div>
+	
+	</form>
+</div>
+*@
+<p class="footer">
+	@*<?php echo $now->format("F j Y g:i a")?> (<?php echo $location->timezone?>)*@
+</p>
+
+<p class="contact">
+	Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
+</p>
+
+@*<?php include("ga.php");?>*@
+
+</body>
+</html>
