@@ -22,7 +22,7 @@
 
 <h1>Is it payday?</h1>
 <p class="status"><span>@Model.PayDayString</span></p>
-@*
+
 <div class="settings">
 
 	<form action="/" method="get">
@@ -31,11 +31,11 @@
 		<h2>Settings</h2>
 		
 		<h3>Country</h3>
-		<div class="country-info">
-			<?php
-			if($activeForm == "country"){
+	    <div class="country-info">
+            @if(Model.ShowCountryForm)
+            {
+                @*
 				$countryList = $geoHandler->getCountryList();
-			?>
 				<p>
 					<select id="input_country" name="country">
 					<?php
@@ -49,23 +49,22 @@
 					?>
 					</select>
 				</p>
-			<?php
+                *@
 			} else {
-			?>
-				<p>
+				@*
+                <p>
 					<?php echo $location->country->name?>
 					<a href="/?change=country" class="change-country">Change</a>
 				</p>
-			<?php
+                *@
 			}
-			?>
 		</div>
 		
 		<h3>Timezone</h3>
 		<div class="timezone-info">
-			<?php
-			if($activeForm == "timezone"){
-			?>
+			@if(Model.ShowTimeZoneForm)
+            {
+                @*
 				<p>
 					<select id="input_timezone" name="timezone">
 					<?php
@@ -80,45 +79,30 @@
 					?>
 					</select>
 				</p>
-			<?php
+                *@
 			} else {
-			?>
-				<p>
+				@*
+                <p>
 					<?php echo $location->timezone?>
 					<a href="/?change=timezone" class="change-timezone">Change</a>
 				</p>
-			<?php
+                *@
 			}
-			?>
 		</div>
 
 		<h3>Payday</h3>
 		<div class="payday-info">
-			<?php
-			if($activeForm == "payday"){
-			?>
-				<p>
-					<select id="input_payday" name="payday">
-					<?php
-						for($i = 1; $i <= 31; $i++){
-							$selected = $i == $payday ? " selected=\"selected\"" : "";
-					?>
-							<option value="<?php echo $i?>"<?php echo $selected?>><?php echo $i?></option>
-					<?php	
-						}
-					?>
-					</select>
-				</p>
-			<?php
+			@if(Model.ShowPayDayForm)
+            {
+                <p>
+		            @Html.DropDownListFor(model => model.PayDay, Model.PayDayItems, new {@id = "input_payday"})
+                </p>
 			} else {
-			?>
-				<p>
-					<?php echo $payday?>
-					<a href="/?change=payday" class="change-payday">Change</a>
-				</p>
-			<?php
+                <p>
+			        @Model.PayDay
+			        <a href="/?change=payday" class="change-payday">Change</a>
+			    </p>
 			}
-			?>
 		</div>
 		
 		<noscript>
@@ -129,7 +113,7 @@
 	
 	</form>
 </div>
-*@
+
 <p class="footer">
 	@*<?php echo $now->format("F j Y g:i a")?> (<?php echo $location->timezone?>)*@
 </p>

@@ -4,6 +4,6 @@ namespace Web.PageBuilders
 {
     public interface IPageBuilder
     {
-        IndexPageModel Build();
+        IndexPageModel Build(string activeForm = null);
     }
 }

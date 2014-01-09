@@ -12,9 +12,9 @@ namespace Web.Controllers
             _pageBuilder = pageBuilder;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string change = null)
         {
-            var pageModel = _pageBuilder.Build();
+            var pageModel = _pageBuilder.Build(change);
             return View(pageModel);
         }
 

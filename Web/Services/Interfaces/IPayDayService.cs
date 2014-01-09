@@ -3,5 +3,6 @@
     public interface IPayDayService
     {
         bool IsPayDay { get; }
+        int GetPayDay();
     }
 }
