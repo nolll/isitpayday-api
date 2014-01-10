@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Web.Services
 {
@@ -8,5 +9,6 @@ namespace Web.Services
         DateTime GetTime(TimeZoneInfo timeZone);
         DateTime Parse(string str, TimeZoneInfo timezone = null);
         DateTime ConvertToUtc(DateTime dateTime);
+        IList<TimeZoneInfo> GetTimezones();
     }
 }

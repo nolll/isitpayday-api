@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Web.Services
 {
@@ -23,6 +24,11 @@ namespace Web.Services
         public DateTime ConvertToUtc(DateTime dateTime)
         {
             return TimeZoneInfo.ConvertTimeToUtc(dateTime);
+        }
+
+        public IList<TimeZoneInfo> GetTimezones()
+        {
+            return TimeZoneInfo.GetSystemTimeZones();
         }
 
         private DateTime Convert(DateTime dateTime, TimeZoneInfo timezone = null)
