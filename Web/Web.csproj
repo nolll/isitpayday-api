@@ -116,7 +116,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
-    <Compile Include="Services\ITimeService.cs" />
+    <Compile Include="Services\Country.cs" />
+    <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\Interfaces\ICountryService.cs" />
+    <Compile Include="Services\Interfaces\ITimeService.cs" />
     <Compile Include="Services\TimeService.cs" />
     <Compile Include="Storage\CookieStorage.cs" />
     <Compile Include="Services\Interfaces\IPayDayService.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="script.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -1,5 +1,6 @@
 ﻿using Castle.Core;
 using Castle.Windsor;
+using Web.Controllers;
 using Web.PageBuilders;
 using Web.Services;
 using Web.Storage;
@@ -21,6 +22,8 @@ namespace Web.Plumbing
             RegisterComponent<IStorage, CookieStorage>();
             RegisterComponent<IWebContext, WebContext>();
             RegisterComponent<ITimeService, TimeService>();
+            RegisterComponent<ICountryService, CountryService>();
+            RegisterComponent<ICommandProvider, CommandProvider>();
         }
 
     }

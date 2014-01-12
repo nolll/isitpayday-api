@@ -25,7 +25,7 @@
 
 <div class="settings">
 
-	<form action="/" method="get">
+	<form action="/" method="post">
 	<div class="settings">
 	
 		<h2>Settings</h2>
@@ -34,29 +34,14 @@
 	    <div class="country-info">
             @if(Model.ShowCountryForm)
             {
-                @*
-				$countryList = $geoHandler->getCountryList();
-				<p>
-					<select id="input_country" name="country">
-					<?php
-						for($i = 0; $i < count($countryList); $i++){
-							$c = $countryList[$i];
-							$selectStr = strtolower($c->code) == strtolower($location->country->code) ? " selected=\"selected\"" : "";
-					?>
-							<option value="<?php echo $c->code?>"<?php echo $selectStr?>><?php echo $c->name?></option>
-					<?php
-						}
-					?>
-					</select>
-				</p>
-                *@
-			} else {
-				@*
                 <p>
-					<?php echo $location->country->name?>
+                    @Html.DropDownListFor(model => model.CountryId, Model.CountryItems, new {@id = "input_country"})
+                </p>
+			} else {
+                <p>
+					@Model.CountryName
 					<a href="/?change=country" class="change-country">Change</a>
 				</p>
-                *@
 			}
 		</div>
 		

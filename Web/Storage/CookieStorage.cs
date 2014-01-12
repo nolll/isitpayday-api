@@ -22,5 +22,10 @@ namespace Web.Storage
             }
             return null;
         }
+
+        public void SavePayDay(int payDay)
+        {
+            _webContext.SetCookie("payday", payDay.ToString());
+        }
     }
 }

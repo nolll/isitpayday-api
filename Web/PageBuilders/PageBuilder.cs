@@ -14,26 +14,32 @@ namespace Web.PageBuilders
 
         private readonly IPayDayService _payDayService;
         private readonly ITimeService _timeService;
+        private readonly ICountryService _countryService;
 
         public PageBuilder(
             IPayDayService payDayService,
-            ITimeService timeService)
+            ITimeService timeService,
+            ICountryService countryService)
         {
             _payDayService = payDayService;
             _timeService = timeService;
+            _countryService = countryService;
         }
 
         public IndexPageModel Build(string activeForm)
         {
             var payDayString = _payDayService.IsPayDay ? "YES!!1!" : "No =(";
+            var countryId = "SE";
+            var countryName = "Sweden";
+            var timeZone = "W. Europe Standard Time";
             var payDay = _payDayService.GetPayDay();
-            var timeZone = "UTC";
             var showCountryForm = activeForm == CountryFormName;
-            var payDayItems = GetPayDayItems();
+            var countryItems = GetCountryItems();
             var showTimeZoneForm = activeForm == TimeZoneFormName;
             var timeZoneItems = GetTimezoneItems();
             var showPayDayForm = activeForm == PayDayFormName;
-
+            var payDayItems = GetPayDayItems();
+            
             return new IndexPageModel
                 {
                     PayDayString = payDayString,
@@ -43,7 +49,10 @@ namespace Web.PageBuilders
                     ShowTimeZoneForm = showTimeZoneForm,
                     PayDayItems = payDayItems,
                     TimeZoneItems = timeZoneItems,
-                    ShowPayDayForm = showPayDayForm
+                    ShowPayDayForm = showPayDayForm,
+                    CountryId = countryId,
+                    CountryName = countryName,
+                    CountryItems = countryItems
                 };
         }
 
@@ -62,6 +71,12 @@ namespace Web.PageBuilders
         {
             var timezones = _timeService.GetTimezones();
             return timezones.Select(t => new SelectListItem { Text = t.DisplayName, Value = t.Id }).ToList();
+        }
+
+        private List<SelectListItem> GetCountryItems()
+        {
+            var countries = _countryService.GetCountries();
+            return countries.Select(c => new SelectListItem { Text = c.Name, Value = c.Id }).ToList();
         }
     }
 }
