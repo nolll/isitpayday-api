@@ -24,6 +24,7 @@ namespace Web.Plumbing
             RegisterComponent<ITimeService, TimeService>();
             RegisterComponent<ICountryService, CountryService>();
             RegisterComponent<ICommandProvider, CommandProvider>();
+            RegisterComponent<IGoogleAnalyticsModelFactory, GoogleAnalyticsModelFactory>();
         }
 
     }

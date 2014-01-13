@@ -26,7 +26,7 @@ namespace Web.Services
             return TimeZoneInfo.ConvertTimeToUtc(dateTime);
         }
 
-        public IList<TimeZoneInfo> GetTimezones()
+        public IEnumerable<TimeZoneInfo> GetTimezones()
         {
             return TimeZoneInfo.GetSystemTimeZones();
         }

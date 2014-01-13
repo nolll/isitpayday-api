@@ -50,11 +50,11 @@
 			@if(Model.ShowTimeZoneForm)
             {
 				<p>
-		            @Html.DropDownListFor(model => model.TimeZone, Model.TimeZoneItems, new {@id = "input_timezone"})
+		            @Html.DropDownListFor(model => model.TimeZoneId, Model.TimeZoneItems, new {@id = "input_timezone"})
                 </p>
 			} else {
                 <p>
-					@Model.TimeZone
+					@Model.TimeZoneName
 					<a href="/?change=timezone" class="change-timezone">Change</a>
 				</p>
 			}
@@ -85,14 +85,15 @@
 </div>
 
 <p class="footer">
-	@*<?php echo $now->format("F j Y g:i a")?> (<?php echo $location->timezone?>)*@
+	@Model.LocalTime
 </p>
 
 <p class="contact">
 	Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
 </p>
-
-@*<?php include("ga.php");?>*@
+        
+@Html.Partial("../GoogleAnalytics", Model.GoogleAnalyticsModel)
+        @*<?php include("ga.php");?>*@
 
 </body>
 </html>

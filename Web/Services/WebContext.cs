@@ -28,6 +28,19 @@ namespace Web.Services
             Response.Cookies.Add(cookie);
         }
 
+        public bool IsInProduction
+        {
+            get
+            {
+                return !GetHost().EndsWith("lan");
+            }
+        }
+
+        private string GetHost()
+        {
+            return HttpContext.Current.Request.Url.Host;
+        }
+
         private HttpRequest Request
         {
             get { return HttpContext.Current.Request; }
