@@ -10,5 +10,6 @@ namespace Web.Services
         DateTime Parse(string str, TimeZoneInfo timezone = null);
         DateTime ConvertToUtc(DateTime dateTime);
         IEnumerable<TimeZoneInfo> GetTimezones();
+        int GetCurrentYear();
     }
 }

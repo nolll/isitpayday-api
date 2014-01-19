@@ -31,6 +31,11 @@ namespace Web.Services
             return TimeZoneInfo.GetSystemTimeZones();
         }
 
+        public int GetCurrentYear()
+        {
+            return DateTime.Now.Year;
+        }
+
         private DateTime Convert(DateTime dateTime, TimeZoneInfo timezone = null)
         {
             return timezone != null ? TimeZoneInfo.ConvertTime(dateTime, timezone) : dateTime;

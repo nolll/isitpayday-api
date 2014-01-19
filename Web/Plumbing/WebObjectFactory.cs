@@ -1,6 +1,7 @@
 ﻿using Castle.Core;
 using Castle.Windsor;
 using Web.Controllers;
+using Web.DateEvaluators;
 using Web.PageBuilders;
 using Web.Services;
 using Web.Storage;
@@ -25,6 +26,10 @@ namespace Web.Plumbing
             RegisterComponent<ICountryService, CountryService>();
             RegisterComponent<ICommandProvider, CommandProvider>();
             RegisterComponent<IGoogleAnalyticsModelFactory, GoogleAnalyticsModelFactory>();
+            RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
+            RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
+            RegisterComponent<IWeekendEvaluator, WeekendEvaluator>();
+            RegisterComponent<IExcludedEvaluator, ExcludedEvaluator>();
         }
 
     }

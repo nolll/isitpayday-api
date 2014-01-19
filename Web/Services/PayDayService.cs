@@ -1,4 +1,5 @@
 ﻿using System;
+using Web.DateEvaluators;
 using Web.Storage;
 
 namespace Web.Services
@@ -7,34 +8,23 @@ namespace Web.Services
     {
         private const int DefaultPayDay = 25;
         private readonly IStorage _storage;
-        private readonly ITimeService _timeService;
-        private readonly ICountryService _countryService;
+        private readonly IPayDayEvaluator _payDayEvaluator;
 
         public PayDayService(
             IStorage storage,
-            ITimeService timeService,
-            ICountryService countryService)
+            IPayDayEvaluator payDayEvaluator)
         {
             _storage = storage;
-            _timeService = timeService;
-            _countryService = countryService;
+            _payDayEvaluator = payDayEvaluator;
         }
 
-        public bool IsPayDay()
+        public bool IsPayDay(DateTime dateTime, int payDay)
         {
-            var timeZone = _countryService.GetTimeZone();
-            var currentTime = _timeService.GetTime(timeZone);
-            return IsPayDay(currentTime);
+            var actualPayDay = _payDayEvaluator.GetActualPayDay(dateTime, payDay);
+            return dateTime.Day == actualPayDay.Day;
         }
 
-        public bool IsPayDay(DateTime dateTime)
-        {
-            var currentDay = dateTime.Day;
-            var payDay = GetPayDay();
-            return currentDay == payDay;
-        }
-
-        public int GetPayDay()
+        public int GetSelectedPayDay()
         {
             var payday = _storage.GetPayDay();
             return payday.HasValue ? payday.Value : DefaultPayDay;

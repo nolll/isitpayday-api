@@ -33,8 +33,8 @@ namespace Web.PageBuilders
         {
             var timeZone = _countryService.GetTimeZone();
             var time = _timeService.GetTime(timeZone);
-            var payDayString = _payDayService.IsPayDay(time) ? "YES!!1!" : "No =(";
-            var payDay = _payDayService.GetPayDay();
+            var payDay = _payDayService.GetSelectedPayDay();
+            var payDayString = _payDayService.IsPayDay(time, payDay) ? "YES!!1!" : "No =(";
             var country = _countryService.GetCountry();
             var showCountryForm = activeForm == CountryFormName;
             var countryItems = GetCountryItems();
