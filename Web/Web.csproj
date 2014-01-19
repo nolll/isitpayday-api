@@ -120,6 +120,7 @@
     <Compile Include="Controllers\SaveSettingsCommand.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
+    <Compile Include="Models\IPageModel.cs" />
     <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
     <Compile Include="Services\Country.cs" />
     <Compile Include="Services\CountryService.cs" />
@@ -173,6 +174,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\isitpayday - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\isitpayday - Web Deploy.pubxml" />
+    <Content Include="Views\Layouts\Page.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

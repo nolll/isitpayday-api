@@ -6,6 +6,7 @@ using Castle.Core;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using NUnit.Framework;
+using Web.Models;
 using Web.Plumbing;
 
 namespace Web.Tests
@@ -20,6 +21,7 @@ namespace Web.Tests
             // Interface som inte är injicerade och som inte ska injiceras
             _ignoredInterfaces = new List<Type>
                 {
+                    typeof(IPageModel),
                 };
         }
 
@@ -42,7 +44,6 @@ namespace Web.Tests
                 if (!ignoredInterfaces.Contains(i))
                 {
                     objectFactory.ResolveOrThrow(i);
-                    //Assert.IsTrue(ObjectFactory.CanResolve(container, i), string.Format("Interface: {0} kan inte resolvas", i));
                 }
             }
         }

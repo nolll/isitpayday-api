@@ -1,25 +1,7 @@
 ﻿@model Web.Models.IndexPageModel
 @{
-    Layout = null;
+    Layout = "~/Views/Layouts/Page.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-<title>Is it payday?</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="title" content="Is it payday?" />
-<meta name="keywords" content="pay day payday" />
-<meta name="description" content="Find out if today is payday" />
-<meta http-equiv="imagetoolbar" content="no" />
-<link rel="image_src" href="/money.jpg" />
-<link href="/styles.css" rel="stylesheet"/>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
-</head>
-    <body>
-
 <h1>Is it payday?</h1>
 <p class="status"><span>@Model.PayDayString</span></p>
 
@@ -87,13 +69,3 @@
 <p class="footer">
 	@Model.LocalTime
 </p>
-
-<p class="contact">
-	Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
-</p>
-        
-@Html.Partial("../GoogleAnalytics", Model.GoogleAnalyticsModel)
-        @*<?php include("ga.php");?>*@
-
-</body>
-</html>

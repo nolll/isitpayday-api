@@ -1,0 +1,27 @@
+﻿@model Web.Models.IPageModel
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Is it payday?</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="title" content="Is it payday?" />
+        <meta name="keywords" content="pay day payday" />
+        <meta name="description" content="Find out if today is payday" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <link rel="image_src" href="/money.jpg" />
+        <link href="/styles.css" rel="stylesheet"/>
+    </head>
+    <body>
+        @RenderBody()
+
+        <p class="contact">
+            Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
+        </p>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+
+        @Html.Partial("../GoogleAnalytics", Model.GoogleAnalyticsModel)
+
+    </body>
+</html>

@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace Web.Models
 {
-    public class IndexPageModel : IndexPagePostModel
+    public class IndexPageModel : IndexPagePostModel, IPageModel
     {
         public string PayDayString { get; set; }
         public string CountryName { get; set; }
