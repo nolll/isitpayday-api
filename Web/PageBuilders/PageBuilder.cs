@@ -55,15 +55,15 @@ namespace Web.PageBuilders
                     PayDay = payDay,
                     TimeZoneId = timeZoneId,
                     TimeZoneName = timeZoneName,
-                    ShowCountryForm = showCountryForm, // not tested
-                    ShowTimeZoneForm = showTimeZoneForm, // not tested
-                    PayDayItems = payDayItems, // not tested
-                    TimeZoneItems = timeZoneItems, // not tested
-                    ShowPayDayForm = showPayDayForm, // not tested
-                    CountryId = countryId, // not tested
-                    CountryName = countryName, // not tested
+                    ShowCountryForm = showCountryForm,
+                    ShowTimeZoneForm = showTimeZoneForm,
+                    ShowPayDayForm = showPayDayForm,
+                    CountryId = countryId,
+                    CountryName = countryName,
+                    LocalTime = localTime,
                     CountryItems = countryItems, // not tested
-                    LocalTime = localTime, // not tested
+                    TimeZoneItems = timeZoneItems, // not tested
+                    PayDayItems = payDayItems, // not tested
                     GoogleAnalyticsModel = googleAnalyticsModel // not tested
                 };
         }
