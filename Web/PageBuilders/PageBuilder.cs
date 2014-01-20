@@ -52,9 +52,9 @@ namespace Web.PageBuilders
             return new IndexPageModel
                 {
                     PayDayString = payDayString,
-                    PayDay = payDay, // not tested
-                    TimeZoneId = timeZoneId, // not tested
-                    TimeZoneName = timeZoneName, // not tested
+                    PayDay = payDay,
+                    TimeZoneId = timeZoneId,
+                    TimeZoneName = timeZoneName,
                     ShowCountryForm = showCountryForm, // not tested
                     ShowTimeZoneForm = showTimeZoneForm, // not tested
                     PayDayItems = payDayItems, // not tested

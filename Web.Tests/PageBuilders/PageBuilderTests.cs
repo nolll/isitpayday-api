@@ -13,7 +13,7 @@ namespace Web.Tests.PageBuilders
         [Test]
         public void PayDayString_WithNonPayDay_IsCorrectString()
         {
-            string activeForm = null;
+            var activeForm = It.IsAny<string>();
             const string expected = "No =(";
 
             GetMock<IPayDayService>().Setup(o => o.IsPayDay(It.IsAny<DateTime>(), It.IsAny<int>())).Returns(false);
@@ -29,7 +29,7 @@ namespace Web.Tests.PageBuilders
         [Test]
         public void PayDayString_WithPayDay_IsCorrectString()
         {
-            string activeForm = null;
+            var activeForm = It.IsAny<string>();
             const string expected = "YES!!1!";
 
             GetMock<IPayDayService>().Setup(o => o.IsPayDay(It.IsAny<DateTime>(), It.IsAny<int>())).Returns(true);
@@ -40,6 +40,40 @@ namespace Web.Tests.PageBuilders
             var result = sut.Build(activeForm);
 
             Assert.AreEqual(expected, result.PayDayString);
+        }
+
+        [Test]
+        public void PayDay_WithPayDay_IsSetFromSelectedPayDay()
+        {
+            var activeForm = It.IsAny<string>();
+            const int selectedPayDay = 1;
+
+            GetMock<IPayDayService>().Setup(o => o.GetSelectedPayDay()).Returns(selectedPayDay);
+            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
+            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.AreEqual(selectedPayDay, result.PayDay);
+        }
+
+        [Test]
+        public void Timezone_WithTimezone_NameAndIdIsSet()
+        {
+            var activeForm = It.IsAny<string>();
+            var timeZone = TimeZoneInfo.Utc;
+            const string expectedTimeZoneId = "UTC";
+            const string expectedTimeZoneName = "UTC";
+
+            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(timeZone);
+            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.AreEqual(expectedTimeZoneId, result.TimeZoneId);
+            Assert.AreEqual(expectedTimeZoneName, result.TimeZoneName);
         }
 
         private PageBuilder GetSut()
