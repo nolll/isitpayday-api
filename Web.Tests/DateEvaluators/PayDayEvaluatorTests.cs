@@ -1,7 +1,7 @@
 ﻿using System;
+using Core.DateEvaluators;
 using NUnit.Framework;
 using Tests.Common;
-using Web.DateEvaluators;
 
 namespace Web.Tests.DateEvaluators
 {

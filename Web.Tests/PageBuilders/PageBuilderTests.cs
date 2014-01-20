@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using Core.Classes;
+using Core.Services;
 using Moq;
 using NUnit.Framework;
 using Tests.Common;
 using Tests.Common.FakeClasses;
+using Web.ModelFactories;
+using Web.Models;
 using Web.PageBuilders;
-using Web.Services;
+using System.Linq;
 
 namespace Web.Tests.PageBuilders
 {
@@ -158,6 +163,86 @@ namespace Web.Tests.PageBuilders
             var result = sut.Build(activeForm);
 
             Assert.AreEqual(expected, result.LocalTime);
+        }
+
+        [Test]
+        public void CountryItems_WithOneCountry_ContainsCorrectItem()
+        {
+            var activeForm = It.IsAny<string>();
+            const string countryId = "a";
+            const string countryName = "b";
+            const int expectedLength = 1;
+            var country = new FakeCountry(countryId, countryName);
+            var countryList = new List<Country> { country };
+
+            GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countryList);
+            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
+            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.AreEqual(expectedLength, result.CountryItems.Count);
+            Assert.AreEqual(countryId, result.CountryItems[0].Value);
+            Assert.AreEqual(countryName, result.CountryItems[0].Text);
+        }
+
+        [Test]
+        public void TimeZoneItems_WithOneTimeZone_ContainsCorrectItem()
+        {
+            var activeForm = It.IsAny<string>();
+            var timeZone = TimeZoneInfo.Utc;
+            var timeZoneId = timeZone.Id;
+            var timeZoneName = timeZone.StandardName;
+            const int expectedLength = 1;
+            var timeZoneList = new List<TimeZoneInfo> { timeZone };
+
+            GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZoneList);
+            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
+            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.AreEqual(expectedLength, result.TimeZoneItems.Count);
+            Assert.AreEqual(timeZoneId, result.TimeZoneItems[0].Value);
+            Assert.AreEqual(timeZoneName, result.TimeZoneItems[0].Text);
+        }
+
+        [Test]
+        public void PayDayItems_ContainsItemsFor31Days()
+        {
+            var activeForm = It.IsAny<string>();
+            const string firstValue = "1";
+            const string lastValue = "31";
+            const int expectedLength = 31;
+
+            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
+            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.AreEqual(expectedLength, result.PayDayItems.Count);
+            Assert.AreEqual(firstValue, result.PayDayItems.First().Value);
+            Assert.AreEqual(firstValue, result.PayDayItems.First().Text);
+            Assert.AreEqual(lastValue, result.PayDayItems.Last().Value);
+            Assert.AreEqual(lastValue, result.PayDayItems.Last().Text);
+        }
+
+        [Test]
+        public void GoogleAnalyticsModel_IsCreatedFromFactory()
+        {
+            var activeForm = It.IsAny<string>();
+
+            GetMock<IGoogleAnalyticsModelFactory>().Setup(o => o.Create()).Returns(new GoogleAnalyticsModel());
+            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
+            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.NotNull(result.GoogleAnalyticsModel);
         }
 
         private PageBuilder GetSut()

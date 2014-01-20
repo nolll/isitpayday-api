@@ -118,28 +118,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ICommandProvider.cs" />
     <Compile Include="Controllers\SaveSettingsCommand.cs" />
-    <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
-    <Compile Include="DateEvaluators\ExcludedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IExcludedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IBlockedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IPayDayEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IWeekendEvaluator.cs" />
-    <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
-    <Compile Include="DateEvaluators\WeekendEvaluator.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
+    <Compile Include="ModelFactories\GoogleAnalyticsModelFactory.cs" />
+    <Compile Include="ModelFactories\Interfaces\IGoogleAnalyticsModelFactory.cs" />
     <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
-    <Compile Include="Services\CountryService.cs" />
-    <Compile Include="Services\Interfaces\ICountryService.cs" />
-    <Compile Include="Services\Interfaces\ITimeService.cs" />
-    <Compile Include="Services\TimeService.cs" />
-    <Compile Include="Storage\CookieStorage.cs" />
-    <Compile Include="Services\Interfaces\IPayDayService.cs" />
     <Compile Include="PageBuilders\PageBuilder.cs" />
-    <Compile Include="Storage\Interfaces\IStorage.cs" />
-    <Compile Include="Services\Interfaces\IWebContext.cs" />
-    <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,7 +133,6 @@
     <Compile Include="Plumbing\WebObjectFactory.cs" />
     <Compile Include="Plumbing\WindsorControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\WebContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -168,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DateEvaluators\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -187,6 +172,14 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{7e85e3b7-c78b-49dd-b5b3-b6462f56ed9a}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Http\Infrastructure.Http.csproj">
+      <Project>{a4038ffa-eb5d-4eeb-bc84-cadbdba0ef5d}</Project>
+      <Name>Infrastructure.Http</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.System\Infrastructure.System.csproj">
+      <Project>{873f24ae-d0eb-472e-8ce7-581e34430c0d}</Project>
+      <Name>Infrastructure.System</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

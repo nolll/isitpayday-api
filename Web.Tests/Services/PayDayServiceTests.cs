@@ -1,10 +1,10 @@
 ﻿using System;
+using Core.DateEvaluators;
+using Core.Services;
+using Core.Storage;
 using Moq;
 using NUnit.Framework;
 using Tests.Common;
-using Web.DateEvaluators;
-using Web.Services;
-using Web.Storage;
 
 namespace Web.Tests.Services
 {

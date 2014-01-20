@@ -1,8 +1,8 @@
 ﻿using System;
+using Core.DateEvaluators;
+using Core.Services;
 using NUnit.Framework;
 using Tests.Common;
-using Web.DateEvaluators;
-using Web.Services;
 
 namespace Web.Tests.DateEvaluators
 {

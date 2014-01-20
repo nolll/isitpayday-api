@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Core.Services;
+using Web.ModelFactories;
 using Web.Models;
-using Web.Services;
 
 namespace Web.PageBuilders
 {
@@ -61,10 +62,10 @@ namespace Web.PageBuilders
                     CountryId = countryId,
                     CountryName = countryName,
                     LocalTime = localTime,
-                    CountryItems = countryItems, // not tested
-                    TimeZoneItems = timeZoneItems, // not tested
-                    PayDayItems = payDayItems, // not tested
-                    GoogleAnalyticsModel = googleAnalyticsModel // not tested
+                    CountryItems = countryItems,
+                    TimeZoneItems = timeZoneItems,
+                    PayDayItems = payDayItems,
+                    GoogleAnalyticsModel = googleAnalyticsModel
                 };
         }
 
@@ -89,30 +90,6 @@ namespace Web.PageBuilders
         {
             var countries = _countryService.GetCountries();
             return countries.Select(c => new SelectListItem { Text = c.Name, Value = c.Id }).ToList();
-        }
-    }
-
-    public interface IGoogleAnalyticsModelFactory
-    {
-        GoogleAnalyticsModel Create();
-    }
-
-    public class GoogleAnalyticsModelFactory : IGoogleAnalyticsModelFactory
-    {
-        private readonly IWebContext _webContext;
-
-        public GoogleAnalyticsModelFactory(IWebContext webContext)
-        {
-            _webContext = webContext;
-        }
-
-        public GoogleAnalyticsModel Create()
-        {
-            return new GoogleAnalyticsModel
-                {
-                    Enabled = _webContext.IsInProduction,
-                    Code = "UA-8453410-4"
-                };
         }
     }
 }
