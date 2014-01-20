@@ -26,8 +26,10 @@ namespace Web.DateEvaluators
                 {
                     new DateTime(currentYear, 1, 1),
                     new DateTime(currentYear, 5, 1),
+                    new DateTime(currentYear, 6, 6),
                     new DateTime(currentYear, 12, 24),
-                    new DateTime(currentYear, 12, 25)
+                    new DateTime(currentYear, 12, 25),
+                    new DateTime(currentYear, 12, 31)
                 };
         }
     }

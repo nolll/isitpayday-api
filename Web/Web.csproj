@@ -130,7 +130,6 @@
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
     <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
-    <Compile Include="Services\Country.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\Interfaces\ICountryService.cs" />
     <Compile Include="Services\Interfaces\ITimeService.cs" />
@@ -183,6 +182,12 @@
     <None Include="Properties\PublishProfiles\isitpayday - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\isitpayday - Web Deploy.pubxml" />
     <Content Include="Views\Layouts\Page.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{7e85e3b7-c78b-49dd-b5b3-b6462f56ed9a}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

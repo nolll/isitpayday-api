@@ -32,10 +32,14 @@ namespace Web.PageBuilders
         public IndexPageModel Build(string activeForm)
         {
             var timeZone = _countryService.GetTimeZone();
+            var timeZoneId = timeZone.Id;
+            var timeZoneName = timeZone.StandardName;
             var time = _timeService.GetTime(timeZone);
             var payDay = _payDayService.GetSelectedPayDay();
             var payDayString = _payDayService.IsPayDay(time, payDay) ? "YES!!1!" : "No =(";
             var country = _countryService.GetCountry();
+            var countryId = country.Id;
+            var countryName = country.Name;
             var showCountryForm = activeForm == CountryFormName;
             var countryItems = GetCountryItems();
             var showTimeZoneForm = activeForm == TimeZoneFormName;
@@ -48,19 +52,19 @@ namespace Web.PageBuilders
             return new IndexPageModel
                 {
                     PayDayString = payDayString,
-                    PayDay = payDay,
-                    TimeZoneId = timeZone.Id,
-                    TimeZoneName = timeZone.StandardName,
-                    ShowCountryForm = showCountryForm,
-                    ShowTimeZoneForm = showTimeZoneForm,
-                    PayDayItems = payDayItems,
-                    TimeZoneItems = timeZoneItems,
-                    ShowPayDayForm = showPayDayForm,
-                    CountryId = country.Id,
-                    CountryName = country.Name,
-                    CountryItems = countryItems,
-                    LocalTime = localTime,
-                    GoogleAnalyticsModel = googleAnalyticsModel
+                    PayDay = payDay, // not tested
+                    TimeZoneId = timeZoneId, // not tested
+                    TimeZoneName = timeZoneName, // not tested
+                    ShowCountryForm = showCountryForm, // not tested
+                    ShowTimeZoneForm = showTimeZoneForm, // not tested
+                    PayDayItems = payDayItems, // not tested
+                    TimeZoneItems = timeZoneItems, // not tested
+                    ShowPayDayForm = showPayDayForm, // not tested
+                    CountryId = countryId, // not tested
+                    CountryName = countryName, // not tested
+                    CountryItems = countryItems, // not tested
+                    LocalTime = localTime, // not tested
+                    GoogleAnalyticsModel = googleAnalyticsModel // not tested
                 };
         }
 
