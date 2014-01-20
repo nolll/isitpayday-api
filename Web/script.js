@@ -1,7 +1,7 @@
 function setupCountryClick(){
 	$(".change-country").click(function(){
 		var url = $(this).attr("href");
-		$(".country-info").load(url + " .country-info select", function(responseText, textStatus, XMLHttpRequest){
+		$(".country-info").load(url + " .country-info select", function(responseText, textStatus, xmlHttpRequest){
 			setupCountryChange();
 		});
 		return false;
@@ -26,7 +26,7 @@ function setupCountryChange(){
 function setupTimezoneClick(){
 	$(".change-timezone").click(function(){
 		var url = $(this).attr("href");
-		$(".timezone-info").load(url + " .timezone-info select", function(responseText, textStatus, XMLHttpRequest){
+		$(".timezone-info").load(url + " .timezone-info select", function(responseText, textStatus, xmlHttpRequest){
 			setupTimezoneChange();
 		});
 		return false;
@@ -51,7 +51,7 @@ function setupTimezoneChange(){
 function setupPaydayClick(){
 	$(".change-payday").click(function(){
 		var url = $(this).attr("href");
-		$(".payday-info").load(url + " .payday-info select", function(responseText, textStatus, XMLHttpRequest){
+		$(".payday-info").load(url + " .payday-info select", function(responseText, textStatus, xmlHttpRequest){
 			setupPaydayChange();
 		});
 		return false;

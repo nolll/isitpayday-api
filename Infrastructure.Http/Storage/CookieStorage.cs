@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using System.Globalization;
+using Core.Services;
 using Core.Storage;
 
 namespace Infrastructure.Http.Storage
@@ -30,7 +31,7 @@ namespace Infrastructure.Http.Storage
 
         public void SetPayDay(int payDay)
         {
-            _webContext.SetCookie(PayDayCookie, payDay.ToString());
+            _webContext.SetCookie(PayDayCookie, payDay.ToString(CultureInfo.InvariantCulture));
         }
 
         public string GetCountry()

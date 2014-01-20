@@ -32,21 +32,13 @@ namespace Core.Services
 
         public Country GetCountry()
         {
-            var countryId = _storage.GetCountry();
-            if (countryId == null)
-            {
-                countryId = "SE";
-            }
+            var countryId = _storage.GetCountry() ?? "SE";
             return GetCountries().FirstOrDefault(o => o.Id == countryId);
         }
 
         public TimeZoneInfo GetTimeZone()
         {
-            var timeZoneId = _storage.GetTimeZone();
-            if (timeZoneId == null)
-            {
-                timeZoneId = "W. Europe Standard Time";
-            }
+            var timeZoneId = _storage.GetTimeZone() ?? "W. Europe Standard Time";
             return _timeService.GetTimezones().FirstOrDefault(o => o.Id == timeZoneId);
         }
     }

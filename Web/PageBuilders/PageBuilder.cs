@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Core.Services;
@@ -74,7 +75,8 @@ namespace Web.PageBuilders
             var items = new List<SelectListItem>();
             for (var i = 1; i <= 31; i++)
             {
-                var item = new SelectListItem {Text = i.ToString(), Value = i.ToString()};
+                var t = i.ToString(CultureInfo.InvariantCulture);
+                var item = new SelectListItem {Text = t, Value = t};
                 items.Add(item);
             }
             return items;
