@@ -2,7 +2,7 @@
 using Core.DateEvaluators;
 using NUnit.Framework;
 
-namespace Web.Tests.DateEvaluators
+namespace Core.Tests.DateEvaluators
 {
     public class WeekendEvaluatorTests
     {

@@ -113,11 +113,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Command.cs" />
-    <Compile Include="Controllers\CommandProvider.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ICommandProvider.cs" />
-    <Compile Include="Controllers\SaveSettingsCommand.cs" />
+    <Compile Include="Commands\Interfaces\ICommandProvider.cs" />
+    <Compile Include="Commands\SaveSettingsCommand.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="money.jpg" />
     <Content Include="script.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
@@ -152,7 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DateEvaluators\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

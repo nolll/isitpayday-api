@@ -1,7 +1,8 @@
 ﻿using Core.Storage;
+using Web.Controllers;
 using Web.Models;
 
-namespace Web.Controllers
+namespace Web.Commands
 {
     public class CommandProvider : ICommandProvider
     {

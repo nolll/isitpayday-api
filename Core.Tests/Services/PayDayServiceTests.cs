@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using Tests.Common;
 
-namespace Web.Tests.Services
+namespace Core.Tests.Services
 {
     public class PayDayServiceTests : MockContainer
     {

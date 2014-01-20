@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Web.Controllers
+namespace Web.Commands
 {
     public abstract class Command
     {

@@ -4,7 +4,7 @@ using Core.Services;
 using NUnit.Framework;
 using Tests.Common;
 
-namespace Web.Tests.DateEvaluators
+namespace Core.Tests.DateEvaluators
 {
     public class ExcludedEvaluatorTests : MockContainer
     {

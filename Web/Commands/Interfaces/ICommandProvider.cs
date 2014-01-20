@@ -1,6 +1,7 @@
-﻿using Web.Models;
+﻿using Web.Controllers;
+using Web.Models;
 
-namespace Web.Controllers
+namespace Web.Commands
 {
     public interface ICommandProvider
     {

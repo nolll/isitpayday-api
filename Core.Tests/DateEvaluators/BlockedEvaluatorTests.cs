@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 using Tests.Common;
 
-namespace Web.Tests.DateEvaluators
+namespace Core.Tests.DateEvaluators
 {
     public class BlockedEvaluatorTests : MockContainer
     {

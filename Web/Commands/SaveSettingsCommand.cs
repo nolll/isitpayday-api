@@ -1,7 +1,7 @@
 ﻿using Core.Storage;
 using Web.Models;
 
-namespace Web.Controllers
+namespace Web.Commands
 {
     public class SaveSettingsCommand : Command
     {
