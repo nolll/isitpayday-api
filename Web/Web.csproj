@@ -167,6 +167,8 @@
     <None Include="Properties\PublishProfiles\isitpayday - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\isitpayday - Web Deploy.pubxml" />
     <Content Include="Views\Layouts\Page.cshtml" />
+    <None Include="Properties\PublishProfiles\isitpayday-com - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\isitpayday-com - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
