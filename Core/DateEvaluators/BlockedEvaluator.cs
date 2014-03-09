@@ -15,9 +15,9 @@ namespace Core.DateEvaluators
             _excludedEvaluator = excludedEvaluator;
         }
 
-        public bool IsBlocked(DateTime dateTime)
+        public bool IsBlocked(DateTime userTime)
         {
-            return _weekendEvaluator.IsWeekend(dateTime) || _excludedEvaluator.IsExcluded(dateTime);
+            return _weekendEvaluator.IsWeekend(userTime) || _excludedEvaluator.IsExcluded(userTime);
         }
     }
 }

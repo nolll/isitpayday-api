@@ -4,6 +4,6 @@ namespace Core.DateEvaluators
 {
     public interface IWeekendEvaluator
     {
-        bool IsWeekend(DateTime dateTime);
+        bool IsWeekend(DateTime userTime);
     }
 }

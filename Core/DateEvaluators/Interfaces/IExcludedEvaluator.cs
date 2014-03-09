@@ -4,6 +4,6 @@ namespace Core.DateEvaluators
 {
     public interface IExcludedEvaluator
     {
-        bool IsExcluded(DateTime dateTime);
+        bool IsExcluded(DateTime userTime);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Classes;
 using Core.DateEvaluators;
 using Core.Storage;
 
@@ -9,19 +10,29 @@ namespace Core.Services
         private const int DefaultPayDay = 25;
         private readonly IStorage _storage;
         private readonly IPayDayEvaluator _payDayEvaluator;
+        private readonly ITimeService _timeService;
 
         public PayDayService(
             IStorage storage,
-            IPayDayEvaluator payDayEvaluator)
+            IPayDayEvaluator payDayEvaluator,
+            ITimeService timeService)
         {
             _storage = storage;
             _payDayEvaluator = payDayEvaluator;
+            _timeService = timeService;
         }
 
-        public bool IsPayDay(DateTime dateTime, int payDay)
+        public bool IsPayDay(DateTime userTime, int payDay)
         {
-            var actualPayDay = _payDayEvaluator.GetActualPayDay(dateTime, payDay);
-            return dateTime.Day == actualPayDay.Day;
+            var actualPayDay = _payDayEvaluator.GetActualPayDay(userTime, payDay);
+            return userTime.Day == actualPayDay.Day;
+        }
+
+        public bool IsPayDay(UserSettings userSettings)
+        {
+            var userTime = _timeService.GetTime(userSettings.TimeZone);
+            var actualPayDay = _payDayEvaluator.GetActualPayDay(userTime, userSettings.PayDay);
+            return userTime.Day == actualPayDay.Day;
         }
 
         public int GetSelectedPayDay()

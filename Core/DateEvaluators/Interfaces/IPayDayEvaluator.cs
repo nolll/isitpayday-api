@@ -4,6 +4,6 @@ namespace Core.DateEvaluators
 {
     public interface IPayDayEvaluator
     {
-        DateTime GetActualPayDay(DateTime dateTime, int payDay);
+        DateTime GetActualPayDay(DateTime userTime, int payDay);
     }
 }

@@ -68,7 +68,8 @@ namespace Core.Tests.Services
         {
             return new PayDayService(
                 GetMock<IStorage>().Object,
-                GetMock<IPayDayEvaluator>().Object);
+                GetMock<IPayDayEvaluator>().Object,
+                GetMock<ITimeService>().Object);
         }
     }
 }

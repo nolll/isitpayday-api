@@ -36,9 +36,9 @@ namespace Web.PageBuilders
             var timeZone = _countryService.GetTimeZone();
             var timeZoneId = timeZone.Id;
             var timeZoneName = timeZone.StandardName;
-            var time = _timeService.GetTime(timeZone);
+            var usertime = _timeService.GetTime(timeZone);
             var payDay = _payDayService.GetSelectedPayDay();
-            var payDayString = _payDayService.IsPayDay(time, payDay) ? "YES!!1!" : "No =(";
+            var payDayString = _payDayService.IsPayDay(usertime, payDay) ? "YES!!1!" : "No =(";
             var country = _countryService.GetCountry();
             var countryId = country.Id;
             var countryName = country.Name;
@@ -48,7 +48,7 @@ namespace Web.PageBuilders
             var timeZoneItems = GetTimezoneItems();
             var showPayDayForm = activeForm == PayDayFormName;
             var payDayItems = GetPayDayItems();
-            var localTime = time.ToString("R");
+            var localTime = usertime.ToString("R");
             var googleAnalyticsModel = _googleAnalyticsModelFactory.Create();
             
             return new IndexPageModel

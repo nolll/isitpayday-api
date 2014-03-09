@@ -13,9 +13,9 @@ namespace Core.DateEvaluators
             _timeService = timeService;
         }
 
-        public bool IsExcluded(DateTime dateTime)
+        public bool IsExcluded(DateTime userTime)
         {
-            return GetExcludedDates().Contains(dateTime);
+            return GetExcludedDates().Contains(userTime);
         }
 
         private IList<DateTime> GetExcludedDates()

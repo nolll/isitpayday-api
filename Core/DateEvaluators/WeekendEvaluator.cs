@@ -4,9 +4,9 @@ namespace Core.DateEvaluators
 {
     public class WeekendEvaluator : IWeekendEvaluator
     {
-        public bool IsWeekend(DateTime dateTime)
+        public bool IsWeekend(DateTime userTime)
         {
-            return dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday;
+            return userTime.DayOfWeek == DayOfWeek.Saturday || userTime.DayOfWeek == DayOfWeek.Sunday;
         }
     }
 }

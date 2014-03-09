@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeClasses\FakeCountry.cs" />
+    <Compile Include="FakeClasses\FakeUserSettings.cs" />
     <Compile Include="MockContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

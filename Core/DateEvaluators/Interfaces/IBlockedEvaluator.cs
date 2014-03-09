@@ -4,6 +4,6 @@ namespace Core.DateEvaluators
 {
     public interface IBlockedEvaluator
     {
-        bool IsBlocked(DateTime dateTime);
+        bool IsBlocked(DateTime userTime);
     }
 }

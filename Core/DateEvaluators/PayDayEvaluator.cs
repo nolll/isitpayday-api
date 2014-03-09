@@ -11,9 +11,9 @@ namespace Core.DateEvaluators
             _blockedEvaluator = blockedEvaluator;
         }
 
-        public DateTime GetActualPayDay(DateTime dateTime, int payDay)
+        public DateTime GetActualPayDay(DateTime userTime, int payDay)
         {
-            var payDayDate = new DateTime(dateTime.Year, dateTime.Month, payDay);
+            var payDayDate = new DateTime(userTime.Year, userTime.Month, payDay);
             while (_blockedEvaluator.IsBlocked(payDayDate))
             {
                 payDayDate = payDayDate.AddDays(-1);
