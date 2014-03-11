@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Core.Services;
+using Core.UseCases.GetPayDay;
 using Web.ModelFactories;
 using Web.Models;
 
@@ -14,35 +15,35 @@ namespace Web.PageBuilders
         private const string TimeZoneFormName = "timezone";
         private const string PayDayFormName = "payday";
 
-        private readonly IPayDayService _payDayService;
         private readonly ITimeService _timeService;
         private readonly ICountryService _countryService;
         private readonly IGoogleAnalyticsModelFactory _googleAnalyticsModelFactory;
         private readonly IUserSettingsService _userSettingsService;
+        private readonly IShowPayDayInteractor _showPayDayInteractor;
 
         public PageBuilder(
-            IPayDayService payDayService,
             ITimeService timeService,
             ICountryService countryService,
             IGoogleAnalyticsModelFactory googleAnalyticsModelFactory,
-            IUserSettingsService userSettingsService)
+            IUserSettingsService userSettingsService,
+            IShowPayDayInteractor showPayDayInteractor)
         {
-            _payDayService = payDayService;
             _timeService = timeService;
             _countryService = countryService;
             _googleAnalyticsModelFactory = googleAnalyticsModelFactory;
             _userSettingsService = userSettingsService;
+            _showPayDayInteractor = showPayDayInteractor;
         }
 
         public IndexPageModel Build(string activeForm)
         {
+            var showPayDayResult = _showPayDayInteractor.Execute();
             var userSettings = _userSettingsService.GetSettings();
             var timeZone = userSettings.TimeZone;
             var timeZoneId = timeZone.Id;
             var timeZoneName = timeZone.StandardName;
             var usertime = _timeService.GetTime(timeZone);
             var payDay = userSettings.PayDay;
-            var payDayString = _payDayService.IsPayDay(usertime, payDay) ? "YES!!1!" : "No =(";
             var country = userSettings.Country;
             var countryId = country.Id;
             var countryName = country.Name;
@@ -57,7 +58,7 @@ namespace Web.PageBuilders
             
             return new IndexPageModel
                 {
-                    PayDayString = payDayString,
+                    PayDayString = showPayDayResult.Message,
                     PayDay = payDay,
                     TimeZoneId = timeZoneId,
                     TimeZoneName = timeZoneName,

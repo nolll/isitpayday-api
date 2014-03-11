@@ -35,9 +35,9 @@ namespace Core.Tests.Interactors
             Assert.AreEqual(expectedMessage, result.Message);
         }
 
-        private GetPayDayInteractor GetSut()
+        private ShowPayDayInteractor GetSut()
         {
-            return new GetPayDayInteractor(
+            return new ShowPayDayInteractor(
                 GetMock<IPayDayService>().Object);
         }
     }

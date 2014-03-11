@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.Classes;
 using Core.Services;
+using Core.UseCases.GetPayDay;
 using Moq;
 using NUnit.Framework;
 using Tests.Common;
@@ -16,35 +17,20 @@ namespace Web.Tests.PageBuilders
     public class PageBuilderTests : MockContainer
     {
         [Test]
-        public void PayDayString_WithNonPayDay_IsCorrectString()
+        public void PayDayString_IsSetFromInteractor()
         {
             var activeForm = It.IsAny<string>();
-            const string expected = "No =(";
+            const string message = "a";
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            var interactorResult = new FakeShowPayDayResult(message: message);
 
-            GetMock<IPayDayService>().Setup(o => o.IsPayDay(It.IsAny<DateTime>(), It.IsAny<int>())).Returns(false);
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(interactorResult);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
 
-            Assert.AreEqual(expected, result.PayDayString);
-        }
-
-        [Test]
-        public void PayDayString_WithPayDay_IsCorrectString()
-        {
-            var activeForm = It.IsAny<string>();
-            const string expected = "YES!!1!";
-            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
-
-            GetMock<IPayDayService>().Setup(o => o.IsPayDay(It.IsAny<DateTime>(), It.IsAny<int>())).Returns(true);
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-
-            var sut = GetSut();
-            var result = sut.Build(activeForm);
-
-            Assert.AreEqual(expected, result.PayDayString);
+            Assert.AreEqual(message, result.PayDayString);
         }
 
         [Test]
@@ -55,6 +41,7 @@ namespace Web.Tests.PageBuilders
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc, selectedPayDay);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -67,11 +54,11 @@ namespace Web.Tests.PageBuilders
         {
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
             var activeForm = It.IsAny<string>();
-            var timeZone = TimeZoneInfo.Utc;
             const string expectedTimeZoneId = "UTC";
             const string expectedTimeZoneName = "UTC";
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -84,9 +71,10 @@ namespace Web.Tests.PageBuilders
         public void ActiveForms_WithCountryForm_OnlyCountryFormIsShown()
         {
             const string activeForm = "country";
-
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -100,9 +88,10 @@ namespace Web.Tests.PageBuilders
         public void ActiveForms_WithTimeZoneForm_OnlyTimeZoneFormIsShown()
         {
             const string activeForm = "timezone";
-
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -116,9 +105,10 @@ namespace Web.Tests.PageBuilders
         public void ActiveForms_WithPayDayForm_OnlyPayDayFormIsShown()
         {
             const string activeForm = "payday";
-
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -138,6 +128,7 @@ namespace Web.Tests.PageBuilders
             var userSettings = new FakeUserSettings(country, TimeZoneInfo.Utc);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -157,6 +148,7 @@ namespace Web.Tests.PageBuilders
 
             GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(time);
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -177,6 +169,7 @@ namespace Web.Tests.PageBuilders
 
             GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countryList);
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -199,6 +192,7 @@ namespace Web.Tests.PageBuilders
 
             GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZoneList);
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -218,6 +212,7 @@ namespace Web.Tests.PageBuilders
             var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -237,7 +232,8 @@ namespace Web.Tests.PageBuilders
 
             GetMock<IGoogleAnalyticsModelFactory>().Setup(o => o.Create()).Returns(new GoogleAnalyticsModel());
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new FakeShowPayDayResult());
+
             var sut = GetSut();
             var result = sut.Build(activeForm);
 
@@ -247,11 +243,11 @@ namespace Web.Tests.PageBuilders
         private PageBuilder GetSut()
         {
             return new PageBuilder(
-                GetMock<IPayDayService>().Object,
                 GetMock<ITimeService>().Object,
                 GetMock<ICountryService>().Object,
                 GetMock<IGoogleAnalyticsModelFactory>().Object,
-                GetMock<IUserSettingsService>().Object);
+                GetMock<IUserSettingsService>().Object,
+                GetMock<IShowPayDayInteractor>().Object);
         }
     }
 }

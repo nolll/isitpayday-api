@@ -2,21 +2,21 @@
 
 namespace Core.UseCases.GetPayDay
 {
-    public class GetPayDayInteractor
+    public class ShowPayDayInteractor : IShowPayDayInteractor
     {
         private readonly IPayDayService _payDayService;
 
-        public GetPayDayInteractor(
+        public ShowPayDayInteractor(
             IPayDayService payDayService)
         {
             _payDayService = payDayService;
         }
 
-        public GetPayDayResult Execute()
+        public ShowPayDayResult Execute()
         {
             var isPayDay = _payDayService.IsPayDay();
             var message = isPayDay ? "YES!!1!" : "No =(";
-            return new GetPayDayResult(isPayDay, message);
+            return new ShowPayDayResult(isPayDay, message);
         }
     }
 }

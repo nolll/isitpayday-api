@@ -3,6 +3,7 @@ using Castle.Windsor;
 using Core.DateEvaluators;
 using Core.Services;
 using Core.Storage;
+using Core.UseCases.GetPayDay;
 using Infrastructure.Http.Storage;
 using Infrastructure.System.Services;
 using Web.Commands;
@@ -22,19 +23,28 @@ namespace Web.Plumbing
 
         private void RegisterTypes()
         {
-            RegisterComponent<IPageBuilder, PageBuilder>();
+            // Interactors
+            RegisterComponent<IShowPayDayInteractor, ShowPayDayInteractor>();
+
+            // Services
+            RegisterComponent<ICountryService, CountryService>();
             RegisterComponent<IPayDayService, PayDayService>();
+            RegisterComponent<ITimeService, TimeService>();
+            
+            // Repositories
+            RegisterComponent<IUserSettingsService, UserSettingsService>();
+            
+            // Misc
+            RegisterComponent<IPageBuilder, PageBuilder>();
             RegisterComponent<IStorage, CookieStorage>();
             RegisterComponent<IWebContext, WebContext>();
-            RegisterComponent<ITimeService, TimeService>();
-            RegisterComponent<ICountryService, CountryService>();
             RegisterComponent<ICommandProvider, CommandProvider>();
             RegisterComponent<IGoogleAnalyticsModelFactory, GoogleAnalyticsModelFactory>();
             RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
             RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
             RegisterComponent<IWeekendEvaluator, WeekendEvaluator>();
             RegisterComponent<IExcludedEvaluator, ExcludedEvaluator>();
-            RegisterComponent<IUserSettingsService, UserSettingsService>();
+            
         }
 
     }
