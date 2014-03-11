@@ -6,7 +6,6 @@ using Core.Storage;
 using Infrastructure.Http.Storage;
 using Infrastructure.System.Services;
 using Web.Commands;
-using Web.Controllers;
 using Web.ModelFactories;
 using Web.PageBuilders;
 using WebContext = Infrastructure.Http.Services.WebContext;
@@ -35,6 +34,7 @@ namespace Web.Plumbing
             RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
             RegisterComponent<IWeekendEvaluator, WeekendEvaluator>();
             RegisterComponent<IExcludedEvaluator, ExcludedEvaluator>();
+            RegisterComponent<IUserSettingsService, UserSettingsService>();
         }
 
     }

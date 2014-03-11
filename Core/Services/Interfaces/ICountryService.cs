@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core.Classes;
 
 namespace Core.Services
@@ -7,7 +6,5 @@ namespace Core.Services
     public interface ICountryService
     {
         IEnumerable<Country> GetCountries();
-        Country GetCountry();
-        TimeZoneInfo GetTimeZone();
     }
 }

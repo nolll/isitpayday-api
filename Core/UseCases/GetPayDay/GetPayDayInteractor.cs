@@ -1,6 +1,4 @@
-﻿using System;
-using Core.Classes;
-using Core.Services;
+﻿using Core.Services;
 
 namespace Core.UseCases.GetPayDay
 {
@@ -14,9 +12,9 @@ namespace Core.UseCases.GetPayDay
             _payDayService = payDayService;
         }
 
-        public GetPayDayResult Execute(UserSettings userSettings)
+        public GetPayDayResult Execute()
         {
-            var isPayDay = _payDayService.IsPayDay(userSettings);
+            var isPayDay = _payDayService.IsPayDay();
             var message = isPayDay ? "YES!!1!" : "No =(";
             return new GetPayDayResult(isPayDay, message);
         }

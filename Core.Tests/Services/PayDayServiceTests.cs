@@ -1,39 +1,15 @@
 ﻿using System;
 using Core.DateEvaluators;
 using Core.Services;
-using Core.Storage;
 using Moq;
 using NUnit.Framework;
 using Tests.Common;
+using Tests.Common.FakeClasses;
 
 namespace Core.Tests.Services
 {
     public class PayDayServiceTests : MockContainer
     {
-        [Test]
-        public void GetSelectedPayDay_WithoutSavedPayDay_ReturnsDefaultPayDay()
-        {
-            const int expected = 25;
-
-            var sut = GetSut();
-            var result = sut.GetSelectedPayDay();
-
-            Assert.AreEqual(expected, result);
-        }
-
-        [Test]
-        public void GetSelectedPayDay_WithoutPayDay_ReturnsPayDayFromStorage()
-        {
-            const int savedPayDay = 1;
-
-            GetMock<IStorage>().Setup(o => o.GetPayDay()).Returns(savedPayDay);
-
-            var sut = GetSut();
-            var result = sut.GetSelectedPayDay();
-
-            Assert.AreEqual(savedPayDay, result);
-        }
-
         [Test]
         public void IsPayDay_TestedPayDayEqualsActualPayDay_ReturnsTrue()
         {
@@ -64,12 +40,50 @@ namespace Core.Tests.Services
             Assert.IsFalse(result);
         }
 
+        [Test]
+        public void IsPayDay_TodayIsPayDay_ReturnsTrue()
+        {
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+            const int payDay = 1;
+            var userSettings = new FakeUserSettings(timeZone: timeZone, payDay: payDay);
+            var userTime = new DateTime(1, 1, 1, 1, 1, 1);
+            var actualPayDay = new DateTime(1, 1, 1, 0, 0, 0);
+
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(userTime);
+            GetMock<IPayDayEvaluator>().Setup(o => o.GetActualPayDay(userTime, payDay)).Returns(actualPayDay);
+
+            var sut = GetSut();
+            var result = sut.IsPayDay();
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsPayDay_TodayIsNotPayDay_ReturnsFalse()
+        {
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+            const int payDay = 2;
+            var userSettings = new FakeUserSettings(timeZone: timeZone, payDay: payDay);
+            var userTime = new DateTime(1, 1, 1, 1, 1, 1);
+            var actualPayDay = new DateTime(1, 1, 2, 0, 0, 0);
+
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(userTime);
+            GetMock<IPayDayEvaluator>().Setup(o => o.GetActualPayDay(userTime, payDay)).Returns(actualPayDay);
+
+            var sut = GetSut();
+            var result = sut.IsPayDay();
+
+            Assert.IsFalse(result);
+        }
+
         private PayDayService GetSut()
         {
             return new PayDayService(
-                GetMock<IStorage>().Object,
                 GetMock<IPayDayEvaluator>().Object,
-                GetMock<ITimeService>().Object);
+                GetMock<ITimeService>().Object,
+                GetMock<IUserSettingsService>().Object);
         }
     }
 }

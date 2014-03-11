@@ -20,10 +20,10 @@ namespace Web.Tests.PageBuilders
         {
             var activeForm = It.IsAny<string>();
             const string expected = "No =(";
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
             GetMock<IPayDayService>().Setup(o => o.IsPayDay(It.IsAny<DateTime>(), It.IsAny<int>())).Returns(false);
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -36,10 +36,10 @@ namespace Web.Tests.PageBuilders
         {
             var activeForm = It.IsAny<string>();
             const string expected = "YES!!1!";
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
             GetMock<IPayDayService>().Setup(o => o.IsPayDay(It.IsAny<DateTime>(), It.IsAny<int>())).Returns(true);
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -52,10 +52,9 @@ namespace Web.Tests.PageBuilders
         {
             var activeForm = It.IsAny<string>();
             const int selectedPayDay = 1;
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc, selectedPayDay);
 
-            GetMock<IPayDayService>().Setup(o => o.GetSelectedPayDay()).Returns(selectedPayDay);
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -66,13 +65,13 @@ namespace Web.Tests.PageBuilders
         [Test]
         public void Timezone_WithTimezone_NameAndIdIsSet()
         {
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
             var activeForm = It.IsAny<string>();
             var timeZone = TimeZoneInfo.Utc;
             const string expectedTimeZoneId = "UTC";
             const string expectedTimeZoneName = "UTC";
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(timeZone);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -86,8 +85,8 @@ namespace Web.Tests.PageBuilders
         {
             const string activeForm = "country";
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -102,8 +101,8 @@ namespace Web.Tests.PageBuilders
         {
             const string activeForm = "timezone";
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -118,8 +117,8 @@ namespace Web.Tests.PageBuilders
         {
             const string activeForm = "payday";
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -136,9 +135,9 @@ namespace Web.Tests.PageBuilders
             const string countryId = "a";
             const string countryName = "b";
             var country = new FakeCountry(countryId, countryName);
+            var userSettings = new FakeUserSettings(country, TimeZoneInfo.Utc);
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(country);
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -154,10 +153,10 @@ namespace Web.Tests.PageBuilders
             const string expected = "Sat, 01 Jan 2000 00:00:00 GMT";
             var timeZone = TimeZoneInfo.Utc;
             var time = new DateTime(2000, 1, 1);
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
             GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(time);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -174,10 +173,10 @@ namespace Web.Tests.PageBuilders
             const int expectedLength = 1;
             var country = new FakeCountry(countryId, countryName);
             var countryList = new List<Country> { country };
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
             GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countryList);
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -196,10 +195,10 @@ namespace Web.Tests.PageBuilders
             var timeZoneName = timeZone.StandardName;
             const int expectedLength = 1;
             var timeZoneList = new List<TimeZoneInfo> { timeZone };
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
             GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZoneList);
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -216,9 +215,9 @@ namespace Web.Tests.PageBuilders
             const string firstValue = "1";
             const string lastValue = "31";
             const int expectedLength = 31;
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -234,11 +233,11 @@ namespace Web.Tests.PageBuilders
         public void GoogleAnalyticsModel_IsCreatedFromFactory()
         {
             var activeForm = It.IsAny<string>();
+            var userSettings = new FakeUserSettings(new FakeCountry(), TimeZoneInfo.Utc);
 
             GetMock<IGoogleAnalyticsModelFactory>().Setup(o => o.Create()).Returns(new GoogleAnalyticsModel());
-            GetMock<ICountryService>().Setup(o => o.GetTimeZone()).Returns(TimeZoneInfo.Utc);
-            GetMock<ICountryService>().Setup(o => o.GetCountry()).Returns(new FakeCountry());
-
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            
             var sut = GetSut();
             var result = sut.Build(activeForm);
 
@@ -251,7 +250,8 @@ namespace Web.Tests.PageBuilders
                 GetMock<IPayDayService>().Object,
                 GetMock<ITimeService>().Object,
                 GetMock<ICountryService>().Object,
-                GetMock<IGoogleAnalyticsModelFactory>().Object);
+                GetMock<IGoogleAnalyticsModelFactory>().Object,
+                GetMock<IUserSettingsService>().Object);
         }
     }
 }

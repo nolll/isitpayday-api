@@ -49,6 +49,8 @@
     <Compile Include="DateEvaluators\Interfaces\IWeekendEvaluator.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
     <Compile Include="DateEvaluators\WeekendEvaluator.cs" />
+    <Compile Include="Services\Interfaces\IUserSettingsService.cs" />
+    <Compile Include="Services\UserSettingsService.cs" />
     <Compile Include="UseCases\GetPayDay\GetPayDayInteractor.cs" />
     <Compile Include="UseCases\GetPayDay\GetPayDayResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

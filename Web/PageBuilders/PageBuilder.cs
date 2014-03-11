@@ -18,28 +18,32 @@ namespace Web.PageBuilders
         private readonly ITimeService _timeService;
         private readonly ICountryService _countryService;
         private readonly IGoogleAnalyticsModelFactory _googleAnalyticsModelFactory;
+        private readonly IUserSettingsService _userSettingsService;
 
         public PageBuilder(
             IPayDayService payDayService,
             ITimeService timeService,
             ICountryService countryService,
-            IGoogleAnalyticsModelFactory googleAnalyticsModelFactory)
+            IGoogleAnalyticsModelFactory googleAnalyticsModelFactory,
+            IUserSettingsService userSettingsService)
         {
             _payDayService = payDayService;
             _timeService = timeService;
             _countryService = countryService;
             _googleAnalyticsModelFactory = googleAnalyticsModelFactory;
+            _userSettingsService = userSettingsService;
         }
 
         public IndexPageModel Build(string activeForm)
         {
-            var timeZone = _countryService.GetTimeZone();
+            var userSettings = _userSettingsService.GetSettings();
+            var timeZone = userSettings.TimeZone;
             var timeZoneId = timeZone.Id;
             var timeZoneName = timeZone.StandardName;
             var usertime = _timeService.GetTime(timeZone);
-            var payDay = _payDayService.GetSelectedPayDay();
+            var payDay = userSettings.PayDay;
             var payDayString = _payDayService.IsPayDay(usertime, payDay) ? "YES!!1!" : "No =(";
-            var country = _countryService.GetCountry();
+            var country = userSettings.Country;
             var countryId = country.Id;
             var countryName = country.Name;
             var showCountryForm = activeForm == CountryFormName;
