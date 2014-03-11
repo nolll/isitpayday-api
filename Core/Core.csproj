@@ -62,6 +62,9 @@
     <Compile Include="Services\Interfaces\IWebContext.cs" />
     <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Storage\Interfaces\IStorage.cs" />
+    <Compile Include="UseCases\SaveSettings\ISaveSettingsInteractor.cs" />
+    <Compile Include="UseCases\SaveSettings\SaveSettingsInteractor.cs" />
+    <Compile Include="UseCases\SaveSettings\SaveSettingsRequest.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

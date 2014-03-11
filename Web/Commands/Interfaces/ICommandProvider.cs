@@ -1,5 +1,4 @@
-﻿using Web.Controllers;
-using Web.Models;
+﻿using Web.Models;
 
 namespace Web.Commands
 {

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeClasses\FakeCountry.cs" />
+    <Compile Include="FakeClasses\FakeSaveSettingsRequest.cs" />
     <Compile Include="FakeClasses\FakeShowPayDayResult.cs" />
     <Compile Include="FakeClasses\FakeUserSettings.cs" />
     <Compile Include="MockContainer.cs" />
