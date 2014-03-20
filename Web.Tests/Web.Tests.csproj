@@ -76,6 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandProviderTests.cs" />
+    <Compile Include="Commands\SaveSettingsCommandTests.cs" />
     <Compile Include="DependencyInjectionTests.cs" />
     <Compile Include="ModelFactories\GoogleAnalyticsModelFactoryTests.cs" />
     <Compile Include="PageBuilders\PageBuilderTests.cs" />

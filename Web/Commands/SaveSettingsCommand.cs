@@ -1,39 +1,30 @@
-﻿using Core.Storage;
+﻿using Core.UseCases.SaveSettings;
 using Web.Models;
 
 namespace Web.Commands
 {
     public class SaveSettingsCommand : Command
     {
-        private readonly IStorage _storage;
+        private readonly ISaveSettingsInteractor _saveSettingsInteractor;
         private readonly IndexPagePostModel _model;
 
         public SaveSettingsCommand(
-            IStorage storage,
+            ISaveSettingsInteractor saveSettingsInteractor,
             IndexPagePostModel model)
         {
-            _storage = storage;
+            _saveSettingsInteractor = saveSettingsInteractor;
             _model = model;
         }
 
         public override bool Execute()
         {
-            if (_model.CountryId != null)
-            {
-                _storage.SetCountry(_model.CountryId);
-                return true;
-            }
-            if (_model.TimeZoneId != null)
-            {
-                _storage.SetTimeZone(_model.TimeZoneId);
-                return true;
-            }
-            if (_model.PayDay.HasValue)
-            {
-                _storage.SetPayDay(_model.PayDay.Value);
-                return true;
-            }
-            return false;
+            var request = new SaveSettingsRequest(
+                _model.CountryId,
+                _model.TimeZoneId,
+                _model.PayDay);
+
+            _saveSettingsInteractor.Execute(request);
+            return true;
         }
     }
 }

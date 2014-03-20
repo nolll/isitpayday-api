@@ -1,20 +1,21 @@
-﻿using Core.Storage;
+﻿using Core.UseCases.SaveSettings;
 using Web.Models;
 
 namespace Web.Commands
 {
     public class CommandProvider : ICommandProvider
     {
-        private readonly IStorage _storage;
+        private readonly ISaveSettingsInteractor _saveSettingsInteractor;
 
-        public CommandProvider(IStorage storage)
+        public CommandProvider(
+            ISaveSettingsInteractor saveSettingsInteractor)
         {
-            _storage = storage;
+            _saveSettingsInteractor = saveSettingsInteractor;
         }
 
-        public Command GetSaveSettingsCommand(IndexPagePostModel postModel)
+        public SaveSettingsCommand GetSaveSettingsCommand(IndexPagePostModel postModel)
         {
-            return new SaveSettingsCommand(_storage, postModel);
+            return new SaveSettingsCommand(_saveSettingsInteractor, postModel);
         }
     }
 }
