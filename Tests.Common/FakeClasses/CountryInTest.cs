@@ -2,9 +2,9 @@
 
 namespace Tests.Common.FakeClasses
 {
-    public class FakeCountry : Country
+    public class CountryInTest : Country
     {
-        public FakeCountry(
+        public CountryInTest(
             string id = default(string), 
             string name = default(string)) : 
             base(

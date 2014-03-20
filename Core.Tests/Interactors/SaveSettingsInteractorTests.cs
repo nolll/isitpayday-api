@@ -13,7 +13,7 @@ namespace Core.Tests.Interactors
         public void Execute_WithCountryId_SavesCountry()
         {
             const string countryId = "a";
-            var request = new FakeSaveSettingsRequest(countryId: countryId);
+            var request = new SaveSettingsRequestInTest(countryId: countryId);
 
             var sut = GetSut();
             sut.Execute(request);
@@ -24,7 +24,7 @@ namespace Core.Tests.Interactors
         [Test]
         public void Execute_WithoutCountryId_DoesntSaveCountry()
         {
-            var request = new FakeSaveSettingsRequest();
+            var request = new SaveSettingsRequestInTest();
 
             var sut = GetSut();
             sut.Execute(request);
@@ -36,7 +36,7 @@ namespace Core.Tests.Interactors
         public void Execute_WithTimeZoneId_SavesTimeZone()
         {
             const string timeZoneId = "a";
-            var request = new FakeSaveSettingsRequest(timeZoneId: timeZoneId);
+            var request = new SaveSettingsRequestInTest(timeZoneId: timeZoneId);
 
             var sut = GetSut();
             sut.Execute(request);
@@ -47,7 +47,7 @@ namespace Core.Tests.Interactors
         [Test]
         public void Execute_WithoutTimeZoneId_DoesntSaveTimeZone()
         {
-            var request = new FakeSaveSettingsRequest();
+            var request = new SaveSettingsRequestInTest();
 
             var sut = GetSut();
             sut.Execute(request);
@@ -59,7 +59,7 @@ namespace Core.Tests.Interactors
         public void Execute_WithPayDay_SavesTimeZone()
         {
             const int payDay = 1;
-            var request = new FakeSaveSettingsRequest(payDay: payDay);
+            var request = new SaveSettingsRequestInTest(payDay: payDay);
 
             var sut = GetSut();
             sut.Execute(request);
@@ -70,7 +70,7 @@ namespace Core.Tests.Interactors
         [Test]
         public void Execute_WithoutPayDay_DoesntSavePayDay()
         {
-            var request = new FakeSaveSettingsRequest();
+            var request = new SaveSettingsRequestInTest();
 
             var sut = GetSut();
             sut.Execute(request);

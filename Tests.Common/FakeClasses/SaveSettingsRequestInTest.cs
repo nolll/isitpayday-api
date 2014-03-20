@@ -2,9 +2,9 @@
 
 namespace Tests.Common.FakeClasses
 {
-    public class FakeSaveSettingsRequest : SaveSettingsRequest
+    public class SaveSettingsRequestInTest : SaveSettingsRequest
     {
-        public FakeSaveSettingsRequest(
+        public SaveSettingsRequestInTest(
             string countryId = default(string),
             string timeZoneId = default(string),
             int? payDay = default(int?))

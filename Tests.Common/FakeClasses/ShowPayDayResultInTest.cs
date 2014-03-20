@@ -2,9 +2,9 @@
 
 namespace Tests.Common.FakeClasses
 {
-    public class FakeShowPayDayResult : ShowPayDayResult
+    public class ShowPayDayResultInTest : ShowPayDayResult
     {
-        public FakeShowPayDayResult(
+        public ShowPayDayResultInTest(
             bool isPayDay = default(bool),
             string message = default(string))
             : base(isPayDay, message)

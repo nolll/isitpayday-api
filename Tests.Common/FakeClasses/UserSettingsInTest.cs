@@ -3,9 +3,9 @@ using Core.Classes;
 
 namespace Tests.Common.FakeClasses
 {
-    public class FakeUserSettings : UserSettings
+    public class UserSettingsInTest : UserSettings
     {
-        public FakeUserSettings(
+        public UserSettingsInTest(
             Country country = default(Country),
             TimeZoneInfo timeZone = default(TimeZoneInfo),
             int payDay = default(int))

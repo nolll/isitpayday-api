@@ -14,8 +14,8 @@ namespace Core.Tests.Services
         [Test]
         public void GetSettings_WithoutSavedCountry_ReturnsSweden()
         {
-            var sweden = new FakeCountry("SE");
-            var norway = new FakeCountry("NO");
+            var sweden = new CountryInTest("SE");
+            var norway = new CountryInTest("NO");
             var countries = new List<Country> {sweden, norway};
 
             GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countries);
@@ -29,8 +29,8 @@ namespace Core.Tests.Services
         [Test]
         public void GetSettings_WithSavedCountry_ReturnsThatCountry()
         {
-            var sweden = new FakeCountry("SE");
-            var norway = new FakeCountry("NO");
+            var sweden = new CountryInTest("SE");
+            var norway = new CountryInTest("NO");
             var countries = new List<Country> { sweden, norway };
 
             GetMock<IStorage>().Setup(o => o.GetCountry()).Returns("NO");

@@ -45,7 +45,7 @@ namespace Core.Tests.Services
         {
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             const int payDay = 1;
-            var userSettings = new FakeUserSettings(timeZone: timeZone, payDay: payDay);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
             var userTime = new DateTime(1, 1, 1, 1, 1, 1);
             var actualPayDay = new DateTime(1, 1, 1, 0, 0, 0);
 
@@ -64,7 +64,7 @@ namespace Core.Tests.Services
         {
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             const int payDay = 2;
-            var userSettings = new FakeUserSettings(timeZone: timeZone, payDay: payDay);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
             var userTime = new DateTime(1, 1, 1, 1, 1, 1);
             var actualPayDay = new DateTime(1, 1, 2, 0, 0, 0);
 
