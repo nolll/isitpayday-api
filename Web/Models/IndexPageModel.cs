@@ -14,6 +14,7 @@ namespace Web.Models
         public List<SelectListItem> TimeZoneItems { get; set; }
         public bool ShowPayDayForm { get; set; }
         public List<SelectListItem> CountryItems { get; set; }
+        public List<SelectListItem> PayDayTypeItems { get; set; }
         public string LocalTime { get; set; }
         public GoogleAnalyticsModel GoogleAnalyticsModel { get; set; }
     }
