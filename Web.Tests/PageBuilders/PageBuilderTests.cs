@@ -225,6 +225,30 @@ namespace Web.Tests.PageBuilders
         }
 
         [Test]
+        public void PayDayTypeItems_ContainsCorrectItems()
+        {
+            var activeForm = It.IsAny<string>();
+            const string firstValue = "1";
+            const string firstText = "Monthly";
+            const string lastValue = "2";
+            const string lastText = "Weekly";
+            const int expectedLength = 2;
+            var userSettings = new UserSettingsInTest(new CountryInTest(), TimeZoneInfo.Utc);
+
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<IShowPayDayInteractor>().Setup(o => o.Execute()).Returns(new ShowPayDayResultInTest());
+
+            var sut = GetSut();
+            var result = sut.Build(activeForm);
+
+            Assert.AreEqual(expectedLength, result.PayDayTypeItems.Count);
+            Assert.AreEqual(firstValue, result.PayDayTypeItems.First().Value);
+            Assert.AreEqual(firstText, result.PayDayTypeItems.First().Text);
+            Assert.AreEqual(lastValue, result.PayDayTypeItems.Last().Value);
+            Assert.AreEqual(lastText, result.PayDayTypeItems.Last().Text);
+        }
+
+        [Test]
         public void GoogleAnalyticsModel_IsCreatedFromFactory()
         {
             var activeForm = It.IsAny<string>();

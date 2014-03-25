@@ -27,5 +27,4 @@ namespace Tests.Common
             return mock as Mock<T>;
         }
     }
-
 }

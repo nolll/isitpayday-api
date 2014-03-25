@@ -97,6 +97,44 @@ namespace Core.Tests.Services
             Assert.AreEqual(savedPayDay, result.PayDay);
         }
 
+        [Test]
+        public void GetPayDayType_WithoutSavedType_ReturnsMonthly()
+        {
+            const PayDayType expected = PayDayType.Monthly;
+
+            var sut = GetSut();
+            var result = sut.GetSettings();
+
+            Assert.AreEqual(expected, result.PayDayType);
+        }
+
+        [Test]
+        public void GetPayDayType_WithMonthlySaved_ReturnsMonthly()
+        {
+            const int savedValue = 1;
+            const PayDayType expected = PayDayType.Monthly;
+
+            GetMock<IStorage>().Setup(o => o.GetPayDayType()).Returns(savedValue);
+
+            var sut = GetSut();
+            var result = sut.GetSettings();
+
+            Assert.AreEqual(expected, result.PayDayType);
+        }
+
+        [Test]
+        public void GetPayDayType_WithWeeklySaved_ReturnsWeekly()
+        {
+            const int savedValue = 2;
+            const PayDayType expected = PayDayType.Weekly;
+
+            GetMock<IStorage>().Setup(o => o.GetPayDayType()).Returns(savedValue);
+
+            var sut = GetSut();
+            var result = sut.GetSettings();
+
+            Assert.AreEqual(expected, result.PayDayType);
+        }
 
         private UserSettingsService GetSut()
         {

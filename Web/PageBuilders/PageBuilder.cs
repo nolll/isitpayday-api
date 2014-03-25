@@ -53,6 +53,7 @@ namespace Web.PageBuilders
             var timeZoneItems = GetTimezoneItems();
             var showPayDayForm = activeForm == PayDayFormName;
             var payDayItems = GetPayDayItems();
+            var payDayTypeItems = GetPayDayTypeItems();
             var localTime = usertime.ToString("R");
             var googleAnalyticsModel = _googleAnalyticsModelFactory.Create();
             
@@ -71,6 +72,7 @@ namespace Web.PageBuilders
                     CountryItems = countryItems,
                     TimeZoneItems = timeZoneItems,
                     PayDayItems = payDayItems,
+                    PayDayTypeItems = payDayTypeItems,
                     GoogleAnalyticsModel = googleAnalyticsModel
                 };
         }
@@ -81,9 +83,17 @@ namespace Web.PageBuilders
             for (var i = 1; i <= 31; i++)
             {
                 var t = i.ToString(CultureInfo.InvariantCulture);
-                var item = new SelectListItem {Text = t, Value = t};
+                var item = new SelectListItem { Text = t, Value = t };
                 items.Add(item);
             }
+            return items;
+        }
+
+        private List<SelectListItem> GetPayDayTypeItems()
+        {
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "Monthly", Value = "1" });
+            items.Add(new SelectListItem { Text = "Weekly", Value = "2" });
             return items;
         }
 

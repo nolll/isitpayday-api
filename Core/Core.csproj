@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\PayDayType.cs" />
     <Compile Include="Classes\UserSettings.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
     <Compile Include="DateEvaluators\ExcludedEvaluator.cs" />

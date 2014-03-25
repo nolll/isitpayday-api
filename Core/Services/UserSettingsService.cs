@@ -28,7 +28,8 @@ namespace Core.Services
             var country = GetCountry();
             var timeZone = GetTimeZone();
             var payDay = GetSelectedPayDay();
-            return new UserSettings(country, timeZone, payDay);
+            var payDayType = GetSelectedPayDayType();
+            return new UserSettings(country, timeZone, payDay, payDayType);
         }
 
         private Country GetCountry()
@@ -47,6 +48,12 @@ namespace Core.Services
         {
             var payday = _storage.GetPayDay();
             return payday.HasValue ? payday.Value : DefaultPayDay;
+        }
+
+        private PayDayType GetSelectedPayDayType()
+        {
+            var payDayType = _storage.GetPayDayType();
+            return payDayType.HasValue && payDayType.Value == 2 ? PayDayType.Weekly : PayDayType.Monthly;
         }
     }
 }

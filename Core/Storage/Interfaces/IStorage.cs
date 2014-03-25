@@ -8,5 +8,6 @@
         void SetCountry(string countryId);
         string GetTimeZone();
         void SetTimeZone(string timeZone);
+        int? GetPayDayType();
     }
 }

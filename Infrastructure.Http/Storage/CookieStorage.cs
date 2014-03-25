@@ -9,6 +9,7 @@ namespace Infrastructure.Http.Storage
         private const string PayDayCookie = "payday";
         private const string CountryCookie = "country";
         private const string TimeZoneCookie = "timezone";
+        private const string PayDayTypeCookie = "paydaytype";
 
         private readonly IWebContext _webContext;
 
@@ -20,13 +21,7 @@ namespace Infrastructure.Http.Storage
 
         public int? GetPayDay()
         {
-            var value = _webContext.GetCookie(PayDayCookie);
-            int payday;
-            if (value != null && int.TryParse(value, out payday))
-            {
-                return payday;
-            }
-            return null;
+            return GetIntValue(_webContext.GetCookie(PayDayCookie));
         }
 
         public void SetPayDay(int payDay)
@@ -52,6 +47,21 @@ namespace Infrastructure.Http.Storage
         public void SetTimeZone(string timeZone)
         {
             _webContext.SetCookie(TimeZoneCookie, timeZone);
+        }
+
+        public int? GetPayDayType()
+        {
+            return GetIntValue(_webContext.GetCookie(PayDayTypeCookie));
+        }
+
+        private static int? GetIntValue(string value)
+        {
+            int intVal;
+            if (value != null && int.TryParse(value, out intVal))
+            {
+                return intVal;
+            }
+            return null;
         }
     }
 }
