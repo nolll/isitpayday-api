@@ -5,66 +5,7 @@
 <h1>Is it payday?</h1>
 <p class="status"><span>@Model.PayDayString</span></p>
 
-<div class="settings">
-
-	<form action="/" method="post">
-	<div class="settings">
-	
-		<h2>Settings</h2>
-		
-		<h3>Country</h3>
-	    <div class="country-info">
-            @if(Model.ShowCountryForm)
-            {
-                <p>
-                    @Html.DropDownListFor(model => model.CountryId, Model.CountryItems, new {@id = "input_country"})
-                </p>
-			} else {
-                <p>
-					@Model.CountryName
-					<a href="/?change=country" class="change-country">Change</a>
-				</p>
-			}
-		</div>
-		
-		<h3>Timezone</h3>
-		<div class="timezone-info">
-			@if(Model.ShowTimeZoneForm)
-            {
-				<p>
-		            @Html.DropDownListFor(model => model.TimeZoneId, Model.TimeZoneItems, new {@id = "input_timezone"})
-                </p>
-			} else {
-                <p>
-					@Model.TimeZoneName
-					<a href="/?change=timezone" class="change-timezone">Change</a>
-				</p>
-			}
-		</div>
-
-		<h3>Payday</h3>
-		<div class="payday-info">
-			@if(Model.ShowPayDayForm)
-            {
-                <p>
-		            @Html.DropDownListFor(model => model.PayDay, Model.PayDayItems, new {@id = "input_payday"})
-                </p>
-			} else {
-                <p>
-			        @Model.PayDay
-			        <a href="/?change=payday" class="change-payday">Change</a>
-			    </p>
-			}
-		</div>
-		
-		<noscript>
-			<button type="submit">Save</button>
-		</noscript>
-		
-	</div>
-	
-	</form>
-</div>
+@Html.Partial("SettingsForm", Model.SettingsFormModel)
 
 <p class="footer">
 	@Model.LocalTime

@@ -16,7 +16,7 @@ namespace Web.Tests.Commands
             const string timeZoneId = "b";
             const int payDay = 1;
 
-            var postModel = new IndexPagePostModel{ CountryId = countryId, TimeZoneId = timeZoneId, PayDay = payDay};
+            var postModel = new SettingsModel{ CountryId = countryId, TimeZoneId = timeZoneId, PayDay = payDay};
 
             var sut = GetSut(postModel);
             var result = sut.Execute();
@@ -25,7 +25,7 @@ namespace Web.Tests.Commands
             GetMock<ISaveSettingsInteractor>().Verify(o => o.Execute(It.Is<SaveSettingsRequest>(r => r.CountryId == countryId && r.TimeZoneId == timeZoneId && r.PayDay == payDay)));
         }
 
-        private SaveSettingsCommand GetSut(IndexPagePostModel postModel)
+        private SaveSettingsCommand GetSut(SettingsModel postModel)
         {
             return new SaveSettingsCommand(
                 GetMock<ISaveSettingsInteractor>().Object,

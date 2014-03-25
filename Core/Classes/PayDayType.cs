@@ -2,7 +2,7 @@
 {
     public enum PayDayType
     {
-        Monthly,
-        Weekly
+        Monthly = 1,
+        Weekly = 2
     }
 }

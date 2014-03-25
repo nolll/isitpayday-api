@@ -13,7 +13,7 @@ namespace Web.Commands
             _saveSettingsInteractor = saveSettingsInteractor;
         }
 
-        public SaveSettingsCommand GetSaveSettingsCommand(IndexPagePostModel postModel)
+        public SaveSettingsCommand GetSaveSettingsCommand(SettingsModel postModel)
         {
             return new SaveSettingsCommand(_saveSettingsInteractor, postModel);
         }

@@ -123,11 +123,15 @@
     <Compile Include="Models\IPageModel.cs" />
     <Compile Include="ModelFactories\GoogleAnalyticsModelFactory.cs" />
     <Compile Include="ModelFactories\Interfaces\IGoogleAnalyticsModelFactory.cs" />
+    <Compile Include="Models\SettingsFormModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
+    <Compile Include="ModelFactories\Interfaces\ISettingsFormModelFactory.cs" />
     <Compile Include="PageBuilders\PageBuilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelFactories\SettingsFormModelFactory.cs" />
     <Compile Include="Plumbing\ControllerInstaller.cs" />
     <Compile Include="Plumbing\ObjectFactory.cs" />
     <Compile Include="Plumbing\WebObjectFactory.cs" />
@@ -169,6 +173,7 @@
     <Content Include="Views\Layouts\Page.cshtml" />
     <None Include="Properties\PublishProfiles\isitpayday-com - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\isitpayday-com - Web Deploy.pubxml" />
+    <Content Include="Views\Home\SettingsForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

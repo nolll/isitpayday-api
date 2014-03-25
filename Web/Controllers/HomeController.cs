@@ -25,7 +25,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string change, IndexPagePostModel postModel)
+        public ActionResult Index(string change, SettingsModel postModel)
         {
             var command = _commandProvider.GetSaveSettingsCommand(postModel);
             command.Execute();

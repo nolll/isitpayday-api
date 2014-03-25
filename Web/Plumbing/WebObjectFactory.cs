@@ -24,30 +24,33 @@ namespace Web.Plumbing
 
         private void RegisterTypes()
         {
-            // Interactors
-            RegisterComponent<IShowPayDayInteractor, ShowPayDayInteractor>();
-            RegisterComponent<ISaveSettingsInteractor, SaveSettingsInteractor>();
+            // Repositories
+            RegisterComponent<IUserSettingsService, UserSettingsService>();
 
             // Services
             RegisterComponent<ICountryService, CountryService>();
             RegisterComponent<IPayDayService, PayDayService>();
             RegisterComponent<ITimeService, TimeService>();
             
-            // Repositories
-            RegisterComponent<IUserSettingsService, UserSettingsService>();
-            
+            // Interactors
+            RegisterComponent<IShowPayDayInteractor, ShowPayDayInteractor>();
+            RegisterComponent<ISaveSettingsInteractor, SaveSettingsInteractor>();
+
             // Misc
-            RegisterComponent<IPageBuilder, PageBuilder>();
             RegisterComponent<IStorage, CookieStorage>();
             RegisterComponent<IWebContext, WebContext>();
             RegisterComponent<ICommandProvider, CommandProvider>();
-            RegisterComponent<IGoogleAnalyticsModelFactory, GoogleAnalyticsModelFactory>();
             RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
             RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
             RegisterComponent<IWeekendEvaluator, WeekendEvaluator>();
             RegisterComponent<IExcludedEvaluator, ExcludedEvaluator>();
+   
+            // Page Builders
+            RegisterComponent<IPageBuilder, PageBuilder>();
             
+            // Model Factories
+            RegisterComponent<IGoogleAnalyticsModelFactory, GoogleAnalyticsModelFactory>();
+            RegisterComponent<ISettingsFormModelFactory, SettingsFormModelFactory>();
         }
-
     }
 }

@@ -4,6 +4,6 @@ namespace Web.Commands
 {
     public interface ICommandProvider
     {
-        SaveSettingsCommand GetSaveSettingsCommand(IndexPagePostModel postModel);
+        SaveSettingsCommand GetSaveSettingsCommand(SettingsModel postModel);
     }
 }

@@ -6,11 +6,11 @@ namespace Web.Commands
     public class SaveSettingsCommand : Command
     {
         private readonly ISaveSettingsInteractor _saveSettingsInteractor;
-        private readonly IndexPagePostModel _model;
+        private readonly SettingsModel _model;
 
         public SaveSettingsCommand(
             ISaveSettingsInteractor saveSettingsInteractor,
-            IndexPagePostModel model)
+            SettingsModel model)
         {
             _saveSettingsInteractor = saveSettingsInteractor;
             _model = model;
