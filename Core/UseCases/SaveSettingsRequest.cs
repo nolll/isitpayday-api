@@ -1,4 +1,4 @@
-﻿namespace Core.UseCases.SaveSettings
+﻿namespace Core.UseCases
 {
     public class SaveSettingsRequest
     {

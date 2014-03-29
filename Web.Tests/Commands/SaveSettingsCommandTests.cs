@@ -1,4 +1,4 @@
-﻿using Core.UseCases.SaveSettings;
+﻿using Core.UseCases;
 using Moq;
 using NUnit.Framework;
 using Tests.Common;
@@ -22,13 +22,13 @@ namespace Web.Tests.Commands
             var result = sut.Execute();
 
             Assert.IsTrue(result);
-            GetMock<ISaveSettingsInteractor>().Verify(o => o.Execute(It.Is<SaveSettingsRequest>(r => r.CountryId == countryId && r.TimeZoneId == timeZoneId && r.PayDay == payDay)));
+            GetMock<ISaveSettings>().Verify(o => o.Execute(It.Is<SaveSettingsRequest>(r => r.CountryId == countryId && r.TimeZoneId == timeZoneId && r.PayDay == payDay)));
         }
 
         private SaveSettingsCommand GetSut(SettingsModel postModel)
         {
             return new SaveSettingsCommand(
-                GetMock<ISaveSettingsInteractor>().Object,
+                GetMock<ISaveSettings>().Object,
                 postModel);
         }
     }

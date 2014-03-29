@@ -1,18 +1,18 @@
-﻿using Core.UseCases.SaveSettings;
+﻿using Core.UseCases;
 using Web.Models;
 
 namespace Web.Commands
 {
     public class SaveSettingsCommand : Command
     {
-        private readonly ISaveSettingsInteractor _saveSettingsInteractor;
+        private readonly ISaveSettings _saveSettings;
         private readonly SettingsModel _model;
 
         public SaveSettingsCommand(
-            ISaveSettingsInteractor saveSettingsInteractor,
+            ISaveSettings saveSettings,
             SettingsModel model)
         {
-            _saveSettingsInteractor = saveSettingsInteractor;
+            _saveSettings = saveSettings;
             _model = model;
         }
 
@@ -23,7 +23,7 @@ namespace Web.Commands
                 _model.TimeZoneId,
                 _model.PayDay);
 
-            _saveSettingsInteractor.Execute(request);
+            _saveSettings.Execute(request);
             return true;
         }
     }

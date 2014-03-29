@@ -1,5 +1,5 @@
 ﻿using Core.Storage;
-using Core.UseCases.SaveSettings;
+using Core.UseCases;
 using Moq;
 using NUnit.Framework;
 using Tests.Common;
@@ -78,9 +78,9 @@ namespace Core.Tests.Interactors
             GetMock<IStorage>().Verify(o => o.SetPayDay(It.IsAny<int>()), Times.Never);
         }
 
-        private SaveSettingsInteractor GetSut()
+        private SaveSettings GetSut()
         {
-            return new SaveSettingsInteractor(
+            return new SaveSettings(
                 GetMock<IStorage>().Object);
         }
     }

@@ -1,12 +1,12 @@
 ﻿using Core.Services;
 
-namespace Core.UseCases.GetPayDay
+namespace Core.UseCases
 {
-    public class ShowPayDayInteractor : IShowPayDayInteractor
+    public class ShowPayDay : IShowPayDay
     {
         private readonly IPayDayService _payDayService;
 
-        public ShowPayDayInteractor(
+        public ShowPayDay(
             IPayDayService payDayService)
         {
             _payDayService = payDayService;

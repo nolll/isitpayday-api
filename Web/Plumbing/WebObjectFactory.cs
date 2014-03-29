@@ -3,8 +3,7 @@ using Castle.Windsor;
 using Core.DateEvaluators;
 using Core.Services;
 using Core.Storage;
-using Core.UseCases.GetPayDay;
-using Core.UseCases.SaveSettings;
+using Core.UseCases;
 using Infrastructure.Http.Storage;
 using Infrastructure.System.Services;
 using Web.Commands;
@@ -33,8 +32,8 @@ namespace Web.Plumbing
             RegisterComponent<ITimeService, TimeService>();
             
             // Interactors
-            RegisterComponent<IShowPayDayInteractor, ShowPayDayInteractor>();
-            RegisterComponent<ISaveSettingsInteractor, SaveSettingsInteractor>();
+            RegisterComponent<IShowPayDay, ShowPayDay>();
+            RegisterComponent<ISaveSettings, SaveSettings>();
 
             // Misc
             RegisterComponent<IStorage, CookieStorage>();

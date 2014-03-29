@@ -2,10 +2,10 @@
 {
     public class IndexPageModel : IPageModel
     {
-        public string PayDayString { get; set; }
-        public string LocalTime { get; set; }
-        public SettingsFormModel SettingsFormModel { get; set; }
-        public GoogleAnalyticsModel GoogleAnalyticsModel { get; set; }
+        public string PayDayString { get; private set; }
+        public string LocalTime { get; private set; }
+        public SettingsFormModel SettingsFormModel { get; private set; }
+        public GoogleAnalyticsModel GoogleAnalyticsModel { get; private set; }
 
         public IndexPageModel(
             string payDayString,

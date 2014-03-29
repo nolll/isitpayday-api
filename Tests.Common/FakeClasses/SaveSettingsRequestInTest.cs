@@ -1,4 +1,4 @@
-﻿using Core.UseCases.SaveSettings;
+﻿using Core.UseCases;
 
 namespace Tests.Common.FakeClasses
 {

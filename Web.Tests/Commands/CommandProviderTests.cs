@@ -1,4 +1,4 @@
-﻿using Core.UseCases.SaveSettings;
+﻿using Core.UseCases;
 using NUnit.Framework;
 using Tests.Common;
 using Web.Commands;
@@ -22,7 +22,7 @@ namespace Web.Tests.Commands
         private CommandProvider GetSut()
         {
             return new CommandProvider(
-                GetMock<ISaveSettingsInteractor>().Object);
+                GetMock<ISaveSettings>().Object);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Core.UseCases.GetPayDay;
+﻿using Core.UseCases;
 
 namespace Tests.Common.FakeClasses
 {

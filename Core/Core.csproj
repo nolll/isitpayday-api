@@ -52,9 +52,9 @@
     <Compile Include="DateEvaluators\WeekendEvaluator.cs" />
     <Compile Include="Services\Interfaces\IUserSettingsService.cs" />
     <Compile Include="Services\UserSettingsService.cs" />
-    <Compile Include="UseCases\GetPayDay\IShowPayDayInteractor.cs" />
-    <Compile Include="UseCases\GetPayDay\ShowPayDayInteractor.cs" />
-    <Compile Include="UseCases\GetPayDay\ShowPayDayResult.cs" />
+    <Compile Include="UseCases\Interfaces\IShowPayDay.cs" />
+    <Compile Include="UseCases\ShowPayDay.cs" />
+    <Compile Include="UseCases\ShowPayDayResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\Interfaces\ICountryService.cs" />
@@ -63,9 +63,9 @@
     <Compile Include="Services\Interfaces\IWebContext.cs" />
     <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Storage\Interfaces\IStorage.cs" />
-    <Compile Include="UseCases\SaveSettings\ISaveSettingsInteractor.cs" />
-    <Compile Include="UseCases\SaveSettings\SaveSettingsInteractor.cs" />
-    <Compile Include="UseCases\SaveSettings\SaveSettingsRequest.cs" />
+    <Compile Include="UseCases\Interfaces\ISaveSettings.cs" />
+    <Compile Include="UseCases\SaveSettings.cs" />
+    <Compile Include="UseCases\SaveSettingsRequest.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,12 +1,12 @@
 ﻿using Core.Storage;
 
-namespace Core.UseCases.SaveSettings
+namespace Core.UseCases
 {
-    public class SaveSettingsInteractor : ISaveSettingsInteractor
+    public class SaveSettings : ISaveSettings
     {
         private readonly IStorage _storage;
 
-        public SaveSettingsInteractor(
+        public SaveSettings(
             IStorage storage)
         {
             _storage = storage;

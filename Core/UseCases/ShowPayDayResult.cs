@@ -1,4 +1,4 @@
-﻿namespace Core.UseCases.GetPayDay
+﻿namespace Core.UseCases
 {
     public class ShowPayDayResult
     {

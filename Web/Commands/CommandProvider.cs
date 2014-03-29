@@ -1,21 +1,21 @@
-﻿using Core.UseCases.SaveSettings;
+﻿using Core.UseCases;
 using Web.Models;
 
 namespace Web.Commands
 {
     public class CommandProvider : ICommandProvider
     {
-        private readonly ISaveSettingsInteractor _saveSettingsInteractor;
+        private readonly ISaveSettings _saveSettings;
 
         public CommandProvider(
-            ISaveSettingsInteractor saveSettingsInteractor)
+            ISaveSettings saveSettings)
         {
-            _saveSettingsInteractor = saveSettingsInteractor;
+            _saveSettings = saveSettings;
         }
 
         public SaveSettingsCommand GetSaveSettingsCommand(SettingsModel postModel)
         {
-            return new SaveSettingsCommand(_saveSettingsInteractor, postModel);
+            return new SaveSettingsCommand(_saveSettings, postModel);
         }
     }
 }

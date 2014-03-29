@@ -1,5 +1,5 @@
 ﻿using Core.Services;
-using Core.UseCases.GetPayDay;
+using Core.UseCases;
 using NUnit.Framework;
 using Tests.Common;
 
@@ -35,9 +35,9 @@ namespace Core.Tests.Interactors
             Assert.AreEqual(expectedMessage, result.Message);
         }
 
-        private ShowPayDayInteractor GetSut()
+        private ShowPayDay GetSut()
         {
-            return new ShowPayDayInteractor(
+            return new ShowPayDay(
                 GetMock<IPayDayService>().Object);
         }
     }

@@ -1,5 +1,5 @@
 ﻿using Core.Services;
-using Core.UseCases.GetPayDay;
+using Core.UseCases;
 using Web.ModelFactories;
 using Web.Models;
 
@@ -10,26 +10,26 @@ namespace Web.PageBuilders
         private readonly ITimeService _timeService;
         private readonly IGoogleAnalyticsModelFactory _googleAnalyticsModelFactory;
         private readonly IUserSettingsService _userSettingsService;
-        private readonly IShowPayDayInteractor _showPayDayInteractor;
+        private readonly IShowPayDay _showPayDay;
         private readonly ISettingsFormModelFactory _settingsFormModelFactory;
 
         public PageBuilder(
             ITimeService timeService,
             IGoogleAnalyticsModelFactory googleAnalyticsModelFactory,
             IUserSettingsService userSettingsService,
-            IShowPayDayInteractor showPayDayInteractor,
+            IShowPayDay showPayDay,
             ISettingsFormModelFactory settingsFormModelFactory)
         {
             _timeService = timeService;
             _googleAnalyticsModelFactory = googleAnalyticsModelFactory;
             _userSettingsService = userSettingsService;
-            _showPayDayInteractor = showPayDayInteractor;
+            _showPayDay = showPayDay;
             _settingsFormModelFactory = settingsFormModelFactory;
         }
 
         public IndexPageModel Build(string activeForm)
         {
-            var showPayDayResult = _showPayDayInteractor.Execute();
+            var showPayDayResult = _showPayDay.Execute();
             var userSettings = _userSettingsService.GetSettings();
             var timeZone = userSettings.TimeZone;
             var usertime = _timeService.GetTime(timeZone);
