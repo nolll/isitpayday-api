@@ -31,9 +31,10 @@ namespace Web.Plumbing
             RegisterComponent<IPayDayService, PayDayService>();
             RegisterComponent<ITimeService, TimeService>();
             
-            // Interactors
+            // Use Cases
             RegisterComponent<IShowPayDay, ShowPayDay>();
             RegisterComponent<ISaveSettings, SaveSettings>();
+            RegisterComponent<IShowSettings, ShowSettings>();
 
             // Misc
             RegisterComponent<IStorage, CookieStorage>();

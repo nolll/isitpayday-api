@@ -5,9 +5,9 @@ using NUnit.Framework;
 using Tests.Common;
 using Tests.Common.FakeClasses;
 
-namespace Core.Tests.Interactors
+namespace Core.Tests.UseCases
 {
-    public class SaveSettingsInteractorTests : MockContainer
+    public class SaveSettingsTests : MockContainer
     {
         [Test]
         public void Execute_WithCountryId_SavesCountry()

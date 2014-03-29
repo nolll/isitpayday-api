@@ -1,10 +1,9 @@
-﻿using Core.Classes;
-using Web.Models;
+﻿using Web.Models;
 
 namespace Web.ModelFactories
 {
     public interface ISettingsFormModelFactory
     {
-        SettingsFormModel Create(UserSettings userSettings, string activeForm);
+        SettingsFormModel Create(string activeForm);
     }
 }

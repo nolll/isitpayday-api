@@ -3,9 +3,9 @@ using Core.UseCases;
 using NUnit.Framework;
 using Tests.Common;
 
-namespace Core.Tests.Interactors
+namespace Core.Tests.UseCases
 {
-    public class GetPayDayInteractorTests : MockContainer
+    public class GetPayDayTests : MockContainer
     {
         [Test]
         public void Execute_TodayIsPayDay_ResultIsCorrect()

@@ -53,6 +53,7 @@
     <Compile Include="Services\Interfaces\IUserSettingsService.cs" />
     <Compile Include="Services\UserSettingsService.cs" />
     <Compile Include="UseCases\Interfaces\IShowPayDay.cs" />
+    <Compile Include="UseCases\Interfaces\IShowSettings.cs" />
     <Compile Include="UseCases\ShowPayDay.cs" />
     <Compile Include="UseCases\ShowPayDayResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="UseCases\Interfaces\ISaveSettings.cs" />
     <Compile Include="UseCases\SaveSettings.cs" />
     <Compile Include="UseCases\SaveSettingsRequest.cs" />
+    <Compile Include="UseCases\ShowSettings.cs" />
+    <Compile Include="UseCases\ShowSettingsResult.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

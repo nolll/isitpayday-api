@@ -49,11 +49,12 @@
     <Compile Include="DateEvaluators\ExcludedEvaluatorTests.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluatorTests.cs" />
     <Compile Include="DateEvaluators\WeekendEvaluatorTests.cs" />
-    <Compile Include="Interactors\GetPayDayInteractorTests.cs" />
-    <Compile Include="Interactors\SaveSettingsInteractorTests.cs" />
+    <Compile Include="UseCases\GetPayDayTests.cs" />
+    <Compile Include="UseCases\SaveSettingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PayDayServiceTests.cs" />
     <Compile Include="Services\UserSettingsServiceTests.cs" />
+    <Compile Include="UseCases\ShowSettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

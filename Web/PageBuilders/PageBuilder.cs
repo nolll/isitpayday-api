@@ -35,7 +35,7 @@ namespace Web.PageBuilders
             var usertime = _timeService.GetTime(timeZone);
             var localTime = usertime.ToString("R");
             var googleAnalyticsModel = _googleAnalyticsModelFactory.Create();
-            var settingsFormModel = _settingsFormModelFactory.Create(userSettings, activeForm);
+            var settingsFormModel = _settingsFormModelFactory.Create(activeForm);
 
             return new IndexPageModel(
                     showPayDayResult.Message,
