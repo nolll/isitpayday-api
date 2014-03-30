@@ -1,4 +1,5 @@
-﻿using Core.UseCases;
+﻿using System;
+using Core.UseCases;
 
 namespace Tests.Common.FakeClasses
 {
@@ -6,8 +7,9 @@ namespace Tests.Common.FakeClasses
     {
         public ShowPayDayResultInTest(
             bool isPayDay = default(bool),
-            string message = default(string))
-            : base(isPayDay, message)
+            string message = default(string),
+            DateTime userTime = default(DateTime))
+            : base(isPayDay, message, userTime)
         {
         }
     }

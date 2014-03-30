@@ -19,7 +19,7 @@ namespace Web.Tests.ModelFactories
         {
             var activeForm = It.IsAny<string>();
             const int selectedPayDay = 1;
-            var showSettingsResult = new ShowSettingsResult(selectedPayDay, new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult(selectedPayDay);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
 
@@ -35,7 +35,7 @@ namespace Web.Tests.ModelFactories
             var activeForm = It.IsAny<string>();
             const string expectedTimeZoneId = "UTC";
             const string expectedTimeZoneName = "UTC";
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult(timeZone: TimeZoneInfo.Utc);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -50,7 +50,7 @@ namespace Web.Tests.ModelFactories
         public void ActiveForms_WithCountryForm_OnlyCountryFormIsShown()
         {
             const string activeForm = "country";
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult();
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -66,7 +66,7 @@ namespace Web.Tests.ModelFactories
         public void ActiveForms_WithTimeZoneForm_OnlyTimeZoneFormIsShown()
         {
             const string activeForm = "timezone";
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult();
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -82,7 +82,7 @@ namespace Web.Tests.ModelFactories
         public void ActiveForms_WithPayDayForm_OnlyPayDayFormIsShown()
         {
             const string activeForm = "payday";
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult();
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -101,7 +101,7 @@ namespace Web.Tests.ModelFactories
             const string countryId = "a";
             const string countryName = "b";
             var country = new CountryInTest(countryId, countryName);
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), country, TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult(country: country);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -121,7 +121,7 @@ namespace Web.Tests.ModelFactories
             const int expectedLength = 1;
             var country = new CountryInTest(countryId, countryName);
             var countryList = new List<Country> { country };
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), countryList, new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult(countryOptions: countryList);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
 
@@ -142,7 +142,7 @@ namespace Web.Tests.ModelFactories
             var timeZoneName = timeZone.StandardName;
             const int expectedLength = 1;
             var timeZoneList = new List<TimeZoneInfo> { timeZone };
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), new List<PayDayType>(), new List<Country>(), timeZoneList);
+            var showSettingsResult = GetShowSettingsResult(timeZoneOptions: timeZoneList);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZoneList);
@@ -163,7 +163,7 @@ namespace Web.Tests.ModelFactories
             const string expected = "1";
             const int expectedLength = 1;
             var payDayOptions = new List<int> {firstValue};
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, payDayOptions, new List<PayDayType>(), new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult(payDayOptions: payDayOptions);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -183,7 +183,7 @@ namespace Web.Tests.ModelFactories
             const string firstValue = "1";
             const string firstText = "Monthly";
             const int expectedLength = 1;
-            var showSettingsResult = new ShowSettingsResult(It.IsAny<int>(), new CountryInTest(), TimeZoneInfo.Utc, PayDayType.Monthly, new List<int>(), payDayTypes, new List<Country>(), new List<TimeZoneInfo>());
+            var showSettingsResult = GetShowSettingsResult(payDayTypeOptions: payDayTypes);
 
             GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             
@@ -193,6 +193,27 @@ namespace Web.Tests.ModelFactories
             Assert.AreEqual(expectedLength, result.PayDayTypeItems.Count);
             Assert.AreEqual(firstValue, result.PayDayTypeItems.First().Value);
             Assert.AreEqual(firstText, result.PayDayTypeItems.First().Text);
+        }
+
+        private static ShowSettingsResult GetShowSettingsResult(
+            int? payDay = null,
+            Country country = null,
+            TimeZoneInfo timeZone = null,
+            PayDayType? payDayType = null,
+            IList<int> payDayOptions = null,
+            IList<PayDayType> payDayTypeOptions = null,
+            IList<Country> countryOptions = null,
+            IList<TimeZoneInfo> timeZoneOptions = null)
+        {
+            return new ShowSettingsResult(
+                payDay.HasValue ? payDay.Value : It.IsAny<int>(),
+                country ?? new CountryInTest(),
+                timeZone ?? TimeZoneInfo.Utc,
+                payDayType.HasValue ? payDayType.Value : PayDayType.Monthly,
+                payDayOptions ?? new List<int>(),
+                payDayTypeOptions ?? new List<PayDayType>(),
+                countryOptions ?? new List<Country>(),
+                timeZoneOptions ?? new List<TimeZoneInfo>());
         }
 
         private SettingsFormModelFactory GetSut()

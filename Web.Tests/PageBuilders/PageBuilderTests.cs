@@ -14,14 +14,12 @@ namespace Web.Tests.PageBuilders
     public class PageBuilderTests : MockContainer
     {
         [Test]
-        public void PayDayString_IsSetFromInteractor()
+        public void PayDayString_IsSetFromUseCase()
         {
             var activeForm = It.IsAny<string>();
             const string message = "a";
-            var userSettings = new UserSettingsInTest(new CountryInTest(), TimeZoneInfo.Utc);
             var interactorResult = new ShowPayDayResultInTest(message: message);
 
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
             GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(interactorResult);
 
             var sut = GetSut();
@@ -31,17 +29,14 @@ namespace Web.Tests.PageBuilders
         }
 
         [Test]
-        public void LocalTime_IsSetFromTimeService()
+        public void LocalTime_IsSetFromUseCase()
         {
             var activeForm = It.IsAny<string>();
             const string expected = "Sat, 01 Jan 2000 00:00:00 GMT";
-            var timeZone = TimeZoneInfo.Utc;
             var time = new DateTime(2000, 1, 1);
-            var userSettings = new UserSettingsInTest(new CountryInTest(), TimeZoneInfo.Utc);
+            var interactorResult = new ShowPayDayResultInTest(userTime: time);
 
-            GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(time);
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(new ShowPayDayResultInTest());
+            GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(interactorResult);
 
             var sut = GetSut();
             var result = sut.Build(activeForm);
@@ -53,10 +48,8 @@ namespace Web.Tests.PageBuilders
         public void GoogleAnalyticsModel_IsCreatedFromFactory()
         {
             var activeForm = It.IsAny<string>();
-            var userSettings = new UserSettingsInTest(new CountryInTest(), TimeZoneInfo.Utc);
 
             GetMock<IGoogleAnalyticsModelFactory>().Setup(o => o.Create()).Returns(new GoogleAnalyticsModel());
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
             GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(new ShowPayDayResultInTest());
 
             var sut = GetSut();
@@ -69,9 +62,7 @@ namespace Web.Tests.PageBuilders
         public void SettingsFormModel_IsSet()
         {
             var activeForm = It.IsAny<string>();
-            var userSettings = new UserSettingsInTest(new CountryInTest(), TimeZoneInfo.Utc);
 
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
             GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(new ShowPayDayResultInTest());
             GetMock<ISettingsFormModelFactory>().Setup(o => o.Create(activeForm)).Returns(new SettingsFormModel());
 
@@ -84,9 +75,7 @@ namespace Web.Tests.PageBuilders
         private PageBuilder GetSut()
         {
             return new PageBuilder(
-                GetMock<ITimeService>().Object,
                 GetMock<IGoogleAnalyticsModelFactory>().Object,
-                GetMock<IUserSettingsService>().Object,
                 GetMock<IShowPayDay>().Object,
                 GetMock<ISettingsFormModelFactory>().Object);
         }
