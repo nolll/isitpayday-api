@@ -1,0 +1,17 @@
+using Core.UseCases;
+using Plumbing;
+
+namespace Web
+{
+    public class UseCaseContainer
+    {
+        private readonly Dependencies _deps;
+
+        public UseCaseContainer(Dependencies deps)
+        {
+            _deps = deps;
+        }
+
+        public ShowPayDay ShowPayDay { get { return new ShowPayDay(_deps.PayDayService, _deps.UserSettingsService, _deps.TimeService); } }
+    }
+}

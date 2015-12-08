@@ -113,8 +113,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandProvider.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Commands\Interfaces\ICommandProvider.cs" />
     <Compile Include="Commands\SaveSettingsCommand.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Plumbing\WebObjectFactory.cs" />
     <Compile Include="Plumbing\WindsorControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UseCaseContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -187,6 +190,10 @@
     <ProjectReference Include="..\Infrastructure.System\Infrastructure.System.csproj">
       <Project>{873f24ae-d0eb-472e-8ce7-581e34430c0d}</Project>
       <Name>Infrastructure.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plumbing\Plumbing.csproj">
+      <Project>{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}</Project>
+      <Name>Plumbing</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

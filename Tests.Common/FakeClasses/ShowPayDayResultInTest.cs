@@ -3,7 +3,7 @@ using Core.UseCases;
 
 namespace Tests.Common.FakeClasses
 {
-    public class ShowPayDayResultInTest : ShowPayDayResult
+    public class ShowPayDayResultInTest : ShowPayDay.Result
     {
         public ShowPayDayResultInTest(
             bool isPayDay = default(bool),

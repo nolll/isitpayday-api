@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7E85E3B7-C78B-49DD-B5B3-B6462F56ED9A}</ProjectGuid>
+    <ProjectGuid>{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
+    <RootNamespace>Plumbing</RootNamespace>
+    <AssemblyName>Plumbing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,37 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Country.cs" />
-    <Compile Include="Classes\PayDayType.cs" />
-    <Compile Include="Classes\UserSettings.cs" />
-    <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
-    <Compile Include="DateEvaluators\ExcludedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IBlockedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IExcludedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IPayDayEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IWeekendEvaluator.cs" />
-    <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
-    <Compile Include="DateEvaluators\WeekendEvaluator.cs" />
-    <Compile Include="Services\Interfaces\IUserSettingsService.cs" />
-    <Compile Include="Services\TimeService.cs" />
-    <Compile Include="Services\UserSettingsService.cs" />
-    <Compile Include="UseCases\Interfaces\IShowSettings.cs" />
-    <Compile Include="UseCases\ShowPayDay.cs" />
+    <Compile Include="Dependencies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CountryService.cs" />
-    <Compile Include="Services\Interfaces\ICountryService.cs" />
-    <Compile Include="Services\Interfaces\IPayDayService.cs" />
-    <Compile Include="Services\Interfaces\ITimeService.cs" />
-    <Compile Include="Services\Interfaces\IWebContext.cs" />
-    <Compile Include="Services\PayDayService.cs" />
-    <Compile Include="Storage\Interfaces\IStorage.cs" />
-    <Compile Include="UseCases\Interfaces\ISaveSettings.cs" />
-    <Compile Include="UseCases\SaveSettings.cs" />
-    <Compile Include="UseCases\SaveSettingsRequest.cs" />
-    <Compile Include="UseCases\ShowSettings.cs" />
-    <Compile Include="UseCases\ShowSettingsResult.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{7E85E3B7-C78B-49DD-B5B3-B6462F56ED9A}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Http\Infrastructure.Http.csproj">
+      <Project>{A4038FFA-EB5D-4EEB-BC84-CADBDBA0EF5D}</Project>
+      <Name>Infrastructure.Http</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

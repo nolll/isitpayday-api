@@ -5,7 +5,7 @@ using Web.PageBuilders;
 
 namespace Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IPageBuilder _pageBuilder;
         private readonly ICommandProvider _commandProvider;
@@ -20,7 +20,8 @@ namespace Web.Controllers
 
         public ActionResult Index(string change)
         {
-            var pageModel = _pageBuilder.Build(change);
+            var showPayDay = UseCase.ShowPayDay.Execute();
+            var pageModel = _pageBuilder.Build(showPayDay, change);
             return View(pageModel);
         }
 

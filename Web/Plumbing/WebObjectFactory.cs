@@ -5,7 +5,6 @@ using Core.Services;
 using Core.Storage;
 using Core.UseCases;
 using Infrastructure.Http.Storage;
-using Infrastructure.System.Services;
 using Web.Commands;
 using Web.ModelFactories;
 using Web.PageBuilders;
@@ -32,7 +31,6 @@ namespace Web.Plumbing
             RegisterComponent<ITimeService, TimeService>();
             
             // Use Cases
-            RegisterComponent<IShowPayDay, ShowPayDay>();
             RegisterComponent<ISaveSettings, SaveSettings>();
             RegisterComponent<IShowSettings, ShowSettings>();
 

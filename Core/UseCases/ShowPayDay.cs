@@ -3,7 +3,7 @@ using Core.Services;
 
 namespace Core.UseCases
 {
-    public class ShowPayDay : IShowPayDay
+    public class ShowPayDay
     {
         private readonly IPayDayService _payDayService;
         private readonly IUserSettingsService _userSettingsService;
@@ -19,18 +19,32 @@ namespace Core.UseCases
             _timeService = timeService;
         }
 
-        public ShowPayDayResult Execute()
+        public Result Execute()
         {
             var isPayDay = _payDayService.IsPayDay();
             var message = isPayDay ? "YES!!1!" : "No =(";
             var userTime = GetUserTime();
-            return new ShowPayDayResult(isPayDay, message, userTime);
+            return new Result(isPayDay, message, userTime);
         }
 
         private DateTime GetUserTime()
         {
             var userSettings = _userSettingsService.GetSettings();
             return _timeService.GetTime(userSettings.TimeZone);
+        }
+
+        public class Result
+        {
+            public bool IsPayDay { get; private set; }
+            public string Message { get; private set; }
+            public DateTime UserTime { get; private set; }
+
+            public Result(bool isPayDay, string message, DateTime userTime)
+            {
+                IsPayDay = isPayDay;
+                Message = message;
+                UserTime = userTime;
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{DEF21EFC-7548-4601-8127-3FD4BE959EBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Tests", "Web.Tests\Web.Tests.csproj", "{54DD3BBB-283F-46A2-AA3F-A0770A652E77}"
@@ -16,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.System", "Infrastructure.System\Infrastructure.System.csproj", "{873F24AE-D0EB-472E-8CE7-581E34430C0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{0373491C-BCFB-436A-B35C-F33E4FE5C8D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plumbing", "Plumbing\Plumbing.csproj", "{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,13 +55,17 @@ Global
 		{0373491C-BCFB-436A-B35C-F33E4FE5C8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0373491C-BCFB-436A-B35C-F33E4FE5C8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0373491C-BCFB-436A-B35C-F33E4FE5C8D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{461ED071-4BBA-41D1-8355-A334DE78A744} = {932D7031-DDE9-4319-AD6B-831FF5E9E9AD}
 		{54DD3BBB-283F-46A2-AA3F-A0770A652E77} = {932D7031-DDE9-4319-AD6B-831FF5E9E9AD}
+		{461ED071-4BBA-41D1-8355-A334DE78A744} = {932D7031-DDE9-4319-AD6B-831FF5E9E9AD}
 		{0373491C-BCFB-436A-B35C-F33E4FE5C8D7} = {932D7031-DDE9-4319-AD6B-831FF5E9E9AD}
 	EndGlobalSection
 EndGlobal

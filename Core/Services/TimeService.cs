@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using Core.Services;
 
-namespace Infrastructure.System.Services
+namespace Core.Services
 {
     public class TimeService : ITimeService
     {

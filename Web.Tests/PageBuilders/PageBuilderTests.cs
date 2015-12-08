@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.Services;
 using Core.UseCases;
 using Moq;
 using NUnit.Framework;
@@ -20,10 +19,8 @@ namespace Web.Tests.PageBuilders
             const string message = "a";
             var interactorResult = new ShowPayDayResultInTest(message: message);
 
-            GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(interactorResult);
-
             var sut = GetSut();
-            var result = sut.Build(activeForm);
+            var result = sut.Build(interactorResult, activeForm);
 
             Assert.AreEqual(message, result.PayDayString);
         }
@@ -36,10 +33,8 @@ namespace Web.Tests.PageBuilders
             var time = new DateTime(2000, 1, 1);
             var interactorResult = new ShowPayDayResultInTest(userTime: time);
 
-            GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(interactorResult);
-
             var sut = GetSut();
-            var result = sut.Build(activeForm);
+            var result = sut.Build(interactorResult, activeForm);
 
             Assert.AreEqual(expected, result.LocalTime);
         }
@@ -50,10 +45,9 @@ namespace Web.Tests.PageBuilders
             var activeForm = It.IsAny<string>();
 
             GetMock<IGoogleAnalyticsModelFactory>().Setup(o => o.Create()).Returns(new GoogleAnalyticsModel());
-            GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(new ShowPayDayResultInTest());
 
             var sut = GetSut();
-            var result = sut.Build(activeForm);
+            var result = sut.Build(new ShowPayDayResultInTest(), activeForm);
 
             Assert.NotNull(result.GoogleAnalyticsModel);
         }
@@ -63,11 +57,10 @@ namespace Web.Tests.PageBuilders
         {
             var activeForm = It.IsAny<string>();
 
-            GetMock<IShowPayDay>().Setup(o => o.Execute()).Returns(new ShowPayDayResultInTest());
             GetMock<ISettingsFormModelFactory>().Setup(o => o.Create(activeForm)).Returns(new SettingsFormModel());
 
             var sut = GetSut();
-            var result = sut.Build(activeForm);
+            var result = sut.Build(new ShowPayDayResultInTest(), activeForm);
 
             Assert.IsInstanceOf<SettingsFormModel>(result.SettingsFormModel);
         }
@@ -76,7 +69,6 @@ namespace Web.Tests.PageBuilders
         {
             return new PageBuilder(
                 GetMock<IGoogleAnalyticsModelFactory>().Object,
-                GetMock<IShowPayDay>().Object,
                 GetMock<ISettingsFormModelFactory>().Object);
         }
     }

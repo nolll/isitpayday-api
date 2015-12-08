@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Core.Classes;
-using Core.Services;
 using Core.UseCases;
 using Web.Models;
 
@@ -27,22 +26,22 @@ namespace Web.ModelFactories
         public SettingsFormModel Create(string activeForm)
         {
             var result = _showSettings.Execute();
-            
+
             return new SettingsFormModel
-                {
-                    PayDay = result.PayDay,
-                    TimeZoneId = result.TimeZone.Id,
-                    TimeZoneName = result.TimeZone.StandardName,
-                    ShowCountryForm = activeForm == CountryFormName,
-                    ShowTimeZoneForm = activeForm == TimeZoneFormName,
-                    ShowPayDayForm = activeForm == PayDayFormName,
-                    CountryId = result.Country.Id,
-                    CountryName = result.Country.Name,
-                    CountryItems = GetCountryItems(result.CountryOptions),
-                    TimeZoneItems = GetTimezoneItems(result.TimeZoneOptions),
-                    PayDayItems = GetPayDayItems(result.PayDayOptions),
-                    PayDayTypeItems = GetPayDayTypeItems(result.PayDayTypeOptions),
-                };
+            {
+                PayDay = result.PayDay,
+                TimeZoneId = result.TimeZone.Id,
+                TimeZoneName = result.TimeZone.StandardName,
+                ShowCountryForm = activeForm == CountryFormName,
+                ShowTimeZoneForm = activeForm == TimeZoneFormName,
+                ShowPayDayForm = activeForm == PayDayFormName,
+                CountryId = result.Country.Id,
+                CountryName = result.Country.Name,
+                CountryItems = GetCountryItems(result.CountryOptions),
+                TimeZoneItems = GetTimezoneItems(result.TimeZoneOptions),
+                PayDayItems = GetPayDayItems(result.PayDayOptions),
+                PayDayTypeItems = GetPayDayTypeItems(result.PayDayTypeOptions),
+            };
         }
 
         private List<SelectListItem> GetPayDayItems(IEnumerable<int> daysInMonth)

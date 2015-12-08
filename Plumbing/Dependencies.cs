@@ -1,0 +1,70 @@
+﻿using Core.DateEvaluators;
+using Core.Services;
+using Infrastructure.Http.Services;
+using Infrastructure.Http.Storage;
+
+namespace Plumbing
+{
+    public class Dependencies
+    {
+        private PayDayService _payDayService;
+        public PayDayService PayDayService
+        {
+            get { return _payDayService ?? (_payDayService = new PayDayService(PayDayEvaluator, TimeService, UserSettingsService)); }
+        }
+
+        private PayDayEvaluator _payDayEvaluator;
+        public PayDayEvaluator PayDayEvaluator
+        {
+            get { return _payDayEvaluator ?? (_payDayEvaluator = new PayDayEvaluator(BlockedEvaluator)); }
+        }
+
+        private BlockedEvaluator _blockedEvaluator;
+        public BlockedEvaluator BlockedEvaluator
+        {
+            get { return _blockedEvaluator ?? (_blockedEvaluator = new BlockedEvaluator(WeekendEvaluator, ExcludedEvaluator)); }
+        }
+
+        private WeekendEvaluator _weekendEvaluator;
+        public WeekendEvaluator WeekendEvaluator
+        {
+            get { return _weekendEvaluator ?? (_weekendEvaluator = new WeekendEvaluator()); }
+        }
+
+        private ExcludedEvaluator _excludedEvaluator;
+        public ExcludedEvaluator ExcludedEvaluator
+        {
+            get { return _excludedEvaluator ?? (_excludedEvaluator = new ExcludedEvaluator(TimeService)); }
+        }
+
+        private TimeService _timeService;
+        public TimeService TimeService
+        {
+            get { return _timeService ?? (_timeService = new TimeService()); }
+        }
+
+        private UserSettingsService _userSettingsService;
+        public UserSettingsService UserSettingsService
+        {
+            get { return _userSettingsService ?? (_userSettingsService = new UserSettingsService(CountryService, TimeService, Storage)); }
+        }
+
+        private CountryService _countryService;
+        public CountryService CountryService
+        {
+            get { return _countryService ?? (_countryService = new CountryService()); }
+        }
+
+        private CookieStorage _cookieStorage;
+        public CookieStorage Storage
+        {
+            get { return _cookieStorage ?? (_cookieStorage = new CookieStorage(WebContext)); }
+        }
+
+        private WebContext _webContext;
+        public WebContext WebContext
+        {
+            get { return _webContext ?? (_webContext = new WebContext(TimeService)); }
+        }
+    }
+}
