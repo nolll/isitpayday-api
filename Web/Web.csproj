@@ -120,11 +120,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Commands\Interfaces\ICommandProvider.cs" />
     <Compile Include="Commands\SaveSettingsCommand.cs" />
+    <Compile Include="Controllers\WebContext.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
-    <Compile Include="ModelFactories\GoogleAnalyticsModelFactory.cs" />
-    <Compile Include="ModelFactories\Interfaces\IGoogleAnalyticsModelFactory.cs" />
     <Compile Include="Models\SettingsFormModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />

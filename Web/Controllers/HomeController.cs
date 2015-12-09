@@ -21,7 +21,7 @@ namespace Web.Controllers
         public ActionResult Index(string change)
         {
             var showPayDay = UseCase.ShowPayDay.Execute();
-            var pageModel = _pageBuilder.Build(showPayDay, change);
+            var pageModel = _pageBuilder.Build(showPayDay, IsInProduction, change);
             return View(pageModel);
         }
 

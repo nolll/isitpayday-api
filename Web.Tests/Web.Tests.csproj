@@ -80,7 +80,6 @@
     <Compile Include="Commands\SaveSettingsCommandTests.cs" />
     <Compile Include="DependencyInjectionTests.cs" />
     <Compile Include="ModelFactories\GoogleAnalyticsModelFactoryTests.cs" />
-    <Compile Include="PageBuilders\PageBuilderTests.cs" />
     <Compile Include="ModelFactories\SettingsFormModelFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

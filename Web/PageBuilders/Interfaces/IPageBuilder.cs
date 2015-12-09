@@ -5,6 +5,6 @@ namespace Web.PageBuilders
 {
     public interface IPageBuilder
     {
-        IndexPageModel Build(ShowPayDay.Result showPayDayResult, string activeForm = null);
+        IndexPageModel Build(ShowPayDay.Result showPayDayResult, bool isInProduction, string activeForm = null);
     }
 }

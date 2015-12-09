@@ -6,21 +6,18 @@ namespace Web.PageBuilders
 {
     public class PageBuilder : IPageBuilder
     {
-        private readonly IGoogleAnalyticsModelFactory _googleAnalyticsModelFactory;
         private readonly ISettingsFormModelFactory _settingsFormModelFactory;
 
         public PageBuilder(
-            IGoogleAnalyticsModelFactory googleAnalyticsModelFactory,
             ISettingsFormModelFactory settingsFormModelFactory)
         {
-            _googleAnalyticsModelFactory = googleAnalyticsModelFactory;
             _settingsFormModelFactory = settingsFormModelFactory;
         }
 
-        public IndexPageModel Build(ShowPayDay.Result showPayDayResult, string activeForm = null)
+        public IndexPageModel Build(ShowPayDay.Result showPayDayResult, bool isInProduction, string activeForm = null)
         {
             var localTime = showPayDayResult.UserTime.ToString("R");
-            var googleAnalyticsModel = _googleAnalyticsModelFactory.Create();
+            var googleAnalyticsModel = new GoogleAnalyticsModel(isInProduction);
             var settingsFormModel = _settingsFormModelFactory.Create(activeForm);
 
             return new IndexPageModel(

@@ -47,7 +47,6 @@ namespace Web.Plumbing
             RegisterComponent<IPageBuilder, PageBuilder>();
             
             // Model Factories
-            RegisterComponent<IGoogleAnalyticsModelFactory, GoogleAnalyticsModelFactory>();
             RegisterComponent<ISettingsFormModelFactory, SettingsFormModelFactory>();
         }
     }

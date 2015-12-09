@@ -1,7 +1,6 @@
-﻿using Core.Services;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Tests.Common;
-using Web.ModelFactories;
+using Web.Models;
 
 namespace Web.Tests.ModelFactories
 {
@@ -12,8 +11,7 @@ namespace Web.Tests.ModelFactories
         {
             const string expected = "UA-8453410-4";
 
-            var sut = GetSut();
-            var result = sut.Create();
+            var result = new GoogleAnalyticsModel(true);
 
             Assert.AreEqual(expected, result.Code);
         }
@@ -21,10 +19,7 @@ namespace Web.Tests.ModelFactories
         [Test]
         public void Enabled_IsNotInProduction_ReturnsFalse()
         {
-            GetMock<IWebContext>().SetupGet(o => o.IsInProduction).Returns(false);
-
-            var sut = GetSut();
-            var result = sut.Create();
+            var result = new GoogleAnalyticsModel(false);
 
             Assert.IsFalse(result.Enabled);
         }
@@ -32,18 +27,9 @@ namespace Web.Tests.ModelFactories
         [Test]
         public void Enabled_IsInProduction_ReturnsTrue()
         {
-            GetMock<IWebContext>().SetupGet(o => o.IsInProduction).Returns(true);
-
-            var sut = GetSut();
-            var result = sut.Create();
+            var result = new GoogleAnalyticsModel(true);
 
             Assert.IsTrue(result.Enabled);
-        }
-
-        private GoogleAnalyticsModelFactory GetSut()
-        {
-            return new GoogleAnalyticsModelFactory(
-                GetMock<IWebContext>().Object);
         }
     }
 }
