@@ -1,18 +1,11 @@
 ﻿using System.Web.Mvc;
-using Web.Commands;
+using Core.UseCases;
 using Web.Models;
 
 namespace Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ICommandProvider _commandProvider;
-
-        public HomeController(ICommandProvider commandProvider)
-        {
-            _commandProvider = commandProvider;
-        }
-
         public ActionResult Index(string change)
         {
             var showPayDay = UseCase.ShowPayDay.Execute();
@@ -24,8 +17,8 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Index(string change, SettingsPostModel postModel)
         {
-            var command = _commandProvider.GetSaveSettingsCommand(postModel);
-            command.Execute();
+            var saveSettingsRequest = new SaveSettingsRequest(postModel.CountryId, postModel.TimeZoneId, postModel.PayDay);
+            UseCase.SaveSettings.Execute(saveSettingsRequest);
             return RedirectToAction("Index");
         }
 

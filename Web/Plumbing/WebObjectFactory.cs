@@ -3,9 +3,7 @@ using Castle.Windsor;
 using Core.DateEvaluators;
 using Core.Services;
 using Core.Storage;
-using Core.UseCases;
 using Infrastructure.Http.Storage;
-using Web.Commands;
 using WebContext = Infrastructure.Http.Services.WebContext;
 
 namespace Web.Plumbing
@@ -27,15 +25,10 @@ namespace Web.Plumbing
             RegisterComponent<ICountryService, CountryService>();
             RegisterComponent<IPayDayService, PayDayService>();
             RegisterComponent<ITimeService, TimeService>();
-            
-            // Use Cases
-            RegisterComponent<ISaveSettings, SaveSettings>();
-            RegisterComponent<IShowSettings, ShowSettings>();
 
             // Misc
             RegisterComponent<IStorage, CookieStorage>();
             RegisterComponent<IWebContext, WebContext>();
-            RegisterComponent<ICommandProvider, CommandProvider>();
             RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
             RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
             RegisterComponent<IWeekendEvaluator, WeekendEvaluator>();

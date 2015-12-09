@@ -114,12 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\CommandProvider.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Commands\Interfaces\ICommandProvider.cs" />
-    <Compile Include="Commands\SaveSettingsCommand.cs" />
     <Compile Include="Controllers\WebContext.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />

@@ -14,5 +14,6 @@ namespace Web
 
         public ShowPayDay ShowPayDay { get { return new ShowPayDay(_deps.PayDayService, _deps.UserSettingsService, _deps.TimeService); } }
         public ShowSettings ShowSettings { get { return new ShowSettings(_deps.UserSettingsService, _deps.CountryService, _deps.TimeService); } }
+        public SaveSettings SaveSettings { get { return new SaveSettings(_deps.Storage); } }
     }
 }

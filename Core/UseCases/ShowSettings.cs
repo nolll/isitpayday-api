@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Core.UseCases
 {
-    public class ShowSettings : IShowSettings
+    public class ShowSettings
     {
         private readonly IUserSettingsService _userSettingsService;
         private readonly ICountryService _countryService;

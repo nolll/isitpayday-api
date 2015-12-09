@@ -2,7 +2,7 @@
 
 namespace Core.UseCases
 {
-    public class SaveSettings : ISaveSettings
+    public class SaveSettings
     {
         private readonly IStorage _storage;
 
