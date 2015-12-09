@@ -2,6 +2,6 @@
 {
     public interface IShowSettings
     {
-        ShowSettingsResult Execute();
+        ShowSettings.Result Execute();
     }
 }

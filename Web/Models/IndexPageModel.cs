@@ -1,4 +1,6 @@
-﻿namespace Web.Models
+﻿using Core.UseCases;
+
+namespace Web.Models
 {
     public class IndexPageModel : IPageModel
     {
@@ -7,16 +9,12 @@
         public SettingsFormModel SettingsFormModel { get; private set; }
         public GoogleAnalyticsModel GoogleAnalyticsModel { get; private set; }
 
-        public IndexPageModel(
-            string payDayString,
-            string localTime,
-            SettingsFormModel settingsFormModel,
-            GoogleAnalyticsModel googleAnalyticsModel)
+        public IndexPageModel(ShowPayDay.Result showPayDayResult, bool isInProduction, ShowSettings.Result showSettingsResult, string activeForm)
         {
-            PayDayString = payDayString;
-            LocalTime = localTime;
-            SettingsFormModel = settingsFormModel;
-            GoogleAnalyticsModel = googleAnalyticsModel;
+            PayDayString = showPayDayResult.Message;
+            LocalTime = showPayDayResult.UserTime.ToString("R"); ;
+            SettingsFormModel = new SettingsFormModel(showSettingsResult, activeForm);
+            GoogleAnalyticsModel = new GoogleAnalyticsModel(isInProduction);
         }
     }
 }

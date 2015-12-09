@@ -11,7 +11,7 @@ namespace Web.Tests.Commands
         [Test]
         public void Method_Scenario_Expected()
         {
-            var model = new SettingsModel();
+            var model = new SettingsPostModel();
 
             var sut = GetSut();
             var result = sut.GetSaveSettingsCommand(model);

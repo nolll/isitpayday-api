@@ -67,7 +67,6 @@
     <Compile Include="UseCases\SaveSettings.cs" />
     <Compile Include="UseCases\SaveSettingsRequest.cs" />
     <Compile Include="UseCases\ShowSettings.cs" />
-    <Compile Include="UseCases\ShowSettingsResult.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

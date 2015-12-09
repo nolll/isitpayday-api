@@ -22,11 +22,11 @@ namespace Core.UseCases
             _timeService = timeService;
         }
 
-        public ShowSettingsResult Execute()
+        public Result Execute()
         {
             var userSettings = _userSettingsService.GetSettings();
 
-            return new ShowSettingsResult(
+            return new Result(
                 userSettings.PayDay,
                 userSettings.Country,
                 userSettings.TimeZone,
@@ -70,6 +70,38 @@ namespace Core.UseCases
         private IList<TimeZoneInfo> TimeZoneOptions
         {
             get { return _timeService.GetTimezones().ToList(); }
+        }
+
+        public class Result
+        {
+            public int PayDay { get; private set; }
+            public Country Country { get; private set; }
+            public TimeZoneInfo TimeZone { get; private set; }
+            public PayDayType PayDayType { get; private set; }
+            public IList<int> PayDayOptions { get; private set; }
+            public IList<PayDayType> PayDayTypeOptions { get; private set; }
+            public IList<Country> CountryOptions { get; private set; }
+            public IList<TimeZoneInfo> TimeZoneOptions { get; private set; }
+
+            public Result(
+                int payDay,
+                Country country,
+                TimeZoneInfo timeZone,
+                PayDayType payDayType,
+                IList<int> payDayOptions,
+                IList<PayDayType> payDayTypeOptions,
+                IList<Country> countryOptions,
+                IList<TimeZoneInfo> timeZoneOptions)
+            {
+                PayDay = payDay;
+                Country = country;
+                TimeZone = timeZone;
+                PayDayType = payDayType;
+                PayDayOptions = payDayOptions;
+                PayDayTypeOptions = payDayTypeOptions;
+                CountryOptions = countryOptions;
+                TimeZoneOptions = timeZoneOptions;
+            }
         }
     }
 }

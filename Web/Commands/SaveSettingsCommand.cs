@@ -6,11 +6,11 @@ namespace Web.Commands
     public class SaveSettingsCommand : Command
     {
         private readonly ISaveSettings _saveSettings;
-        private readonly SettingsModel _model;
+        private readonly SettingsPostModel _model;
 
         public SaveSettingsCommand(
             ISaveSettings saveSettings,
-            SettingsModel model)
+            SettingsPostModel model)
         {
             _saveSettings = saveSettings;
             _model = model;

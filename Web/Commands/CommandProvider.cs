@@ -13,7 +13,7 @@ namespace Web.Commands
             _saveSettings = saveSettings;
         }
 
-        public SaveSettingsCommand GetSaveSettingsCommand(SettingsModel postModel)
+        public SaveSettingsCommand GetSaveSettingsCommand(SettingsPostModel postModel)
         {
             return new SaveSettingsCommand(_saveSettings, postModel);
         }

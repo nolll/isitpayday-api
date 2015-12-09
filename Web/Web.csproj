@@ -125,14 +125,10 @@
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
     <Compile Include="Models\SettingsFormModel.cs" />
-    <Compile Include="Models\SettingsModel.cs" />
-    <Compile Include="PageBuilders\Interfaces\IPageBuilder.cs" />
-    <Compile Include="ModelFactories\Interfaces\ISettingsFormModelFactory.cs" />
-    <Compile Include="PageBuilders\PageBuilder.cs" />
+    <Compile Include="Models\SettingsPostModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ModelFactories\SettingsFormModelFactory.cs" />
     <Compile Include="Plumbing\ControllerInstaller.cs" />
     <Compile Include="Plumbing\ObjectFactory.cs" />
     <Compile Include="Plumbing\WebObjectFactory.cs" />

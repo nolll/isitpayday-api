@@ -8,7 +8,7 @@ using Moq;
 using NUnit.Framework;
 using Tests.Common;
 using Tests.Common.FakeClasses;
-using Web.ModelFactories;
+using Web.Models;
 
 namespace Web.Tests.ModelFactories
 {
@@ -21,10 +21,7 @@ namespace Web.Tests.ModelFactories
             const int selectedPayDay = 1;
             var showSettingsResult = GetShowSettingsResult(selectedPayDay);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(selectedPayDay, result.PayDay);
         }
@@ -37,10 +34,7 @@ namespace Web.Tests.ModelFactories
             const string expectedTimeZoneName = "UTC";
             var showSettingsResult = GetShowSettingsResult(timeZone: TimeZoneInfo.Utc);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedTimeZoneId, result.TimeZoneId);
             Assert.AreEqual(expectedTimeZoneName, result.TimeZoneName);
@@ -52,10 +46,7 @@ namespace Web.Tests.ModelFactories
             const string activeForm = "country";
             var showSettingsResult = GetShowSettingsResult();
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.IsTrue(result.ShowCountryForm);
             Assert.IsFalse(result.ShowTimeZoneForm);
@@ -68,10 +59,7 @@ namespace Web.Tests.ModelFactories
             const string activeForm = "timezone";
             var showSettingsResult = GetShowSettingsResult();
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.IsFalse(result.ShowCountryForm);
             Assert.IsTrue(result.ShowTimeZoneForm);
@@ -84,10 +72,7 @@ namespace Web.Tests.ModelFactories
             const string activeForm = "payday";
             var showSettingsResult = GetShowSettingsResult();
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.IsFalse(result.ShowCountryForm);
             Assert.IsFalse(result.ShowTimeZoneForm);
@@ -103,10 +88,7 @@ namespace Web.Tests.ModelFactories
             var country = new CountryInTest(countryId, countryName);
             var showSettingsResult = GetShowSettingsResult(country: country);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(countryId, result.CountryId);
             Assert.AreEqual(countryName, result.CountryName);
@@ -123,10 +105,7 @@ namespace Web.Tests.ModelFactories
             var countryList = new List<Country> { country };
             var showSettingsResult = GetShowSettingsResult(countryOptions: countryList);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.CountryItems.Count);
             Assert.AreEqual(countryId, result.CountryItems[0].Value);
@@ -144,11 +123,9 @@ namespace Web.Tests.ModelFactories
             var timeZoneList = new List<TimeZoneInfo> { timeZone };
             var showSettingsResult = GetShowSettingsResult(timeZoneOptions: timeZoneList);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
             GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZoneList);
 
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.TimeZoneItems.Count);
             Assert.AreEqual(timeZoneId, result.TimeZoneItems[0].Value);
@@ -165,10 +142,7 @@ namespace Web.Tests.ModelFactories
             var payDayOptions = new List<int> {firstValue};
             var showSettingsResult = GetShowSettingsResult(payDayOptions: payDayOptions);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.PayDayItems.Count);
             Assert.AreEqual(expected, result.PayDayItems.First().Value);
@@ -185,17 +159,14 @@ namespace Web.Tests.ModelFactories
             const int expectedLength = 1;
             var showSettingsResult = GetShowSettingsResult(payDayTypeOptions: payDayTypes);
 
-            GetMock<IShowSettings>().Setup(o => o.Execute()).Returns(showSettingsResult);
-            
-            var sut = GetSut();
-            var result = sut.Create(activeForm);
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.PayDayTypeItems.Count);
             Assert.AreEqual(firstValue, result.PayDayTypeItems.First().Value);
             Assert.AreEqual(firstText, result.PayDayTypeItems.First().Text);
         }
 
-        private static ShowSettingsResult GetShowSettingsResult(
+        private static ShowSettings.Result GetShowSettingsResult(
             int? payDay = null,
             Country country = null,
             TimeZoneInfo timeZone = null,
@@ -205,7 +176,7 @@ namespace Web.Tests.ModelFactories
             IList<Country> countryOptions = null,
             IList<TimeZoneInfo> timeZoneOptions = null)
         {
-            return new ShowSettingsResult(
+            return new ShowSettings.Result(
                 payDay.HasValue ? payDay.Value : It.IsAny<int>(),
                 country ?? new CountryInTest(),
                 timeZone ?? TimeZoneInfo.Utc,
@@ -214,12 +185,6 @@ namespace Web.Tests.ModelFactories
                 payDayTypeOptions ?? new List<PayDayType>(),
                 countryOptions ?? new List<Country>(),
                 timeZoneOptions ?? new List<TimeZoneInfo>());
-        }
-
-        private SettingsFormModelFactory GetSut()
-        {
-            return new SettingsFormModelFactory(
-                GetMock<IShowSettings>().Object);
         }
     }
 }

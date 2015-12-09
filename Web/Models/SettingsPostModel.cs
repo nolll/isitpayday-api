@@ -1,6 +1,6 @@
 ﻿namespace Web.Models
 {
-    public class SettingsModel
+    public class SettingsPostModel
     {
         public int? PayDay { get; set; }
         public string TimeZoneId { get; set; }
