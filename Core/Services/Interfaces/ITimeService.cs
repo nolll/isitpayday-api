@@ -5,8 +5,8 @@ namespace Core.Services
 {
     public interface ITimeService
     {
-        DateTime GetTime();
-        DateTime GetTime(TimeZoneInfo timeZone);
+        DateTime GetUtcTime();
+        DateTime GetLocalTime(TimeZoneInfo timeZone);
         IEnumerable<TimeZoneInfo> GetTimezones();
         int GetCurrentYear();
     }

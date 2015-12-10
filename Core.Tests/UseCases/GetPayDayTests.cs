@@ -51,7 +51,7 @@ namespace Core.Tests.UseCases
             var userSettings = new UserSettingsInTest(timeZone: timeZone);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(now);
+            GetMock<ITimeService>().Setup(o => o.GetLocalTime(timeZone)).Returns(now);
 
             var sut = GetSut();
             var result = sut.Execute();

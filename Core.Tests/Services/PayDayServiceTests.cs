@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.Services;
-using Moq;
 using NUnit.Framework;
 using Tests.Common;
 using Tests.Common.FakeClasses;
@@ -13,8 +12,12 @@ namespace Core.Tests.Services
         public void IsPayDay_TestedPayDayEqualsActualPayDay_ReturnsTrue()
         {
             const int selectedPayDay = 25;
-            var testedPayDay = new DateTime(2000, 1, 25);
+            var testedPayDay = new DateTime(2000, 1, 25, 12, 0, 0);
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: selectedPayDay);
 
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            
             var sut = GetSut();
             var result = sut.IsPayDay(testedPayDay, selectedPayDay);
 
@@ -26,7 +29,11 @@ namespace Core.Tests.Services
         {
             const int selectedPayDay = 25;
             var testedPayDay = new DateTime(2000, 1, 24);
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: selectedPayDay);
 
+            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            
             var sut = GetSut();
             var result = sut.IsPayDay(testedPayDay, selectedPayDay);
 
@@ -39,13 +46,13 @@ namespace Core.Tests.Services
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             const int payDay = 23;
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
-            var userTime = new DateTime(2015, 1, 23);
+            var userTime = new DateTime(2015, 1, 23, 12, 0, 0);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(userTime);
+            GetMock<ITimeService>().Setup(o => o.GetLocalTime(timeZone)).Returns(userTime);
 
             var sut = GetSut();
-            var result = sut.IsPayDay();
+            var result = sut.IsPayDay(userTime, payDay);
 
             Assert.IsTrue(result);
         }
@@ -59,7 +66,7 @@ namespace Core.Tests.Services
             var userTime = new DateTime(1, 1, 1, 1, 1, 1);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetTime(timeZone)).Returns(userTime);
+            GetMock<ITimeService>().Setup(o => o.GetLocalTime(timeZone)).Returns(userTime);
 
             var sut = GetSut();
             var result = sut.IsPayDay();

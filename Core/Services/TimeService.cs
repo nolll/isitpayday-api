@@ -5,14 +5,19 @@ namespace Core.Services
 {
     public class TimeService : ITimeService
     {
-        public DateTime GetTime()
+        public DateTime GetUtcTime()
         {
             return DateTime.UtcNow;
         }
 
-        public DateTime GetTime(TimeZoneInfo timeZone)
+        public DateTime GetLocalTime(TimeZoneInfo timeZone)
         {
-            return TimeZoneInfo.ConvertTime(DateTime.Now, timeZone);
+            return TimeZoneInfo.ConvertTime(GetUtcTime(), timeZone);
+        }
+
+        public static DateTime GetLocalTime(DateTime utcTime, TimeZoneInfo timeZone)
+        {
+            return TimeZoneInfo.ConvertTime(utcTime, timeZone);
         }
 
         public IEnumerable<TimeZoneInfo> GetTimezones()
@@ -24,7 +29,5 @@ namespace Core.Services
         {
             return DateTime.Now.Year;
         }
-
     }
-
 }

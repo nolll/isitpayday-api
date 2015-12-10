@@ -21,16 +21,11 @@ namespace Core.UseCases
 
         public Result Execute()
         {
+            var userSettings = _userSettingsService.GetSettings();
+            var userTime = _timeService.GetLocalTime(userSettings.TimeZone);
             var isPayDay = _payDayService.IsPayDay();
             var message = isPayDay ? "YES!!1!" : "No =(";
-            var userTime = GetUserTime();
             return new Result(isPayDay, message, userTime);
-        }
-
-        private DateTime GetUserTime()
-        {
-            var userSettings = _userSettingsService.GetSettings();
-            return _timeService.GetTime(userSettings.TimeZone);
         }
 
         public class Result

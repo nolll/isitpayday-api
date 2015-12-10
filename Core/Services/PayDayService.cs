@@ -16,18 +16,18 @@ namespace Core.Services
             _userSettingsService = userSettingsService;
         }
 
-        public bool IsPayDay(DateTime userTime, int payDay)
+        public bool IsPayDay(DateTime utcTime, int payDay)
         {
-            var actualPayDay = PayDayEvaluator.GetActualPayDay(userTime, payDay);
-            return userTime.Day == actualPayDay.Day;
+            var userSettings = _userSettingsService.GetSettings();
+            var localTime = TimeService.GetLocalTime(utcTime, userSettings.TimeZone);
+            var actualPayDay = PayDayEvaluator.GetActualPayDay(localTime, payDay);
+            return localTime.Day == actualPayDay.Day;
         }
 
         public bool IsPayDay()
         {
             var userSettings = _userSettingsService.GetSettings();
-            var userTime = _timeService.GetTime(userSettings.TimeZone);
-            var actualPayDay = PayDayEvaluator.GetActualPayDay(userTime, userSettings.PayDay);
-            return userTime.Day == actualPayDay.Day;
+            return IsPayDay(_timeService.GetUtcTime(), userSettings.PayDay);
         }
     }
 }
