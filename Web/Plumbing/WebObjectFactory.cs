@@ -1,6 +1,5 @@
 ﻿using Castle.Core;
 using Castle.Windsor;
-using Core.DateEvaluators;
 using Core.Services;
 using Core.Storage;
 
@@ -26,7 +25,6 @@ namespace Web.Plumbing
 
             // Misc
             RegisterComponent<IStorage, CookieStorage>();
-            RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
         }
     }
 }

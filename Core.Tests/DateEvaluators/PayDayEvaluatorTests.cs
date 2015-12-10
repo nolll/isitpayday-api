@@ -14,8 +14,7 @@ namespace Core.Tests.DateEvaluators
             const int payDay = 2;
             var expectedDate = date;
 
-            var sut = GetSut();
-            var result = sut.GetActualPayDay(date, payDay);
+            var result = PayDayEvaluator.GetActualPayDay(date, payDay);
 
             Assert.AreEqual(expectedDate, result);
         }
@@ -27,8 +26,7 @@ namespace Core.Tests.DateEvaluators
             const int payDay = 3;
             var expectedDate = new DateTime(2015, 1, 2);
 
-            var sut = GetSut();
-            var result = sut.GetActualPayDay(date, payDay);
+            var result = PayDayEvaluator.GetActualPayDay(date, payDay);
 
             Assert.AreEqual(expectedDate, result);
         }
@@ -40,15 +38,9 @@ namespace Core.Tests.DateEvaluators
             const int payDay = 4;
             var expectedDate = new DateTime(2015, 1, 2);
 
-            var sut = GetSut();
-            var result = sut.GetActualPayDay(date, payDay);
+            var result = PayDayEvaluator.GetActualPayDay(date, payDay);
 
             Assert.AreEqual(expectedDate, result);
-        }
-
-        private PayDayEvaluator GetSut()
-        {
-            return new PayDayEvaluator();
         }
     }
 }

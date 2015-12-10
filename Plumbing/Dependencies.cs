@@ -1,5 +1,4 @@
-﻿using Core.DateEvaluators;
-using Core.Services;
+﻿using Core.Services;
 using Core.Storage;
 
 namespace Plumbing
@@ -16,13 +15,7 @@ namespace Plumbing
         private PayDayService _payDayService;
         public PayDayService PayDayService
         {
-            get { return _payDayService ?? (_payDayService = new PayDayService(PayDayEvaluator, TimeService, UserSettingsService)); }
-        }
-
-        private PayDayEvaluator _payDayEvaluator;
-        public PayDayEvaluator PayDayEvaluator
-        {
-            get { return _payDayEvaluator ?? (_payDayEvaluator = new PayDayEvaluator()); }
+            get { return _payDayService ?? (_payDayService = new PayDayService(TimeService, UserSettingsService)); }
         }
 
         private TimeService _timeService;
