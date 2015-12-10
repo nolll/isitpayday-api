@@ -16,8 +16,7 @@ namespace Core.Tests.DateEvaluators
 
             GetMock<ITimeService>().Setup(o => o.GetCurrentYear()).Returns(currentYear);
 
-            var sut = GetSut();
-            var result = sut.IsExcluded(input);
+            var result = ExcludedEvaluator.IsExcluded(input);
 
             Assert.IsTrue(result);
         }
@@ -30,16 +29,9 @@ namespace Core.Tests.DateEvaluators
 
             GetMock<ITimeService>().Setup(o => o.GetCurrentYear()).Returns(currentYear);
 
-            var sut = GetSut();
-            var result = sut.IsExcluded(input);
+            var result = ExcludedEvaluator.IsExcluded(input);
 
             Assert.IsFalse(result);
-        }
-
-        private ExcludedEvaluator GetSut()
-        {
-            return new ExcludedEvaluator(
-                GetMock<ITimeService>().Object);
         }
     }
 }

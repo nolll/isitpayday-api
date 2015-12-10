@@ -11,8 +11,7 @@ namespace Core.Tests.DateEvaluators
         {
             var friday = new DateTime(2014, 1, 17);
 
-            var sut = GetSut();
-            var result = sut.IsWeekend(friday);
+            var result = WeekendEvaluator.IsWeekend(friday);
 
             Assert.IsFalse(result);
         }
@@ -22,8 +21,7 @@ namespace Core.Tests.DateEvaluators
         {
             var saturday = new DateTime(2014, 1, 18);
 
-            var sut = GetSut();
-            var result = sut.IsWeekend(saturday);
+            var result = WeekendEvaluator.IsWeekend(saturday);
 
             Assert.IsTrue(result);
         }
@@ -33,8 +31,7 @@ namespace Core.Tests.DateEvaluators
         {
             var sunday = new DateTime(2014, 1, 19);
 
-            var sut = GetSut();
-            var result = sut.IsWeekend(sunday);
+            var result = WeekendEvaluator.IsWeekend(sunday);
 
             Assert.IsTrue(result);
         }
@@ -44,15 +41,9 @@ namespace Core.Tests.DateEvaluators
         {
             var monday = new DateTime(2014, 1, 20);
 
-            var sut = GetSut();
-            var result = sut.IsWeekend(monday);
+            var result = WeekendEvaluator.IsWeekend(monday);
 
             Assert.IsFalse(result);
-        }
-
-        private WeekendEvaluator GetSut()
-        {
-            return new WeekendEvaluator();
         }
     }
 }

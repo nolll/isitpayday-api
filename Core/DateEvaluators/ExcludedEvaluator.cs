@@ -1,36 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Services;
 
 namespace Core.DateEvaluators
 {
-    public class ExcludedEvaluator : IExcludedEvaluator
+    public static class ExcludedEvaluator
     {
-        private readonly ITimeService _timeService;
-
-        public ExcludedEvaluator(ITimeService timeService)
+        public static bool IsExcluded(DateTime userTime)
         {
-            _timeService = timeService;
+            return GetExcludedDates(userTime.Year).Contains(userTime);
         }
 
-        public bool IsExcluded(DateTime userTime)
+        private static IList<DateTime> GetExcludedDates(int year)
         {
-            return GetExcludedDates().Contains(userTime);
-        }
-
-        private IList<DateTime> GetExcludedDates()
-        {
-            var currentYear = _timeService.GetCurrentYear();
-
             return new List<DateTime>
-                {
-                    new DateTime(currentYear, 1, 1),
-                    new DateTime(currentYear, 5, 1),
-                    new DateTime(currentYear, 6, 6),
-                    new DateTime(currentYear, 12, 24),
-                    new DateTime(currentYear, 12, 25),
-                    new DateTime(currentYear, 12, 31)
-                };
+            {
+                new DateTime(year, 1, 1),
+                new DateTime(year, 5, 1),
+                new DateTime(year, 6, 6),
+                new DateTime(year, 12, 24),
+                new DateTime(year, 12, 25),
+                new DateTime(year, 12, 31)
+            };
         }
     }
 }

@@ -28,8 +28,6 @@ namespace Web.Plumbing
             RegisterComponent<IStorage, CookieStorage>();
             RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
             RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
-            RegisterComponent<IWeekendEvaluator, WeekendEvaluator>();
-            RegisterComponent<IExcludedEvaluator, ExcludedEvaluator>();
         }
     }
 }

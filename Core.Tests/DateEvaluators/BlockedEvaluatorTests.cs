@@ -11,13 +11,10 @@ namespace Core.Tests.DateEvaluators
         [Test]
         public void IsBlocked_WithWeekDayThatIsNotExcluded_ReturnsFalse()
         {
-            var date = It.IsAny<DateTime>();
-
-            GetMock<IExcludedEvaluator>().Setup(o => o.IsExcluded(date)).Returns(false);
-            GetMock<IWeekendEvaluator>().Setup(o => o.IsWeekend(date)).Returns(false);
+            var notBlockedDate = new DateTime(2015, 1, 2);
 
             var sut = GetSut();
-            var result = sut.IsBlocked(date);
+            var result = sut.IsBlocked(notBlockedDate);
 
             Assert.IsFalse(result);
         }
@@ -25,13 +22,10 @@ namespace Core.Tests.DateEvaluators
         [Test]
         public void IsBlocked_WithWeekDayThatIsExcluded_ReturnsTrue()
         {
-            var date = It.IsAny<DateTime>();
-
-            GetMock<IExcludedEvaluator>().Setup(o => o.IsExcluded(date)).Returns(true);
-            GetMock<IWeekendEvaluator>().Setup(o => o.IsWeekend(date)).Returns(false);
+            var excludedDate = new DateTime(2015, 1, 1);
 
             var sut = GetSut();
-            var result = sut.IsBlocked(date);
+            var result = sut.IsBlocked(excludedDate);
 
             Assert.IsTrue(result);
         }
@@ -39,13 +33,10 @@ namespace Core.Tests.DateEvaluators
         [Test]
         public void IsBlocked_WithWeekendDayThatIsNotExcluded_ReturnsTrue()
         {
-            var date = It.IsAny<DateTime>();
-
-            GetMock<IExcludedEvaluator>().Setup(o => o.IsExcluded(date)).Returns(false);
-            GetMock<IWeekendEvaluator>().Setup(o => o.IsWeekend(date)).Returns(true);
+            var weekendDate = new DateTime(2015, 1, 3);
 
             var sut = GetSut();
-            var result = sut.IsBlocked(date);
+            var result = sut.IsBlocked(weekendDate);
 
             Assert.IsTrue(result);
         }
@@ -53,22 +44,17 @@ namespace Core.Tests.DateEvaluators
         [Test]
         public void IsBlocked_WithWeekendDayThatIsExcluded_ReturnsTrue()
         {
-            var date = It.IsAny<DateTime>();
-
-            GetMock<IExcludedEvaluator>().Setup(o => o.IsExcluded(date)).Returns(true);
-            GetMock<IWeekendEvaluator>().Setup(o => o.IsWeekend(date)).Returns(true);
+            var blockedWeekendDate = new DateTime(2015, 6, 6);
 
             var sut = GetSut();
-            var result = sut.IsBlocked(date);
+            var result = sut.IsBlocked(blockedWeekendDate);
 
             Assert.IsTrue(result);
         }
 
         private BlockedEvaluator GetSut()
         {
-            return new BlockedEvaluator(
-                GetMock<IWeekendEvaluator>().Object,
-                GetMock<IExcludedEvaluator>().Object);
+            return new BlockedEvaluator();
         }
     }
 }

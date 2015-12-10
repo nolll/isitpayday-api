@@ -28,19 +28,7 @@ namespace Plumbing
         private BlockedEvaluator _blockedEvaluator;
         public BlockedEvaluator BlockedEvaluator
         {
-            get { return _blockedEvaluator ?? (_blockedEvaluator = new BlockedEvaluator(WeekendEvaluator, ExcludedEvaluator)); }
-        }
-
-        private WeekendEvaluator _weekendEvaluator;
-        public WeekendEvaluator WeekendEvaluator
-        {
-            get { return _weekendEvaluator ?? (_weekendEvaluator = new WeekendEvaluator()); }
-        }
-
-        private ExcludedEvaluator _excludedEvaluator;
-        public ExcludedEvaluator ExcludedEvaluator
-        {
-            get { return _excludedEvaluator ?? (_excludedEvaluator = new ExcludedEvaluator(TimeService)); }
+            get { return _blockedEvaluator ?? (_blockedEvaluator = new BlockedEvaluator()); }
         }
 
         private TimeService _timeService;
