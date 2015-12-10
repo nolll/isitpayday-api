@@ -14,10 +14,11 @@ namespace Core.Tests.UseCases
         {
             const string expectedMessage = "YES!!1!";
             var timeZone = TimeZoneInfo.Utc;
-            var userSettings = new UserSettingsInTest(timeZone: timeZone);
+            var time = new DateTime(2000, 1, 25, 12, 0, 0, DateTimeKind.Utc);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: 25);
 
-            GetMock<IPayDayService>().Setup(o => o.IsPayDay()).Returns(true);
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<ITimeService>().Setup(o => o.GetUtcTime()).Returns(time);
 
             var sut = GetSut();
             var result = sut.Execute();
@@ -31,10 +32,11 @@ namespace Core.Tests.UseCases
         {
             const string expectedMessage = "No =(";
             var timeZone = TimeZoneInfo.Utc;
-            var userSettings = new UserSettingsInTest(timeZone: timeZone);
+            var time = new DateTime(2000, 1, 24, 12, 0, 0, DateTimeKind.Utc);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: 25);
 
-            GetMock<IPayDayService>().Setup(o => o.IsPayDay()).Returns(false);
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
+            GetMock<ITimeService>().Setup(o => o.GetUtcTime()).Returns(time);
 
             var sut = GetSut();
             var result = sut.Execute();
@@ -46,12 +48,12 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_UserTimeIsSet()
         {
-            var now = DateTime.Parse("2000-01-01 00:00:00");
+            var now = new DateTime(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
             var timeZone = TimeZoneInfo.Utc;
-            var userSettings = new UserSettingsInTest(timeZone: timeZone);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: 25);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetLocalTime(timeZone)).Returns(now);
+            GetMock<ITimeService>().Setup(o => o.GetUtcTime()).Returns(now);
 
             var sut = GetSut();
             var result = sut.Execute();
@@ -62,7 +64,6 @@ namespace Core.Tests.UseCases
         private ShowPayDay GetSut()
         {
             return new ShowPayDay(
-                GetMock<IPayDayService>().Object,
                 GetMock<IUserSettingsService>().Object,
                 GetMock<ITimeService>().Object);
         }

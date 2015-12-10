@@ -12,12 +12,6 @@ namespace Plumbing
             Storage = storage;
         }
 
-        private PayDayService _payDayService;
-        public PayDayService PayDayService
-        {
-            get { return _payDayService ?? (_payDayService = new PayDayService(TimeService, UserSettingsService)); }
-        }
-
         private TimeService _timeService;
         public TimeService TimeService
         {

@@ -20,7 +20,6 @@ namespace Web.Plumbing
 
             // Services
             RegisterComponent<ICountryService, CountryService>();
-            RegisterComponent<IPayDayService, PayDayService>();
             RegisterComponent<ITimeService, TimeService>();
 
             // Misc

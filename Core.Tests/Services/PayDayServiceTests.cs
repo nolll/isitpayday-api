@@ -16,10 +16,7 @@ namespace Core.Tests.Services
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: selectedPayDay);
 
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            
-            var sut = GetSut();
-            var result = sut.IsPayDay(testedPayDay, selectedPayDay);
+            var result = PayDayService.IsPayDay(testedPayDay, userSettings, selectedPayDay);
 
             Assert.IsTrue(result);
         }
@@ -32,10 +29,7 @@ namespace Core.Tests.Services
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: selectedPayDay);
 
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            
-            var sut = GetSut();
-            var result = sut.IsPayDay(testedPayDay, selectedPayDay);
+            var result = PayDayService.IsPayDay(testedPayDay, userSettings, selectedPayDay);
 
             Assert.IsFalse(result);
         }
@@ -48,11 +42,7 @@ namespace Core.Tests.Services
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
             var userTime = new DateTime(2015, 1, 23, 12, 0, 0);
 
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetLocalTime(timeZone)).Returns(userTime);
-
-            var sut = GetSut();
-            var result = sut.IsPayDay(userTime, payDay);
+            var result = PayDayService.IsPayDay(userTime, userSettings, payDay);
 
             Assert.IsTrue(result);
         }
@@ -65,20 +55,9 @@ namespace Core.Tests.Services
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
             var userTime = new DateTime(1, 1, 1, 1, 1, 1);
 
-            GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetLocalTime(timeZone)).Returns(userTime);
-
-            var sut = GetSut();
-            var result = sut.IsPayDay();
+            var result = PayDayService.IsPayDay(userTime, userSettings, payDay);
 
             Assert.IsFalse(result);
-        }
-
-        private PayDayService GetSut()
-        {
-            return new PayDayService(
-                GetMock<ITimeService>().Object,
-                GetMock<IUserSettingsService>().Object);
         }
     }
 }
