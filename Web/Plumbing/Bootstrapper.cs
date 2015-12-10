@@ -1,6 +1,6 @@
 using Plumbing;
 
-namespace Web
+namespace Web.Plumbing
 {
     public class Bootstrapper
     {
@@ -8,8 +8,7 @@ namespace Web
 
         public Bootstrapper()
         {
-            var deps = new Dependencies();
-            UseCases = new UseCaseContainer(deps);
+            UseCases = new UseCaseContainer(new Dependencies(new CookieStorage()));
         }
     }
 }

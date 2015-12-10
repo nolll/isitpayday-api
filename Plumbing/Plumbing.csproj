@@ -47,10 +47,6 @@
       <Project>{7E85E3B7-C78B-49DD-B5B3-B6462F56ED9A}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Http\Infrastructure.Http.csproj">
-      <Project>{A4038FFA-EB5D-4EEB-BC84-CADBDBA0EF5D}</Project>
-      <Name>Infrastructure.Http</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

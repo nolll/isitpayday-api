@@ -1,7 +1,7 @@
 using Core.UseCases;
 using Plumbing;
 
-namespace Web
+namespace Web.Plumbing
 {
     public class UseCaseContainer
     {

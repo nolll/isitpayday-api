@@ -1,15 +1,15 @@
 ﻿using System.Web.Mvc;
+using Web.Plumbing;
 
 namespace Web.Controllers
 {
     public abstract class BaseController : Controller
     {
-        private readonly Bootstrapper _bootstrapper = new Bootstrapper();
-        private readonly WebContext _webContext;
+        private readonly Bootstrapper _bootstrapper;
 
         protected BaseController()
         {
-            _webContext = new WebContext(Request);
+            _bootstrapper = new Bootstrapper();
         }
 
         protected UseCaseContainer UseCase
@@ -19,7 +19,7 @@ namespace Web.Controllers
 
         protected bool IsInProduction
         {
-            get { return _webContext.IsInProduction; }
+            get { return !WebContext.Host.EndsWith("lan");; }
         }
     }
 }

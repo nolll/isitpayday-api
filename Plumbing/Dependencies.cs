@@ -1,12 +1,18 @@
 ﻿using Core.DateEvaluators;
 using Core.Services;
-using Infrastructure.Http.Services;
-using Infrastructure.Http.Storage;
+using Core.Storage;
 
 namespace Plumbing
 {
     public class Dependencies
     {
+        public IStorage Storage { get; private set; }
+
+        public Dependencies(IStorage storage)
+        {
+            Storage = storage;
+        }
+
         private PayDayService _payDayService;
         public PayDayService PayDayService
         {
@@ -53,18 +59,6 @@ namespace Plumbing
         public CountryService CountryService
         {
             get { return _countryService ?? (_countryService = new CountryService()); }
-        }
-
-        private CookieStorage _cookieStorage;
-        public CookieStorage Storage
-        {
-            get { return _cookieStorage ?? (_cookieStorage = new CookieStorage(WebContext)); }
-        }
-
-        private WebContext _webContext;
-        public WebContext WebContext
-        {
-            get { return _webContext ?? (_webContext = new WebContext(TimeService)); }
         }
     }
 }

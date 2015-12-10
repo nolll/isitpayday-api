@@ -59,7 +59,6 @@
     <Compile Include="Services\Interfaces\ICountryService.cs" />
     <Compile Include="Services\Interfaces\IPayDayService.cs" />
     <Compile Include="Services\Interfaces\ITimeService.cs" />
-    <Compile Include="Services\Interfaces\IWebContext.cs" />
     <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Storage\Interfaces\IStorage.cs" />
     <Compile Include="UseCases\SaveSettings.cs" />
