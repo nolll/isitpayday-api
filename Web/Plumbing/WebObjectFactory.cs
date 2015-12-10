@@ -15,14 +15,7 @@ namespace Web.Plumbing
 
         private void RegisterTypes()
         {
-            // Repositories
             RegisterComponent<IUserSettingsService, UserSettingsService>();
-
-            // Services
-            RegisterComponent<ICountryService, CountryService>();
-            RegisterComponent<ITimeService, TimeService>();
-
-            // Misc
             RegisterComponent<IStorage, CookieStorage>();
         }
     }

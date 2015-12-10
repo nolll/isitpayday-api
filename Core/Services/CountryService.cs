@@ -5,9 +5,9 @@ using Core.Classes;
 
 namespace Core.Services
 {
-    public class CountryService : ICountryService
+    public static class CountryService
     {
-        public IEnumerable<Country> GetCountries()
+        public static IEnumerable<Country> GetCountries()
         {
             var countries = from ri in
                             from ci in CultureInfo.GetCultures(CultureTypes.SpecificCultures)

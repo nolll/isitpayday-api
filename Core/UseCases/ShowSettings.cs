@@ -9,17 +9,10 @@ namespace Core.UseCases
     public class ShowSettings
     {
         private readonly IUserSettingsService _userSettingsService;
-        private readonly ICountryService _countryService;
-        private readonly ITimeService _timeService;
 
-        public ShowSettings(
-            IUserSettingsService userSettingsService,
-            ICountryService countryService,
-            ITimeService timeService)
+        public ShowSettings(IUserSettingsService userSettingsService)
         {
             _userSettingsService = userSettingsService;
-            _countryService = countryService;
-            _timeService = timeService;
         }
 
         public Result Execute()
@@ -55,21 +48,21 @@ namespace Core.UseCases
             get
             {
                 return new List<PayDayType>
-                    {
-                        PayDayType.Monthly,
-                        PayDayType.Weekly
-                    };
+                {
+                    PayDayType.Monthly,
+                    PayDayType.Weekly
+                };
             }
         }
 
         private IList<Country> CountryOptions
         {
-            get { return _countryService.GetCountries().ToList(); }
+            get { return CountryService.GetCountries().ToList(); }
         }
 
         private IList<TimeZoneInfo> TimeZoneOptions
         {
-            get { return _timeService.GetTimezones().ToList(); }
+            get { return TimeZoneInfo.GetSystemTimeZones().ToList(); }
         }
 
         public class Result

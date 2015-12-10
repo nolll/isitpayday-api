@@ -111,40 +111,33 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_ResultContainsCorrectCountryOptions()
         {
-            const string countryId = "a";
-            var countries = new List<Country> { new CountryInTest(countryId) };
+            const int expected = 142;
             var userSettings = new UserSettingsInTest();
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countries);
 
             var sut = GetSut();
             var result = sut.Execute();
 
-            Assert.AreEqual(countries, result.CountryOptions);
+            Assert.AreEqual(expected, result.CountryOptions.Count);
         }
 
         [Test]
         public void Execute_ResultContainsCorrectTimeZoneOptions()
         {
-            var timeZones = new List<TimeZoneInfo> { TimeZoneInfo.Utc };
             var userSettings = new UserSettingsInTest();
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
-            GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZones);
 
             var sut = GetSut();
             var result = sut.Execute();
 
-            Assert.AreEqual(timeZones, result.TimeZoneOptions);
+            Assert.AreEqual(TimeZoneInfo.GetSystemTimeZones().Count, result.TimeZoneOptions.Count);
         }
 
         private ShowSettings GetSut()
         {
-            return new ShowSettings(
-                GetMock<IUserSettingsService>().Object,
-                GetMock<ICountryService>().Object,
-                GetMock<ITimeService>().Object);
+            return new ShowSettings(GetMock<IUserSettingsService>().Object);
         }
     }
 }

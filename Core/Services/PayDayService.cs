@@ -8,7 +8,7 @@ namespace Core.Services
     {
         public static bool IsPayDay(DateTime utcTime, UserSettings userSettings, int payDay)
         {
-            var localTime = TimeService.GetLocalTime(utcTime, userSettings.TimeZone);
+            var localTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
             var actualPayDay = PayDayEvaluator.GetActualPayDay(localTime, payDay);
             return localTime.Day == actualPayDay.Day;
         }

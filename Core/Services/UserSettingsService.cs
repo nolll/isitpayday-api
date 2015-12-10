@@ -9,17 +9,10 @@ namespace Core.Services
     {
         private const int DefaultPayDay = 25;
         
-        private readonly ICountryService _countryService;
-        private readonly ITimeService _timeService;
         private readonly IStorage _storage;
 
-        public UserSettingsService(
-            ICountryService countryService,
-            ITimeService timeService,
-            IStorage storage)
+        public UserSettingsService(IStorage storage)
         {
-            _countryService = countryService;
-            _timeService = timeService;
             _storage = storage;
         }
 
@@ -35,13 +28,13 @@ namespace Core.Services
         private Country GetCountry()
         {
             var countryId = _storage.GetCountry() ?? "SE";
-            return _countryService.GetCountries().FirstOrDefault(o => o.Id == countryId);
+            return CountryService.GetCountries().FirstOrDefault(o => o.Id == countryId);
         }
 
         private TimeZoneInfo GetTimeZone()
         {
             var timeZoneId = _storage.GetTimeZone() ?? "W. Europe Standard Time";
-            return _timeService.GetTimezones().FirstOrDefault(o => o.Id == timeZoneId);
+            return TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(o => o.Id == timeZoneId);
         }
 
         private int GetSelectedPayDay()

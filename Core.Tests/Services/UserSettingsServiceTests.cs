@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Core.Classes;
 using Core.Services;
 using Core.Storage;
 using NUnit.Framework;
 using Tests.Common;
-using Tests.Common.FakeClasses;
 
 namespace Core.Tests.Services
 {
@@ -14,32 +12,25 @@ namespace Core.Tests.Services
         [Test]
         public void GetSettings_WithoutSavedCountry_ReturnsSweden()
         {
-            var sweden = new CountryInTest("SE");
-            var norway = new CountryInTest("NO");
-            var countries = new List<Country> {sweden, norway};
-
-            GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countries);
+            const string expected = "Sweden";
 
             var sut = GetSut();
             var result = sut.GetSettings();
 
-            Assert.AreEqual(sweden, result.Country);
+            Assert.AreEqual(expected, result.Country.Name);
         }
 
         [Test]
         public void GetSettings_WithSavedCountry_ReturnsThatCountry()
         {
-            var sweden = new CountryInTest("SE");
-            var norway = new CountryInTest("NO");
-            var countries = new List<Country> { sweden, norway };
+            const string expected = "Norway";
 
             GetMock<IStorage>().Setup(o => o.GetCountry()).Returns("NO");
-            GetMock<ICountryService>().Setup(o => o.GetCountries()).Returns(countries);
 
             var sut = GetSut();
             var result = sut.GetSettings();
 
-            Assert.AreEqual(norway, result.Country);
+            Assert.AreEqual(expected, result.Country.Name);
         }
 
         [Test]
@@ -47,9 +38,6 @@ namespace Core.Tests.Services
         {
             var utc = TimeZoneInfo.Utc;
             var westernEurope = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
-            var timeZones = new List<TimeZoneInfo> { utc, westernEurope };
-
-            GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZones);
 
             var sut = GetSut();
             var result = sut.GetSettings();
@@ -61,11 +49,8 @@ namespace Core.Tests.Services
         public void GetSettings_WithSavedTimeZone_ReturnsThatTimeZone()
         {
             var utc = TimeZoneInfo.Utc;
-            var westernEurope = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
-            var timeZones = new List<TimeZoneInfo> { utc, westernEurope };
 
             GetMock<IStorage>().Setup(o => o.GetTimeZone()).Returns("UTC");
-            GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZones);
 
             var sut = GetSut();
             var result = sut.GetSettings();
@@ -138,10 +123,7 @@ namespace Core.Tests.Services
 
         private UserSettingsService GetSut()
         {
-            return new UserSettingsService(
-                GetMock<ICountryService>().Object,
-                GetMock<ITimeService>().Object,
-                GetMock<IStorage>().Object);
+            return new UserSettingsService(GetMock<IStorage>().Object);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Core.UseCases;
 using Web.Models;
 
@@ -8,7 +9,8 @@ namespace Web.Controllers
     {
         public ActionResult Index(string change)
         {
-            var showPayDay = UseCase.ShowPayDay.Execute();
+            var payDayRequest = new ShowPayDay.Request(DateTime.UtcNow);
+            var showPayDay = UseCase.ShowPayDay.Execute(payDayRequest);
             var showSettings = UseCase.ShowSettings.Execute();
             var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, change);
             return View(pageModel);

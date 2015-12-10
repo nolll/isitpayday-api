@@ -123,8 +123,6 @@ namespace Web.Tests.ModelFactories
             var timeZoneList = new List<TimeZoneInfo> { timeZone };
             var showSettingsResult = GetShowSettingsResult(timeZoneOptions: timeZoneList);
 
-            GetMock<ITimeService>().Setup(o => o.GetTimezones()).Returns(timeZoneList);
-
             var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.TimeZoneItems.Count);

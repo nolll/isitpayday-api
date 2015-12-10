@@ -12,8 +12,8 @@ namespace Web.Plumbing
             _deps = deps;
         }
 
-        public ShowPayDay ShowPayDay { get { return new ShowPayDay(_deps.UserSettingsService, _deps.TimeService); } }
-        public ShowSettings ShowSettings { get { return new ShowSettings(_deps.UserSettingsService, _deps.CountryService, _deps.TimeService); } }
+        public ShowPayDay ShowPayDay { get { return new ShowPayDay(_deps.UserSettingsService); } }
+        public ShowSettings ShowSettings { get { return new ShowSettings(_deps.UserSettingsService); } }
         public SaveSettings SaveSettings { get { return new SaveSettings(_deps.Storage); } }
     }
 }
