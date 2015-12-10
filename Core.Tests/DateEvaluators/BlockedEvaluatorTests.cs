@@ -13,19 +13,17 @@ namespace Core.Tests.DateEvaluators
         {
             var notBlockedDate = new DateTime(2015, 1, 2);
 
-            var sut = GetSut();
-            var result = sut.IsBlocked(notBlockedDate);
+            var result = BlockedEvaluator.IsBlocked(notBlockedDate);
 
             Assert.IsFalse(result);
         }
 
         [Test]
-        public void IsBlocked_WithWeekDayThatIsExcluded_ReturnsTrue()
+        public void IsBlocked_WithWeekDayThatIsExcluded_ReturnsTrue()   
         {
             var excludedDate = new DateTime(2015, 1, 1);
 
-            var sut = GetSut();
-            var result = sut.IsBlocked(excludedDate);
+            var result = BlockedEvaluator.IsBlocked(excludedDate);
 
             Assert.IsTrue(result);
         }
@@ -35,8 +33,7 @@ namespace Core.Tests.DateEvaluators
         {
             var weekendDate = new DateTime(2015, 1, 3);
 
-            var sut = GetSut();
-            var result = sut.IsBlocked(weekendDate);
+            var result = BlockedEvaluator.IsBlocked(weekendDate);
 
             Assert.IsTrue(result);
         }
@@ -46,15 +43,9 @@ namespace Core.Tests.DateEvaluators
         {
             var blockedWeekendDate = new DateTime(2015, 6, 6);
 
-            var sut = GetSut();
-            var result = sut.IsBlocked(blockedWeekendDate);
+            var result = BlockedEvaluator.IsBlocked(blockedWeekendDate);
 
             Assert.IsTrue(result);
-        }
-
-        private BlockedEvaluator GetSut()
-        {
-            return new BlockedEvaluator();
         }
     }
 }

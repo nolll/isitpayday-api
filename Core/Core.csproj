@@ -44,7 +44,6 @@
     <Compile Include="Classes\UserSettings.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
     <Compile Include="DateEvaluators\ExcludedEvaluator.cs" />
-    <Compile Include="DateEvaluators\Interfaces\IBlockedEvaluator.cs" />
     <Compile Include="DateEvaluators\Interfaces\IPayDayEvaluator.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
     <Compile Include="DateEvaluators\WeekendEvaluator.cs" />

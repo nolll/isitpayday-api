@@ -27,7 +27,6 @@ namespace Web.Plumbing
             // Misc
             RegisterComponent<IStorage, CookieStorage>();
             RegisterComponent<IPayDayEvaluator, PayDayEvaluator>();
-            RegisterComponent<IBlockedEvaluator, BlockedEvaluator>();
         }
     }
 }

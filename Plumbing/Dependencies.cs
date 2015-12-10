@@ -22,13 +22,7 @@ namespace Plumbing
         private PayDayEvaluator _payDayEvaluator;
         public PayDayEvaluator PayDayEvaluator
         {
-            get { return _payDayEvaluator ?? (_payDayEvaluator = new PayDayEvaluator(BlockedEvaluator)); }
-        }
-
-        private BlockedEvaluator _blockedEvaluator;
-        public BlockedEvaluator BlockedEvaluator
-        {
-            get { return _blockedEvaluator ?? (_blockedEvaluator = new BlockedEvaluator()); }
+            get { return _payDayEvaluator ?? (_payDayEvaluator = new PayDayEvaluator()); }
         }
 
         private TimeService _timeService;
