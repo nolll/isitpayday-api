@@ -5,7 +5,7 @@ namespace Plumbing
 {
     public class Dependencies
     {
-        public IStorage Storage { get; private set; }
+        public IStorage Storage { get; }
 
         public Dependencies(IStorage storage)
         {
@@ -13,9 +13,6 @@ namespace Plumbing
         }
 
         private UserSettingsService _userSettingsService;
-        public UserSettingsService UserSettingsService
-        {
-            get { return _userSettingsService ?? (_userSettingsService = new UserSettingsService(Storage)); }
-        }
+        public UserSettingsService UserSettingsService => _userSettingsService ?? (_userSettingsService = new UserSettingsService(Storage));
     }
 }

@@ -7,41 +7,17 @@ namespace Web.Controllers
     {
         private readonly Bootstrapper _bootstrapper;
         private readonly CookieContainer _cookies;
+        protected UseCaseContainer UseCase => _bootstrapper.UseCases;
+        protected bool IsInProduction => !WebContext.Host.EndsWith("lan");
+        protected int? PayDay => _cookies.PayDay;
+        protected string CountryCode => _cookies.CountryCode;
+        protected int? PayDayType => _cookies.PayDayType;
+        protected string TimezoneId => _cookies.TimezoneId;
 
         protected BaseController()
         {
             _bootstrapper = new Bootstrapper();
             _cookies = new CookieContainer();
-        }
-
-        protected UseCaseContainer UseCase
-        {
-            get { return _bootstrapper.UseCases; }
-        }
-
-        protected bool IsInProduction
-        {
-            get { return !WebContext.Host.EndsWith("lan");; }
-        }
-
-        protected int? PayDay
-        {
-            get { return _cookies.PayDay; }
-        }
-
-        protected string CountryCode
-        {
-            get { return _cookies.CountryCode; }
-        }
-
-        protected int? PayDayType
-        {
-            get { return _cookies.PayDayType; }
-        }
-
-        protected string TimezoneId
-        {
-            get { return _cookies.TimezoneId; }
         }
     }
 }

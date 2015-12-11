@@ -43,27 +43,9 @@ namespace Core.UseCases
             }
         }
 
-        private IList<PayDayType> PayDayTypeOptions
-        {
-            get
-            {
-                return new List<PayDayType>
-                {
-                    PayDayType.Monthly,
-                    PayDayType.Weekly
-                };
-            }
-        }
-
-        private IList<Country> CountryOptions
-        {
-            get { return CountryService.GetCountries().ToList(); }
-        }
-
-        private IList<TimeZoneInfo> TimeZoneOptions
-        {
-            get { return TimeZoneInfo.GetSystemTimeZones().ToList(); }
-        }
+        private IList<PayDayType> PayDayTypeOptions => new List<PayDayType> { PayDayType.Monthly, PayDayType.Weekly };
+        private IList<Country> CountryOptions => CountryService.GetCountries().ToList();
+        private IList<TimeZoneInfo> TimeZoneOptions => TimeZoneInfo.GetSystemTimeZones().ToList();
 
         public class Result
         {

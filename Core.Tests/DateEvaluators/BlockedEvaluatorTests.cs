@@ -1,6 +1,5 @@
 ﻿using System;
-using Core.DateEvaluators;
-using Moq;
+using Core.DateEvaluators;  
 using NUnit.Framework;
 using Tests.Common;
 

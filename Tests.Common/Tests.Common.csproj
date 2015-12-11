@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="FakeClasses\CountryInTest.cs" />
     <Compile Include="FakeClasses\SaveSettingsRequestInTest.cs" />
-    <Compile Include="FakeClasses\ShowPayDayResultInTest.cs" />
     <Compile Include="FakeClasses\UserSettingsInTest.cs" />
     <Compile Include="MockContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Classes;
-using Core.Services;
 using Core.UseCases;
 using Moq;
 using NUnit.Framework;
@@ -175,10 +174,10 @@ namespace Web.Tests.ModelFactories
             IList<TimeZoneInfo> timeZoneOptions = null)
         {
             return new ShowSettings.Result(
-                payDay.HasValue ? payDay.Value : It.IsAny<int>(),
+                payDay ?? It.IsAny<int>(),
                 country ?? new CountryInTest(),
                 timeZone ?? TimeZoneInfo.Utc,
-                payDayType.HasValue ? payDayType.Value : PayDayType.Monthly,
+                payDayType ?? PayDayType.Monthly,
                 payDayOptions ?? new List<int>(),
                 payDayTypeOptions ?? new List<PayDayType>(),
                 countryOptions ?? new List<Country>(),

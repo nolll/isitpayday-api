@@ -44,7 +44,7 @@ namespace Core.Services
 
         public static int GetSelectedPayDay(int? payDay)
         {
-            return payDay.HasValue ? payDay.Value : DefaultPayDay;
+            return payDay ?? DefaultPayDay;
         }
 
         private PayDayType GetSelectedPayDayType()

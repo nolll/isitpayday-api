@@ -12,7 +12,7 @@ namespace Web.Plumbing
 
         public WindsorControllerFactory(IKernel kernel)
         {
-            this._kernel = kernel;
+            _kernel = kernel;
         }
 
         public override void ReleaseController(IController controller)
@@ -24,7 +24,7 @@ namespace Web.Plumbing
         {
             if (controllerType == null)
             {
-                throw new HttpException(404, string.Format("The controller for path '{0}' could not be found.", requestContext.HttpContext.Request.Path));
+                throw new HttpException(404, $"The controller for path '{requestContext.HttpContext.Request.Path}' could not be found.");
             }
             return (IController)_kernel.Resolve(controllerType);
         }

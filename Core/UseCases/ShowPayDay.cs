@@ -25,8 +25,8 @@ namespace Core.UseCases
 
         public class Request
         {
-            public int? PayDay { get; private set; }
-            public DateTime UtcTime { get; private set; }
+            public int? PayDay { get; }
+            public DateTime UtcTime { get; }
 
             public Request(int? payDay, DateTime utcTime)
             {
@@ -37,9 +37,9 @@ namespace Core.UseCases
 
         public class Result
         {
-            public bool IsPayDay { get; private set; }
-            public string Message { get; private set; }
-            public DateTime UserTime { get; private set; }
+            public bool IsPayDay { get; }
+            public string Message { get; }
+            public DateTime UserTime { get; }
 
             public Result(bool isPayDay, string message, DateTime userTime)
             {

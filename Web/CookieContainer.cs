@@ -6,26 +6,10 @@ namespace Web
         private const string CountryCookie = "country";
         private const string TimeZoneCookie = "timezone";
         private const string PayDayTypeCookie = "paydaytype";
-
-        public int? PayDay
-        {
-            get { return GetIntValue(WebContext.GetCookie(PayDayCookie)); }
-        }
-
-        public string CountryCode
-        {
-            get { return WebContext.GetCookie(CountryCookie); }
-        }
-
-        public string TimezoneId
-        {
-            get { return WebContext.GetCookie(TimeZoneCookie); }
-        }
-
-        public int? PayDayType
-        {
-            get { return GetIntValue(WebContext.GetCookie(PayDayTypeCookie)); }
-        }
+        public int? PayDay => GetIntValue(WebContext.GetCookie(PayDayCookie));
+        public string CountryCode => WebContext.GetCookie(CountryCookie);
+        public string TimezoneId => WebContext.GetCookie(TimeZoneCookie);
+        public int? PayDayType => GetIntValue(WebContext.GetCookie(PayDayTypeCookie));
 
         private static int? GetIntValue(string value)
         {

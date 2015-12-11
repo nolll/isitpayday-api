@@ -36,7 +36,6 @@ namespace Core.Tests.Services
         [Test]
         public void GetSettings_WithoutSavedTimeZone_ReturnsThatTimeZone()
         {
-            var utc = TimeZoneInfo.Utc;
             var westernEurope = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
 
             var sut = GetSut();

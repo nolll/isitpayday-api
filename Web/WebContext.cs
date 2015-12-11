@@ -5,6 +5,9 @@ namespace Web
 {
     public static class WebContext
     {
+        private static HttpRequest Request => HttpContext.Current.Request;
+        private static HttpResponse Response => HttpContext.Current.Response;
+
         public static string Host
         {
             get
@@ -17,7 +20,7 @@ namespace Web
         public static string GetCookie(string name)
         {
             var cookie = Request.Cookies.Get(name);
-            return cookie == null ? null : cookie.Value;
+            return cookie?.Value;
         }
 
         public static void SetCookie(string name, string value)
@@ -28,16 +31,6 @@ namespace Web
                 Expires = DateTime.Now.Add(TimeSpan.FromDays(3650))
             };
             Response.Cookies.Add(cookie);
-        }
-
-        private static HttpRequest Request
-        {
-            get { return HttpContext.Current.Request; }
-        }
-
-        private static HttpResponse Response
-        {
-            get { return HttpContext.Current.Response; }
         }
     }
 }
