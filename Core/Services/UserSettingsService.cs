@@ -39,8 +39,12 @@ namespace Core.Services
 
         private int GetSelectedPayDay()
         {
-            var payday = _storage.GetPayDay();
-            return payday.HasValue ? payday.Value : DefaultPayDay;
+            return GetSelectedPayDay(_storage.GetPayDay());
+        }
+
+        public static int GetSelectedPayDay(int? payDay)
+        {
+            return payDay.HasValue ? payDay.Value : DefaultPayDay;
         }
 
         private PayDayType GetSelectedPayDayType()

@@ -15,8 +15,8 @@ namespace Core.Tests.UseCases
             const string expectedMessage = "YES!!1!";
             var timeZone = TimeZoneInfo.Utc;
             var time = new DateTime(2000, 1, 25, 12, 0, 0, DateTimeKind.Utc);
-            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: 25);
-            var request = new ShowPayDay.Request(time);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone);
+            var request = new ShowPayDay.Request(25, time);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
@@ -33,8 +33,8 @@ namespace Core.Tests.UseCases
             const string expectedMessage = "No =(";
             var timeZone = TimeZoneInfo.Utc;
             var time = new DateTime(2000, 1, 24, 12, 0, 0, DateTimeKind.Utc);
-            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: 25);
-            var request = new ShowPayDay.Request(time);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone);
+            var request = new ShowPayDay.Request(25, time);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
@@ -50,8 +50,8 @@ namespace Core.Tests.UseCases
         {
             var time = new DateTime(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
             var timeZone = TimeZoneInfo.Utc;
-            var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: 25);
-            var request = new ShowPayDay.Request(time);
+            var userSettings = new UserSettingsInTest(timeZone: timeZone);
+            var request = new ShowPayDay.Request(25, time);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 

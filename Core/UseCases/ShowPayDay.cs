@@ -14,20 +14,23 @@ namespace Core.UseCases
 
         public Result Execute(Request request)
         {
+            var payDay = UserSettingsService.GetSelectedPayDay(request.PayDay);
             var utcTime = request.UtcTime;
             var userSettings = _userSettingsService.GetSettings();
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
-            var isPayDay = PayDayService.IsPayDay(utcTime, userSettings, userSettings.PayDay);
+            var isPayDay = PayDayService.IsPayDay(utcTime, userSettings, payDay);
             var message = isPayDay ? "YES!!1!" : "No =(";
             return new Result(isPayDay, message, userTime);
         }
 
         public class Request
         {
+            public int? PayDay { get; private set; }
             public DateTime UtcTime { get; private set; }
 
-            public Request(DateTime utcTime)
+            public Request(int? payDay, DateTime utcTime)
             {
+                PayDay = payDay;
                 UtcTime = utcTime;
             }
         }

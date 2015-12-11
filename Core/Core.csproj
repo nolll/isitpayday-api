@@ -51,7 +51,6 @@
     <Compile Include="UseCases\ShowPayDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CountryService.cs" />
-    <Compile Include="Services\Interfaces\ICountryService.cs" />
     <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Storage\Interfaces\IStorage.cs" />
     <Compile Include="UseCases\SaveSettings.cs" />
