@@ -9,7 +9,7 @@ namespace Web.Controllers
     {
         public ActionResult Index(string change)
         {
-            var payDayRequest = new ShowPayDay.Request(PayDay, DateTime.UtcNow);
+            var payDayRequest = new ShowPayDay.Request(PayDay, PayDayType, CountryCode, TimezoneId, DateTime.UtcNow);
             var showPayDay = UseCase.ShowPayDay.Execute(payDayRequest);
             var showSettings = UseCase.ShowSettings.Execute();
             var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, change);

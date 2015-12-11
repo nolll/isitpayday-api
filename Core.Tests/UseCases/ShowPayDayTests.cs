@@ -16,7 +16,7 @@ namespace Core.Tests.UseCases
             var timeZone = TimeZoneInfo.Utc;
             var time = new DateTime(2000, 1, 25, 12, 0, 0, DateTimeKind.Utc);
             var userSettings = new UserSettingsInTest(timeZone: timeZone);
-            var request = new ShowPayDay.Request(25, time);
+            var request = new ShowPayDay.Request(25, null, null, null, time);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
@@ -34,7 +34,7 @@ namespace Core.Tests.UseCases
             var timeZone = TimeZoneInfo.Utc;
             var time = new DateTime(2000, 1, 24, 12, 0, 0, DateTimeKind.Utc);
             var userSettings = new UserSettingsInTest(timeZone: timeZone);
-            var request = new ShowPayDay.Request(25, time);
+            var request = new ShowPayDay.Request(25, null, null, null, time);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
@@ -51,7 +51,7 @@ namespace Core.Tests.UseCases
             var time = new DateTime(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
             var timeZone = TimeZoneInfo.Utc;
             var userSettings = new UserSettingsInTest(timeZone: timeZone);
-            var request = new ShowPayDay.Request(25, time);
+            var request = new ShowPayDay.Request(25, null, null, null, time);
 
             GetMock<IUserSettingsService>().Setup(o => o.GetSettings()).Returns(userSettings);
 
@@ -63,7 +63,7 @@ namespace Core.Tests.UseCases
 
         private ShowPayDay GetSut()
         {
-            return new ShowPayDay(GetMock<IUserSettingsService>().Object);
+            return new ShowPayDay();
         }
     }
 }
