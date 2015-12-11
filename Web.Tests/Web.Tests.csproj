@@ -76,7 +76,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyInjectionTests.cs" />
     <Compile Include="ModelFactories\GoogleAnalyticsModelFactoryTests.cs" />
     <Compile Include="ModelFactories\SettingsFormModelFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
