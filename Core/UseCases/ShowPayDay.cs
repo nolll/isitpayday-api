@@ -5,18 +5,11 @@ namespace Core.UseCases
 {
     public class ShowPayDay
     {
-        private readonly IUserSettingsService _userSettingsService;
-
-        public ShowPayDay(IUserSettingsService userSettingsService)
-        {
-            _userSettingsService = userSettingsService;
-        }
-
         public Result Execute(Request request)
         {
             var payDay = UserSettingsService.GetSelectedPayDay(request.PayDay);
             var utcTime = request.UtcTime;
-            var userSettings = _userSettingsService.GetSettings();
+            var userSettings = UserSettingsService.GetSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
             var isPayDay = PayDayService.IsPayDay(utcTime, userSettings, payDay);
             var message = isPayDay ? "YES!!1!" : "No =(";
@@ -26,11 +19,17 @@ namespace Core.UseCases
         public class Request
         {
             public int? PayDay { get; }
+            public int? PayDayType { get; }
+            public string CountryCode { get; }
+            public string TimezoneId { get; }
             public DateTime UtcTime { get; }
 
-            public Request(int? payDay, DateTime utcTime)
+            public Request(int? payDay, int? payDayType, string countryCode, string timezoneId, DateTime utcTime)
             {
                 PayDay = payDay;
+                PayDayType = payDayType;
+                CountryCode = countryCode;
+                TimezoneId = timezoneId;
                 UtcTime = utcTime;
             }
         }
