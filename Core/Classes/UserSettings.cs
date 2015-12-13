@@ -16,14 +16,6 @@ namespace Core.Classes
         public Country Country { get; private set; }
         public TimeZoneInfo TimeZone { get; private set; }
 
-        public UserSettings(Country country, TimeZoneInfo timeZone, int payDay, PayDayType payDayType)
-        {
-            PayDayType = payDayType;
-            Country = country;
-            TimeZone = timeZone;
-            PayDay = payDay;
-        }
-
         public UserSettings(int? payDay, int? payDayType, string countryCode, string timezoneId)
         {
             PayDay = GetSelectedPayDay(payDay);

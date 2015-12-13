@@ -52,8 +52,6 @@
     <Compile Include="UseCases\ShowPayDayTests.cs" />
     <Compile Include="UseCases\SaveSettingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PayDayServiceTests.cs" />
-    <Compile Include="Services\UserSettingsTests.cs" />
     <Compile Include="UseCases\ShowSettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
