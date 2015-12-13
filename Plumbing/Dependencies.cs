@@ -1,5 +1,4 @@
-﻿using Core.Services;
-using Core.Storage;
+﻿using Core.Storage;
 
 namespace Plumbing
 {
@@ -11,8 +10,5 @@ namespace Plumbing
         {
             Storage = storage;
         }
-
-        private UserSettingsService _userSettingsService;
-        public UserSettingsService UserSettingsService => _userSettingsService ?? (_userSettingsService = new UserSettingsService(Storage));
     }
 }

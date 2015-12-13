@@ -11,7 +11,8 @@ namespace Web.Controllers
         {
             var payDayRequest = new ShowPayDay.Request(PayDay, PayDayType, CountryCode, TimezoneId, DateTime.UtcNow);
             var showPayDay = UseCase.ShowPayDay.Execute(payDayRequest);
-            var showSettings = UseCase.ShowSettings.Execute();
+            var settingsRequest = new ShowSettings.Request(PayDay, PayDayType, CountryCode, TimezoneId);
+            var showSettings = UseCase.ShowSettings.Execute(settingsRequest);
             var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, change);
             return View("~/Views/Home/Index.cshtml", pageModel);
         }

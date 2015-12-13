@@ -13,7 +13,7 @@ namespace Web.Plumbing
         }
 
         public ShowPayDay ShowPayDay => new ShowPayDay();
-        public ShowSettings ShowSettings => new ShowSettings(_deps.UserSettingsService);
+        public ShowSettings ShowSettings => new ShowSettings();
         public SaveSettings SaveSettings => new SaveSettings(_deps.Storage);
     }
 }

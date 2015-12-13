@@ -8,16 +8,25 @@ namespace Core.UseCases
 {
     public class ShowSettings
     {
-        private readonly IUserSettingsService _userSettingsService;
-
-        public ShowSettings(IUserSettingsService userSettingsService)
+        public class Request
         {
-            _userSettingsService = userSettingsService;
+            public int? PayDay { get; }
+            public int? PayDayType { get; }
+            public string CountryCode { get; }
+            public string TimezoneId { get; }
+
+            public Request(int? payDay, int? payDayType, string countryCode, string timezoneId)
+            {
+                PayDay = payDay;
+                PayDayType = payDayType;
+                CountryCode = countryCode;
+                TimezoneId = timezoneId;
+            }
         }
 
-        public Result Execute()
+        public Result Execute(Request request)
         {
-            var userSettings = _userSettingsService.GetSettings();
+            var userSettings = UserSettingsService.GetSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
 
             return new Result(
                 userSettings.PayDay,
