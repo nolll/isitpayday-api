@@ -12,8 +12,7 @@ namespace Core.UseCases
             var userSettings = UserSettingsService.GetSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
             var isPayDay = PayDayService.IsPayDay(utcTime, userSettings, payDay);
-            var message = isPayDay ? "YES!!1!" : "No =(";
-            return new Result(isPayDay, message, userTime);
+            return new Result(isPayDay, userTime);
         }
 
         public class Request
@@ -37,13 +36,11 @@ namespace Core.UseCases
         public class Result
         {
             public bool IsPayDay { get; }
-            public string Message { get; }
             public DateTime UserTime { get; }
 
-            public Result(bool isPayDay, string message, DateTime userTime)
+            public Result(bool isPayDay, DateTime userTime)
             {
                 IsPayDay = isPayDay;
-                Message = message;
                 UserTime = userTime;
             }
         }

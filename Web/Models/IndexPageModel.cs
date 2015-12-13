@@ -11,7 +11,7 @@ namespace Web.Models
 
         public IndexPageModel(ShowPayDay.Result showPayDayResult, bool isInProduction, ShowSettings.Result showSettingsResult, string activeForm)
         {
-            PayDayString = showPayDayResult.Message;
+            PayDayString = showPayDayResult.IsPayDay ? "YES!!1!" : "No =(";
             LocalTime = showPayDayResult.UserTime.ToString("R");
             SettingsFormModel = new SettingsFormModel(showSettingsResult, activeForm);
             GoogleAnalyticsModel = new GoogleAnalyticsModel(isInProduction);
