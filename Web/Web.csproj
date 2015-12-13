@@ -111,6 +111,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CookieContainer.cs" />
+    <Compile Include="CookieNames.cs" />
     <Compile Include="CookieStorage.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
