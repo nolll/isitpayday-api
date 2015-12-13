@@ -1,21 +1,19 @@
 ﻿using System;
 using Core.Classes;
 using Core.Services;
-using Core.Storage;
 using NUnit.Framework;
 using Tests.Common;
 
 namespace Core.Tests.Services
 {
-    public class UserSettingsServiceTests : MockContainer
+    public class UserSettingsTests : MockContainer
     {
         [Test]
         public void GetSettings_WithoutSavedCountry_ReturnsSweden()
         {
             const string expected = "Sweden";
 
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, null, null, null);
 
             Assert.AreEqual(expected, result.Country.Name);
         }
@@ -25,21 +23,17 @@ namespace Core.Tests.Services
         {
             const string expected = "Norway";
 
-            GetMock<IStorage>().Setup(o => o.GetCountry()).Returns("NO");
-
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, null, "NO", null);
 
             Assert.AreEqual(expected, result.Country.Name);
         }
 
         [Test]
-        public void GetSettings_WithoutSavedTimeZone_ReturnsThatTimeZone()
+        public void GetSettings_WithoutSavedTimeZone_ReturnsDefaultTimeZone()
         {
             var westernEurope = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
 
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, null, null, null);
 
             Assert.AreEqual(westernEurope, result.TimeZone);
         }
@@ -49,10 +43,7 @@ namespace Core.Tests.Services
         {
             var utc = TimeZoneInfo.Utc;
 
-            GetMock<IStorage>().Setup(o => o.GetTimeZone()).Returns("UTC");
-
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, null, null, "UTC");
 
             Assert.AreEqual(utc, result.TimeZone);
         }
@@ -62,8 +53,7 @@ namespace Core.Tests.Services
         {
             const int expected = 25;
 
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, null, null, null);
 
             Assert.AreEqual(expected, result.PayDay);
         }
@@ -71,12 +61,9 @@ namespace Core.Tests.Services
         [Test]
         public void GetSelectedPayDay_WithSavedPayDay_ReturnsPayDayFromStorage()
         {
-            const int savedPayDay = 1;
+            const int savedPayDay = 24;
 
-            GetMock<IStorage>().Setup(o => o.GetPayDay()).Returns(savedPayDay);
-
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(savedPayDay, null, null, null);
 
             Assert.AreEqual(savedPayDay, result.PayDay);
         }
@@ -86,8 +73,7 @@ namespace Core.Tests.Services
         {
             const PayDayType expected = PayDayType.Monthly;
 
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, null, null, null);
 
             Assert.AreEqual(expected, result.PayDayType);
         }
@@ -98,10 +84,7 @@ namespace Core.Tests.Services
             const int savedValue = 1;
             const PayDayType expected = PayDayType.Monthly;
 
-            GetMock<IStorage>().Setup(o => o.GetPayDayType()).Returns(savedValue);
-
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, savedValue, null, null);
 
             Assert.AreEqual(expected, result.PayDayType);
         }
@@ -112,17 +95,9 @@ namespace Core.Tests.Services
             const int savedValue = 2;
             const PayDayType expected = PayDayType.Weekly;
 
-            GetMock<IStorage>().Setup(o => o.GetPayDayType()).Returns(savedValue);
-
-            var sut = GetSut();
-            var result = sut.GetSettings();
+            var result = UserSettingsService.GetSettings(null, savedValue, null, null);
 
             Assert.AreEqual(expected, result.PayDayType);
-        }
-
-        private UserSettingsService GetSut()
-        {
-            return new UserSettingsService(GetMock<IStorage>().Object);
         }
     }
 }
