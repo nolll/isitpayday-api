@@ -14,18 +14,18 @@ namespace Web.Models
         private const string TimeZoneFormName = "timezone";
         private const string PayDayFormName = "payday";
 
-        public int? PayDay { get; private set; }
-        public string TimeZoneId { get; private set; }
-        public string CountryId { get; private set; }
-        public string CountryName { get; private set; }
-        public string TimeZoneName { get; private set; }
-        public bool ShowCountryForm { get; private set; }
-        public List<SelectListItem> PayDayItems { get; private set; }
-        public bool ShowTimeZoneForm { get; private set; }
-        public List<SelectListItem> TimeZoneItems { get; private set; }
-        public bool ShowPayDayForm { get; private set; }
-        public List<SelectListItem> CountryItems { get; private set; }
-        public List<SelectListItem> PayDayTypeItems { get; private set; }
+        public int? PayDay { get; }
+        public string TimeZoneId { get; }
+        public string CountryId { get; }
+        public string CountryName { get; }
+        public string TimeZoneName { get; }
+        public bool ShowCountryForm { get; }
+        public List<SelectListItem> PayDayItems { get; }
+        public bool ShowTimeZoneForm { get; }
+        public List<SelectListItem> TimeZoneItems { get; }
+        public bool ShowPayDayForm { get; }
+        public List<SelectListItem> CountryItems { get; }
+        public List<SelectListItem> PayDayTypeItems { get; }
 
         public SettingsFormModel(
             ShowSettings.Result showSettingsResult,

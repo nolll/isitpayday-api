@@ -2,9 +2,9 @@
 {
     public class SaveSettingsRequest
     {
-        public string CountryId { get; private set; }
-        public string TimeZoneId { get; private set; }
-        public int? PayDay { get; private set; }
+        public string CountryId { get; }
+        public string TimeZoneId { get; }
+        public int? PayDay { get; }
 
         public SaveSettingsRequest(
             string countryId,

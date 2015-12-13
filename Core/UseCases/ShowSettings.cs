@@ -58,14 +58,14 @@ namespace Core.UseCases
 
         public class Result
         {
-            public int PayDay { get; private set; }
-            public Country Country { get; private set; }
-            public TimeZoneInfo TimeZone { get; private set; }
-            public PayDayType PayDayType { get; private set; }
-            public IList<int> PayDayOptions { get; private set; }
-            public IList<PayDayType> PayDayTypeOptions { get; private set; }
-            public IList<Country> CountryOptions { get; private set; }
-            public IList<TimeZoneInfo> TimeZoneOptions { get; private set; }
+            public int PayDay { get; }
+            public Country Country { get; }
+            public TimeZoneInfo TimeZone { get; }
+            public PayDayType PayDayType { get; }
+            public IList<int> PayDayOptions { get; }
+            public IList<PayDayType> PayDayTypeOptions { get; }
+            public IList<Country> CountryOptions { get; }
+            public IList<TimeZoneInfo> TimeZoneOptions { get; }
 
             public Result(
                 int payDay,

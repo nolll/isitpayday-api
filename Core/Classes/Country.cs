@@ -2,8 +2,8 @@
 {
     public class Country
     {
-        public string Id { get; private set; }
-        public string Name { get; private set; }
+        public string Id { get; }
+        public string Name { get; }
 
         public Country(string id, string name)
         {

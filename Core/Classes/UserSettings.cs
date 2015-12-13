@@ -11,10 +11,10 @@ namespace Core.Classes
         private const string DefaultCountryCode = "SE";
         private const string DefaultTimezone = "W. Europe Standard Time";
         
-        public int PayDay { get; private set; }
-        public PayDayType PayDayType { get; private set; }
-        public Country Country { get; private set; }
-        public TimeZoneInfo TimeZone { get; private set; }
+        public int PayDay { get; }
+        public PayDayType PayDayType { get; }
+        public Country Country { get; }
+        public TimeZoneInfo TimeZone { get; }
 
         public UserSettings(int? payDay, int? payDayType, string countryCode, string timezoneId)
         {
