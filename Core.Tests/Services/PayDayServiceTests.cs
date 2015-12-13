@@ -16,7 +16,7 @@ namespace Core.Tests.Services
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: selectedPayDay);
 
-            var result = PayDayService.IsPayDay(testedPayDay, userSettings, selectedPayDay);
+            var result = PayDayService.IsPayDay(testedPayDay, userSettings);
 
             Assert.IsTrue(result);
         }
@@ -29,7 +29,7 @@ namespace Core.Tests.Services
             var timeZone = TimeZoneInfo.FindSystemTimeZoneById("UTC");
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: selectedPayDay);
 
-            var result = PayDayService.IsPayDay(testedPayDay, userSettings, selectedPayDay);
+            var result = PayDayService.IsPayDay(testedPayDay, userSettings);
 
             Assert.IsFalse(result);
         }
@@ -42,7 +42,7 @@ namespace Core.Tests.Services
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
             var userTime = new DateTime(2015, 1, 23, 12, 0, 0);
 
-            var result = PayDayService.IsPayDay(userTime, userSettings, payDay);
+            var result = PayDayService.IsPayDay(userTime, userSettings);
 
             Assert.IsTrue(result);
         }
@@ -55,7 +55,7 @@ namespace Core.Tests.Services
             var userSettings = new UserSettingsInTest(timeZone: timeZone, payDay: payDay);
             var userTime = new DateTime(1, 1, 1, 1, 1, 1);
 
-            var result = PayDayService.IsPayDay(userTime, userSettings, payDay);
+            var result = PayDayService.IsPayDay(userTime, userSettings);
 
             Assert.IsFalse(result);
         }

@@ -13,7 +13,7 @@ namespace Core.Tests.Services
         {
             const string expected = "Sweden";
 
-            var result = UserSettingsService.GetSettings(null, null, null, null);
+            var result = new UserSettings(null, null, null, null);
 
             Assert.AreEqual(expected, result.Country.Name);
         }
@@ -23,7 +23,7 @@ namespace Core.Tests.Services
         {
             const string expected = "Norway";
 
-            var result = UserSettingsService.GetSettings(null, null, "NO", null);
+            var result = new UserSettings(null, null, "NO", null);
 
             Assert.AreEqual(expected, result.Country.Name);
         }
@@ -33,7 +33,7 @@ namespace Core.Tests.Services
         {
             var westernEurope = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
 
-            var result = UserSettingsService.GetSettings(null, null, null, null);
+            var result = new UserSettings(null, null, null, null);
 
             Assert.AreEqual(westernEurope, result.TimeZone);
         }
@@ -43,7 +43,7 @@ namespace Core.Tests.Services
         {
             var utc = TimeZoneInfo.Utc;
 
-            var result = UserSettingsService.GetSettings(null, null, null, "UTC");
+            var result = new UserSettings(null, null, null, "UTC");
 
             Assert.AreEqual(utc, result.TimeZone);
         }
@@ -53,7 +53,7 @@ namespace Core.Tests.Services
         {
             const int expected = 25;
 
-            var result = UserSettingsService.GetSettings(null, null, null, null);
+            var result = new UserSettings(null, null, null, null);
 
             Assert.AreEqual(expected, result.PayDay);
         }
@@ -63,7 +63,7 @@ namespace Core.Tests.Services
         {
             const int savedPayDay = 24;
 
-            var result = UserSettingsService.GetSettings(savedPayDay, null, null, null);
+            var result = new UserSettings(savedPayDay, null, null, null);
 
             Assert.AreEqual(savedPayDay, result.PayDay);
         }
@@ -73,7 +73,7 @@ namespace Core.Tests.Services
         {
             const PayDayType expected = PayDayType.Monthly;
 
-            var result = UserSettingsService.GetSettings(null, null, null, null);
+            var result = new UserSettings(null, null, null, null);
 
             Assert.AreEqual(expected, result.PayDayType);
         }
@@ -84,7 +84,7 @@ namespace Core.Tests.Services
             const int savedValue = 1;
             const PayDayType expected = PayDayType.Monthly;
 
-            var result = UserSettingsService.GetSettings(null, savedValue, null, null);
+            var result = new UserSettings(null, savedValue, null, null);
 
             Assert.AreEqual(expected, result.PayDayType);
         }
@@ -95,7 +95,7 @@ namespace Core.Tests.Services
             const int savedValue = 2;
             const PayDayType expected = PayDayType.Weekly;
 
-            var result = UserSettingsService.GetSettings(null, savedValue, null, null);
+            var result = new UserSettings(null, savedValue, null, null);
 
             Assert.AreEqual(expected, result.PayDayType);
         }

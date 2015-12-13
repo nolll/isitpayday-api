@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Classes;
 using Core.Services;
 
 namespace Core.UseCases
@@ -7,11 +8,10 @@ namespace Core.UseCases
     {
         public Result Execute(Request request)
         {
-            var payDay = UserSettingsService.GetSelectedPayDay(request.PayDay);
             var utcTime = request.UtcTime;
-            var userSettings = UserSettingsService.GetSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
+            var userSettings = new UserSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
-            var isPayDay = PayDayService.IsPayDay(utcTime, userSettings, payDay);
+            var isPayDay = PayDayService.IsPayDay(utcTime, userSettings);
             return new Result(isPayDay, userTime);
         }
 

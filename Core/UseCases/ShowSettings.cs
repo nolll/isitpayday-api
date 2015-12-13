@@ -26,7 +26,7 @@ namespace Core.UseCases
 
         public Result Execute(Request request)
         {
-            var userSettings = UserSettingsService.GetSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
+            var userSettings = new UserSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
 
             return new Result(
                 userSettings.PayDay,

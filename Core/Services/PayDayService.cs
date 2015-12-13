@@ -6,10 +6,10 @@ namespace Core.Services
 {
     public static class PayDayService
     {
-        public static bool IsPayDay(DateTime utcTime, UserSettings userSettings, int payDay)
+        public static bool IsPayDay(DateTime utcTime, UserSettings userSettings)
         {
             var localTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
-            var actualPayDay = PayDayEvaluator.GetActualPayDay(localTime, payDay);
+            var actualPayDay = PayDayEvaluator.GetActualPayDay(localTime, userSettings.PayDay);
             return localTime.Day == actualPayDay.Day;
         }
     }
