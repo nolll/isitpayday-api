@@ -5,7 +5,7 @@
 <h1>Is it payday?</h1>
 <p class="status"><span>@Model.PayDayString</span></p>
 
-@Html.Partial("SettingsForm", Model.SettingsFormModel)
+@Html.Partial("~/Views/Home/SettingsForm.cshtml", Model.SettingsFormModel)
 
 <p class="footer">
 	@Model.LocalTime

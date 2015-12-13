@@ -13,7 +13,7 @@ namespace Web.Controllers
             var showPayDay = UseCase.ShowPayDay.Execute(payDayRequest);
             var showSettings = UseCase.ShowSettings.Execute();
             var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, change);
-            return View(pageModel);
+            return View("~/Views/Home/Index.cshtml", pageModel);
         }
 
         [HttpPost]
