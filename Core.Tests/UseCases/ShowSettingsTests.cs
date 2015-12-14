@@ -65,19 +65,19 @@ namespace Core.Tests.UseCases
             var request = new ShowSettings.Request(null, null, null, null);
 
             const int expectedCount = 2;
-            const Frequency expectedFirstOption = Frequency.Monthly;
-            const Frequency expectedLastOption = Frequency.Weekly;
+            const Frequency expectedFirstOption = Frequency.Weekly;
+            const Frequency expectedLastOption = Frequency.Monthly;
 
             var sut = GetSut();
             var result = sut.Execute(request);
 
             Assert.AreEqual(expectedCount, result.FrequencyOptions.Count);
-            Assert.AreEqual(expectedFirstOption, result.FrequencyOptions.First());
-            Assert.AreEqual(expectedLastOption, result.FrequencyOptions.Last());
+            Assert.AreEqual(expectedLastOption, result.FrequencyOptions.First());
+            Assert.AreEqual(expectedFirstOption, result.FrequencyOptions.Last());
         }
 
         [Test]
-        public void Execute_ResultContainsCorrectPayDayOptions()
+        public void Execute_ResultContainsCorrectMonthlyPayDayOptions()
         {
             var request = new ShowSettings.Request(null, null, null, null);
 
@@ -88,9 +88,29 @@ namespace Core.Tests.UseCases
             var sut = GetSut();
             var result = sut.Execute(request);
 
-            Assert.AreEqual(expectedCount, result.PayDayOptions.Count);
-            Assert.AreEqual(expectedFirstOption, result.PayDayOptions.First());
-            Assert.AreEqual(expectedLastOption, result.PayDayOptions.Last());
+            Assert.AreEqual(expectedCount, result.MonthlyPayDayOptions.Count);
+            Assert.AreEqual(expectedFirstOption, result.MonthlyPayDayOptions.First());
+            Assert.AreEqual(expectedLastOption, result.MonthlyPayDayOptions.Last());
+        }
+
+        [Test]
+        public void Execute_ResultContainsCorrectWeeklyPayDayOptions()
+        {
+            var request = new ShowSettings.Request(null, null, null, null);
+
+            const int expectedCount = 7;
+
+            var sut = GetSut();
+            var result = sut.Execute(request);
+
+            Assert.AreEqual(expectedCount, result.WeeklyPayDayOptions.Count);
+            Assert.AreEqual(Weekday.Monday, result.WeeklyPayDayOptions[0]);
+            Assert.AreEqual(Weekday.Tuesday, result.WeeklyPayDayOptions[1]);
+            Assert.AreEqual(Weekday.Wednesday, result.WeeklyPayDayOptions[2]);
+            Assert.AreEqual(Weekday.Thursday, result.WeeklyPayDayOptions[3]);
+            Assert.AreEqual(Weekday.Friday, result.WeeklyPayDayOptions[4]);
+            Assert.AreEqual(Weekday.Saturday, result.WeeklyPayDayOptions[5]);
+            Assert.AreEqual(Weekday.Sunday, result.WeeklyPayDayOptions[6]);
         }
 
         [Test]

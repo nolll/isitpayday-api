@@ -18,12 +18,13 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string change, SettingsPostModel postModel)
+        public ActionResult Index(SettingsPostModel postModel)
         {
-            var saveSettingsRequest = new SaveSettingsRequest(postModel.CountryId, postModel.TimeZoneId, postModel.PayDay);
+            var settingsRequest = new ShowSettings.Request(PayDay, Frequency, CountryCode, TimezoneId);
+            var showSettings = UseCase.ShowSettings.Execute(settingsRequest);
+            var saveSettingsRequest = new SaveSettingsRequest(showSettings.Country.Id, postModel.CountryId, showSettings.TimeZone.Id, postModel.TimeZoneId, showSettings.PayDay, postModel.PayDay, (int)showSettings.Frequency, postModel.FrequencyId);
             UseCase.SaveSettings.Execute(saveSettingsRequest);
             return RedirectToAction("Index");
         }
-
     }
 }

@@ -113,6 +113,7 @@
     <Compile Include="CookieContainer.cs" />
     <Compile Include="CookieNames.cs" />
     <Compile Include="CookieStorage.cs" />
+    <Compile Include="CustomSelectListItem.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />

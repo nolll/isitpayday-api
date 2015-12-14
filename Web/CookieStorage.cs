@@ -10,6 +10,11 @@ namespace Web
             WebContext.SetCookie(CookieNames.PayDay, payDay.ToString(CultureInfo.InvariantCulture));
         }
 
+        public void SetFrequency(int frequency)
+        {
+            WebContext.SetCookie(CookieNames.Frequency, frequency.ToString(CultureInfo.InvariantCulture));
+        }
+
         public void SetCountry(string countryId)
         {
             WebContext.SetCookie(CookieNames.Country, countryId);

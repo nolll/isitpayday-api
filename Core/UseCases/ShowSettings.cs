@@ -33,13 +33,14 @@ namespace Core.UseCases
                 userSettings.Country,
                 userSettings.TimeZone,
                 userSettings.Frequency,
-                PayDayOptions,
+                MonthlyPayDayOptions,
+                WeeklyPayDayOptions,
                 FrequencyOptions,
                 CountryOptions,
                 TimeZoneOptions);
         }
 
-        private IList<int> PayDayOptions
+        private IList<int> MonthlyPayDayOptions
         {
             get
             {
@@ -52,6 +53,17 @@ namespace Core.UseCases
             }
         }
 
+        private IList<Weekday> WeeklyPayDayOptions => new List<Weekday>
+        {
+            Weekday.Monday,
+            Weekday.Tuesday,
+            Weekday.Wednesday,
+            Weekday.Thursday,
+            Weekday.Friday,
+            Weekday.Saturday,
+            Weekday.Sunday
+        };
+
         private IList<Frequency> FrequencyOptions => new List<Frequency> { Frequency.Monthly, Frequency.Weekly };
         private IList<Country> CountryOptions => CountryService.GetCountries().ToList();
         private IList<TimeZoneInfo> TimeZoneOptions => TimeZoneInfo.GetSystemTimeZones().ToList();
@@ -62,7 +74,8 @@ namespace Core.UseCases
             public Country Country { get; }
             public TimeZoneInfo TimeZone { get; }
             public Frequency Frequency { get; }
-            public IList<int> PayDayOptions { get; }
+            public IList<int> MonthlyPayDayOptions { get; }
+            public IList<Weekday> WeeklyPayDayOptions { get; }
             public IList<Frequency> FrequencyOptions { get; }
             public IList<Country> CountryOptions { get; }
             public IList<TimeZoneInfo> TimeZoneOptions { get; }
@@ -72,7 +85,8 @@ namespace Core.UseCases
                 Country country,
                 TimeZoneInfo timeZone,
                 Frequency frequency,
-                IList<int> payDayOptions,
+                IList<int> monthlyPayDayOptions,
+                IList<Weekday> weeklyPayDayOptions,
                 IList<Frequency> frequencyOptions,
                 IList<Country> countryOptions,
                 IList<TimeZoneInfo> timeZoneOptions)
@@ -81,7 +95,8 @@ namespace Core.UseCases
                 Country = country;
                 TimeZone = timeZone;
                 Frequency = frequency;
-                PayDayOptions = payDayOptions;
+                MonthlyPayDayOptions = monthlyPayDayOptions;
+                WeeklyPayDayOptions = weeklyPayDayOptions;
                 FrequencyOptions = frequencyOptions;
                 CountryOptions = countryOptions;
                 TimeZoneOptions = timeZoneOptions;

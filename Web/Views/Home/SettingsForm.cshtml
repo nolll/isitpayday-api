@@ -42,13 +42,13 @@
 	            @if (Model.ShowFrequencyForm)
 	            {
 	                <p>
-	                    @Html.DropDownListFor(model => model.Frequency, Model.FrequencyItems, new {@id = "input_frequency"})
+	                    @Html.DropDownListFor(model => model.FrequencyId, Model.FrequencyItems, new {@id = "input_frequency"})
 	                </p>
 	            }
 	            else
 	            {
 	                <p>
-	                    @Model.Frequency
+	                    @Model.FrequencyName
 	                    <a href="/?change=frequency" class="change-frequency">Change</a>
 	                </p>
 	            }

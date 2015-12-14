@@ -14,15 +14,29 @@ namespace Web.Tests.ModelFactories
     public class SettingsFormModelFactoryTests : MockContainer
     {
         [Test]
+        public void PayDay_WithMonthlyPayDay_IsSetFromSelectedPayDay()
+        {
+            var activeForm = It.IsAny<string>();
+            const int selectedPayDay = 1;
+            const string expected = "1st";
+            var showSettingsResult = GetShowSettingsResult(selectedPayDay, frequency: Frequency.Monthly);
+
+            var result = new SettingsFormModel(showSettingsResult, activeForm);
+
+            Assert.AreEqual(expected, result.PayDay);
+        }
+
+        [Test]
         public void PayDay_WithPayDay_IsSetFromSelectedPayDay()
         {
             var activeForm = It.IsAny<string>();
             const int selectedPayDay = 1;
-            var showSettingsResult = GetShowSettingsResult(selectedPayDay);
+            const string expected = "Monday";
+            var showSettingsResult = GetShowSettingsResult(selectedPayDay, frequency: Frequency.Weekly);
 
             var result = new SettingsFormModel(showSettingsResult, activeForm);
 
-            Assert.AreEqual(selectedPayDay, result.PayDay);
+            Assert.AreEqual(expected, result.PayDay);
         }
 
         [Test]
@@ -134,16 +148,17 @@ namespace Web.Tests.ModelFactories
         {
             var activeForm = It.IsAny<string>();
             const int firstValue = 1;
-            const string expected = "1";
+            const string expectedText = "1st";
+            const string expectedValue = "1";
             const int expectedLength = 1;
             var payDayOptions = new List<int> {firstValue};
-            var showSettingsResult = GetShowSettingsResult(payDayOptions: payDayOptions);
+            var showSettingsResult = GetShowSettingsResult(monthlyPayDayOptions: payDayOptions);
 
             var result = new SettingsFormModel(showSettingsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.PayDayItems.Count);
-            Assert.AreEqual(expected, result.PayDayItems.First().Value);
-            Assert.AreEqual(expected, result.PayDayItems.First().Text);
+            Assert.AreEqual(expectedValue, result.PayDayItems.First().Value);
+            Assert.AreEqual(expectedText, result.PayDayItems.First().Text);
         }
 
         [Test]
@@ -168,7 +183,8 @@ namespace Web.Tests.ModelFactories
             Country country = null,
             TimeZoneInfo timeZone = null,
             Frequency? frequency = null,
-            IList<int> payDayOptions = null,
+            IList<int> monthlyPayDayOptions = null,
+            IList<Weekday> weeklyPayDayOptions = null,
             IList<Frequency> frequencyOptions = null,
             IList<Country> countryOptions = null,
             IList<TimeZoneInfo> timeZoneOptions = null)
@@ -178,7 +194,8 @@ namespace Web.Tests.ModelFactories
                 country ?? new CountryInTest(),
                 timeZone ?? TimeZoneInfo.Utc,
                 frequency ?? Frequency.Monthly,
-                payDayOptions ?? new List<int>(),
+                monthlyPayDayOptions ?? new List<int>(),
+                weeklyPayDayOptions ?? new List<Weekday>(),
                 frequencyOptions ?? new List<Frequency>(),
                 countryOptions ?? new List<Country>(),
                 timeZoneOptions ?? new List<TimeZoneInfo>());

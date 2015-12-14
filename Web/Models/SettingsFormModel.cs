@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web.Mvc;
 using Core.Classes;
 using Core.UseCases;
 
@@ -15,33 +14,35 @@ namespace Web.Models
         private const string FrequencyFormName = "frequency";
         private const string PayDayFormName = "payday";
 
-        public int? PayDay { get; }
-        public string Frequency { get; }
+        public string PayDay { get; }
+        public string FrequencyName { get; }
+        public int FrequencyId { get; }
         public string TimeZoneId { get; }
         public string CountryId { get; }
         public string CountryName { get; }
         public string TimeZoneName { get; }
         public bool ShowCountryForm { get; }
-        public List<SelectListItem> PayDayItems { get; }
+        public IList<CustomSelectListItem> PayDayItems { get; }
         public bool ShowTimeZoneForm { get; }
-        public List<SelectListItem> TimeZoneItems { get; }
+        public IList<CustomSelectListItem> TimeZoneItems { get; }
         public bool ShowPayDayForm { get; }
-        public List<SelectListItem> CountryItems { get; }
+        public IList<CustomSelectListItem> CountryItems { get; }
         public bool ShowFrequencyForm { get; }
-        public List<SelectListItem> FrequencyItems { get; }
+        public IList<CustomSelectListItem> FrequencyItems { get; }
 
         public SettingsFormModel(
             ShowSettings.Result showSettingsResult,
             string activeForm)
         {
-            PayDay = showSettingsResult.PayDay;
-            Frequency = GetFrequencyText(showSettingsResult.Frequency);
+            PayDay = showSettingsResult.Frequency == Frequency.Monthly ? GetPayDayName(showSettingsResult.PayDay) : ((Weekday)showSettingsResult.PayDay).ToString();
+            FrequencyName = GetFrequencyText(showSettingsResult.Frequency);
+            FrequencyId = (int)showSettingsResult.Frequency;
             TimeZoneId = showSettingsResult.TimeZone.Id;
             CountryId = showSettingsResult.Country.Id;
             CountryName = showSettingsResult.Country.Name;
             TimeZoneName = showSettingsResult.TimeZone.StandardName;
             ShowCountryForm = activeForm == CountryFormName;
-            PayDayItems = GetPayDayItems(showSettingsResult.PayDayOptions);
+            PayDayItems = GetPayDayItems(showSettingsResult);
             ShowTimeZoneForm = activeForm == TimeZoneFormName;
             TimeZoneItems = GetTimezoneItems(showSettingsResult.TimeZoneOptions);
             ShowPayDayForm = activeForm == PayDayFormName;
@@ -50,19 +51,39 @@ namespace Web.Models
             FrequencyItems = GetFrequencyItems(showSettingsResult.FrequencyOptions);
         }
 
-        private List<SelectListItem> GetPayDayItems(IEnumerable<int> daysInMonth)
+        private IList<CustomSelectListItem> GetPayDayItems(ShowSettings.Result showSettingsResult)
         {
-            return daysInMonth.Select(c => new SelectListItem { Text = c.ToString(CultureInfo.InvariantCulture), Value = c.ToString(CultureInfo.InvariantCulture) }).ToList();
+            if(showSettingsResult.Frequency == Frequency.Weekly)
+                return showSettingsResult.WeeklyPayDayOptions.Select(o => new CustomSelectListItem(o.ToString(), (int)o)).ToList();
+            return showSettingsResult.MonthlyPayDayOptions.Select(o => new CustomSelectListItem(GetPayDayName(o), o)).ToList();
         }
 
-        private List<SelectListItem> GetFrequencyItems(IList<Frequency> frequencies)
+        private string GetPayDayName(int payDay)
         {
-            return frequencies.Select(c => new SelectListItem { Text = GetFrequencyText(c), Value = GetDropDownValue(c) }).ToList();
+            var strPayDay = payDay.ToString(CultureInfo.InvariantCulture);
+            if (strPayDay.EndsWith("11"))
+                return $"{payDay}th";
+            if (strPayDay.EndsWith("12"))
+                return $"{payDay}th";
+            if (strPayDay.EndsWith("13"))
+                return $"{payDay}th";
+            if (strPayDay.EndsWith("1"))
+                return $"{payDay}st";
+            if (strPayDay.EndsWith("2"))
+                return $"{payDay}nd";
+            if (strPayDay.EndsWith("3"))
+                return $"{payDay}rd";
+            return $"{payDay}th";
+        }
+
+        private List<CustomSelectListItem> GetFrequencyItems(IList<Frequency> frequencies)
+        {
+            return frequencies.Select(c => new CustomSelectListItem(GetFrequencyText(c), GetDropDownValue(c))).ToList();
         }
 
         private string GetFrequencyText(Frequency frequency)
         {
-            return frequency == Core.Classes.Frequency.Weekly ? "Weekly" : "Monthly";
+            return frequency == Frequency.Weekly ? "Weekly" : "Monthly";
         }
 
         private string GetDropDownValue(Frequency frequency)
@@ -70,14 +91,14 @@ namespace Web.Models
             return ((int)frequency).ToString(CultureInfo.InvariantCulture);
         }
 
-        private List<SelectListItem> GetTimezoneItems(IEnumerable<TimeZoneInfo> timeZones)
+        private List<CustomSelectListItem> GetTimezoneItems(IEnumerable<TimeZoneInfo> timeZones)
         {
-            return timeZones.Select(t => new SelectListItem { Text = t.DisplayName, Value = t.Id }).ToList();
+            return timeZones.Select(t => new CustomSelectListItem(t.DisplayName, t.Id)).ToList();
         }
 
-        private List<SelectListItem> GetCountryItems(IEnumerable<Country> countries)
+        private List<CustomSelectListItem> GetCountryItems(IEnumerable<Country> countries)
         {
-            return countries.Select(c => new SelectListItem { Text = c.Name, Value = c.Id }).ToList();
+            return countries.Select(c => new CustomSelectListItem(c.Name, c.Id)).ToList();
         }
     }
 }
