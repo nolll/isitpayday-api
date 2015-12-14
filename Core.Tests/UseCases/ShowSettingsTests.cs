@@ -49,14 +49,14 @@ namespace Core.Tests.UseCases
 
         [TestCase(1, Frequency.Monthly)]
         [TestCase(2, Frequency.Weekly)]
-        public void Execute_ResultContainsSelectedFrequency(int intType, Frequency enumType)
+        public void Execute_ResultContainsSelectedFrequency(int intFrequency, Frequency enumFrequency)
         {
-            var request = new ShowSettings.Request(null, intType, null, null);
+            var request = new ShowSettings.Request(null, intFrequency, null, null);
 
             var sut = GetSut();
             var result = sut.Execute(request);
 
-            Assert.AreEqual(enumType, result.Frequency);
+            Assert.AreEqual(enumFrequency, result.Frequency);
         }
 
         [Test]
