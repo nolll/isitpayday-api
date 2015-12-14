@@ -158,9 +158,9 @@ namespace Web.Tests.ModelFactories
 
             var result = new SettingsFormModel(showSettingsResult, activeForm);
 
-            Assert.AreEqual(expectedLength, result.PayDayTypeItems.Count);
-            Assert.AreEqual(firstValue, result.PayDayTypeItems.First().Value);
-            Assert.AreEqual(firstText, result.PayDayTypeItems.First().Text);
+            Assert.AreEqual(expectedLength, result.FrequencyItems.Count);
+            Assert.AreEqual(firstValue, result.FrequencyItems.First().Value);
+            Assert.AreEqual(firstText, result.FrequencyItems.First().Text);
         }
 
         private static ShowSettings.Result GetShowSettingsResult(

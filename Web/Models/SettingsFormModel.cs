@@ -12,9 +12,11 @@ namespace Web.Models
     {
         private const string CountryFormName = "country";
         private const string TimeZoneFormName = "timezone";
+        private const string FrequencyFormName = "frequency";
         private const string PayDayFormName = "payday";
 
         public int? PayDay { get; }
+        public string Frequency { get; }
         public string TimeZoneId { get; }
         public string CountryId { get; }
         public string CountryName { get; }
@@ -25,13 +27,15 @@ namespace Web.Models
         public List<SelectListItem> TimeZoneItems { get; }
         public bool ShowPayDayForm { get; }
         public List<SelectListItem> CountryItems { get; }
-        public List<SelectListItem> PayDayTypeItems { get; }
+        public bool ShowFrequencyForm { get; }
+        public List<SelectListItem> FrequencyItems { get; }
 
         public SettingsFormModel(
             ShowSettings.Result showSettingsResult,
             string activeForm)
         {
             PayDay = showSettingsResult.PayDay;
+            Frequency = GetFrequencyText(showSettingsResult.PayDayType);
             TimeZoneId = showSettingsResult.TimeZone.Id;
             CountryId = showSettingsResult.Country.Id;
             CountryName = showSettingsResult.Country.Name;
@@ -42,7 +46,8 @@ namespace Web.Models
             TimeZoneItems = GetTimezoneItems(showSettingsResult.TimeZoneOptions);
             ShowPayDayForm = activeForm == PayDayFormName;
             CountryItems = GetCountryItems(showSettingsResult.CountryOptions);
-            PayDayTypeItems = GetPayDayTypeItems(showSettingsResult.PayDayTypeOptions);
+            ShowFrequencyForm = activeForm == FrequencyFormName;
+            FrequencyItems = GetFrequencyItems(showSettingsResult.FrequencyOptions);
         }
 
         private List<SelectListItem> GetPayDayItems(IEnumerable<int> daysInMonth)
@@ -50,12 +55,12 @@ namespace Web.Models
             return daysInMonth.Select(c => new SelectListItem { Text = c.ToString(CultureInfo.InvariantCulture), Value = c.ToString(CultureInfo.InvariantCulture) }).ToList();
         }
 
-        private List<SelectListItem> GetPayDayTypeItems(IList<PayDayType> payDayTypes)
+        private List<SelectListItem> GetFrequencyItems(IList<PayDayType> payDayTypes)
         {
-            return payDayTypes.Select(c => new SelectListItem { Text = GetDropDownText(c), Value = GetDropDownValue(c) }).ToList();
+            return payDayTypes.Select(c => new SelectListItem { Text = GetFrequencyText(c), Value = GetDropDownValue(c) }).ToList();
         }
 
-        private string GetDropDownText(PayDayType payDayType)
+        private string GetFrequencyText(PayDayType payDayType)
         {
             return payDayType == PayDayType.Weekly ? "Weekly" : "Monthly";
         }

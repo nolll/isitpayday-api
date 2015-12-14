@@ -63,7 +63,7 @@ namespace Core.UseCases
             public TimeZoneInfo TimeZone { get; }
             public PayDayType PayDayType { get; }
             public IList<int> PayDayOptions { get; }
-            public IList<PayDayType> PayDayTypeOptions { get; }
+            public IList<PayDayType> FrequencyOptions { get; }
             public IList<Country> CountryOptions { get; }
             public IList<TimeZoneInfo> TimeZoneOptions { get; }
 
@@ -73,7 +73,7 @@ namespace Core.UseCases
                 TimeZoneInfo timeZone,
                 PayDayType payDayType,
                 IList<int> payDayOptions,
-                IList<PayDayType> payDayTypeOptions,
+                IList<PayDayType> frequencyOptions,
                 IList<Country> countryOptions,
                 IList<TimeZoneInfo> timeZoneOptions)
             {
@@ -82,7 +82,7 @@ namespace Core.UseCases
                 TimeZone = timeZone;
                 PayDayType = payDayType;
                 PayDayOptions = payDayOptions;
-                PayDayTypeOptions = payDayTypeOptions;
+                FrequencyOptions = frequencyOptions;
                 CountryOptions = countryOptions;
                 TimeZoneOptions = timeZoneOptions;
             }

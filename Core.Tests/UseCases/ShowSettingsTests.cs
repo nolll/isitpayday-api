@@ -71,9 +71,9 @@ namespace Core.Tests.UseCases
             var sut = GetSut();
             var result = sut.Execute(request);
 
-            Assert.AreEqual(expectedCount, result.PayDayTypeOptions.Count);
-            Assert.AreEqual(expectedFirstOption, result.PayDayTypeOptions.First());
-            Assert.AreEqual(expectedLastOption, result.PayDayTypeOptions.Last());
+            Assert.AreEqual(expectedCount, result.FrequencyOptions.Count);
+            Assert.AreEqual(expectedFirstOption, result.FrequencyOptions.First());
+            Assert.AreEqual(expectedLastOption, result.FrequencyOptions.Last());
         }
 
         [Test]
