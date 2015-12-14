@@ -32,7 +32,7 @@ namespace Core.DateEvaluators
                 get
                 {
                     var localTime = TimeZoneInfo.ConvertTime(_utcTime, _timezone);
-                    var payDayDate = GetNextPayDay(localTime);
+                    var payDayDate = GetNextPayDate(localTime);
                     while (BlockedEvaluator.IsBlocked(payDayDate))
                     {
                         payDayDate = payDayDate.AddDays(-1);
@@ -41,13 +41,42 @@ namespace Core.DateEvaluators
                 }
             }
 
-            private DateTime GetNextPayDay(DateTime localTime)
+            private DateTime GetNextPayDate(DateTime localTime)
             {
-                while (localTime.Day != _payDay)
+                var payDay = AdjustPayDayForShortMonths(localTime);
+                return FindPayDate(localTime, payDay);
+            }
+
+            private DateTime FindPayDate(DateTime localTime, int payDay)
+            {
+                while (localTime.Day != payDay)
                 {
                     localTime = localTime.AddDays(1);
                 }
                 return localTime;
+            }
+
+            private int AdjustPayDayForShortMonths(DateTime localTime)
+            {
+                var payDay = _payDay;
+                while (!IsMonthLongEnough(localTime, payDay))
+                {
+                    payDay--;
+                }
+                return payDay;
+            }
+
+            private bool IsMonthLongEnough(DateTime time, int payDay)
+            {
+                try
+                {
+                    var foo = new DateTime(time.Year, time.Month, payDay);
+                    return true;
+                }
+                catch(Exception)
+                {
+                    return false;
+                }
             }
         }
 

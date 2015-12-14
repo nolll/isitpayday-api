@@ -8,7 +8,7 @@ namespace Core.Tests.UseCases
     public class MonthlyPayDayTests : MockContainer
     {
         [Test]
-        public void Execute_TodayIsPayDay_ResultIsCorrect()
+        public void Execute_TodayIsPayDay_IsTrue()
         {
             var time = new DateTime(2000, 1, 25, 12, 0, 0, DateTimeKind.Utc);
             var request = new ShowPayDay.Request(25, null, null, "UTC", time);
@@ -20,7 +20,7 @@ namespace Core.Tests.UseCases
         }
 
         [Test]
-        public void Execute_TodayIsNotPayDay_ResultIsCorrect()
+        public void Execute_TodayIsNotPayDay_IsFalse()
         {
             var time = new DateTime(2000, 1, 24, 12, 0, 0, DateTimeKind.Utc);
             var request = new ShowPayDay.Request(25, null, null, "UTC", time);
@@ -29,6 +29,17 @@ namespace Core.Tests.UseCases
             var result = sut.Execute(request);
 
             Assert.IsFalse(result.IsPayDay);
+        }
+
+        [Test]
+        public void Execute_TodayIsNotPayDayButMonthIsTooShortAndFallbacks_IsTrue()
+        {
+            var request = new ShowPayDay.Request(31, null, null, "UTC", TestData.Dates.LeapYearFeb29th);
+
+            var sut = GetSut();
+            var result = sut.Execute(request);
+
+            Assert.IsTrue(result.IsPayDay);
         }
 
         [Test]

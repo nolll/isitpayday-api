@@ -34,7 +34,7 @@ namespace Web.Models
             ShowSettings.Result showSettingsResult,
             string activeForm)
         {
-            PayDay = showSettingsResult.Frequency == Frequency.Monthly ? GetPayDayName(showSettingsResult.PayDay) : ((Weekday)showSettingsResult.PayDay).ToString();
+            PayDay = showSettingsResult.Frequency == Frequency.Monthly ? new NthFormatter(showSettingsResult.PayDay).Format() : ((Weekday)showSettingsResult.PayDay).ToString();
             FrequencyName = GetFrequencyText(showSettingsResult.Frequency);
             FrequencyId = (int)showSettingsResult.Frequency;
             TimeZoneId = showSettingsResult.TimeZone.Id;
@@ -55,25 +55,7 @@ namespace Web.Models
         {
             if(showSettingsResult.Frequency == Frequency.Weekly)
                 return showSettingsResult.WeeklyPayDayOptions.Select(o => new CustomSelectListItem(o.ToString(), (int)o)).ToList();
-            return showSettingsResult.MonthlyPayDayOptions.Select(o => new CustomSelectListItem(GetPayDayName(o), o)).ToList();
-        }
-
-        private string GetPayDayName(int payDay)
-        {
-            var strPayDay = payDay.ToString(CultureInfo.InvariantCulture);
-            if (strPayDay.EndsWith("11"))
-                return $"{payDay}th";
-            if (strPayDay.EndsWith("12"))
-                return $"{payDay}th";
-            if (strPayDay.EndsWith("13"))
-                return $"{payDay}th";
-            if (strPayDay.EndsWith("1"))
-                return $"{payDay}st";
-            if (strPayDay.EndsWith("2"))
-                return $"{payDay}nd";
-            if (strPayDay.EndsWith("3"))
-                return $"{payDay}rd";
-            return $"{payDay}th";
+            return showSettingsResult.MonthlyPayDayOptions.Select(o => new CustomSelectListItem(new NthFormatter(o).Format(), o)).ToList();
         }
 
         private List<CustomSelectListItem> GetFrequencyItems(IList<Frequency> frequencies)
