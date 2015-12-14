@@ -1,6 +1,6 @@
 ﻿using System;
 using Core.Classes;
-using Core.Services;
+using Core.DateEvaluators;
 
 namespace Core.UseCases
 {
@@ -11,7 +11,8 @@ namespace Core.UseCases
             var utcTime = request.UtcTime;
             var userSettings = new UserSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
-            var isPayDay = PayDayService.IsPayDay(utcTime, userSettings);
+            var evaluator = PayDayEvaluator.Create(userSettings.PayDayType, utcTime, userSettings.TimeZone, userSettings.PayDay);
+            var isPayDay = evaluator.IsPayDay;
             return new Result(isPayDay, userTime);
         }
 

@@ -42,6 +42,7 @@
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Classes\PayDayType.cs" />
     <Compile Include="Classes\UserSettings.cs" />
+    <Compile Include="Classes\Weekday.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
     <Compile Include="DateEvaluators\ExcludedEvaluator.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
@@ -49,7 +50,6 @@
     <Compile Include="UseCases\ShowPayDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CountryService.cs" />
-    <Compile Include="Services\PayDayService.cs" />
     <Compile Include="Storage\Interfaces\IStorage.cs" />
     <Compile Include="UseCases\SaveSettings.cs" />
     <Compile Include="UseCases\SaveSettingsRequest.cs" />

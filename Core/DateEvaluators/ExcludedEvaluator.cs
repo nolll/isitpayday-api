@@ -7,7 +7,7 @@ namespace Core.DateEvaluators
     {
         public static bool IsExcluded(DateTime userTime)
         {
-            return GetExcludedDates(userTime.Year).Contains(userTime);
+            return GetExcludedDates(userTime.Year).Contains(userTime.Date);
         }
 
         private static IList<DateTime> GetExcludedDates(int year)
