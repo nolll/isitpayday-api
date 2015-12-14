@@ -147,14 +147,14 @@ namespace Web.Tests.ModelFactories
         }
 
         [Test]
-        public void PayDayTypeItems_ContainsCorrectItems()
+        public void FrequencyItems_ContainsCorrectItems()
         {
             var activeForm = It.IsAny<string>();
-            var payDayTypes = new List<PayDayType> {PayDayType.Monthly};
+            var frequencies = new List<Frequency> {Frequency.Monthly};
             const string firstValue = "1";
             const string firstText = "Monthly";
             const int expectedLength = 1;
-            var showSettingsResult = GetShowSettingsResult(payDayTypeOptions: payDayTypes);
+            var showSettingsResult = GetShowSettingsResult(frequencyOptions: frequencies);
 
             var result = new SettingsFormModel(showSettingsResult, activeForm);
 
@@ -167,9 +167,9 @@ namespace Web.Tests.ModelFactories
             int? payDay = null,
             Country country = null,
             TimeZoneInfo timeZone = null,
-            PayDayType? payDayType = null,
+            Frequency? frequency = null,
             IList<int> payDayOptions = null,
-            IList<PayDayType> payDayTypeOptions = null,
+            IList<Frequency> frequencyOptions = null,
             IList<Country> countryOptions = null,
             IList<TimeZoneInfo> timeZoneOptions = null)
         {
@@ -177,9 +177,9 @@ namespace Web.Tests.ModelFactories
                 payDay ?? It.IsAny<int>(),
                 country ?? new CountryInTest(),
                 timeZone ?? TimeZoneInfo.Utc,
-                payDayType ?? PayDayType.Monthly,
+                frequency ?? Frequency.Monthly,
                 payDayOptions ?? new List<int>(),
-                payDayTypeOptions ?? new List<PayDayType>(),
+                frequencyOptions ?? new List<Frequency>(),
                 countryOptions ?? new List<Country>(),
                 timeZoneOptions ?? new List<TimeZoneInfo>());
         }

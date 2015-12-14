@@ -47,26 +47,26 @@ namespace Core.Tests.UseCases
             Assert.AreEqual(payDay, result.PayDay);
         }
 
-        [TestCase(1, PayDayType.Monthly)]
-        [TestCase(2, PayDayType.Weekly)]
-        public void Execute_ResultContainsSelectedPayDayType(int intType, PayDayType enumType)
+        [TestCase(1, Frequency.Monthly)]
+        [TestCase(2, Frequency.Weekly)]
+        public void Execute_ResultContainsSelectedFrequency(int intType, Frequency enumType)
         {
             var request = new ShowSettings.Request(null, intType, null, null);
 
             var sut = GetSut();
             var result = sut.Execute(request);
 
-            Assert.AreEqual(enumType, result.PayDayType);
+            Assert.AreEqual(enumType, result.Frequency);
         }
 
         [Test]
-        public void Execute_ResultContainsCorrectPayDayTypeOptions()
+        public void Execute_ResultContainsCorrectFrequencyOptions()
         {
             var request = new ShowSettings.Request(null, null, null, null);
 
             const int expectedCount = 2;
-            const PayDayType expectedFirstOption = PayDayType.Monthly;
-            const PayDayType expectedLastOption = PayDayType.Weekly;
+            const Frequency expectedFirstOption = Frequency.Monthly;
+            const Frequency expectedLastOption = Frequency.Weekly;
 
             var sut = GetSut();
             var result = sut.Execute(request);

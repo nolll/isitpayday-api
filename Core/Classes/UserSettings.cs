@@ -7,19 +7,19 @@ namespace Core.Classes
     public class UserSettings
     {
         private const int DefaultPayDay = 25;
-        private const PayDayType DefaultPayDayType = PayDayType.Monthly;
+        private const Frequency DefaultFrequency = Frequency.Monthly;
         private const string DefaultCountryCode = "SE";
         private const string DefaultTimezone = "W. Europe Standard Time";
         
         public int PayDay { get; }
-        public PayDayType PayDayType { get; }
+        public Frequency Frequency { get; }
         public Country Country { get; }
         public TimeZoneInfo TimeZone { get; }
 
-        public UserSettings(int? payDay, int? payDayType, string countryCode, string timezoneId)
+        public UserSettings(int? payDay, int? frequency, string countryCode, string timezoneId)
         {
             PayDay = GetSelectedPayDay(payDay);
-            PayDayType = GetSelectedPayDayType(payDayType);
+            Frequency = GetSelectedFrequency(frequency);
             Country = GetCountry(countryCode);
             TimeZone = GetTimeZone(timezoneId);
         }
@@ -41,11 +41,11 @@ namespace Core.Classes
             return payDay ?? DefaultPayDay;
         }
 
-        private static PayDayType GetSelectedPayDayType(int? payDayType)
+        private static Frequency GetSelectedFrequency(int? frequency)
         {
-            if (!payDayType.HasValue)
-                return DefaultPayDayType;
-            return payDayType.Value == 2 ? PayDayType.Weekly : PayDayType.Monthly;
+            if (!frequency.HasValue)
+                return DefaultFrequency;
+            return frequency.Value == 2 ? Frequency.Weekly : Frequency.Monthly;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Web.Controllers
         protected static bool IsInProduction => !WebContext.Host.EndsWith("lan");
         protected static int? PayDay => CookieContainer.PayDay;
         protected static string CountryCode => CookieContainer.CountryCode;
-        protected static int? PayDayType => CookieContainer.PayDayType;
+        protected static int? Frequency => CookieContainer.Frequency;
         protected static string TimezoneId => CookieContainer.TimezoneId;
 
         protected BaseController()

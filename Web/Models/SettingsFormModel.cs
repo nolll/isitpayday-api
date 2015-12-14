@@ -35,7 +35,7 @@ namespace Web.Models
             string activeForm)
         {
             PayDay = showSettingsResult.PayDay;
-            Frequency = GetFrequencyText(showSettingsResult.PayDayType);
+            Frequency = GetFrequencyText(showSettingsResult.Frequency);
             TimeZoneId = showSettingsResult.TimeZone.Id;
             CountryId = showSettingsResult.Country.Id;
             CountryName = showSettingsResult.Country.Name;
@@ -55,19 +55,19 @@ namespace Web.Models
             return daysInMonth.Select(c => new SelectListItem { Text = c.ToString(CultureInfo.InvariantCulture), Value = c.ToString(CultureInfo.InvariantCulture) }).ToList();
         }
 
-        private List<SelectListItem> GetFrequencyItems(IList<PayDayType> payDayTypes)
+        private List<SelectListItem> GetFrequencyItems(IList<Frequency> frequencies)
         {
-            return payDayTypes.Select(c => new SelectListItem { Text = GetFrequencyText(c), Value = GetDropDownValue(c) }).ToList();
+            return frequencies.Select(c => new SelectListItem { Text = GetFrequencyText(c), Value = GetDropDownValue(c) }).ToList();
         }
 
-        private string GetFrequencyText(PayDayType payDayType)
+        private string GetFrequencyText(Frequency frequency)
         {
-            return payDayType == PayDayType.Weekly ? "Weekly" : "Monthly";
+            return frequency == Core.Classes.Frequency.Weekly ? "Weekly" : "Monthly";
         }
 
-        private string GetDropDownValue(PayDayType payDayType)
+        private string GetDropDownValue(Frequency frequency)
         {
-            return ((int)payDayType).ToString(CultureInfo.InvariantCulture);
+            return ((int)frequency).ToString(CultureInfo.InvariantCulture);
         }
 
         private List<SelectListItem> GetTimezoneItems(IEnumerable<TimeZoneInfo> timeZones)

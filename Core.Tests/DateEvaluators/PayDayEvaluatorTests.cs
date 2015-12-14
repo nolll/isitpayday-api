@@ -14,7 +14,7 @@ namespace Core.Tests.DateEvaluators
             var date = new DateTime(2015, 1, 2, 12, 0, 0, DateTimeKind.Utc);
             const int payDay = 2;
 
-            var evaluator = PayDayEvaluator.Create(PayDayType.Monthly, date, TimeZoneInfo.Utc, payDay);
+            var evaluator = PayDayEvaluator.Create(Frequency.Monthly, date, TimeZoneInfo.Utc, payDay);
             var result = evaluator.IsPayDay;
 
             Assert.IsTrue(result);
@@ -26,7 +26,7 @@ namespace Core.Tests.DateEvaluators
             var date = new DateTime(2015, 1, 2, 12, 0, 0, DateTimeKind.Utc);
             const int payDay = 3;
 
-            var evaluator = PayDayEvaluator.Create(PayDayType.Monthly, date, TimeZoneInfo.Utc, payDay);
+            var evaluator = PayDayEvaluator.Create(Frequency.Monthly, date, TimeZoneInfo.Utc, payDay);
             var result = evaluator.IsPayDay;
 
             Assert.IsTrue(result);
@@ -38,7 +38,7 @@ namespace Core.Tests.DateEvaluators
             var date = new DateTime(2015, 1, 2, 12, 0, 0, DateTimeKind.Utc);
             const int payDay = 4;
 
-            var evaluator = PayDayEvaluator.Create(PayDayType.Monthly, date, TimeZoneInfo.Utc, payDay);
+            var evaluator = PayDayEvaluator.Create(Frequency.Monthly, date, TimeZoneInfo.Utc, payDay);
             var result = evaluator.IsPayDay;
 
             Assert.IsTrue(result);

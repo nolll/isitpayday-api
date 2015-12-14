@@ -9,9 +9,9 @@ namespace Web.Controllers
     {
         public ActionResult Index(string change)
         {
-            var payDayRequest = new ShowPayDay.Request(PayDay, PayDayType, CountryCode, TimezoneId, DateTime.UtcNow);
+            var payDayRequest = new ShowPayDay.Request(PayDay, Frequency, CountryCode, TimezoneId, DateTime.UtcNow);
             var showPayDay = UseCase.ShowPayDay.Execute(payDayRequest);
-            var settingsRequest = new ShowSettings.Request(PayDay, PayDayType, CountryCode, TimezoneId);
+            var settingsRequest = new ShowSettings.Request(PayDay, Frequency, CountryCode, TimezoneId);
             var showSettings = UseCase.ShowSettings.Execute(settingsRequest);
             var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, change);
             return View("~/Views/Home/Index.cshtml", pageModel);

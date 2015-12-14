@@ -11,14 +11,14 @@ namespace Core.UseCases
         public class Request
         {
             public int? PayDay { get; }
-            public int? PayDayType { get; }
+            public int? Frequency { get; }
             public string CountryCode { get; }
             public string TimezoneId { get; }
 
-            public Request(int? payDay, int? payDayType, string countryCode, string timezoneId)
+            public Request(int? payDay, int? frequency, string countryCode, string timezoneId)
             {
                 PayDay = payDay;
-                PayDayType = payDayType;
+                Frequency = frequency;
                 CountryCode = countryCode;
                 TimezoneId = timezoneId;
             }
@@ -26,15 +26,15 @@ namespace Core.UseCases
 
         public Result Execute(Request request)
         {
-            var userSettings = new UserSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
+            var userSettings = new UserSettings(request.PayDay, request.Frequency, request.CountryCode, request.TimezoneId);
 
             return new Result(
                 userSettings.PayDay,
                 userSettings.Country,
                 userSettings.TimeZone,
-                userSettings.PayDayType,
+                userSettings.Frequency,
                 PayDayOptions,
-                PayDayTypeOptions,
+                FrequencyOptions,
                 CountryOptions,
                 TimeZoneOptions);
         }
@@ -52,7 +52,7 @@ namespace Core.UseCases
             }
         }
 
-        private IList<PayDayType> PayDayTypeOptions => new List<PayDayType> { PayDayType.Monthly, PayDayType.Weekly };
+        private IList<Frequency> FrequencyOptions => new List<Frequency> { Frequency.Monthly, Frequency.Weekly };
         private IList<Country> CountryOptions => CountryService.GetCountries().ToList();
         private IList<TimeZoneInfo> TimeZoneOptions => TimeZoneInfo.GetSystemTimeZones().ToList();
 
@@ -61,9 +61,9 @@ namespace Core.UseCases
             public int PayDay { get; }
             public Country Country { get; }
             public TimeZoneInfo TimeZone { get; }
-            public PayDayType PayDayType { get; }
+            public Frequency Frequency { get; }
             public IList<int> PayDayOptions { get; }
-            public IList<PayDayType> FrequencyOptions { get; }
+            public IList<Frequency> FrequencyOptions { get; }
             public IList<Country> CountryOptions { get; }
             public IList<TimeZoneInfo> TimeZoneOptions { get; }
 
@@ -71,16 +71,16 @@ namespace Core.UseCases
                 int payDay,
                 Country country,
                 TimeZoneInfo timeZone,
-                PayDayType payDayType,
+                Frequency frequency,
                 IList<int> payDayOptions,
-                IList<PayDayType> frequencyOptions,
+                IList<Frequency> frequencyOptions,
                 IList<Country> countryOptions,
                 IList<TimeZoneInfo> timeZoneOptions)
             {
                 PayDay = payDay;
                 Country = country;
                 TimeZone = timeZone;
-                PayDayType = payDayType;
+                Frequency = frequency;
                 PayDayOptions = payDayOptions;
                 FrequencyOptions = frequencyOptions;
                 CountryOptions = countryOptions;

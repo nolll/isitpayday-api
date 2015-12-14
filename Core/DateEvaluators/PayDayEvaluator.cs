@@ -5,9 +5,9 @@ namespace Core.DateEvaluators
 {
     public abstract class PayDayEvaluator
     {
-        public static PayDayEvaluator Create(PayDayType type, DateTime userTime, TimeZoneInfo timezone, int payDay)
+        public static PayDayEvaluator Create(Frequency type, DateTime userTime, TimeZoneInfo timezone, int payDay)
         {
-            if(type == PayDayType.Weekly)
+            if(type == Frequency.Weekly)
                 return new WeeklyPayDayEvaluator(userTime, timezone, payDay);
             return new MonthlyPayDayEvaluator(userTime, timezone, payDay);
         }

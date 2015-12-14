@@ -9,9 +9,9 @@ namespace Core.UseCases
         public Result Execute(Request request)
         {
             var utcTime = request.UtcTime;
-            var userSettings = new UserSettings(request.PayDay, request.PayDayType, request.CountryCode, request.TimezoneId);
+            var userSettings = new UserSettings(request.PayDay, request.Frequency, request.CountryCode, request.TimezoneId);
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
-            var evaluator = PayDayEvaluator.Create(userSettings.PayDayType, utcTime, userSettings.TimeZone, userSettings.PayDay);
+            var evaluator = PayDayEvaluator.Create(userSettings.Frequency, utcTime, userSettings.TimeZone, userSettings.PayDay);
             var isPayDay = evaluator.IsPayDay;
             return new Result(isPayDay, userTime);
         }
@@ -19,15 +19,15 @@ namespace Core.UseCases
         public class Request
         {
             public int? PayDay { get; }
-            public int? PayDayType { get; }
+            public int? Frequency { get; }
             public string CountryCode { get; }
             public string TimezoneId { get; }
             public DateTime UtcTime { get; }
 
-            public Request(int? payDay, int? payDayType, string countryCode, string timezoneId, DateTime utcTime)
+            public Request(int? payDay, int? frequency, string countryCode, string timezoneId, DateTime utcTime)
             {
                 PayDay = payDay;
-                PayDayType = payDayType;
+                Frequency = frequency;
                 CountryCode = countryCode;
                 TimezoneId = timezoneId;
                 UtcTime = utcTime;

@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Country.cs" />
-    <Compile Include="Classes\PayDayType.cs" />
+    <Compile Include="Classes\Frequency.cs" />
     <Compile Include="Classes\UserSettings.cs" />
     <Compile Include="Classes\Weekday.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />

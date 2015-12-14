@@ -5,6 +5,6 @@ namespace Web
         public const string PayDay = "payday";
         public const string Country = "country";
         public const string TimeZone = "timezone";
-        public const string PayDayType = "paydaytype";
+        public const string Frequency = "frequency";
     }
 }

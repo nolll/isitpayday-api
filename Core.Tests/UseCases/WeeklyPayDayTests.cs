@@ -10,7 +10,7 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_TodayIsPayDay_IsTrue()
         {
-            var request = new ShowPayDay.Request((int)Weekday.Friday, (int)PayDayType.Weekly, null, TestData.Timezones.Utc, TestData.Dates.UnblockedFriday);
+            var request = new ShowPayDay.Request((int)Weekday.Friday, (int)Frequency.Weekly, null, TestData.Timezones.Utc, TestData.Dates.UnblockedFriday);
 
             var sut = GetSut();
             var result = sut.Execute(request);
@@ -21,7 +21,7 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_TodayIsNotPayDay_IsFalse()
         {
-            var request = new ShowPayDay.Request((int)Weekday.Thursday, (int)PayDayType.Weekly, null, TestData.Timezones.Utc, TestData.Dates.UnblockedFriday);
+            var request = new ShowPayDay.Request((int)Weekday.Thursday, (int)Frequency.Weekly, null, TestData.Timezones.Utc, TestData.Dates.UnblockedFriday);
 
             var sut = GetSut();
             var result = sut.Execute(request);
@@ -32,7 +32,7 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_TomorrowIsChristmasEve_TodayIsPayday()
         {
-            var request = new ShowPayDay.Request((int)Weekday.Thursday, (int)PayDayType.Weekly, null, TestData.Timezones.Utc, TestData.Dates.DayBeforeChristmasEve);
+            var request = new ShowPayDay.Request((int)Weekday.Thursday, (int)Frequency.Weekly, null, TestData.Timezones.Utc, TestData.Dates.DayBeforeChristmasEve);
 
             var sut = GetSut();
             var result = sut.Execute(request);
