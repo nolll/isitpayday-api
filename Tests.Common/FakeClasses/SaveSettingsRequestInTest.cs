@@ -2,7 +2,7 @@
 
 namespace Tests.Common.FakeClasses
 {
-    public class SaveSettingsRequestInTest : SaveSettingsRequest
+    public class SaveSettingsRequestInTest : SaveSettings.Request
     {
         public SaveSettingsRequestInTest(
             string oldCountryId = default(string),

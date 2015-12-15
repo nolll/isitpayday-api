@@ -9,11 +9,11 @@ namespace Web.Models
         public SettingsFormModel SettingsFormModel { get; }
         public GoogleAnalyticsModel GoogleAnalyticsModel { get; }
 
-        public IndexPageModel(ShowPayDay.Result showPayDayResult, bool isInProduction, ShowSettings.Result showSettingsResult, string activeForm)
+        public IndexPageModel(ShowPayDay.Result showPayDayResult, bool isInProduction, ShowSettings.Result showSettingsResult, Options.Result optionsResult, string activeForm)
         {
             PayDayString = showPayDayResult.IsPayDay ? "YES!!1!" : "No =(";
             LocalTime = showPayDayResult.UserTime.ToString("R");
-            SettingsFormModel = new SettingsFormModel(showSettingsResult, activeForm);
+            SettingsFormModel = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
             GoogleAnalyticsModel = new GoogleAnalyticsModel(isInProduction);
         }
     }

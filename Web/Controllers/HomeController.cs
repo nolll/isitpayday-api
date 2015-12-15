@@ -13,7 +13,8 @@ namespace Web.Controllers
             var showPayDay = UseCase.ShowPayDay.Execute(payDayRequest);
             var settingsRequest = new ShowSettings.Request(PayDay, Frequency, CountryCode, TimezoneId);
             var showSettings = UseCase.ShowSettings.Execute(settingsRequest);
-            var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, change);
+            var optionsResult = UseCase.Options.Execute();
+            var pageModel = new IndexPageModel(showPayDay, IsInProduction, showSettings, optionsResult, change);
             return View("~/Views/Home/Index.cshtml", pageModel);
         }
 
@@ -22,7 +23,7 @@ namespace Web.Controllers
         {
             var settingsRequest = new ShowSettings.Request(PayDay, Frequency, CountryCode, TimezoneId);
             var showSettings = UseCase.ShowSettings.Execute(settingsRequest);
-            var saveSettingsRequest = new SaveSettingsRequest(showSettings.Country.Id, postModel.CountryId, showSettings.TimeZone.Id, postModel.TimeZoneId, showSettings.PayDay, postModel.PayDay, (int)showSettings.Frequency, postModel.FrequencyId);
+            var saveSettingsRequest = new SaveSettings.Request(showSettings.Country.Id, postModel.CountryId, showSettings.TimeZone.Id, postModel.TimeZoneId, showSettings.PayDay, postModel.PayDay, (int)showSettings.Frequency, postModel.FrequencyId);
             UseCase.SaveSettings.Execute(saveSettingsRequest);
             return RedirectToAction("Index");
         }

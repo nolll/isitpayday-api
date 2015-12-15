@@ -32,6 +32,7 @@ namespace Web.Models
 
         public SettingsFormModel(
             ShowSettings.Result showSettingsResult,
+            Options.Result optionsResult,
             string activeForm)
         {
             PayDay = showSettingsResult.Frequency == Frequency.Monthly ? new NthFormatter(showSettingsResult.PayDay).Format() : ((Weekday)showSettingsResult.PayDay).ToString();
@@ -42,20 +43,20 @@ namespace Web.Models
             CountryName = showSettingsResult.Country.Name;
             TimeZoneName = showSettingsResult.TimeZone.StandardName;
             ShowCountryForm = activeForm == CountryFormName;
-            PayDayItems = GetPayDayItems(showSettingsResult);
+            PayDayItems = GetPayDayItems(showSettingsResult, optionsResult);
             ShowTimeZoneForm = activeForm == TimeZoneFormName;
-            TimeZoneItems = GetTimezoneItems(showSettingsResult.TimeZoneOptions);
+            TimeZoneItems = GetTimezoneItems(optionsResult.TimeZoneOptions);
             ShowPayDayForm = activeForm == PayDayFormName;
-            CountryItems = GetCountryItems(showSettingsResult.CountryOptions);
+            CountryItems = GetCountryItems(optionsResult.CountryOptions);
             ShowFrequencyForm = activeForm == FrequencyFormName;
-            FrequencyItems = GetFrequencyItems(showSettingsResult.FrequencyOptions);
+            FrequencyItems = GetFrequencyItems(optionsResult.FrequencyOptions);
         }
 
-        private IList<CustomSelectListItem> GetPayDayItems(ShowSettings.Result showSettingsResult)
+        private IList<CustomSelectListItem> GetPayDayItems(ShowSettings.Result showSettingsResult, Options.Result optionsResult)
         {
             if(showSettingsResult.Frequency == Frequency.Weekly)
-                return showSettingsResult.WeeklyPayDayOptions.Select(o => new CustomSelectListItem(o.ToString(), (int)o)).ToList();
-            return showSettingsResult.MonthlyPayDayOptions.Select(o => new CustomSelectListItem(new NthFormatter(o).Format(), o)).ToList();
+                return optionsResult.WeeklyPayDayOptions.Select(o => new CustomSelectListItem(o.ToString(), (int)o)).ToList();
+            return optionsResult.MonthlyPayDayOptions.Select(o => new CustomSelectListItem(new NthFormatter(o).Format(), o)).ToList();
         }
 
         private List<CustomSelectListItem> GetFrequencyItems(IList<Frequency> frequencies)

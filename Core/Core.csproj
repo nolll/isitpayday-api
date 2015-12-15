@@ -52,7 +52,6 @@
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Storage\Interfaces\IStorage.cs" />
     <Compile Include="UseCases\SaveSettings.cs" />
-    <Compile Include="UseCases\SaveSettingsRequest.cs" />
     <Compile Include="UseCases\ShowSettings.cs" />
   </ItemGroup>
   <ItemGroup />

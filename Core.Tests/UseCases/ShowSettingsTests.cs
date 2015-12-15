@@ -7,6 +7,82 @@ using System.Linq;
 
 namespace Core.Tests.UseCases
 {
+    public class OptionsTests : MockContainer
+    {
+        [Test]
+        public void Execute_ResultContainsCorrectFrequencyOptions()
+        {
+            const int expectedCount = 2;
+            const Frequency expectedFirstOption = Frequency.Weekly;
+            const Frequency expectedLastOption = Frequency.Monthly;
+
+            var sut = GetSut();
+            var result = sut.Execute();
+
+            Assert.AreEqual(expectedCount, result.FrequencyOptions.Count);
+            Assert.AreEqual(expectedLastOption, result.FrequencyOptions.First());
+            Assert.AreEqual(expectedFirstOption, result.FrequencyOptions.Last());
+        }
+
+        [Test]
+        public void Execute_ResultContainsCorrectMonthlyPayDayOptions()
+        {
+            const int expectedCount = 31;
+            const int expectedFirstOption = 1;
+            const int expectedLastOption = 31;
+
+            var sut = GetSut();
+            var result = sut.Execute();
+
+            Assert.AreEqual(expectedCount, result.MonthlyPayDayOptions.Count);
+            Assert.AreEqual(expectedFirstOption, result.MonthlyPayDayOptions.First());
+            Assert.AreEqual(expectedLastOption, result.MonthlyPayDayOptions.Last());
+        }
+
+        [Test]
+        public void Execute_ResultContainsCorrectWeeklyPayDayOptions()
+        {
+            const int expectedCount = 7;
+
+            var sut = GetSut();
+            var result = sut.Execute();
+
+            Assert.AreEqual(expectedCount, result.WeeklyPayDayOptions.Count);
+            Assert.AreEqual(Weekday.Monday, result.WeeklyPayDayOptions[0]);
+            Assert.AreEqual(Weekday.Tuesday, result.WeeklyPayDayOptions[1]);
+            Assert.AreEqual(Weekday.Wednesday, result.WeeklyPayDayOptions[2]);
+            Assert.AreEqual(Weekday.Thursday, result.WeeklyPayDayOptions[3]);
+            Assert.AreEqual(Weekday.Friday, result.WeeklyPayDayOptions[4]);
+            Assert.AreEqual(Weekday.Saturday, result.WeeklyPayDayOptions[5]);
+            Assert.AreEqual(Weekday.Sunday, result.WeeklyPayDayOptions[6]);
+        }
+
+        [Test]
+        public void Execute_ResultContainsCorrectCountryOptions()
+        {
+            const int expected = 142;
+
+            var sut = GetSut();
+            var result = sut.Execute();
+
+            Assert.AreEqual(expected, result.CountryOptions.Count);
+        }
+
+        [Test]
+        public void Execute_ResultContainsCorrectTimeZoneOptions()
+        {
+            var sut = GetSut();
+            var result = sut.Execute();
+
+            Assert.AreEqual(TimeZoneInfo.GetSystemTimeZones().Count, result.TimeZoneOptions.Count);
+        }
+
+        private Options GetSut()
+        {
+            return new Options();
+        }
+    }
+
     public class ShowSettingsTests : MockContainer
     {
         [TestCase("SE", "Sweden")]
@@ -57,83 +133,6 @@ namespace Core.Tests.UseCases
             var result = sut.Execute(request);
 
             Assert.AreEqual(enumFrequency, result.Frequency);
-        }
-
-        [Test]
-        public void Execute_ResultContainsCorrectFrequencyOptions()
-        {
-            var request = new ShowSettings.Request(null, null, null, null);
-
-            const int expectedCount = 2;
-            const Frequency expectedFirstOption = Frequency.Weekly;
-            const Frequency expectedLastOption = Frequency.Monthly;
-
-            var sut = GetSut();
-            var result = sut.Execute(request);
-
-            Assert.AreEqual(expectedCount, result.FrequencyOptions.Count);
-            Assert.AreEqual(expectedLastOption, result.FrequencyOptions.First());
-            Assert.AreEqual(expectedFirstOption, result.FrequencyOptions.Last());
-        }
-
-        [Test]
-        public void Execute_ResultContainsCorrectMonthlyPayDayOptions()
-        {
-            var request = new ShowSettings.Request(null, null, null, null);
-
-            const int expectedCount = 31;
-            const int expectedFirstOption = 1;
-            const int expectedLastOption = 31;
-
-            var sut = GetSut();
-            var result = sut.Execute(request);
-
-            Assert.AreEqual(expectedCount, result.MonthlyPayDayOptions.Count);
-            Assert.AreEqual(expectedFirstOption, result.MonthlyPayDayOptions.First());
-            Assert.AreEqual(expectedLastOption, result.MonthlyPayDayOptions.Last());
-        }
-
-        [Test]
-        public void Execute_ResultContainsCorrectWeeklyPayDayOptions()
-        {
-            var request = new ShowSettings.Request(null, null, null, null);
-
-            const int expectedCount = 7;
-
-            var sut = GetSut();
-            var result = sut.Execute(request);
-
-            Assert.AreEqual(expectedCount, result.WeeklyPayDayOptions.Count);
-            Assert.AreEqual(Weekday.Monday, result.WeeklyPayDayOptions[0]);
-            Assert.AreEqual(Weekday.Tuesday, result.WeeklyPayDayOptions[1]);
-            Assert.AreEqual(Weekday.Wednesday, result.WeeklyPayDayOptions[2]);
-            Assert.AreEqual(Weekday.Thursday, result.WeeklyPayDayOptions[3]);
-            Assert.AreEqual(Weekday.Friday, result.WeeklyPayDayOptions[4]);
-            Assert.AreEqual(Weekday.Saturday, result.WeeklyPayDayOptions[5]);
-            Assert.AreEqual(Weekday.Sunday, result.WeeklyPayDayOptions[6]);
-        }
-
-        [Test]
-        public void Execute_ResultContainsCorrectCountryOptions()
-        {
-            const int expected = 142;
-            var request = new ShowSettings.Request(null, null, null, null);
-
-            var sut = GetSut();
-            var result = sut.Execute(request);
-
-            Assert.AreEqual(expected, result.CountryOptions.Count);
-        }
-
-        [Test]
-        public void Execute_ResultContainsCorrectTimeZoneOptions()
-        {
-            var request = new ShowSettings.Request(null, null, null, null);
-
-            var sut = GetSut();
-            var result = sut.Execute(request);
-
-            Assert.AreEqual(TimeZoneInfo.GetSystemTimeZones().Count, result.TimeZoneOptions.Count);
         }
 
         private ShowSettings GetSut()

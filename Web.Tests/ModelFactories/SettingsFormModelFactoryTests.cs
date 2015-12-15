@@ -20,8 +20,9 @@ namespace Web.Tests.ModelFactories
             const int selectedPayDay = 1;
             const string expected = "1st";
             var showSettingsResult = GetShowSettingsResult(selectedPayDay, frequency: Frequency.Monthly);
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expected, result.PayDay);
         }
@@ -33,8 +34,9 @@ namespace Web.Tests.ModelFactories
             const int selectedPayDay = 1;
             const string expected = "Monday";
             var showSettingsResult = GetShowSettingsResult(selectedPayDay, frequency: Frequency.Weekly);
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expected, result.PayDay);
         }
@@ -46,8 +48,9 @@ namespace Web.Tests.ModelFactories
             const string expectedTimeZoneId = "UTC";
             const string expectedTimeZoneName = "UTC";
             var showSettingsResult = GetShowSettingsResult(timeZone: TimeZoneInfo.Utc);
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expectedTimeZoneId, result.TimeZoneId);
             Assert.AreEqual(expectedTimeZoneName, result.TimeZoneName);
@@ -58,8 +61,9 @@ namespace Web.Tests.ModelFactories
         {
             const string activeForm = "country";
             var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.IsTrue(result.ShowCountryForm);
             Assert.IsFalse(result.ShowTimeZoneForm);
@@ -71,8 +75,9 @@ namespace Web.Tests.ModelFactories
         {
             const string activeForm = "timezone";
             var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.IsFalse(result.ShowCountryForm);
             Assert.IsTrue(result.ShowTimeZoneForm);
@@ -84,8 +89,9 @@ namespace Web.Tests.ModelFactories
         {
             const string activeForm = "payday";
             var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.IsFalse(result.ShowCountryForm);
             Assert.IsFalse(result.ShowTimeZoneForm);
@@ -100,8 +106,9 @@ namespace Web.Tests.ModelFactories
             const string countryName = "b";
             var country = new CountryInTest(countryId, countryName);
             var showSettingsResult = GetShowSettingsResult(country: country);
+            var optionsResult = GetOptionsResult();
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(countryId, result.CountryId);
             Assert.AreEqual(countryName, result.CountryName);
@@ -116,9 +123,10 @@ namespace Web.Tests.ModelFactories
             const int expectedLength = 1;
             var country = new CountryInTest(countryId, countryName);
             var countryList = new List<Country> { country };
-            var showSettingsResult = GetShowSettingsResult(countryOptions: countryList);
+            var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult(countryOptions: countryList);
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.CountryItems.Count);
             Assert.AreEqual(countryId, result.CountryItems[0].Value);
@@ -134,9 +142,10 @@ namespace Web.Tests.ModelFactories
             var timeZoneName = timeZone.StandardName;
             const int expectedLength = 1;
             var timeZoneList = new List<TimeZoneInfo> { timeZone };
-            var showSettingsResult = GetShowSettingsResult(timeZoneOptions: timeZoneList);
+            var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult(timeZoneOptions: timeZoneList);
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.TimeZoneItems.Count);
             Assert.AreEqual(timeZoneId, result.TimeZoneItems[0].Value);
@@ -152,9 +161,10 @@ namespace Web.Tests.ModelFactories
             const string expectedValue = "1";
             const int expectedLength = 1;
             var payDayOptions = new List<int> {firstValue};
-            var showSettingsResult = GetShowSettingsResult(monthlyPayDayOptions: payDayOptions);
+            var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult(monthlyPayDayOptions: payDayOptions);
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.PayDayItems.Count);
             Assert.AreEqual(expectedValue, result.PayDayItems.First().Value);
@@ -169,9 +179,10 @@ namespace Web.Tests.ModelFactories
             const string firstValue = "1";
             const string firstText = "Monthly";
             const int expectedLength = 1;
-            var showSettingsResult = GetShowSettingsResult(frequencyOptions: frequencies);
+            var showSettingsResult = GetShowSettingsResult();
+            var optionsResult = GetOptionsResult(frequencyOptions: frequencies);
 
-            var result = new SettingsFormModel(showSettingsResult, activeForm);
+            var result = new SettingsFormModel(showSettingsResult, optionsResult, activeForm);
 
             Assert.AreEqual(expectedLength, result.FrequencyItems.Count);
             Assert.AreEqual(firstValue, result.FrequencyItems.First().Value);
@@ -182,18 +193,23 @@ namespace Web.Tests.ModelFactories
             int? payDay = null,
             Country country = null,
             TimeZoneInfo timeZone = null,
-            Frequency? frequency = null,
+            Frequency? frequency = null)
+        {
+            return new ShowSettings.Result(
+                payDay ?? It.IsAny<int>(),
+                country ?? new CountryInTest(),
+                timeZone ?? TimeZoneInfo.Utc,
+                frequency ?? Frequency.Monthly);
+        }
+
+        private static Options.Result GetOptionsResult(
             IList<int> monthlyPayDayOptions = null,
             IList<Weekday> weeklyPayDayOptions = null,
             IList<Frequency> frequencyOptions = null,
             IList<Country> countryOptions = null,
             IList<TimeZoneInfo> timeZoneOptions = null)
         {
-            return new ShowSettings.Result(
-                payDay ?? It.IsAny<int>(),
-                country ?? new CountryInTest(),
-                timeZone ?? TimeZoneInfo.Utc,
-                frequency ?? Frequency.Monthly,
+            return new Options.Result(
                 monthlyPayDayOptions ?? new List<int>(),
                 weeklyPayDayOptions ?? new List<Weekday>(),
                 frequencyOptions ?? new List<Frequency>(),

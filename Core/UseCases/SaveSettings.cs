@@ -12,7 +12,7 @@ namespace Core.UseCases
             _storage = storage;
         }
 
-        public void Execute(SaveSettingsRequest request)
+        public void Execute(Request request)
         {
             if (HasChanged(request.OldCountryId, request.NewCountryId))
             {
@@ -42,6 +42,38 @@ namespace Core.UseCases
         private bool HasChanged(string oldValue, string newValue)
         {
             return !string.IsNullOrEmpty(newValue) && newValue != oldValue;
+        }
+
+        public class Request
+        {
+            public string OldCountryId { get; }
+            public string NewCountryId { get; }
+            public string OldTimeZoneId { get; }
+            public string NewTimeZoneId { get; }
+            public int? OldPayDay { get; }
+            public int? NewPayDay { get; }
+            public int? OldFrequency { get; }
+            public int? NewFrequency { get; }
+
+            public Request(
+                string oldCountryId,
+                string newCountryId,
+                string oldTimeZoneId,
+                string newTimeZoneId,
+                int? oldPayDay,
+                int? newPayDay,
+                int? oldFrequency,
+                int? newFrequency)
+            {
+                OldCountryId = oldCountryId;
+                NewCountryId = newCountryId;
+                OldTimeZoneId = oldTimeZoneId;
+                NewTimeZoneId = newTimeZoneId;
+                OldPayDay = oldPayDay;
+                NewPayDay = newPayDay;
+                OldFrequency = oldFrequency;
+                NewFrequency = newFrequency;
+            }
         }
     }
 }
