@@ -137,9 +137,6 @@
     <Content Include="script.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -164,6 +161,7 @@
     <None Include="Properties\PublishProfiles\isitpayday-com - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\isitpayday-com - Web Deploy.pubxml" />
     <Content Include="Views\Home\SettingsForm.cshtml" />
+    <Content Include="Web.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
