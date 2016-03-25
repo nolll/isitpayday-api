@@ -19,8 +19,7 @@ namespace Core.DateEvaluators
                 new DateTime(year, 6, 6),
                 new DateTime(year, 12, 24),
                 new DateTime(year, 12, 25),
-                new DateTime(year, 12, 31),
-                new DateTime(2016, 3, 25)
+                new DateTime(year, 12, 31)
             };
         }
     }
