@@ -5,8 +5,8 @@ namespace Tests.Common.FakeClasses
     public class CountryInTest : Country
     {
         public CountryInTest(
-            string id = default(string), 
-            string name = default(string)) : 
+            string id = "", 
+            string name = "") : 
             base(
             id, 
             name)

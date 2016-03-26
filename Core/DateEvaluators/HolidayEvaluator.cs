@@ -28,9 +28,15 @@ namespace Core.DateEvaluators
 
         private static HolidayEvaluator GetEvaluator(Country country)
         {
-            if(country.Id == "SE")
-                return new SwedishHolidayEvaluator();
+            HolidayEvaluator evaluator;
+            if(Evaluators.TryGetValue(country.Id, out evaluator))
+                return evaluator;
             return new DefaultHolidayEvaluator();
         }
+
+        private static readonly Dictionary<string, HolidayEvaluator> Evaluators = new Dictionary<string, HolidayEvaluator>
+        {
+            { "SE", new SwedishHolidayEvaluator() }
+        };
     }
 }
