@@ -45,6 +45,7 @@
     <Compile Include="Classes\UserSettings.cs" />
     <Compile Include="Classes\Weekday.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
+    <Compile Include="DateEvaluators\CountrySpecific\DefaultHolidayEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\SwedishHolidayEvaluator.cs" />
     <Compile Include="DateEvaluators\HolidayEvaluator.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluator.cs" />

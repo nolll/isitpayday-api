@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Classes;
 using Core.DateEvaluators.CountrySpecific;
 using Core.HolidayRules;
 
@@ -10,9 +11,9 @@ namespace Core.DateEvaluators
     {
         protected abstract List<IHolidayRule> HolidayRules { get; }
 
-        public static bool IsHoliday(DateTime userTime)
+        public static bool IsHoliday(Country country, DateTime userTime)
         {
-            return GetEvaluator().Evaluate(userTime);
+            return GetEvaluator(country).Evaluate(userTime);
         }
 
         private bool Evaluate(DateTime userTime)
@@ -25,9 +26,11 @@ namespace Core.DateEvaluators
             return HolidayRules.Select(o => o.GetDate(year)).ToList();
         }
 
-        private static HolidayEvaluator GetEvaluator()
+        private static HolidayEvaluator GetEvaluator(Country country)
         {
-            return new SwedishHolidayEvaluator();
+            if(country.Id == "SE")
+                return new SwedishHolidayEvaluator();
+            return new DefaultHolidayEvaluator();
         }
     }
 }

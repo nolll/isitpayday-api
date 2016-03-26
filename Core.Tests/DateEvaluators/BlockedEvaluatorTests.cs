@@ -1,18 +1,22 @@
 ﻿using System;
+using Core.Classes;
 using Core.DateEvaluators;  
 using NUnit.Framework;
 using Tests.Common;
+using Tests.Common.FakeClasses;
 
 namespace Core.Tests.DateEvaluators
 {
     public class BlockedEvaluatorTests : MockContainer
     {
+        private readonly Country _country = new CountryInTest();
+
         [Test]
         public void IsBlocked_WithWeekDayThatIsNotExcluded_ReturnsFalse()
         {
             var notBlockedDate = new DateTime(2015, 1, 2);
 
-            var result = BlockedEvaluator.IsBlocked(notBlockedDate);
+            var result = BlockedEvaluator.IsBlocked(_country, notBlockedDate);
 
             Assert.IsFalse(result);
         }
@@ -22,7 +26,7 @@ namespace Core.Tests.DateEvaluators
         {
             var excludedDate = new DateTime(2015, 1, 1);
 
-            var result = BlockedEvaluator.IsBlocked(excludedDate);
+            var result = BlockedEvaluator.IsBlocked(_country, excludedDate);
 
             Assert.IsTrue(result);
         }
@@ -32,7 +36,7 @@ namespace Core.Tests.DateEvaluators
         {
             var weekendDate = new DateTime(2015, 1, 3);
 
-            var result = BlockedEvaluator.IsBlocked(weekendDate);
+            var result = BlockedEvaluator.IsBlocked(_country, weekendDate);
 
             Assert.IsTrue(result);
         }
@@ -42,7 +46,7 @@ namespace Core.Tests.DateEvaluators
         {
             var blockedWeekendDate = new DateTime(2015, 6, 6);
 
-            var result = BlockedEvaluator.IsBlocked(blockedWeekendDate);
+            var result = BlockedEvaluator.IsBlocked(_country, blockedWeekendDate);
 
             Assert.IsTrue(result);
         }

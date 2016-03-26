@@ -11,7 +11,7 @@ namespace Core.UseCases
             var utcTime = request.UtcTime;
             var userSettings = new UserSettings(request.PayDay, request.Frequency, request.CountryCode, request.TimezoneId);
             var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
-            var evaluator = PayDayEvaluator.Create(userSettings.Frequency, utcTime, userSettings.TimeZone, userSettings.PayDay);
+            var evaluator = PayDayEvaluator.Create(userSettings.Frequency, userSettings.Country, utcTime, userSettings.TimeZone, userSettings.PayDay);
             var isPayDay = evaluator.IsPayDay;
             return new Result(isPayDay, userTime);
         }

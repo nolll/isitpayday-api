@@ -5,23 +5,25 @@ namespace Core.DateEvaluators
 {
     public abstract class PayDayEvaluator
     {
-        public static PayDayEvaluator Create(Frequency type, DateTime userTime, TimeZoneInfo timezone, int payDay)
+        public static PayDayEvaluator Create(Frequency type, Country country, DateTime userTime, TimeZoneInfo timezone, int payDay)
         {
             if(type == Frequency.Weekly)
-                return new WeeklyPayDayEvaluator(userTime, timezone, payDay);
-            return new MonthlyPayDayEvaluator(userTime, timezone, payDay);
+                return new WeeklyPayDayEvaluator(country, userTime, timezone, payDay);
+            return new MonthlyPayDayEvaluator(country, userTime, timezone, payDay);
         }
 
         public abstract bool IsPayDay { get; }
 
         private class MonthlyPayDayEvaluator : PayDayEvaluator
         {
+            private readonly Country _country;
             private readonly DateTime _utcTime;
             private readonly TimeZoneInfo _timezone;
             private readonly int _payDay;
 
-            public MonthlyPayDayEvaluator(DateTime utcTime, TimeZoneInfo timezone, int payDay)
+            public MonthlyPayDayEvaluator(Country country, DateTime utcTime, TimeZoneInfo timezone, int payDay)
             {
+                _country = country;
                 _utcTime = utcTime;
                 _timezone = timezone;
                 _payDay = payDay;
@@ -33,7 +35,7 @@ namespace Core.DateEvaluators
                 {
                     var localTime = TimeZoneInfo.ConvertTime(_utcTime, _timezone);
                     var payDayDate = GetNextPayDate(localTime);
-                    while (BlockedEvaluator.IsBlocked(payDayDate))
+                    while (BlockedEvaluator.IsBlocked(_country, payDayDate))
                     {
                         payDayDate = payDayDate.AddDays(-1);
                     }
@@ -82,12 +84,14 @@ namespace Core.DateEvaluators
 
         private class WeeklyPayDayEvaluator : PayDayEvaluator
         {
+            private readonly Country _country;
             private readonly DateTime _utcTime;
             private readonly TimeZoneInfo _timezone;
             private readonly int _payDay;
 
-            public WeeklyPayDayEvaluator(DateTime utcTime, TimeZoneInfo timezone, int payDay)
+            public WeeklyPayDayEvaluator(Country country, DateTime utcTime, TimeZoneInfo timezone, int payDay)
             {
+                _country = country;
                 _utcTime = utcTime;
                 _timezone = timezone;
                 _payDay = payDay;
@@ -99,7 +103,7 @@ namespace Core.DateEvaluators
                 {
                     var localTime = TimeZoneInfo.ConvertTime(_utcTime, _timezone);
                     var payDayDate = GetNextPayDay(localTime);
-                    while (BlockedEvaluator.IsBlocked(payDayDate))
+                    while (BlockedEvaluator.IsBlocked(_country, payDayDate))
                     {
                         payDayDate = payDayDate.AddDays(-1);
                     }
