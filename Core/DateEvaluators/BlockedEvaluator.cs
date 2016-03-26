@@ -6,7 +6,7 @@ namespace Core.DateEvaluators
     {
         public static bool IsBlocked(DateTime userTime)
         {
-            return WeekendEvaluator.IsWeekend(userTime) || ExcludedEvaluator.IsExcluded(userTime);
+            return WeekendEvaluator.IsWeekend(userTime) || HolidayEvaluator.IsHoliday(userTime);
         }
     }
 }
