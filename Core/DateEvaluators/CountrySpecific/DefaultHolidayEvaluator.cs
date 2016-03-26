@@ -7,14 +7,6 @@ namespace Core.DateEvaluators.CountrySpecific
     {
         protected override List<IHolidayRule> HolidayRules => new List<IHolidayRule>
         {
-            new NewYearsDayRule(),
-            new EpiphanyRule(),
-            new GoodFridayRule(),
-            new EasterMondayRule(),
-            new AscensionDayRule(),
-            new ChristmasEveRule(),
-            new ChristmasDayRule(),
-            new NewYearsEveRule()
         };
     }
 }

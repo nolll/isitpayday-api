@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateEvaluators\BlockedEvaluatorTests.cs" />
-    <Compile Include="DateEvaluators\HolidayEvaluatorTests.cs" />
+    <Compile Include="DateEvaluators\HolidayEvaluators\Arrange.cs" />
+    <Compile Include="DateEvaluators\HolidayEvaluators\GivenDefaultCountry.cs" />
+    <Compile Include="DateEvaluators\HolidayEvaluators\GivenSweden.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluatorTests.cs" />
     <Compile Include="DateEvaluators\WeekendEvaluatorTests.cs" />
     <Compile Include="UseCases\MonthlyPayDayTests.cs" />

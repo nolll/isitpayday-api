@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\CountryCode.cs" />
     <Compile Include="Classes\Frequency.cs" />
     <Compile Include="Classes\UserSettings.cs" />
     <Compile Include="Classes\Weekday.cs" />

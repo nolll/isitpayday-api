@@ -9,24 +9,25 @@ namespace Core.Tests.DateEvaluators
 {
     public class BlockedEvaluatorTests : MockContainer
     {
-        private readonly Country _country = new CountryInTest();
+        private readonly Country _defaultCountry = new CountryInTest();
+        private readonly Country _sweden = new CountryInTest(CountryCode.Sweden);
 
         [Test]
         public void IsBlocked_WithWeekDayThatIsNotExcluded_ReturnsFalse()
         {
             var notBlockedDate = new DateTime(2015, 1, 2);
 
-            var result = BlockedEvaluator.IsBlocked(_country, notBlockedDate);
+            var result = BlockedEvaluator.IsBlocked(_defaultCountry, notBlockedDate);
 
             Assert.IsFalse(result);
         }
 
         [Test]
-        public void IsBlocked_WithWeekDayThatIsExcluded_ReturnsTrue()   
+        public void IsBlocked_WithWeekDayThatIsHoliday_ReturnsTrue()   
         {
             var excludedDate = new DateTime(2015, 1, 1);
 
-            var result = BlockedEvaluator.IsBlocked(_country, excludedDate);
+            var result = BlockedEvaluator.IsBlocked(_sweden, excludedDate);
 
             Assert.IsTrue(result);
         }
@@ -36,7 +37,7 @@ namespace Core.Tests.DateEvaluators
         {
             var weekendDate = new DateTime(2015, 1, 3);
 
-            var result = BlockedEvaluator.IsBlocked(_country, weekendDate);
+            var result = BlockedEvaluator.IsBlocked(_defaultCountry, weekendDate);
 
             Assert.IsTrue(result);
         }
@@ -46,7 +47,7 @@ namespace Core.Tests.DateEvaluators
         {
             var blockedWeekendDate = new DateTime(2015, 6, 6);
 
-            var result = BlockedEvaluator.IsBlocked(_country, blockedWeekendDate);
+            var result = BlockedEvaluator.IsBlocked(_defaultCountry, blockedWeekendDate);
 
             Assert.IsTrue(result);
         }
