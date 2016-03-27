@@ -1,5 +1,3 @@
-using System;
-using Core.DateEvaluators;
 using NUnit.Framework;
 
 namespace Core.Tests.DateEvaluators.HolidayEvaluators
@@ -8,31 +6,57 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
     {
         protected override string CountryCode => "SE";
 
-        [Test]
-        public void NewYearsDayIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 1, 1)));
+        [TestCase("2014-01-01")]
+        [TestCase("2015-01-01")]
+        [TestCase("2016-01-01")]
+        public void NewYearsDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void EpiphanyIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 1, 6)));
+        [TestCase("2014-01-06")]
+        [TestCase("2015-01-06")]
+        [TestCase("2016-01-06")]
+        public void EpiphanyIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void GoodFridayIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 3, 25)));
+        [TestCase("2014-04-18")]
+        [TestCase("2015-04-03")]
+        [TestCase("2016-03-25")]
+        public void GoodFridayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void EasterMondayIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 3, 25)));
+        [TestCase("2014-04-21")]
+        [TestCase("2015-04-06")]
+        [TestCase("2016-03-28")]
+        public void EasterMondayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void AscensionDayIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 5, 5)));
+        [TestCase("2014-05-29")]
+        [TestCase("2015-05-14")]
+        [TestCase("2016-05-05")]
+        public void AscensionDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void ChristmasEveIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 12, 24)));
+        [TestCase("2014-06-06")]
+        [TestCase("2015-06-06")]
+        [TestCase("2016-06-06")]
+        public void NationalDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void ChristmasDayIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 12, 25)));
+        //[Test]
+        //public void MidsummersEveIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 6, 24)));
 
-        [Test]
-        public void NewYearsEveIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 12, 31)));
+        [TestCase("2014-12-24")]
+        [TestCase("2015-12-24")]
+        [TestCase("2016-12-24")]
+        public void ChristmasEveIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        [Test]
-        public void AnyOtherDayIsNotHoliday() => Assert.IsFalse(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 1, 2)));
+        [TestCase("2014-12-25")]
+        [TestCase("2015-12-25")]
+        [TestCase("2016-12-25")]
+        public void ChristmasDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
+
+        [TestCase("2014-12-25")]
+        [TestCase("2015-12-25")]
+        [TestCase("2016-12-25")]
+        public void NewYearsEveIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
+
+        [TestCase("2014-01-02")]
+        [TestCase("2015-01-02")]
+        [TestCase("2016-01-02")]
+        public void AnyOtherDayIsNotHoliday(string date) => Assert.IsFalse(IsHoliday(date));
     }
 }
