@@ -36,8 +36,10 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
         [TestCase("2016-06-06")]
         public void NationalDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
-        //[Test]
-        //public void MidsummersEveIsHoliday() => Assert.IsTrue(HolidayEvaluator.IsHoliday(Country, new DateTime(2016, 6, 24)));
+        [TestCase("2014-06-20")]
+        [TestCase("2015-06-19")]
+        [TestCase("2016-06-24")]
+        public void MidsummersEveIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
         [TestCase("2014-12-24")]
         [TestCase("2015-12-24")]

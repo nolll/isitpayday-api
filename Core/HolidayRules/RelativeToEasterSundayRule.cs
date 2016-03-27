@@ -2,11 +2,11 @@ using System;
 
 namespace Core.HolidayRules
 {
-    public class RelativeToEasterRule : IHolidayRule
+    public class RelativeToEasterSundayRule : IHolidayRule
     {
         private readonly int _diffInDays;
 
-        public RelativeToEasterRule(int diffInDays)
+        protected RelativeToEasterSundayRule(int diffInDays)
         {
             _diffInDays = diffInDays;
         }
@@ -30,10 +30,10 @@ namespace Core.HolidayRules
                 k = c % 4,
                 m = (a + 11 * h) / 319,
                 r = (2 * e + 2 * j - k - h + m + 32) % 7,
-                n = (h - m + r + 90) / 25,
-                p = (h - m + r + n + 19) % 32;
+                month = (h - m + r + 90) / 25,
+                day = (h - m + r + month + 19) % 32;
 
-            return new DateTime(year, n, p);
+            return new DateTime(year, month, day);
         }
     }
 }

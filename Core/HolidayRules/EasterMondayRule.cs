@@ -1,6 +1,6 @@
 namespace Core.HolidayRules
 {
-    public class EasterMondayRule : RelativeToEasterRule
+    public class EasterMondayRule : RelativeToEasterSundayRule
     {
         public EasterMondayRule() : base(1)
         {

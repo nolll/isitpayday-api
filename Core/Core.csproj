@@ -59,9 +59,10 @@
     <Compile Include="HolidayRules\FixedHolidayRule.cs" />
     <Compile Include="HolidayRules\GoodFridayRule.cs" />
     <Compile Include="HolidayRules\IHolidayRule.cs" />
+    <Compile Include="HolidayRules\MidsummersEveRule.cs" />
     <Compile Include="HolidayRules\NewYearsDayRule.cs" />
     <Compile Include="HolidayRules\NewYearsEveRule.cs" />
-    <Compile Include="HolidayRules\RelativeToEasterRule.cs" />
+    <Compile Include="HolidayRules\RelativeToEasterSundayRule.cs" />
     <Compile Include="HolidayRules\SwedishNationalDayRule.cs" />
     <Compile Include="UseCases\ShowPayDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

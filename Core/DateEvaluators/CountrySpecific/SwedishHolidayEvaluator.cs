@@ -12,6 +12,7 @@ namespace Core.DateEvaluators.CountrySpecific
             new GoodFridayRule(),
             new EasterMondayRule(),
             new AscensionDayRule(),
+            new MidsummersEveRule(),
             new SwedishNationalDayRule(),
             new ChristmasEveRule(),
             new ChristmasDayRule(),
