@@ -1,13 +1,15 @@
 using System;
+using Core.Classes;
 
 namespace Core.HolidayRules
 {
     public class FixedHolidayRule : IHolidayRule
     {
-        private readonly int _month;
+        private readonly Month _month;
         private readonly int _day;
+        private bool _moveSundayToMonday;
 
-        public FixedHolidayRule(int month, int day)
+        protected FixedHolidayRule(Month month, int day)
         {
             _month = month;
             _day = day;
@@ -15,7 +17,16 @@ namespace Core.HolidayRules
 
         public DateTime GetDate(int year)
         {
-            return new DateTime(year, _month, _day);
+            var date = new DateTime(year, (int)_month, _day);
+            if (_moveSundayToMonday && date.DayOfWeek == DayOfWeek.Sunday)
+                return date.AddDays(1);
+            return date;
+        }
+
+        public IHolidayRule MoveSundayToMonday()
+        {
+            _moveSundayToMonday = true;
+            return this;
         }
     }
 }

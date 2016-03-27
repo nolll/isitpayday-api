@@ -26,6 +26,11 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
         [TestCase("2016-03-28")]
         public void EasterMondayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
+        [TestCase("2014-05-01")]
+        [TestCase("2015-05-01")]
+        [TestCase("2016-05-01")]
+        public void InternationalWorkersDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
+
         [TestCase("2014-05-29")]
         [TestCase("2015-05-14")]
         [TestCase("2016-05-05")]
@@ -50,6 +55,11 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
         [TestCase("2015-12-25")]
         [TestCase("2016-12-25")]
         public void ChristmasDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
+
+        [TestCase("2014-12-26")]
+        [TestCase("2015-12-26")]
+        [TestCase("2016-12-26")]
+        public void BoxingDayIsHoliday(string date) => Assert.IsTrue(IsHoliday(date));
 
         [TestCase("2014-12-25")]
         [TestCase("2015-12-25")]
