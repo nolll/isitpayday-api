@@ -4,19 +4,21 @@ using System.Linq;
 using Core.Classes;
 using Core.DateEvaluators.CountrySpecific;
 using Core.HolidayRules;
+using Core.WeekendRules;
 
 namespace Core.DateEvaluators
 {
-    public abstract class HolidayEvaluator
+    public abstract class CountryEvaluator
     {
+        private readonly WeekendRule _weekendRule = new WeekendRule();
         protected abstract List<HolidayRule> HolidayRules { get; }
 
-        public static bool IsHoliday(Country country, DateTime userTime)
+        public bool IsWeekend(DateTime userTime)
         {
-            return GetEvaluator(country).Evaluate(userTime);
+            return _weekendRule.IsWeekend(userTime);
         }
 
-        private bool Evaluate(DateTime userTime)
+        public bool IsHoliday(DateTime userTime)
         {
             return GetHolidays(userTime.Year).Contains(userTime.Date);
         }
@@ -26,18 +28,18 @@ namespace Core.DateEvaluators
             return HolidayRules.Select(o => o.GetDate(year)).ToList();
         }
 
-        private static HolidayEvaluator GetEvaluator(Country country)
+        public static CountryEvaluator GetEvaluator(Country country)
         {
-            HolidayEvaluator evaluator;
+            CountryEvaluator evaluator;
             if(Evaluators.TryGetValue(country.Id, out evaluator))
                 return evaluator;
-            return new DefaultHolidayEvaluator();
+            return new DefaultEvaluator();
         }
 
-        private static readonly Dictionary<string, HolidayEvaluator> Evaluators = new Dictionary<string, HolidayEvaluator>
+        private static readonly Dictionary<string, CountryEvaluator> Evaluators = new Dictionary<string, CountryEvaluator>
         {
-            { "SE", new SwedishHolidayEvaluator() },
-            { "US", new UnitedStatesHolidayEvaluator() }
+            { "SE", new SwedenEvaluator() },
+            { "US", new UnitedStatesEvaluator() }
         };
     }
 }

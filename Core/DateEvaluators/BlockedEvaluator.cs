@@ -7,7 +7,8 @@ namespace Core.DateEvaluators
     {
         public static bool IsBlocked(Country country, DateTime userTime)
         {
-            return WeekendEvaluator.IsWeekend(userTime) || HolidayEvaluator.IsHoliday(country, userTime);
+            var evaluator = CountryEvaluator.GetEvaluator(country);
+            return evaluator.IsWeekend(userTime) || evaluator.IsHoliday(userTime);
         }
     }
 }

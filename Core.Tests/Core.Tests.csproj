@@ -54,7 +54,7 @@
     <Compile Include="DateEvaluators\HolidayEvaluators\GivenUnitedStates.cs" />
     <Compile Include="DateEvaluators\HolidayEvaluators\GivenSweden.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluatorTests.cs" />
-    <Compile Include="DateEvaluators\WeekendEvaluatorTests.cs" />
+    <Compile Include="DateEvaluators\WeekendRuleTests.cs" />
     <Compile Include="UseCases\MonthlyPayDayTests.cs" />
     <Compile Include="UseCases\WeeklyPayDayTests.cs" />
     <Compile Include="UseCases\SaveSettingsTests.cs" />

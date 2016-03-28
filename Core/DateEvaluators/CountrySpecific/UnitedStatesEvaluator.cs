@@ -4,7 +4,7 @@ using Core.HolidayRules;
 
 namespace Core.DateEvaluators.CountrySpecific
 {
-    public class UnitedStatesHolidayEvaluator : HolidayEvaluator
+    public class UnitedStatesEvaluator : CountryEvaluator
     {
         protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
         {

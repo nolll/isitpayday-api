@@ -2,11 +2,11 @@ using System;
 
 namespace Core.HolidayRules
 {
-    public class RelativeToEasterSundayRule : HolidayRule
+    public class RelativeToEasterSunday : HolidayRule
     {
         private readonly int _diffInDays;
 
-        protected RelativeToEasterSundayRule(int diffInDays)
+        public RelativeToEasterSunday(int diffInDays)
         {
             _diffInDays = diffInDays;
         }

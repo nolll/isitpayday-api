@@ -8,18 +8,19 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
 {
     public class Arrange
     {
-        protected Country Country;
+        private Country _country;
         protected virtual string CountryCode => "";
         
         [SetUp]
         public void Setup()
         {
-            Country = new CountryInTest(CountryCode);
+            _country = new CountryInTest(CountryCode);
         }
 
         protected bool IsHoliday(string date)
         {
-            return HolidayEvaluator.IsHoliday(Country, DateTime.Parse(date));
+            var evaluator = CountryEvaluator.GetEvaluator(_country);
+            return evaluator.IsHoliday(DateTime.Parse(date));
         }
     }
 }

@@ -1,17 +1,18 @@
 ﻿using System;
 using Core.DateEvaluators;
+using Core.WeekendRules;
 using NUnit.Framework;
 
 namespace Core.Tests.DateEvaluators
 {
-    public class WeekendEvaluatorTests
+    public class WeekendRuleTests
     {
         [Test]
         public void IsWeekend_WithFriday_ReturnsFalse()
         {
             var friday = new DateTime(2014, 1, 17);
 
-            var result = WeekendEvaluator.IsWeekend(friday);
+            var result = new WeekendRule().IsWeekend(friday);
 
             Assert.IsFalse(result);
         }
@@ -21,7 +22,7 @@ namespace Core.Tests.DateEvaluators
         {
             var saturday = new DateTime(2014, 1, 18);
 
-            var result = WeekendEvaluator.IsWeekend(saturday);
+            var result = new WeekendRule().IsWeekend(saturday);
 
             Assert.IsTrue(result);
         }
@@ -31,7 +32,7 @@ namespace Core.Tests.DateEvaluators
         {
             var sunday = new DateTime(2014, 1, 19);
 
-            var result = WeekendEvaluator.IsWeekend(sunday);
+            var result = new WeekendRule().IsWeekend(sunday);
 
             Assert.IsTrue(result);
         }
@@ -41,7 +42,7 @@ namespace Core.Tests.DateEvaluators
         {
             var monday = new DateTime(2014, 1, 20);
 
-            var result = WeekendEvaluator.IsWeekend(monday);
+            var result = new WeekendRule().IsWeekend(monday);
 
             Assert.IsFalse(result);
         }

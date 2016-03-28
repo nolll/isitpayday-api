@@ -1,15 +1,12 @@
 using System;
+using Core.Classes;
 
 namespace Core.HolidayRules
 {
-    public class MidsummersEveRule : HolidayRule
+    public class MidsummersEveRule : FirstDayOfWeekFrom
     {
-        protected override DateTime DetermineDate(int year)
+        public MidsummersEveRule() : base(DayOfWeek.Friday, Month.June, 19)
         {
-            var date = new DateTime(year, 6, 19);
-            while (date.DayOfWeek != DayOfWeek.Friday)
-                date = date.AddDays(1);
-            return date;
         }
     }
 }

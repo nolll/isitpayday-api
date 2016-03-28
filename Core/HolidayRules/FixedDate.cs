@@ -3,12 +3,12 @@ using Core.Classes;
 
 namespace Core.HolidayRules
 {
-    public class FixedHolidayRule : HolidayRule
+    public class FixedDate : HolidayRule
     {
         private readonly Month _month;
         private readonly int _day;
 
-        protected FixedHolidayRule(Month month, int day)
+        public FixedDate(Month month, int day)
         {
             _month = month;
             _day = day;

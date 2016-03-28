@@ -3,7 +3,7 @@ using Core.HolidayRules;
 
 namespace Core.DateEvaluators.CountrySpecific
 {
-    public class SwedishHolidayEvaluator : HolidayEvaluator
+    public class SwedenEvaluator : CountryEvaluator
     {
         protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
         {
