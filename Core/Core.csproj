@@ -56,6 +56,7 @@
     <Compile Include="HolidayRules\BoxingDayRule.cs" />
     <Compile Include="HolidayRules\ChristmasDayRule.cs" />
     <Compile Include="HolidayRules\ChristmasEveRule.cs" />
+    <Compile Include="HolidayRules\ColumbusDayRule.cs" />
     <Compile Include="HolidayRules\EasterMondayRule.cs" />
     <Compile Include="HolidayRules\EpiphanyRule.cs" />
     <Compile Include="HolidayRules\FixedHolidayRule.cs" />
@@ -63,13 +64,19 @@
     <Compile Include="HolidayRules\IHolidayRule.cs" />
     <Compile Include="HolidayRules\IndependenceDayRule.cs" />
     <Compile Include="HolidayRules\InternationalWorkersDayRule.cs" />
+    <Compile Include="HolidayRules\LaborDayRule.cs" />
+    <Compile Include="HolidayRules\LastDayOfWeekInMonth.cs" />
+    <Compile Include="HolidayRules\MartinLutherKingJrsBirthdayRule.cs" />
+    <Compile Include="HolidayRules\MemorialDayRule.cs" />
     <Compile Include="HolidayRules\MidsummersEveRule.cs" />
     <Compile Include="HolidayRules\NewYearsDayRule.cs" />
     <Compile Include="HolidayRules\NewYearsEveRule.cs" />
     <Compile Include="HolidayRules\NthDayOfWeekInMonth.cs" />
+    <Compile Include="HolidayRules\PresidentsDayRule.cs" />
     <Compile Include="HolidayRules\RelativeToEasterSundayRule.cs" />
     <Compile Include="HolidayRules\SwedishNationalDayRule.cs" />
     <Compile Include="HolidayRules\ThanksgivingDayRule.cs" />
+    <Compile Include="HolidayRules\VeteransDayRule.cs" />
     <Compile Include="UseCases\ShowPayDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CountryService.cs" />
