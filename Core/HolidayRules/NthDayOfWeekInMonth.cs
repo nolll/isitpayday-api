@@ -3,7 +3,7 @@ using Core.Classes;
 
 namespace Core.HolidayRules
 {
-    public abstract class NthDayOfWeekInMonth : IHolidayRule
+    public abstract class NthDayOfWeekInMonth : HolidayRule
     {
         private readonly int _nth;
         private readonly DayOfWeek _dayOfWeek;
@@ -16,7 +16,7 @@ namespace Core.HolidayRules
             _month = month;
         }
 
-        public DateTime GetDate(int year)
+        protected override DateTime DetermineDate(int year)
         {
             return GetNthDayOfWeekInMonth(year);
         }

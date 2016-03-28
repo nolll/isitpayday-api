@@ -5,7 +5,7 @@ namespace Core.DateEvaluators.CountrySpecific
 {
     public class SwedishHolidayEvaluator : HolidayEvaluator
     {
-        protected override List<IHolidayRule> HolidayRules => new List<IHolidayRule>
+        protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
         {
             new NewYearsDayRule(),
             new EpiphanyRule(),

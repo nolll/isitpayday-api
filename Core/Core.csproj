@@ -52,6 +52,9 @@
     <Compile Include="DateEvaluators\HolidayEvaluator.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
     <Compile Include="DateEvaluators\WeekendEvaluator.cs" />
+    <Compile Include="HolidayAdjustments\HolidayAdjustment.cs" />
+    <Compile Include="HolidayAdjustments\SaturdayToFridayAdjustment.cs" />
+    <Compile Include="HolidayAdjustments\SundayToMondayAdjustment.cs" />
     <Compile Include="HolidayRules\AscensionDayRule.cs" />
     <Compile Include="HolidayRules\BoxingDayRule.cs" />
     <Compile Include="HolidayRules\ChristmasDayRule.cs" />
@@ -61,7 +64,7 @@
     <Compile Include="HolidayRules\EpiphanyRule.cs" />
     <Compile Include="HolidayRules\FixedHolidayRule.cs" />
     <Compile Include="HolidayRules\GoodFridayRule.cs" />
-    <Compile Include="HolidayRules\IHolidayRule.cs" />
+    <Compile Include="HolidayRules\HolidayRule.cs" />
     <Compile Include="HolidayRules\IndependenceDayRule.cs" />
     <Compile Include="HolidayRules\InternationalWorkersDayRule.cs" />
     <Compile Include="HolidayRules\LaborDayRule.cs" />

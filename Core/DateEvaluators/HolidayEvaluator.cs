@@ -9,7 +9,7 @@ namespace Core.DateEvaluators
 {
     public abstract class HolidayEvaluator
     {
-        protected abstract List<IHolidayRule> HolidayRules { get; }
+        protected abstract List<HolidayRule> HolidayRules { get; }
 
         public static bool IsHoliday(Country country, DateTime userTime)
         {

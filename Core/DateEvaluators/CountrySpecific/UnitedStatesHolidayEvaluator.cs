@@ -1,22 +1,23 @@
 using System.Collections.Generic;
+using Core.HolidayAdjustments;
 using Core.HolidayRules;
 
 namespace Core.DateEvaluators.CountrySpecific
 {
     public class UnitedStatesHolidayEvaluator : HolidayEvaluator
     {
-        protected override List<IHolidayRule> HolidayRules => new List<IHolidayRule>
+        protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
         {
-            new NewYearsDayRule().MoveSundayToMonday(),
+            new NewYearsDayRule().Adjust(Adjust.SundayToMonday),
             new MartinLutherKingJrsBirthdayRule(),
             new PresidentsDayRule(),
             new MemorialDayRule(),
             new IndependenceDayRule(),
             new LaborDayRule(),
             new ColumbusDayRule(),
-            new VeteransDayRule().MoveSundayToMonday().MoveSaturdayToFriday(),
+            new VeteransDayRule().Adjust(Adjust.SaturdayToFriday).Adjust(Adjust.SundayToMonday),
             new ThanksgivingDayRule(),
-            new ChristmasDayRule().MoveSundayToMonday()
+            new ChristmasDayRule().Adjust(Adjust.SundayToMonday)
         };
     }
 }

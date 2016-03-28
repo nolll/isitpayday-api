@@ -3,7 +3,7 @@ using Core.Classes;
 
 namespace Core.HolidayRules
 {
-    public abstract class LastDayOfWeekInMonth : IHolidayRule
+    public abstract class LastDayOfWeekInMonth : HolidayRule
     {
         private readonly DayOfWeek _dayOfWeek;
         private readonly Month _month;
@@ -14,7 +14,7 @@ namespace Core.HolidayRules
             _month = month;
         }
 
-        public DateTime GetDate(int year)
+        protected override DateTime DetermineDate(int year)
         {
             var firstOfMonth = new DateTime(year, (int)_month, 1);
             var firstOfNextMonth = firstOfMonth.AddMonths(1);

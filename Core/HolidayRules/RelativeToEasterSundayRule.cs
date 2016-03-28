@@ -2,7 +2,7 @@ using System;
 
 namespace Core.HolidayRules
 {
-    public class RelativeToEasterSundayRule : IHolidayRule
+    public class RelativeToEasterSundayRule : HolidayRule
     {
         private readonly int _diffInDays;
 
@@ -11,7 +11,7 @@ namespace Core.HolidayRules
             _diffInDays = diffInDays;
         }
 
-        public DateTime GetDate(int year)
+        protected override DateTime DetermineDate(int year)
         {
             return GetEasterSunday(year).AddDays(_diffInDays);
         }
