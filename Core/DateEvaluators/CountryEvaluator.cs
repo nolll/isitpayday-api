@@ -38,8 +38,9 @@ namespace Core.DateEvaluators
 
         private static readonly Dictionary<string, CountryEvaluator> Evaluators = new Dictionary<string, CountryEvaluator>
         {
-            { "SE", new SwedenEvaluator() },
+            { "DK", new DenmarkEvaluator() },
             { "NO", new NorwayEvaluator() },
+            { "SE", new SwedenEvaluator() },
             { "US", new UnitedStatesEvaluator() }
         };
     }

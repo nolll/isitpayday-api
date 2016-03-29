@@ -47,6 +47,7 @@
     <Compile Include="Classes\Weekday.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\DefaultEvaluator.cs" />
+    <Compile Include="DateEvaluators\CountrySpecific\DenmarkEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\NorwayEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\SwedenEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\UnitedStatesEvaluator.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="HolidayRules\FixedDate.cs" />
     <Compile Include="HolidayRules\GoodFridayRule.cs" />
     <Compile Include="HolidayRules\HolidayRule.cs" />
+    <Compile Include="HolidayRules\NationalDayDenmarkRule.cs" />
+    <Compile Include="HolidayRules\NationalDayNorwayRule.cs" />
     <Compile Include="HolidayRules\NationalDayUnitedStatesRule.cs" />
     <Compile Include="HolidayRules\InternationalWorkersDayRule.cs" />
     <Compile Include="HolidayRules\LaborDayRule.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="HolidayRules\NewYearsDayRule.cs" />
     <Compile Include="HolidayRules\NewYearsEveRule.cs" />
     <Compile Include="HolidayRules\NthDayOfWeekInMonth.cs" />
+    <Compile Include="HolidayRules\PrayerDayRule.cs" />
     <Compile Include="HolidayRules\PresidentsDayRule.cs" />
     <Compile Include="HolidayRules\RelativeToEasterSunday.cs" />
     <Compile Include="HolidayRules\NationalDaySwedenRule.cs" />
