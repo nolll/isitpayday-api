@@ -51,6 +51,7 @@
     <Compile Include="DateEvaluators\BlockedEvaluatorTests.cs" />
     <Compile Include="DateEvaluators\HolidayEvaluators\Arrange.cs" />
     <Compile Include="DateEvaluators\HolidayEvaluators\GivenDefaultCountry.cs" />
+    <Compile Include="DateEvaluators\HolidayEvaluators\GivenNorway.cs" />
     <Compile Include="DateEvaluators\HolidayEvaluators\GivenUnitedStates.cs" />
     <Compile Include="DateEvaluators\HolidayEvaluators\GivenSweden.cs" />
     <Compile Include="DateEvaluators\PayDayEvaluatorTests.cs" />

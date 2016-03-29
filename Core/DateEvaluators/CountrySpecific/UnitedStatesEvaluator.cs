@@ -12,7 +12,7 @@ namespace Core.DateEvaluators.CountrySpecific
             new MartinLutherKingJrsBirthdayRule(),
             new PresidentsDayRule(),
             new MemorialDayRule(),
-            new IndependenceDayRule(),
+            new NationalDayUnitedStatesRule(),
             new LaborDayRule(),
             new ColumbusDayRule(),
             new VeteransDayRule().Adjust(Adjust.SaturdayToFriday).Adjust(Adjust.SundayToMonday),
