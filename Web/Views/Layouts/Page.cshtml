@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <title>Is it payday?</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="title" content="Is it payday?" />
         <meta name="keywords" content="pay day payday" />
         <meta name="description" content="Find out if today is payday" />
@@ -12,17 +12,22 @@
         <link href="/Styles/styles.css" rel="stylesheet"/>
         <link rel="shortcut icon" type="image/png" href="/Images/favicon.png" />
     </head>
-    <body>
-        @RenderBody()
+<body>
 
-        <p class="contact">
-            Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
-        </p>
+@RenderBody()
 
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <script type="text/javascript" src="/Scripts/script.js"></script>
+<p class="contact">
+    Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
+</p>
 
-        @Html.Partial("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 
-    </body>
+@*<script src="/Scripts/lib/vue.js"></script>*@
+<script src="/Scripts/old.js"></script>
+<script src="/assets/scripts.js"></script>
+
+@Html.Partial("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
+
+</body>
+
 </html>

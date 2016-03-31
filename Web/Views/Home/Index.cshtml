@@ -2,11 +2,16 @@
 @{
     Layout = "~/Views/Layouts/Page.cshtml";
 }
-<h1>Is it payday?</h1>
-<p class="status"><span>@Model.PayDayString</span></p>
 
-@Html.Partial("~/Views/Home/SettingsForm.cshtml", Model.SettingsFormModel)
+<div id="app">
 
-<p class="footer">
-	@Model.LocalTime
-</p>
+    <h1>Is it payday?</h1>
+    <p class="status" v-show="initialized"><span v-text="message"></span></p>
+
+    @Html.Partial("~/Views/Home/SettingsForm.cshtml", Model.SettingsFormModel)
+
+    <p class="footer">
+        @Model.LocalTime
+    </p>
+
+</div>

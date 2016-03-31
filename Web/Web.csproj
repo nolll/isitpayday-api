@@ -144,6 +144,11 @@
     <Content Include="Global.asax" />
     <Content Include="Images\favicon.png" />
     <Content Include="Images\money.jpg" />
+    <Content Include="Scripts\lib\vue.js" />
+    <Content Include="Scripts\old.js" />
+    <None Include="package.json" />
+    <Content Include="Scripts\ajax.js" />
+    <Content Include="webpack.config.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Styles\styles.css" />
     <Content Include="Web.config" />
