@@ -1,4 +1,4 @@
-namespace Web
+namespace Web.Cookies
 {
     public static class CookieContainer
     {

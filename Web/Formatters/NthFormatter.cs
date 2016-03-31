@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Web
+namespace Web.Formatters
 {
     public class NthFormatter
     {

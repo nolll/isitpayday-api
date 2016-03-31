@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Web.Cookies;
 using Web.Plumbing;
 
 namespace Web.Controllers

@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Web.Mvc;
 
-namespace Web
+namespace Web.Models
 {
     public class CustomSelectListItem : SelectListItem
     {
@@ -12,7 +12,7 @@ namespace Web
         }
 
         public CustomSelectListItem(string text, int value)
-            : this(text, value.ToString(CultureInfo.InvariantCulture))
+            : this(text, (string) value.ToString(CultureInfo.InvariantCulture))
         {
         }
     }

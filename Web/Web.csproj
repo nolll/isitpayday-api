@@ -119,10 +119,12 @@
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="CookieContainer.cs" />
-    <Compile Include="CookieNames.cs" />
-    <Compile Include="CookieStorage.cs" />
-    <Compile Include="CustomSelectListItem.cs" />
+    <Compile Include="Cookies\CookieContainer.cs" />
+    <Compile Include="Cookies\CookieNames.cs" />
+    <Compile Include="Cookies\CookieStorage.cs" />
+    <Compile Include="Cookies\WebContext.cs" />
+    <Compile Include="Formatters\NthFormatter.cs" />
+    <Compile Include="Models\CustomSelectListItem.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
@@ -131,20 +133,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="NthFormatter.cs" />
     <Compile Include="Plumbing\Bootstrapper.cs" />
     <Compile Include="Plumbing\UseCaseContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
-    <Content Include="money.jpg" />
-    <Content Include="script.js" />
-    <Content Include="styles.css" />
+    <Content Include="Images\favicon.png" />
+    <Content Include="Images\money.jpg" />
+    <Content Include="Scripts\script.js" />
+    <Content Include="Styles\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>

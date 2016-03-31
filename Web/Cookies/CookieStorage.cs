@@ -1,7 +1,7 @@
 using System.Globalization;
 using Core.Storage;
 
-namespace Web
+namespace Web.Cookies
 {
     public class CookieStorage : IStorage
     {
