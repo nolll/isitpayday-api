@@ -226,7 +226,9 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="AfterBuild">
+    <Exec Command="npm install" ContinueOnError="false" WorkingDirectory="$(MSBuildProjectDirectory)" Condition="'$(Configuration)' == 'Release'" />
+    <Exec Command="npm run gulp" ContinueOnError="false" WorkingDirectory="$(MSBuildProjectDirectory)" Condition="'$(Configuration)' == 'Release'" />
+  </Target>
 </Project>
