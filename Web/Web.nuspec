@@ -7,4 +7,7 @@
     <authors>Henrik Severinson</authors>
     <description>Single purpose website that determines if today is payday</description>
   </metadata>
+  <files>
+    <file src="assets\*.*" target="assets" />
+  </files>
 </package>
