@@ -230,5 +230,5 @@
   <Target Name="AfterBuild">
     <Exec Command="npm install" ContinueOnError="false" WorkingDirectory="$(MSBuildProjectDirectory)" Condition="'$(Configuration)' == 'Release'" />
     <Exec Command="npm run gulp" ContinueOnError="false" WorkingDirectory="$(MSBuildProjectDirectory)" Condition="'$(Configuration)' == 'Release'" />
-  </Target>
+  </Target> -->
 </Project>
