@@ -10,3 +10,4 @@ _NCrunch_*/
 **/bin/
 **/*proj.user
 /Web/node_modules
+/Web/assets

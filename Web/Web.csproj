@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="gulpfile.js" />
     <Content Include="Images\favicon.png" />
     <Content Include="Images\money.jpg" />
     <Content Include="Scripts\lib\vue.js" />

@@ -1,9 +1,9 @@
 var webpack = require("webpack");
 
 module.exports = {
-    entry: "./Scripts/script.js",
+    entry: __dirname + "/Scripts/script.js",
     output: {
-        path: "assets",
+        path: __dirname + "/assets",
         filename: "scripts.js"
     },
     plugins: [

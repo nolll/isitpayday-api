@@ -8,6 +8,8 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webpack": "^1.5.0",
     "webpack": "^1.12.14"
   },
   "author": "nolll"
