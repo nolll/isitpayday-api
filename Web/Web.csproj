@@ -153,8 +153,10 @@
     <Content Include="Images\money.jpg" />
     <None Include="package.json" />
     <Content Include="Scripts\ajax.js" />
+    <Content Include="Scripts\components\settings\settings.html" />
+    <Content Include="Scripts\components\settings\settings.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Styles\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Release.config">
@@ -164,7 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\components\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

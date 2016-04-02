@@ -45,6 +45,9 @@ var app = new Vue({
                 .replace("{frequency}", this.frequency)
                 .replace("{country}", this.country);
         }
+    },
+    components: {
+        "settings": require('./components/settings/settings')
     }
 });
 

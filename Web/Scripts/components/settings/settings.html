@@ -1,0 +1,54 @@
+﻿<div class="settings">
+    <form action="/" method="post">
+        <div class="settings">
+            <h2>Settings</h2>
+            <h3>Country</h3>
+            <div class="country-info">
+                <p v-show="countryFormVisible">
+                    Dropdown @*@Html.DropDownListFor(model => model.CountryId, Model.CountryItems, new { @id = "input_country" })*@
+                </p>
+                <p v-else>
+                    {{country}}
+                    <a href="#" class="change-country">Change</a>
+                </p>
+            </div>
+
+            <h3>Timezone</h3>
+            <div class="timezone-info">
+                <p v-show="timezoneFormVisible">
+                    Dropdown @*@Html.DropDownListFor(model => model.TimeZoneId, Model.TimeZoneItems, new { @id = "input_timezone" })*@
+                </p>
+                <p v-else>
+                    {{timezone}}
+                    <a href="#" class="change-timezone">Change</a>
+                </p>
+            </div>
+
+            <h3>Frequency</h3>
+            <div class="frequency-info">
+                <p v-show="frequencyFormVisible">
+                    Dropdown @*@Html.DropDownListFor(model => model.FrequencyId, Model.FrequencyItems, new { @id = "input_frequency" })*@
+                </p>
+                <p v-else>
+                    {{frequency}}
+                    <a href="#" class="change-frequency">Change</a>
+                </p>
+            </div>
+
+            <h3>Payday</h3>
+            <div class="payday-info">
+                <p v-show="paydayFormVisible">
+                    Dropdown @*@Html.DropDownListFor(model => model.PayDay, Model.PayDayItems, new { @id = "input_payday" })*@
+                </p>
+                <p v-else>
+                    {{payday}}
+                    <a href="#" class="change-payday">Change</a>
+                </p>
+            </div>
+
+            <noscript>
+                <button type="submit">Save</button>
+            </noscript>
+        </div>
+    </form>
+</div>
