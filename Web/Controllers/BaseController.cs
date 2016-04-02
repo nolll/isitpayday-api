@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 using Web.Cookies;
 using Web.Plumbing;
 
@@ -15,6 +16,17 @@ namespace Web.Controllers
         protected static string TimezoneId => CookieContainer.TimezoneId;
 
         protected BaseController()
+        {
+            _bootstrapper = new Bootstrapper();
+        }
+    }
+
+    public abstract class BaseApiController : ApiController
+    {
+        private readonly Bootstrapper _bootstrapper;
+        protected UseCaseContainer UseCase => _bootstrapper.UseCases;
+
+        protected BaseApiController()
         {
             _bootstrapper = new Bootstrapper();
         }
