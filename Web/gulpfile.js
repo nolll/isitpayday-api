@@ -4,7 +4,7 @@ var webpack = require("gulp-webpack");
 var webpackConfig = require("./webpack.config.js");
 
 var paths = {
-    jsEntry: "./Scripts/script.js",
+    jsEntry: "./Scripts/app.js",
     assetFolder: "./assets/",
     allJs: "./Scripts/**/*.js"
     //allHtml: "./Frontend/js/**/*.html",

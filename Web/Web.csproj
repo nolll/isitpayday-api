@@ -151,7 +151,6 @@
     <Content Include="gulpfile.js" />
     <Content Include="Images\favicon.png" />
     <Content Include="Images\money.jpg" />
-    <Content Include="Scripts\old.js" />
     <None Include="package.json" />
     <Content Include="Scripts\ajax.js" />
     <Content Include="webpack.config.js" />
