@@ -1,18 +1,13 @@
 ﻿using System;
-using Core.Classes;
 using Core.UseCases;
 
 namespace Web.Controllers
 {
     public class DataController : BaseApiController
     {
-        public DataModel Get()
+        public DataModel Get(int frequency, int payday, string country, string timezone)
         {
-            const int payDay = 25;
-            const int frequency = (int)Frequency.Monthly;
-            const string countryCode = "SE";
-            const string timezoneId = "W. Europe Standard Time";
-            var payDayRequest = new ShowPayDay.Request(payDay, frequency, countryCode, timezoneId, DateTime.UtcNow);
+            var payDayRequest = new ShowPayDay.Request(payday, frequency, country, timezone, DateTime.UtcNow);
             var showPayDayResult = UseCase.ShowPayDay.Execute(payDayRequest);
 
             return new DataModel(showPayDayResult);
