@@ -11,7 +11,7 @@ var app = new Vue({
     data: defaultData,
     computed: {
         message: function() {
-            return this.isPayDay ? "YES!!1!" : "No =(";
+            return this.isPayday ? "YES!!1!" : "No =(";
         },
         formattedLocalTime: function() {
             if (this.localTime)
@@ -22,17 +22,17 @@ var app = new Vue({
     methods: {
         initData: function () {
             this.loadSettings();
-            this.loadPayDay();
+            this.loadPayday();
             this.loadOptions();
         },
-        updatePayDay: function() {
-            this.loadPayDay();
+        updatePayday: function() {
+            this.loadPayday();
         },
-        loadPayDay: function() {
-            ajax.load(this.getPaydayUrl(), this.loadedPayDay, this.loadError);
+        loadPayday: function() {
+            ajax.load(this.getPaydayUrl(), this.loadedPayday, this.loadError);
         },
-        loadedPayDay: function (data) {
-            this.isPayDay = data.isPayDay;
+        loadedPayday: function (data) {
+            this.isPayday = data.isPayday;
             this.localTime = data.localTime;
             this.initialized = true;
         },
@@ -47,14 +47,14 @@ var app = new Vue({
         loadError: function () {
         },
         loadSettings: function () {
-            this.payDay = this.getPayDay();
+            this.payday = this.getPayday();
             this.timezone = this.getTimezone();
             this.frequency = this.getFrequency();
             this.country = this.getCountry();
         },
-        getPayDay: function () {
-            var payDay = cookie.get("payday");
-            return payDay ? payDay : this.payDay;
+        getPayday: function () {
+            var payday = cookie.get("payday");
+            return payday ? payday : this.payday;
         },
         getTimezone: function () {
             var timezone = cookie.get("timezone");
@@ -76,15 +76,72 @@ var app = new Vue({
             return country ? country : this.country;
         },
         getPaydayUrl: function () {
-            var template = "/api/data/get?frequency={frequency}&payday={payday}&country={country}&timezone={timezone}";
+            if (this.frequency === "weekly")
+                return this.getWeeklyPaydayUrl();
+            return this.getMonthlyPaydayUrl();
+        },
+        getMonthlyPaydayUrl: function () {
+            var template = "/api/monthly?payday={payday}&country={country}&timezone={timezone}";
             return template
-                .replace("{payday}", this.payDay)
+                .replace("{payday}", this.payday)
                 .replace("{timezone}", this.timezone)
-                .replace("{frequency}", this.frequency)
+                .replace("{country}", this.country);
+        },
+        getWeeklyPaydayUrl: function () {
+            var template = "/api/weekly?payday={payday}&country={country}&timezone={timezone}";
+            return template
+                .replace("{payday}", this.payday)
+                .replace("{timezone}", this.timezone)
                 .replace("{country}", this.country);
         },
         getOptionsUrl: function () {
-            return "/api/data/options";
+            return "/api/options";
+        },
+        setCountry: function (country) {
+            if (country !== this.country) {
+                this.country = country;
+                this.saveCountry(country);
+                this.updatePayday();
+            }
+        },
+        setFrequency: function (frequency) {
+            if (frequency !== this.frequency) {
+                this.frequency = frequency;
+                this.saveFrequency(frequency);
+                var payday = frequency === "weekly" ? 5 : 25;
+                this.payday = payday;
+                this.savePayday(payday);
+                this.updatePayday();
+            }
+        },
+        setTimezone: function (timezone) {
+            if (timezone !== this.timezone) {
+                this.timezone = timezone;
+                this.saveTimezone(timezone);
+                this.updatePayday();
+            }
+        },
+        setPayday: function (payday) {
+            if (payday !== this.payday) {
+                this.payday = payday;
+                this.savePayday(payday);
+                this.updatePayday();
+            }
+        },
+        saveCountry: function (country) {
+            this.setCookie("country", country);
+        },
+        saveFrequency: function (frequency) {
+            this.setCookie("frequency", frequency);
+        },
+        saveTimezone: function (timezone) {
+            this.setCookie("timezone", timezone);
+        },
+        savePayday: function (payday) {
+            this.setCookie("payday", payday);
+        },
+        setCookie(name, value) {
+            cookie.set(name, value, { expires: 3650 });
         }
     },
     components: {
@@ -92,8 +149,16 @@ var app = new Vue({
     },
     events: {
         "select-country": function (country) {
-            this.country = country;
-            this.updatePayDay();
+            this.setCountry(country);
+        },
+        "select-frequency": function (frequency) {
+            this.setFrequency(frequency);
+        },
+        "select-timezone": function (timezone) {
+            this.setTimezone(timezone);
+        },
+        "select-payday": function (payday) {
+            this.setPayday(payday);
         }
     }
 });
@@ -101,7 +166,7 @@ var app = new Vue({
 function defaultData() {
     return {
         initialized: false,
-        isPayDay: false,
+        isPayday: false,
         payday: 25,
         timezone: "W. Europe Standard Time",
         frequency: "weekly",

@@ -19,7 +19,7 @@ module.exports = {
     methods: {
         select: function (event) {
             event.preventDefault();
-            this.$dispatch("select-frequncy", this.frequency);
+            this.$dispatch("select-frequency", this.frequency);
             this.close();
         },
         open: function () {

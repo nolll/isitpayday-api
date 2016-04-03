@@ -2,17 +2,19 @@
 
 module.exports = {
     template: html,
-    props: ["showForm", "payday"],
+    props: ["showForm", "payday", "frequency"],
     data: getData,
     computed: {
         paydayName: function () {
+            if (this.frequency === "weekly")
+                return formatWeekday(this.payday);
             return formatNth(this.payday);
         }
     },
     methods: {
         select: function (event) {
             event.preventDefault();
-            this.$dispatch("select-payday", this.frequency);
+            this.$dispatch("select-payday", this.payday);
             this.close();
         },
         open: function () {
@@ -35,9 +37,15 @@ function getPayDays() {
         i;
 
     for (i = 1; i <= 31; i++) {
-        paydays.push({ id: i, name: formatNth(i) });
+        paydays.push({ id: i, name: format(i) });
     }
     return paydays;
+}
+
+function format(n) {
+    if (this.frequency === "weekly")
+        return formatWeekday(n);
+    return formatNth(n);
 }
 
 function formatNth(n)
@@ -69,4 +77,20 @@ function endsWith(n, lookFor) {
 
 function lastChar(n) {
     return n.toString().slice(-1);
+}
+
+function formatWeekday(payday) {
+    if (payday === "1")
+        return "Monday";
+    if (payday === "2")
+        return "Tuesday";
+    if (payday === "3")
+        return "Wednesday";
+    if (payday === "4")
+        return "Thursday";
+    if (payday === "5")
+        return "Friday";
+    if (payday === "6")
+        return "Saturday";
+    return "Sunday";
 }

@@ -122,9 +122,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseApiController.cs" />
-    <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MonthlyController.cs" />
+    <Compile Include="Controllers\WeeklyController.cs" />
     <Compile Include="Formatters\NthFormatter.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomSelectListItem.cs" />
