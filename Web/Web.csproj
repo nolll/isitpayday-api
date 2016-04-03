@@ -153,6 +153,10 @@
     <Content Include="Images\favicon.png" />
     <Content Include="Images\money.jpg" />
     <None Include="package.json" />
+    <Content Include="Scripts\weekdays.js" />
+    <Content Include="Scripts\urls.js" />
+    <Content Include="Scripts\frequencies.js" />
+    <Content Include="Scripts\storage.js" />
     <Content Include="Scripts\ajax.js" />
     <Content Include="Scripts\components\timezone-form\timezone-form.html" />
     <Content Include="Scripts\components\timezone-form\timezone-form.js" />

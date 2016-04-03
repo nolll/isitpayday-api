@@ -1,4 +1,5 @@
 ﻿var html = require("html-loader!./frequency-form.html");
+var frequencies = require("../../frequencies");
 
 module.exports = {
     template: html,
@@ -39,7 +40,7 @@ function getData() {
 
 function getFrequencies() {
     return [
-        { id: "monthly", name: "Monthly" },
-        { id: "weekly", name: "Weekly" }
+        { id: frequencies.monthly, name: "Monthly" },
+        { id: frequencies.weekly, name: "Weekly" }
     ];
 }

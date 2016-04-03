@@ -1,7 +1,10 @@
-var Vue = require("vue");
-var cookie = require("js-cookie");
-var moment = require("moment");
-var ajax = require("./ajax");
+var Vue = require("vue"),
+    cookie = require("js-cookie"),
+    moment = require("moment"),
+    ajax = require("./ajax"),
+    storage = require("./storage"),
+    frequencies = require("./frequencies"),
+    urls = require("./urls")
 
 var app = new Vue({
     el: "#app",
@@ -21,7 +24,6 @@ var app = new Vue({
     },
     methods: {
         initData: function () {
-            this.loadSettings();
             this.loadPayday();
             this.loadOptions();
         },
@@ -37,7 +39,7 @@ var app = new Vue({
             this.initialized = true;
         },
         loadOptions: function () {
-            ajax.load(this.getOptionsUrl(), this.loadedOptions, this.loadError);
+            ajax.load(urls.getOptionsUrl(), this.loadedOptions, this.loadError);
         },
         loadedOptions: function (data) {
             this.countries = data.countries;
@@ -46,102 +48,41 @@ var app = new Vue({
         },
         loadError: function () {
         },
-        loadSettings: function () {
-            this.payday = this.getPayday();
-            this.timezone = this.getTimezone();
-            this.frequency = this.getFrequency();
-            this.country = this.getCountry();
-        },
-        getPayday: function () {
-            var payday = cookie.get("payday");
-            return payday ? payday : this.payday;
-        },
-        getTimezone: function () {
-            var timezone = cookie.get("timezone");
-            return timezone ? timezone : this.timezone;
-        },
-        getFrequency: function () {
-            var frequency = cookie.get("frequency");
-            if (frequency) {
-                if (frequency === "1")
-                    return "monthly";
-                if (frequency === "2")
-                    return "weekly";
-                return frequency;
-            }
-            return this.frequency;
-        },
-        getCountry: function () {
-            var country = cookie.get("country");
-            return country ? country : this.country;
-        },
         getPaydayUrl: function () {
-            if (this.frequency === "weekly")
-                return this.getWeeklyPaydayUrl();
-            return this.getMonthlyPaydayUrl();
-        },
-        getMonthlyPaydayUrl: function () {
-            var template = "/api/monthly?payday={payday}&country={country}&timezone={timezone}";
-            return template
-                .replace("{payday}", this.payday)
-                .replace("{timezone}", this.timezone)
-                .replace("{country}", this.country);
-        },
-        getWeeklyPaydayUrl: function () {
-            var template = "/api/weekly?payday={payday}&country={country}&timezone={timezone}";
-            return template
-                .replace("{payday}", this.payday)
-                .replace("{timezone}", this.timezone)
-                .replace("{country}", this.country);
-        },
-        getOptionsUrl: function () {
-            return "/api/options";
+            if (this.frequency === frequencies.weekly)
+                return urls.getWeeklyUrl(this.payday, this.timezone, this.country);
+            return urls.getMonthlyUrl(this.payday, this.timezone, this.country);
         },
         setCountry: function (country) {
             if (country !== this.country) {
                 this.country = country;
-                this.saveCountry(country);
+                storage.saveCountry(country);
                 this.updatePayday();
             }
         },
         setFrequency: function (frequency) {
             if (frequency !== this.frequency) {
                 this.frequency = frequency;
-                this.saveFrequency(frequency);
-                var payday = frequency === "weekly" ? 5 : 25;
+                storage.saveFrequency(frequency);
+                var payday = frequency === frequencies.weekly ? 5 : 25;
                 this.payday = payday;
-                this.savePayday(payday);
+                storage.savePayday(payday);
                 this.updatePayday();
             }
         },
         setTimezone: function (timezone) {
             if (timezone !== this.timezone) {
                 this.timezone = timezone;
-                this.saveTimezone(timezone);
+                storage.saveTimezone(timezone);
                 this.updatePayday();
             }
         },
         setPayday: function (payday) {
             if (payday !== this.payday) {
                 this.payday = payday;
-                this.savePayday(payday);
+                storage.savePayday(payday);
                 this.updatePayday();
             }
-        },
-        saveCountry: function (country) {
-            this.setCookie("country", country);
-        },
-        saveFrequency: function (frequency) {
-            this.setCookie("frequency", frequency);
-        },
-        saveTimezone: function (timezone) {
-            this.setCookie("timezone", timezone);
-        },
-        savePayday: function (payday) {
-            this.setCookie("payday", payday);
-        },
-        setCookie(name, value) {
-            cookie.set(name, value, { expires: 3650 });
         }
     },
     components: {
@@ -167,10 +108,10 @@ function defaultData() {
     return {
         initialized: false,
         isPayday: false,
-        payday: 25,
-        timezone: "W. Europe Standard Time",
-        frequency: "weekly",
-        country: "SE",
+        payday: storage.getPayday(),
+        timezone: storage.getTimezone(),
+        frequency: storage.getFrequency(),
+        country: storage.getCountry(),
         countries: [],
         timezones: [],
         localTime: null

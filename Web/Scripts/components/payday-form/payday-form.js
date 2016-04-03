@@ -1,4 +1,7 @@
 ﻿var html = require("html-loader!./payday-form.html");
+var frequencies = require("../../frequencies");
+var weekdays = require("../../weekdays");
+var nthFormatter = require("../../nth-formatter");
 
 module.exports = {
     template: html,
@@ -6,9 +9,7 @@ module.exports = {
     data: getData,
     computed: {
         paydayName: function () {
-            if (this.frequency === "weekly")
-                return formatWeekday(this.payday);
-            return formatNth(this.payday);
+            return format(this.payday);
         }
     },
     methods: {
@@ -43,54 +44,7 @@ function getPayDays() {
 }
 
 function format(n) {
-    if (this.frequency === "weekly")
-        return formatWeekday(n);
-    return formatNth(n);
-}
-
-function formatNth(n)
-{
-    if (shouldFormatsAsFirst(n))
-        return n + "st";
-    if (shouldFormatsAsSecond(n))
-        return n + "nd";
-    if (shouldFormatsAsThird(n))
-        return n + "rd";
-    return n + "th";
-}
-
-function shouldFormatsAsFirst(n) {
-    return endsWith(n, "1") && !endsWith(n, "11");
-}
-
-function shouldFormatsAsSecond(n) {
-    return endsWith(n, "2") && !endsWith(n, "12");
-}
-        
-function shouldFormatsAsThird(n) {
-    return endsWith(n, "3") && !endsWith(n, "13");
-}
-
-function endsWith(n, lookFor) {
-    return lastChar(n) === lookFor;
-}
-
-function lastChar(n) {
-    return n.toString().slice(-1);
-}
-
-function formatWeekday(payday) {
-    if (payday === "1")
-        return "Monday";
-    if (payday === "2")
-        return "Tuesday";
-    if (payday === "3")
-        return "Wednesday";
-    if (payday === "4")
-        return "Thursday";
-    if (payday === "5")
-        return "Friday";
-    if (payday === "6")
-        return "Saturday";
-    return "Sunday";
+    if (this.frequency === frequencies.weekly)
+        return weekdays.getName(n);
+    return nthFormatter.format(n);
 }
