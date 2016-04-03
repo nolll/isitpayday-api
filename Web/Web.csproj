@@ -131,6 +131,7 @@
     <Compile Include="Cookies\WebContext.cs" />
     <Compile Include="Formatters\NthFormatter.cs" />
     <Compile Include="Models\CustomSelectListItem.cs" />
+    <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
@@ -153,6 +154,14 @@
     <Content Include="Images\money.jpg" />
     <None Include="package.json" />
     <Content Include="Scripts\ajax.js" />
+    <Content Include="Scripts\components\timezone-form\timezone-form.html" />
+    <Content Include="Scripts\components\timezone-form\timezone-form.js" />
+    <Content Include="Scripts\components\country-form\country-form.html" />
+    <Content Include="Scripts\components\country-form\country-form.js" />
+    <Content Include="Scripts\components\payday-form\payday-form.html" />
+    <Content Include="Scripts\components\payday-form\payday-form.js" />
+    <Content Include="Scripts\components\frequency-form\frequency-form.html" />
+    <Content Include="Scripts\components\frequency-form\frequency-form.js" />
     <Content Include="Scripts\components\settings\settings.html" />
     <Content Include="Scripts\components\settings\settings.js" />
     <Content Include="webpack.config.js" />

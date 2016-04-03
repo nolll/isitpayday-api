@@ -1,0 +1,13 @@
+﻿<h3>Frequency</h3>
+<div class="frequency-info">
+    <p v-show="showForm">
+        <select v-model="frequency" v-on:change="select" number>
+            <option v-for="f in frequencies" value="{{f.id}}">{{f.name}}</option>
+        </select>
+        <a href="#" v-on:click="close">Cancel</a>
+    </p>
+    <p v-else>
+        {{frequencyName}}
+        <a href="#" v-on:click="open">Change</a>
+    </p>
+</div>

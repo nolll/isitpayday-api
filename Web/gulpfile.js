@@ -6,8 +6,8 @@ var webpackConfig = require("./webpack.config.js");
 var paths = {
     jsEntry: "./Scripts/app.js",
     assetFolder: "./assets/",
-    allJs: "./Scripts/**/*.js"
-    //allHtml: "./Frontend/js/**/*.html",
+    allJs: "./Scripts/**/*.js",
+    allHtml: "./Scripts/components/**/*.html",
 };
 
 gulp.task("default", ["build"]);
@@ -27,5 +27,5 @@ function taskWatch() {
     }
 
     gulp.watch(paths.allJs, ["scripts"]).on("change", onChanged);
-    //gulp.watch(paths.allHtml, ["scripts"]).on("change", onChanged);
+    gulp.watch(paths.allHtml, ["scripts"]).on("change", onChanged);
 }

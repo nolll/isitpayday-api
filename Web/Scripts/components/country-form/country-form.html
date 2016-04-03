@@ -1,0 +1,13 @@
+﻿<h3>Country</h3>
+<div class="country-info">
+    <p v-show="showForm">
+        <select v-model="country" v-on:change="select" number>
+            <option v-for="c in countries" value="{{c.id}}">{{c.name}}</option>
+        </select>
+        <a href="#" v-on:click="close">Cancel</a>
+    </p>
+    <p v-else>
+        {{country}}
+        <a href="#" v-on:click="open">Change</a>
+    </p>
+</div>

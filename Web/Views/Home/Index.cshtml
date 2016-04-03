@@ -8,7 +8,13 @@
     <h1>Is it payday?</h1>
     <p class="status" v-show="initialized"><span v-text="message"></span></p>
 
-    <settings v-bind:frequency="frequency" v-bind:payday="payday" v-bind:country="country" v-bind:timezone="timezone"></settings>
+    <settings
+        v-bind:frequency="frequency"
+        v-bind:payday="payday"
+        v-bind:country="country"
+        v-bind:timezone="timezone"
+        v-bind:countries="countries">
+    </settings>
 
     @*@Html.Partial("~/Views/Home/SettingsForm.cshtml", Model.SettingsFormModel)*@
 

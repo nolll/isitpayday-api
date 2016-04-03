@@ -1,0 +1,13 @@
+﻿<h3>Payday</h3>
+<div class="payday-info">
+    <p v-show="showForm">
+        <select v-model="payday" v-on:change="select" number>
+            <option v-for="p in paydays" value="{{p.id}}">{{p.name}}</option>
+        </select>
+        <a href="#" v-on:click="close">Cancel</a>
+    </p>
+    <p v-else>
+        {{paydayName}}
+        <a href="#" v-on:click="open">Change</a>
+    </p>
+</div>
