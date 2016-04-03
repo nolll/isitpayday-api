@@ -3,6 +3,18 @@
 module.exports = {
     template: html,
     props: ["showForm", "country", "countries"],
+    computed: {
+        countryName: function() {
+            var i;
+            for (i = 0; i < this.countries.length; i++) {
+                var c = this.countries[i];
+                if (c.id === this.country) {
+                    return c.name;
+                }
+            }
+            return "";
+        }
+    },
     methods: {
         select: function (event) {
             event.preventDefault();

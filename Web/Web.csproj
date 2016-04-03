@@ -190,7 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Layouts\Page.cshtml" />
-    <Content Include="Views\Home\SettingsForm.cshtml" />
     <Content Include="Web.nuspec" />
   </ItemGroup>
   <ItemGroup>
