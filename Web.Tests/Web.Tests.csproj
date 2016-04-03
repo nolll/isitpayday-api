@@ -77,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelFactories\GoogleAnalyticsModelFactoryTests.cs" />
-    <Compile Include="ModelFactories\SettingsFormModelFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

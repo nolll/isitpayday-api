@@ -51,7 +51,8 @@ namespace Core.Tests.UseCases
             var sut = GetSut();
             var result = sut.Execute(request);
 
-            Assert.AreEqual(time, result.UserTime);
+            // todo: test one more time zone
+            Assert.AreEqual(time, result.LocalTime);
         }
 
         private ShowPayDay GetSut()

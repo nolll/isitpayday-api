@@ -17,8 +17,6 @@
         v-bind:timezones="timezones">
     </settings>
 
-    <p class="footer">
-        @Model.LocalTime
-    </p>
+    <p class="footer" v-text="formattedLocalTime"></p>
 
 </div>

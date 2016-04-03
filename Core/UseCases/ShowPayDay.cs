@@ -10,10 +10,10 @@ namespace Core.UseCases
         {
             var utcTime = request.UtcTime;
             var userSettings = new UserSettings(request.PayDay, request.Frequency, request.CountryCode, request.TimezoneId);
-            var userTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
             var evaluator = PayDayEvaluator.Create(userSettings.Frequency, userSettings.Country, utcTime, userSettings.TimeZone, userSettings.PayDay);
             var isPayDay = evaluator.IsPayDay;
-            return new Result(isPayDay, userTime);
+            var localTime = TimeZoneInfo.ConvertTime(utcTime, userSettings.TimeZone);
+            return new Result(isPayDay, localTime);
         }
 
         public class Request
@@ -37,12 +37,12 @@ namespace Core.UseCases
         public class Result
         {
             public bool IsPayDay { get; }
-            public DateTime UserTime { get; }
+            public DateTime LocalTime { get; }
 
-            public Result(bool isPayDay, DateTime userTime)
+            public Result(bool isPayDay, DateTime localTime)
             {
                 IsPayDay = isPayDay;
-                UserTime = userTime;
+                LocalTime = localTime;
             }
         }
     }

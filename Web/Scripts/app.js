@@ -1,5 +1,6 @@
 var Vue = require("vue");
 var cookie = require("js-cookie");
+var moment = require("moment");
 var ajax = require("./ajax");
 
 var app = new Vue({
@@ -11,6 +12,11 @@ var app = new Vue({
     computed: {
         message: function() {
             return this.isPayDay ? "YES!!1!" : "No =(";
+        },
+        formattedLocalTime: function() {
+            if (this.localTime)
+                return moment(this.localTime).format("MMMM Do YYYY, HH:mm:ss");
+            return "";
         }
     },
     methods: {
@@ -27,6 +33,7 @@ var app = new Vue({
         },
         loadedPayDay: function (data) {
             this.isPayDay = data.isPayDay;
+            this.localTime = data.localTime;
             this.initialized = true;
         },
         loadOptions: function () {
@@ -100,6 +107,7 @@ function defaultData() {
         frequency: "weekly",
         country: "SE",
         countries: [],
-        timezones: []
+        timezones: [],
+        localTime: null
     };
 }

@@ -125,10 +125,6 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Cookies\CookieContainer.cs" />
-    <Compile Include="Cookies\CookieNames.cs" />
-    <Compile Include="Cookies\CookieStorage.cs" />
-    <Compile Include="Cookies\WebContext.cs" />
     <Compile Include="Formatters\NthFormatter.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomSelectListItem.cs" />
@@ -137,7 +133,6 @@
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
-    <Compile Include="Models\SettingsFormModel.cs" />
     <Compile Include="Models\SettingsPostModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

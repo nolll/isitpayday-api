@@ -1,6 +1,3 @@
-using Plumbing;
-using Web.Cookies;
-
 namespace Web.Plumbing
 {
     public class Bootstrapper
@@ -9,7 +6,7 @@ namespace Web.Plumbing
 
         public Bootstrapper()
         {
-            UseCases = new UseCaseContainer(new Dependencies(new CookieStorage()));
+            UseCases = new UseCaseContainer();
         }
     }
 }
