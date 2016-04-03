@@ -1,12 +1,14 @@
 using Core.UseCases;
+using JetBrains.Annotations;
 
 namespace Web.Models
 {
-    public class DataModel
+    public class PayDayModel
     {
+        [UsedImplicitly]
         public bool IsPayDay { get; }
 
-        public DataModel(ShowPayDay.Result showPayDayResult)
+        public PayDayModel(ShowPayDay.Result showPayDayResult)
         {
             IsPayDay = showPayDayResult.IsPayDay;
         }

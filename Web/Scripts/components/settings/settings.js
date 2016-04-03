@@ -2,7 +2,7 @@
 
 module.exports = {
     template: html,
-    props: ["frequency", "payday", "country", "timezone", "countries"],
+    props: ["frequency", "payday", "country", "timezone", "countries", "timezones"],
     computed: {
     },
     watch: {

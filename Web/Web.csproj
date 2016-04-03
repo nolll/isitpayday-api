@@ -130,8 +130,10 @@
     <Compile Include="Cookies\CookieStorage.cs" />
     <Compile Include="Cookies\WebContext.cs" />
     <Compile Include="Formatters\NthFormatter.cs" />
+    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomSelectListItem.cs" />
-    <Compile Include="Models\DataModel.cs" />
+    <Compile Include="Models\OptionsModel.cs" />
+    <Compile Include="Models\PayDayModel.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\TimezoneModel.cs" />
     <Compile Include="Plumbing\Bootstrapper.cs" />
     <Compile Include="Plumbing\UseCaseContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

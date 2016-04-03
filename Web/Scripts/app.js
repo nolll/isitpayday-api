@@ -17,7 +17,7 @@ var app = new Vue({
         initData: function () {
             this.loadSettings();
             this.loadPayDay();
-            //this.loadOptions();
+            this.loadOptions();
         },
         updatePayDay: function() {
             this.loadPayDay();

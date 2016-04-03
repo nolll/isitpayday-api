@@ -2,7 +2,7 @@
 <div class="timezone-info">
     <p v-show="showForm">
         <select v-model="timezone" v-on:change="select" number>
-            <option v-for="t in timezones" value="{{t}}">{{t}}</option>
+            <option v-for="t in timezones" value="{{t.id}}">{{t.id}}</option>
         </select>
         <a href="#" v-on:click="close">Cancel</a>
     </p>

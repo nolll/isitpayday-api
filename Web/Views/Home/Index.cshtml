@@ -13,10 +13,9 @@
         v-bind:payday="payday"
         v-bind:country="country"
         v-bind:timezone="timezone"
-        v-bind:countries="countries">
+        v-bind:countries="countries"
+        v-bind:timezones="timezones">
     </settings>
-
-    @*@Html.Partial("~/Views/Home/SettingsForm.cshtml", Model.SettingsFormModel)*@
 
     <p class="footer">
         @Model.LocalTime
