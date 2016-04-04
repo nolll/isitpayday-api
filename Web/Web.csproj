@@ -153,6 +153,7 @@
     <Content Include="Images\favicon.png" />
     <Content Include="Images\money.jpg" />
     <None Include="package.json" />
+    <Content Include="Scripts\nth-formatter.js" />
     <Content Include="Scripts\weekdays.js" />
     <Content Include="Scripts\urls.js" />
     <Content Include="Scripts\frequencies.js" />
