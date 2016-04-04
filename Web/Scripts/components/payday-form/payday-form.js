@@ -1,7 +1,7 @@
 ﻿var html = require("html-loader!./payday-form.html");
-var frequencies = require("../../frequencies");
-var weekdays = require("../../weekdays");
-var nthFormatter = require("../../nth-formatter");
+var frequencies = require("frequencies");
+var weekdays = require("weekdays");
+var nthFormatter = require("nth-formatter");
 
 module.exports = {
     template: html,
@@ -21,7 +21,7 @@ module.exports = {
         open: function () {
             this.showForm = true;
         },
-        close: function () {
+        close: function () { 
             this.showForm = false;
         }
     }

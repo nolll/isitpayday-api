@@ -1,5 +1,5 @@
 ﻿var html = require("html-loader!./frequency-form.html");
-var frequencies = require("../../frequencies");
+var frequencies = require("frequencies");
 
 module.exports = {
     template: html,

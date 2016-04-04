@@ -1,10 +1,10 @@
 var Vue = require("vue"),
     cookie = require("js-cookie"),
     moment = require("moment"),
-    ajax = require("./ajax"),
-    storage = require("./storage"),
-    frequencies = require("./frequencies"),
-    urls = require("./urls")
+    ajax = require("ajax"),
+    storage = require("storage"),
+    frequencies = require("frequencies"),
+    urls = require("urls");
 
 var app = new Vue({
     el: "#app",
