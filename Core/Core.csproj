@@ -42,8 +42,7 @@
   <ItemGroup>
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Classes\CountryCode.cs" />
-    <Compile Include="Classes\Frequency.cs" />
-    <Compile Include="Classes\UserSettings.cs" />
+    <Compile Include="Classes\Month.cs" />
     <Compile Include="Classes\Weekday.cs" />
     <Compile Include="DateEvaluators\BlockedEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\DefaultEvaluator.cs" />
@@ -54,6 +53,9 @@
     <Compile Include="DateEvaluators\CountryEvaluator.cs" />
     <Compile Include="DateEvaluators\MonthlyPayDayEvaluator.cs" />
     <Compile Include="DateEvaluators\WeeklyPayDayEvaluator.cs" />
+    <Compile Include="Exceptions\CountryNotFoundException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Exceptions\TimezoneNotFoundException.cs" />
     <Compile Include="HolidayAdjustments\HolidayAdjustment.cs" />
     <Compile Include="HolidayAdjustments\SaturdayToFridayAdjustment.cs" />
     <Compile Include="HolidayAdjustments\SundayToMondayAdjustment.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="HolidayRules\ThanksgivingDayRule.cs" />
     <Compile Include="HolidayRules\VeteransDayRule.cs" />
     <Compile Include="HolidayRules\WhitMondayRule.cs" />
+    <Compile Include="Services\TimezoneService.cs" />
     <Compile Include="UseCases\Shared\PaydayResult.cs" />
     <Compile Include="UseCases\WeeklyPayday.cs" />
     <Compile Include="UseCases\MonthlyPayday.cs" />
