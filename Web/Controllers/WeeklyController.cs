@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Http;
-using Core.Classes;
 using Core.UseCases;
 using Web.Models;
 
@@ -11,8 +10,8 @@ namespace Web.Controllers
         [HttpGet]
         public PayDayModel Index(int payday, string country, string timezone)
         {
-            var payDayRequest = new ShowPayDay.Request(payday, (int)Frequency.Weekly, country, timezone, DateTime.UtcNow);
-            var showPayDayResult = UseCase.ShowPayDay.Execute(payDayRequest);
+            var payDayRequest = new WeeklyPayday.Request(payday, country, timezone, DateTime.UtcNow);
+            var showPayDayResult = UseCase.WeeklyPayday.Execute(payDayRequest);
 
             return new PayDayModel(showPayDayResult);
         }

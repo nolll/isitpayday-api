@@ -12,7 +12,7 @@ function getPayday() {
 }
 
 function savePayday(payday) {
-    this.setCookie("payday", payday);
+    setCookie("payday", payday);
 }
 
 function getTimezone() {
@@ -21,7 +21,7 @@ function getTimezone() {
 }
 
 function saveTimezone(timezone) {
-    this.setCookie("timezone", timezone);
+    setCookie("timezone", timezone);
 }
 
 function getFrequency() {
@@ -37,7 +37,7 @@ function getFrequency() {
 }
 
 function saveFrequency(frequency) {
-    this.setCookie("frequency", frequency);
+    setCookie("frequency", frequency);
 }
 
 function getCountry() {
@@ -46,7 +46,7 @@ function getCountry() {
 }
 
 function saveCountry(country) {
-    this.setCookie("country", country);
+    setCookie("country", country);
 }
 
 function setCookie(name, value) {
@@ -57,5 +57,9 @@ module.exports = {
     getPayday: getPayday,
     getTimezone: getTimezone,
     getFrequency: getFrequency,
-    getCountry: getCountry
+    getCountry: getCountry,
+    savePayday: savePayday,
+    saveTimezone: saveTimezone,
+    saveFrequency: saveFrequency,
+    saveCountry: saveCountry
 }

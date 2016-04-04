@@ -4,7 +4,8 @@ namespace Web.Plumbing
 {
     public class UseCaseContainer
     {
-        public ShowPayDay ShowPayDay => new ShowPayDay();
+        public MonthlyPayday MonthlyPayday => new MonthlyPayday();
+        public WeeklyPayday WeeklyPayday => new WeeklyPayday();
         public Options Options => new Options();
     }
 }

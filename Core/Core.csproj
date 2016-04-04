@@ -52,7 +52,8 @@
     <Compile Include="DateEvaluators\CountrySpecific\SwedenEvaluator.cs" />
     <Compile Include="DateEvaluators\CountrySpecific\UnitedStatesEvaluator.cs" />
     <Compile Include="DateEvaluators\CountryEvaluator.cs" />
-    <Compile Include="DateEvaluators\PayDayEvaluator.cs" />
+    <Compile Include="DateEvaluators\MonthlyPayDayEvaluator.cs" />
+    <Compile Include="DateEvaluators\WeeklyPayDayEvaluator.cs" />
     <Compile Include="HolidayAdjustments\HolidayAdjustment.cs" />
     <Compile Include="HolidayAdjustments\SaturdayToFridayAdjustment.cs" />
     <Compile Include="HolidayAdjustments\SundayToMondayAdjustment.cs" />
@@ -87,7 +88,9 @@
     <Compile Include="HolidayRules\ThanksgivingDayRule.cs" />
     <Compile Include="HolidayRules\VeteransDayRule.cs" />
     <Compile Include="HolidayRules\WhitMondayRule.cs" />
-    <Compile Include="UseCases\ShowPayDay.cs" />
+    <Compile Include="UseCases\Shared\PaydayResult.cs" />
+    <Compile Include="UseCases\WeeklyPayday.cs" />
+    <Compile Include="UseCases\MonthlyPayday.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="UseCases\ShowSettings.cs" />

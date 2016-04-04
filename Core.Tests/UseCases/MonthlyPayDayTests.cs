@@ -11,7 +11,7 @@ namespace Core.Tests.UseCases
         public void Execute_TodayIsPayDay_IsTrue()
         {
             var time = new DateTime(2000, 1, 25, 12, 0, 0, DateTimeKind.Utc);
-            var request = new ShowPayDay.Request(25, null, null, "UTC", time);
+            var request = new MonthlyPayday.Request(25, null, "UTC", time);
 
             var sut = GetSut();
             var result = sut.Execute(request);
@@ -23,7 +23,7 @@ namespace Core.Tests.UseCases
         public void Execute_TodayIsNotPayDay_IsFalse()
         {
             var time = new DateTime(2000, 1, 24, 12, 0, 0, DateTimeKind.Utc);
-            var request = new ShowPayDay.Request(25, null, null, "UTC", time);
+            var request = new MonthlyPayday.Request(25, null, "UTC", time);
 
             var sut = GetSut();
             var result = sut.Execute(request);
@@ -34,7 +34,7 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_TodayIsNotPayDayButMonthIsTooShortAndFallbacks_IsTrue()
         {
-            var request = new ShowPayDay.Request(31, null, null, "UTC", TestData.Dates.LeapYearFeb29th);
+            var request = new MonthlyPayday.Request(31, null, "UTC", TestData.Dates.LeapYearFeb29th);
 
             var sut = GetSut();
             var result = sut.Execute(request);
@@ -46,7 +46,7 @@ namespace Core.Tests.UseCases
         public void Execute_UserTimeIsSet()
         {
             var time = new DateTime(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
-            var request = new ShowPayDay.Request(25, null, null, "UTC", time);
+            var request = new MonthlyPayday.Request(25, null, "UTC", time);
 
             var sut = GetSut();
             var result = sut.Execute(request);
@@ -55,9 +55,9 @@ namespace Core.Tests.UseCases
             Assert.AreEqual(time, result.LocalTime);
         }
 
-        private ShowPayDay GetSut()
+        private MonthlyPayday GetSut()
         {
-            return new ShowPayDay();
+            return new MonthlyPayday();
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using Core.UseCases;
+using Core.UseCases.Shared;
 using JetBrains.Annotations;
 
 namespace Web.Models
@@ -12,7 +12,7 @@ namespace Web.Models
         [UsedImplicitly]
         public DateTime LocalTime { get; }
 
-        public PayDayModel(ShowPayDay.Result showPayDayResult)
+        public PayDayModel(PaydayResult showPayDayResult)
         {
             IsPayDay = showPayDayResult.IsPayDay;
             LocalTime = showPayDayResult.LocalTime;
