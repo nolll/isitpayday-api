@@ -127,6 +127,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonthlyController.cs" />
     <Compile Include="Controllers\WeeklyController.cs" />
+    <Compile Include="Extensions\RequestEvaluator.cs" />
+    <Compile Include="Extensions\Environment.cs" />
+    <Compile Include="Extensions\EnsureHttpsAttribute.cs" />
     <Compile Include="Formatters\NthFormatter.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomSelectListItem.cs" />
