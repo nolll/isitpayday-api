@@ -34,7 +34,7 @@ var app = new Vue({
             ajax.load(this.getPaydayUrl(), this.loadedPayday, this.loadError);
         },
         loadedPayday: function (data) {
-            this.isPayday = data.isPayday;
+            this.isPayday = data.isPayDay;
             this.localTime = data.localTime;
             this.initialized = true;
         },
