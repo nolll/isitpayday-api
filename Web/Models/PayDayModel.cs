@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Core.UseCases.Shared;
 using JetBrains.Annotations;
 
@@ -18,7 +19,7 @@ namespace Web.Models
         public PayDayModel(PaydayResult showPayDayResult)
         {
             IsPayDay = showPayDayResult.IsPayDay;
-            NextPayDay = showPayDayResult.NextPayDay.ToShortDateString();
+            NextPayDay = showPayDayResult.NextPayDay.ToString("yyyy-MM-dd");
             LocalTime = showPayDayResult.LocalTime;
         }
     }
