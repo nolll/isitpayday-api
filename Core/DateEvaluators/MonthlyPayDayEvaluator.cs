@@ -18,28 +18,25 @@ namespace Core.DateEvaluators
             _payDay = payDay;
         }
 
-        public bool IsPayDay
+        private DateTime LocalTime => TimeZoneInfo.ConvertTime(_utcTime, _timezone);
+        public bool IsPayDay => LocalTime.Date == NextPayDay;
+
+        public DateTime NextPayDay
         {
             get
             {
-                var localTime = TimeZoneInfo.ConvertTime(_utcTime, _timezone);
-                var payDayDate = GetNextPayDate(localTime);
+                var payDayDate = GetNextPayDate(LocalTime);
                 while (BlockedEvaluator.IsBlocked(_country, payDayDate))
                 {
                     payDayDate = payDayDate.AddDays(-1);
                 }
-                return localTime.Date == payDayDate.Date;
+                return payDayDate.Date;
             }
         }
 
         private DateTime GetNextPayDate(DateTime localTime)
         {
             var payDay = AdjustPayDayForShortMonths(localTime);
-            return FindPayDate(localTime, payDay);
-        }
-
-        private DateTime FindPayDate(DateTime localTime, int payDay)
-        {
             while (localTime.Day != payDay)
             {
                 localTime = localTime.AddDays(1);

@@ -16,8 +16,9 @@ namespace Core.UseCases
             var timezone = TimezoneService.GetTimezone(request.TimezoneId);
             var evaluator = new MonthlyPayDayEvaluator(country, utcTime, timezone, request.PayDay);
             var isPayDay = evaluator.IsPayDay;
+            var nextPayDay = evaluator.NextPayDay;
             var localTime = TimeZoneInfo.ConvertTime(utcTime, timezone);
-            return new PaydayResult(isPayDay, localTime);
+            return new PaydayResult(isPayDay, nextPayDay, localTime);
         }
 
         public class Request

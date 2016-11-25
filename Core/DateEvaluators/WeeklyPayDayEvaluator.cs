@@ -18,17 +18,18 @@ namespace Core.DateEvaluators
             _payDay = payDay;
         }
 
-        public bool IsPayDay
+        private DateTime LocalTime => TimeZoneInfo.ConvertTime(_utcTime, _timezone);
+        public bool IsPayDay => LocalTime.Date == NextPayDay.Date;
+
+        public DateTime NextPayDay
         {
-            get
-            {
-                var localTime = TimeZoneInfo.ConvertTime(_utcTime, _timezone);
-                var payDayDate = GetNextPayDay(localTime);
+            get {
+                var payDayDate = GetNextPayDay(LocalTime);
                 while (BlockedEvaluator.IsBlocked(_country, payDayDate))
                 {
                     payDayDate = payDayDate.AddDays(-1);
                 }
-                return localTime.Date == payDayDate.Date;
+                return payDayDate.Date;
             }
         }
 

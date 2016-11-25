@@ -10,11 +10,15 @@ namespace Web.Models
         public bool IsPayDay { get; }
 
         [UsedImplicitly]
+        public string NextPayDay { get; }
+
+        [UsedImplicitly]
         public DateTime LocalTime { get; }
 
         public PayDayModel(PaydayResult showPayDayResult)
         {
             IsPayDay = showPayDayResult.IsPayDay;
+            NextPayDay = showPayDayResult.NextPayDay.ToShortDateString();
             LocalTime = showPayDayResult.LocalTime;
         }
     }
