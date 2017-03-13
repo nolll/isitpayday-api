@@ -1,19 +1,20 @@
 using System;
-using System.Web.Http;
+using System.Web.Mvc;
 using Core.UseCases;
 using Web.Models;
 
 namespace Web.Controllers
 {
-    public class MonthlyController : BaseApiController
+    public class MonthlyController : BaseController
     {
         [HttpGet]
-        public PayDayModel Index(int payday, string country, string timezone)
+        [Route(Routes.ApiMonthly)]
+        public ActionResult Index(int payday, string country, string timezone)
         {
             var payDayRequest = new MonthlyPayday.Request(payday, country, timezone, DateTime.UtcNow);
             var showPayDayResult = UseCase.MonthlyPayday.Execute(payDayRequest);
 
-            return new PayDayModel(showPayDayResult);
+            return JsonView(new PayDayModel(showPayDayResult));
         }
     }
 }

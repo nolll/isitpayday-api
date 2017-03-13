@@ -1,16 +1,17 @@
-﻿using System.Web.Http;
+﻿using System.Web.Mvc;
 using Web.Models;
 
 namespace Web.Controllers
 {
-    public class OptionsController : BaseApiController
+    public class OptionsController : BaseController
     {
         [HttpGet]
-        public OptionsModel Index()
+        [Route(Routes.ApiOptions)]
+        public ActionResult Index()
         {
             var optionsResult = UseCase.Options.Execute();
 
-            return new OptionsModel(optionsResult);
+            return JsonView(new OptionsModel(optionsResult));
         }
     }
 }
