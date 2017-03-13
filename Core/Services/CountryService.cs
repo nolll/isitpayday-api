@@ -13,7 +13,7 @@ namespace Core.Services
         {
             var countries = from ri in
                             from ci in CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-                            select new RegionInfo(ci.LCID)
+                            select new RegionInfo(ci.Name)
                             group ri by ri.TwoLetterISORegionName into g
                             select new Country(g.Key, g.First().DisplayName);
             return countries.OrderBy(o => o.Name);
