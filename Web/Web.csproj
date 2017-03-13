@@ -180,6 +180,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <None Include="Web.wpp.targets" />
     <None Include="Properties\PublishProfiles\isitpayday-com - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
