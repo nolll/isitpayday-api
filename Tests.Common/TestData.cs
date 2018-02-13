@@ -13,7 +13,10 @@ namespace Tests.Common
 
         public static class Timezones
         {
-            public static string Utc = "UTC";
+            public const string Utc = "UTC";
+            public const string WindowsWesternEurope = "W. Europe Standard Time";
+            public const string IanaEuropeStockholm = "Europe/Stockholm";
+            public const string Invalid = "Not a Timezone Id";
         }
     }
 }
