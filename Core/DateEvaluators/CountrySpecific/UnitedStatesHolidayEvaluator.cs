@@ -4,9 +4,9 @@ using Core.HolidayRules;
 
 namespace Core.DateEvaluators.CountrySpecific
 {
-    public class UnitedStatesEvaluator : CountryEvaluator
+    public class UnitedStatesHolidayEvaluator : HolidayEvaluator
     {
-        protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
+        protected override IEnumerable<HolidayRule> HolidayRules => new List<HolidayRule>
         {
             new NewYearsDayRule().Adjust(Adjust.SundayToMonday),
             new MartinLutherKingJrsBirthdayRule(),

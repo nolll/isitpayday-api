@@ -5,17 +5,17 @@ namespace Core.DateEvaluators
 {
     public class MonthlyPayDayEvaluator
     {
-        private readonly Country _country;
         private readonly DateTime _utcTime;
         private readonly TimeZoneInfo _timezone;
         private readonly int _payDay;
+        private readonly BlockedEvaluator _blockedEvaluator;
 
         public MonthlyPayDayEvaluator(Country country, DateTime utcTime, TimeZoneInfo timezone, int payDay)
         {
-            _country = country;
             _utcTime = utcTime;
             _timezone = timezone;
             _payDay = payDay;
+            _blockedEvaluator = new BlockedEvaluator(country);
         }
 
         private DateTime LocalTime => TimeZoneInfo.ConvertTime(_utcTime, _timezone);
@@ -26,7 +26,7 @@ namespace Core.DateEvaluators
             get
             {
                 var payDayDate = GetNextPayDate(LocalTime);
-                while (BlockedEvaluator.IsBlocked(_country, payDayDate))
+                while (_blockedEvaluator.IsBlocked(payDayDate))
                 {
                     payDayDate = payDayDate.AddDays(-1);
                 }

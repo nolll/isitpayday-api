@@ -3,18 +3,18 @@ using Core.HolidayRules;
 
 namespace Core.DateEvaluators.CountrySpecific
 {
-    public class DenmarkEvaluator : CountryEvaluator
+    public class SwedenHolidayEvaluator : HolidayEvaluator
     {
-        protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
+        protected override IEnumerable<HolidayRule> HolidayRules => new List<HolidayRule>
         {
             new NewYearsDayRule(),
-            new MaundyThursdayRule(),
+            new EpiphanyRule(),
             new GoodFridayRule(),
             new EasterMondayRule(),
-            new PrayerDayRule(),
+            new InternationalWorkersDayRule(),
             new AscensionDayRule(),
-            new WhitMondayRule(),
-            new NationalDayDenmarkRule(),
+            new MidsummersEveRule(),
+            new NationalDaySwedenRule(),
             new ChristmasEveRule(),
             new ChristmasDayRule(),
             new BoxingDayRule(),

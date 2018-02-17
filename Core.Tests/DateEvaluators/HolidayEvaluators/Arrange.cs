@@ -19,7 +19,7 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
 
         protected bool IsHoliday(string date)
         {
-            var evaluator = CountryEvaluator.GetEvaluator(_country);
+            var evaluator = HolidayEvaluator.Create(_country);
             return evaluator.IsHoliday(DateTime.Parse(date));
         }
     }

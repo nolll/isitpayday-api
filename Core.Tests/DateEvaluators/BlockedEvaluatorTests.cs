@@ -17,7 +17,7 @@ namespace Core.Tests.DateEvaluators
         {
             var notBlockedDate = new DateTime(2015, 1, 2);
 
-            var result = BlockedEvaluator.IsBlocked(_defaultCountry, notBlockedDate);
+            var result = new BlockedEvaluator(_defaultCountry).IsBlocked(notBlockedDate);
 
             Assert.IsFalse(result);
         }
@@ -27,7 +27,7 @@ namespace Core.Tests.DateEvaluators
         {
             var excludedDate = new DateTime(2015, 1, 1);
 
-            var result = BlockedEvaluator.IsBlocked(_sweden, excludedDate);
+            var result = new BlockedEvaluator(_sweden).IsBlocked(excludedDate);
 
             Assert.IsTrue(result);
         }
@@ -37,7 +37,7 @@ namespace Core.Tests.DateEvaluators
         {
             var weekendDate = new DateTime(2015, 1, 3);
 
-            var result = BlockedEvaluator.IsBlocked(_defaultCountry, weekendDate);
+            var result = new BlockedEvaluator(_defaultCountry).IsBlocked(weekendDate);
 
             Assert.IsTrue(result);
         }
@@ -47,7 +47,7 @@ namespace Core.Tests.DateEvaluators
         {
             var blockedWeekendDate = new DateTime(2015, 6, 6);
 
-            var result = BlockedEvaluator.IsBlocked(_defaultCountry, blockedWeekendDate);
+            var result = new BlockedEvaluator(_defaultCountry).IsBlocked(blockedWeekendDate);
 
             Assert.IsTrue(result);
         }

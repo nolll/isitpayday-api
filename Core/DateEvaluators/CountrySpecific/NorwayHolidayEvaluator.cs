@@ -3,9 +3,9 @@ using Core.HolidayRules;
 
 namespace Core.DateEvaluators.CountrySpecific
 {
-    public class NorwayEvaluator : CountryEvaluator
+    public class NorwayHolidayEvaluator : HolidayEvaluator
     {
-        protected override List<HolidayRule> HolidayRules => new List<HolidayRule>
+        protected override IEnumerable<HolidayRule> HolidayRules => new List<HolidayRule>
         {
             new NewYearsDayRule(),
             new MaundyThursdayRule(),

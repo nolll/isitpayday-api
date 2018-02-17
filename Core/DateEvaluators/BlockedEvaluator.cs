@@ -3,12 +3,20 @@ using Core.Classes;
 
 namespace Core.DateEvaluators
 {
-    public static class BlockedEvaluator
+    public class BlockedEvaluator
     {
-        public static bool IsBlocked(Country country, DateTime userTime)
+        private readonly WeekendEvaluator _weekendEvaluator;
+        private readonly HolidayEvaluator _holidayEvaluator;
+
+        public BlockedEvaluator(Country country)
         {
-            var evaluator = CountryEvaluator.GetEvaluator(country);
-            return evaluator.IsWeekend(userTime) || evaluator.IsHoliday(userTime);
+            _weekendEvaluator = new WeekendEvaluator();
+            _holidayEvaluator = HolidayEvaluator.Create(country);
+        }
+
+        public bool IsBlocked(DateTime userTime)
+        {
+            return _weekendEvaluator.IsWeekend(userTime) || _holidayEvaluator.IsHoliday(userTime);
         }
     }
 }
