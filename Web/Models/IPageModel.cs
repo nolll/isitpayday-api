@@ -3,5 +3,6 @@
     public interface IPageModel
     {
         GoogleAnalyticsModel GoogleAnalyticsModel { get; }
+        string Version { get; }
     }
 }

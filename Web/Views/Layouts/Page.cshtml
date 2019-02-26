@@ -1,29 +1,30 @@
 ﻿@model Web.Models.IPageModel
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Is it payday?</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="title" content="Is it payday?" />
-        <meta name="keywords" content="pay day payday" />
-        <meta name="description" content="Find out if today is payday" />
-        <meta http-equiv="imagetoolbar" content="no" />
-        <link rel="image_src" href="/Images/money.jpg" />
-        <link href="/Styles/styles.css" rel="stylesheet"/>
-        <link rel="shortcut icon" type="image/png" href="/Images/favicon.png" />
-    </head>
+<head>
+    <title>Is it payday?</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Is it payday?" />
+    <meta name="keywords" content="pay day payday" />
+    <meta name="description" content="Find out if today is payday" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <link rel="image_src" href="/Images/money.jpg" />
+    <link href="/Styles/styles.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="/Images/favicon.png" />
+</head>
 <body>
 
-@RenderBody()
+    @RenderBody()
 
-<p class="contact">
-    Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
-</p>
+    <p class="contact">
+        Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
+    </p>
 
-<script src="/assets/scripts.js"></script>
+    <script src="/assets/scripts.js"></script>
 
-@Html.Partial("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
+    @Html.Partial("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
 
 </body>
-
 </html>
+
+<!-- version: @Model.Version -->

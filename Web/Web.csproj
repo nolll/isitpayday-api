@@ -122,9 +122,7 @@
     <Compile Include="Extensions\RequestEvaluator.cs" />
     <Compile Include="Extensions\Environment.cs" />
     <Compile Include="Extensions\EnsureHttpsAttribute.cs" />
-    <Compile Include="Formatters\NthFormatter.cs" />
     <Compile Include="Models\CountryModel.cs" />
-    <Compile Include="Models\CustomSelectListItem.cs" />
     <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="Models\PayDayModel.cs" />
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
@@ -143,7 +141,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />
     <Content Include="Images\favicon.png" />
