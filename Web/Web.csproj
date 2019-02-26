@@ -128,7 +128,6 @@
     <Compile Include="Models\GoogleAnalyticsModel.cs" />
     <Compile Include="Models\IndexPageModel.cs" />
     <Compile Include="Models\IPageModel.cs" />
-    <Compile Include="Models\SettingsPostModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,10 +191,6 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{7e85e3b7-c78b-49dd-b5b3-b6462f56ed9a}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plumbing\Plumbing.csproj">
-      <Project>{FFEA857B-6462-40F2-A5FD-1DAD24E756E1}</Project>
-      <Name>Plumbing</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

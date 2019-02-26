@@ -2,11 +2,11 @@ using System;
 
 namespace Core.HolidayRules
 {
-    public class RelativeToEasterSunday : HolidayRule
+    public abstract class RelativeToEasterSunday : HolidayRule
     {
         private readonly int _diffInDays;
 
-        public RelativeToEasterSunday(int diffInDays)
+        protected RelativeToEasterSunday(int diffInDays)
         {
             _diffInDays = diffInDays;
         }
@@ -17,7 +17,7 @@ namespace Core.HolidayRules
         }
 
         // The algorithm was found here: http://stackoverflow.com/questions/26022233/calculate-the-date-of-easter-sunday
-        private DateTime GetEasterSunday(int year)
+        private static DateTime GetEasterSunday(int year)
         {
             int a = year % 19,
                 b = year / 100,

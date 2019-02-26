@@ -12,7 +12,7 @@ namespace Core.Tests.DateEvaluators
         {
             var friday = new DateTime(2014, 1, 17);
 
-            var result = new WeekendRule().IsWeekend(friday);
+            var result = WeekendRule.IsWeekend(friday);
 
             Assert.IsFalse(result);
         }
@@ -22,7 +22,7 @@ namespace Core.Tests.DateEvaluators
         {
             var saturday = new DateTime(2014, 1, 18);
 
-            var result = new WeekendRule().IsWeekend(saturday);
+            var result = WeekendRule.IsWeekend(saturday);
 
             Assert.IsTrue(result);
         }
@@ -32,7 +32,7 @@ namespace Core.Tests.DateEvaluators
         {
             var sunday = new DateTime(2014, 1, 19);
 
-            var result = new WeekendRule().IsWeekend(sunday);
+            var result = WeekendRule.IsWeekend(sunday);
 
             Assert.IsTrue(result);
         }
@@ -42,7 +42,7 @@ namespace Core.Tests.DateEvaluators
         {
             var monday = new DateTime(2014, 1, 20);
 
-            var result = new WeekendRule().IsWeekend(monday);
+            var result = WeekendRule.IsWeekend(monday);
 
             Assert.IsFalse(result);
         }

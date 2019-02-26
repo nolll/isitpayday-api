@@ -23,10 +23,7 @@ namespace Core.DateEvaluators
 
         public static HolidayEvaluator Create(Country country)
         {
-            HolidayEvaluator evaluator;
-            if(Evaluators.TryGetValue(country.Id, out evaluator))
-                return evaluator;
-            return new DefaultHolidayEvaluator();
+            return Evaluators.TryGetValue(country.Id, out var evaluator) ? evaluator : new DefaultHolidayEvaluator();
         }
 
         private static readonly Dictionary<string, HolidayEvaluator> Evaluators = new Dictionary<string, HolidayEvaluator>

@@ -3,13 +3,13 @@ using Core.Classes;
 
 namespace Core.HolidayRules
 {
-    public class FirstDayOfWeekFrom : HolidayRule
+    public abstract class FirstDayOfWeekFrom : HolidayRule
     {
         private readonly DayOfWeek _dayOfWeek;
         private readonly Month _month;
         private readonly int _day;
 
-        public FirstDayOfWeekFrom(DayOfWeek dayOfWeek, Month month, int day)
+        protected FirstDayOfWeekFrom(DayOfWeek dayOfWeek, Month month, int day)
         {
             _dayOfWeek = dayOfWeek;
             _month = month;
