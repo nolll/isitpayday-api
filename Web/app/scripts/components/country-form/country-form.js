@@ -5,18 +5,25 @@ export default {
     template: html,
     computed: {
         ...mapGetters([
-            'country',
             'countries'
         ]),
+        country: {
+            get() {
+                return this.$store.getters.country;
+            },
+            set(value) {
+                this.$store.commit('selectCountry', value);
+            }
+        },
         countryName: function() {
             var i;
             for (i = 0; i < this.countries.length; i++) {
-                var c = this.countries[i];
+                const c = this.countries[i];
                 if (c.id === this.country) {
                     return c.name;
                 }
             }
-            return "";
+            return '';
         }
     },
     methods: {

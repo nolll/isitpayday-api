@@ -1,7 +1,7 @@
 ﻿<h3>Country</h3>
 <div class="country-info">
     <p v-show="showForm">
-        <select v-model.number="country" v-on:change="select">
+        <select v-model.number="country">
             <option v-for="c in countries" :value="c.id">{{c.name}}</option>
         </select>
         <a href="#" v-on:click="close">Cancel</a>
