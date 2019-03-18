@@ -11,4 +11,6 @@ _NCrunch_*/
 **/*proj.user
 /Web/node_modules
 /Web/assets
+/Web/dist
 /Web/Properties/PublishProfiles
+/Web/Views/Generated

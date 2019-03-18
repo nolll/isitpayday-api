@@ -1,13 +1,22 @@
-﻿var html = require("html-loader!./payday-form.html");
-var frequencies = require("frequencies");
-var weekdays = require("weekdays");
-var nthFormatter = require("nth-formatter");
+﻿import html from './payday-form.html';
+import frequencies from '../../frequencies';
+import weekdays from '../../weekdays';
+import nthFormatter from '../../nth-formatter';
+import { mapGetters } from 'vuex';
 
-module.exports = {
+export default {
     template: html,
-    props: ["showForm", "payday", "frequency"],
-    data: getData,
+    data: function() {
+        return {
+            showForm: false,
+            paydays: getPayDays()
+        };
+    },
     computed: {
+        ...mapGetters([
+            'payday',
+            'frequency'
+        ]),
         paydayName: function () {
             return format(this.payday);
         }
@@ -15,7 +24,7 @@ module.exports = {
     methods: {
         select: function (event) {
             event.preventDefault();
-            this.$dispatch("select-payday", this.payday);
+            this.$store.dispatch('selectPayday', this.payday);
             this.close();
         },
         open: function () {
@@ -26,12 +35,6 @@ module.exports = {
         }
     }
 };
-
-function getData() {
-    return {
-        paydays: getPayDays()
-    }
-}
 
 function getPayDays() {
     var paydays = [],

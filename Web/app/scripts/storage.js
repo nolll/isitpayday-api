@@ -1,5 +1,5 @@
 var cookie = require("js-cookie");
-var frequencies = require("frequencies");
+var frequencies = require("./frequencies");
 
 var defaultPayday = 25;
 var defaultTimezone = "W. Europe Standard Time";

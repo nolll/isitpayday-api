@@ -1,4 +1,5 @@
-﻿@model Web.Models.IPageModel
+﻿@using Web.Models
+@model Web.Models.PageModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <meta name="description" content="Find out if today is payday" />
     <meta http-equiv="imagetoolbar" content="no" />
     <link rel="image_src" href="/Images/money.jpg" />
-    <link href="/Styles/styles.css" rel="stylesheet" />
+    @Html.Partial(PageModel.StyleView)
     <link rel="shortcut icon" type="image/png" href="/Images/favicon.png" />
 </head>
 <body>
@@ -20,7 +21,7 @@
         Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
     </p>
 
-    <script src="/assets/scripts.js"></script>
+    @Html.Partial(PageModel.ScriptView)
 
     @Html.Partial("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
 

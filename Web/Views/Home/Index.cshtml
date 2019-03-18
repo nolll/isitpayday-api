@@ -1,4 +1,4 @@
-﻿@model Web.Models.IndexPageModel
+﻿@model Web.Models.PageModel
 @{
     Layout = "~/Views/Layouts/Page.cshtml";
 }
@@ -6,16 +6,9 @@
 <div id="app">
 
     <h1>Is it payday?</h1>
-    <p class="status" v-show="initialized"><span v-text="message"></span></p>
+    <p class="status" v-show="isReady"><span v-text="message"></span></p>
 
-    <settings
-        v-bind:frequency="frequency"
-        v-bind:payday="payday"
-        v-bind:country="country"
-        v-bind:timezone="timezone"
-        v-bind:countries="countries"
-        v-bind:timezones="timezones">
-    </settings>
+    <settings />
 
     <p class="footer" v-text="formattedLocalTime"></p>
 

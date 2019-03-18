@@ -1,9 +1,13 @@
-﻿var html = require("html-loader!./country-form.html");
+﻿import html from './country-form.html';
+import { mapGetters } from 'vuex';
 
-module.exports = {
+export default {
     template: html,
-    props: ["showForm", "country", "countries"],
     computed: {
+        ...mapGetters([
+            'country',
+            'countries'
+        ]),
         countryName: function() {
             var i;
             for (i = 0; i < this.countries.length; i++) {
@@ -18,7 +22,7 @@ module.exports = {
     methods: {
         select: function (event) {
             event.preventDefault();
-            this.$dispatch("select-country", this.country);
+            this.$store.dispatch('selectCountry', this.country);
             this.close();
         },
         open: function () {
@@ -27,5 +31,10 @@ module.exports = {
         close: function () {
             this.showForm = false;
         }
+    },
+    data: function() {
+        return {
+            showForm: false
+        };
     }
 };

@@ -1,8 +1,8 @@
 ﻿<h3>Timezone</h3>
 <div class="timezone-info">
     <p v-show="showForm">
-        <select v-model="timezone" v-on:change="select" number>
-            <option v-for="t in timezones" value="{{t.id}}">{{t.id}}</option>
+        <select v-model.number="timezone" v-on:change="select">
+            <option v-for="t in timezones" :value="t.id">{{t.id}}</option>
         </select>
         <a href="#" v-on:click="close">Cancel</a>
     </p>

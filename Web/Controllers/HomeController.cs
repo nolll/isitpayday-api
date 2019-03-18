@@ -9,7 +9,7 @@ namespace Web.Controllers
         [Route(Routes.Home)]
         public ActionResult Index()
         {
-            var pageModel = new IndexPageModel(IsInProduction);
+            var pageModel = new PageModel(IsInProduction);
             return View("~/Views/Home/Index.cshtml", pageModel);
         }
     }

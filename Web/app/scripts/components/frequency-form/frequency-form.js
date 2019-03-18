@@ -1,11 +1,20 @@
-﻿var html = require("html-loader!./frequency-form.html");
-var frequencies = require("frequencies");
+﻿import html from './frequency-form.html';
+import frequencies from '../../frequencies';
+import { mapGetters } from 'vuex';
 
-module.exports = {
+export default {
     template: html,
-    props: ["showForm", "frequency"],
-    data: getData,
+    data: function() {
+        return {
+            showForm: false,
+            frequencies: [
+                { id: frequencies.monthly, name: 'Monthly' },
+                { id: frequencies.weekly, name: 'Weekly' }
+            ]
+        };
+    },
     computed: {
+        ...mapGetters(['frequency']),
         frequencyName: function() {
             var i;
             for (i = 0; i < this.frequencies.length; i++) {
@@ -20,7 +29,7 @@ module.exports = {
     methods: {
         select: function (event) {
             event.preventDefault();
-            this.$dispatch("select-frequency", this.frequency);
+            this.$store.dispatch('selectFrequency', this.frequency);
             this.close();
         },
         open: function () {
@@ -31,16 +40,3 @@ module.exports = {
         }
     }
 };
-
-function getData() {
-    return {
-        frequencies: getFrequencies()
-    }
-}
-
-function getFrequencies() {
-    return [
-        { id: frequencies.monthly, name: "Monthly" },
-        { id: frequencies.weekly, name: "Weekly" }
-    ];
-}
