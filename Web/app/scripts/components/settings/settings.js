@@ -11,5 +11,10 @@ export default {
         TimezoneForm,
         FrequencyForm,
         PaydayForm
+    },
+    computed: {
+        test() {
+            return this.$store.state._isPaydayReady;
+        }
     }
 };

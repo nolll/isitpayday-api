@@ -1,6 +1,5 @@
 ﻿import html from './frequency-form.html';
 import frequencies from '../../frequencies';
-import { mapGetters } from 'vuex';
 
 export default {
     template: html,
@@ -14,7 +13,15 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['frequency']),
+        frequency: {
+            get() {
+                return this.$store.getters.frequency;
+            },
+            set(value) {
+                this.$store.commit('selectFrequency', value);
+                this.close();
+            }
+        },
         frequencyName: function() {
             var i;
             for (i = 0; i < this.frequencies.length; i++) {
@@ -27,11 +34,6 @@ export default {
         }
     },
     methods: {
-        select: function (event) {
-            event.preventDefault();
-            this.$store.dispatch('selectFrequency', this.frequency);
-            this.close();
-        },
         open: function () {
             this.showForm = true;
         },

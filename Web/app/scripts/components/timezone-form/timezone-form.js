@@ -9,14 +9,18 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['timezone', 'timezones'])
+        ...mapGetters(['timezones']),
+        timezone: {
+            get() {
+                return this.$store.getters.timezone;
+            },
+            set(value) {
+                this.$store.commit('selectTimezone', value);
+                this.close();
+            }
+        },
     },
     methods: {
-        select: function (event) {
-            event.preventDefault();
-            this.$store.dispatch('selectTimezone', this.timezone);
-            this.close();
-        },
         open: function () {
             this.showForm = true;
         },

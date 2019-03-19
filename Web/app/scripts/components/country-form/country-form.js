@@ -13,6 +13,7 @@ export default {
             },
             set(value) {
                 this.$store.commit('selectCountry', value);
+                this.close();
             }
         },
         countryName: function() {
@@ -27,11 +28,6 @@ export default {
         }
     },
     methods: {
-        select: function (event) {
-            event.preventDefault();
-            this.$store.dispatch('selectCountry', this.country);
-            this.close();
-        },
         open: function () {
             this.showForm = true;
         },

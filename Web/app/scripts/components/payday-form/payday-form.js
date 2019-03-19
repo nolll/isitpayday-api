@@ -8,46 +8,51 @@ export default {
     template: html,
     data: function() {
         return {
-            showForm: false,
-            paydays: getPayDays()
+            showForm: false
         };
     },
     computed: {
         ...mapGetters([
-            'payday',
             'frequency'
         ]),
-        paydayName: function () {
-            return format(this.payday);
+        payday: {
+            get() {
+                return this.$store.getters.payday;
+            },
+            set(value) {
+                this.$store.commit('selectPayday', value);
+                this.close();
+            }
+        },
+        paydayName() {
+            return format(this.frequency, this.payday);
+        },
+        paydays() {
+            return getPayDays(this.frequency);
         }
     },
     methods: {
-        select: function (event) {
-            event.preventDefault();
-            this.$store.dispatch('selectPayday', this.payday);
-            this.close();
-        },
-        open: function () {
+        open() {
             this.showForm = true;
         },
-        close: function () { 
+        close() { 
             this.showForm = false;
         }
     }
 };
 
-function getPayDays() {
+function getPayDays(frequency) {
     var paydays = [],
         i;
 
     for (i = 1; i <= 31; i++) {
-        paydays.push({ id: i, name: format(i) });
+        paydays.push({ id: i, name: format(frequency, i) });
     }
     return paydays;
 }
 
-function format(n) {
-    if (this.frequency === frequencies.weekly)
-        return weekdays.getName(n);
-    return nthFormatter.format(n);
+function format(frequency, payday) {
+    if (frequency === frequencies.weekly)
+        return weekdays.getName(payday);
+    return nthFormatter.format(payday);
 }

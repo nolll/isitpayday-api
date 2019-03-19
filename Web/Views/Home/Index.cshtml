@@ -6,10 +6,10 @@
 <div id="app">
 
     <h1>Is it payday?</h1>
-    <p class="status" v-show="isReady"><span v-text="message"></span></p>
+    <p class="status" v-if="isReady"><span v-text="message"></span></p>
 
-    <settings />
+    <settings v-if="isReady"/>
 
-    <p class="footer" v-text="formattedLocalTime"></p>
+    <p class="footer" v-text="formattedLocalTime" v-if="isReady"></p>
 
 </div>
