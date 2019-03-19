@@ -14,6 +14,7 @@ namespace Web
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         protected void Application_End()
