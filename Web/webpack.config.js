@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './app/scripts/index.js',
+    entry: './app/scripts/main.js',
     output: {
         filename: '[name]-[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -70,40 +70,3 @@ module.exports = {
     },
     stats: { children: false }
 };
-
-
-//var webpack = require("webpack");
-//var path = require("path");
-
-//module.exports = {
-//    entry: __dirname + "/Scripts/app.js",
-//    output: {
-//        path: __dirname + "/assets",
-//        filename: "scripts.js"
-//    },
-//    devtool: "source-map",
-//    resolve: {
-//        alias: getAliases(
-//            "ajax",
-//            "frequencies",
-//            "nth-formatter",
-//            "storage",
-//            "urls",
-//            "weekdays")
-//    },
-//    plugins: [
-//        new webpack.ProvidePlugin({
-//            "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch"
-//        })
-//    ]
-//};
-
-//function getAliases() {
-//    var i,
-//        aliases = {};
-//    for (i = 0; i < arguments.length; i++) {
-//        var module = arguments[i];
-//        aliases[module] = path.resolve("./Scripts/" + module + ".js");
-//    }
-//    return aliases;
-//}

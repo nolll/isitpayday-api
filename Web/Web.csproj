@@ -148,6 +148,7 @@
     <Content Include="Images\money.jpg" />
     <Content Include="webpack.dev.js" />
     <Content Include="webpack.prod.js" />
+    <Content Include="app\scripts\App.vue" />
     <None Include="package.json" />
     <Content Include="app\scripts\nth-formatter.js" />
     <Content Include="app\scripts\weekdays.js" />

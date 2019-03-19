@@ -1,14 +1,17 @@
-import vue from 'vue';
-import store from './store';
-import moment from 'moment';
-import { mapGetters } from 'vuex';
-import Settings from './components/settings/settings';
+﻿<template>
+    <div v-if="isReady">
+        <p class="status"><span v-text="message"></span></p>
+        <settings />
+        <p class="footer" v-text="formattedLocalTime"></p>
+    </div>
+</template>
 
-function init() {
-    const appElement = document.getElementById('app');
-    const options = {
-        el: appElement,
-        store: store,
+<script>
+    import moment from 'moment';
+    import { mapGetters } from 'vuex';
+    import Settings from './components/settings/settings';
+
+    export default {
         mounted: function () {
             this.$store.dispatch('loadSettings');
             this.$store.dispatch('loadPayday');
@@ -32,10 +35,5 @@ function init() {
         components: {
             Settings
         }
-    };
-    new vue(options);
-}
-
-export default {
-    init
-};
+    }
+</script>

@@ -3,13 +3,6 @@
     Layout = "~/Views/Layouts/Page.cshtml";
 }
 
-<div id="app">
+<h1>Is it payday?</h1>
 
-    <h1>Is it payday?</h1>
-    <p class="status" v-if="isReady"><span v-text="message"></span></p>
-
-    <settings v-if="isReady"/>
-
-    <p class="footer" v-text="formattedLocalTime" v-if="isReady"></p>
-
-</div>
+<div id="app"></div>
