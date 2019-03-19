@@ -18,7 +18,7 @@ export default {
                 return this.$store.getters.frequency;
             },
             set(value) {
-                this.$store.commit('selectFrequency', value);
+                this.$store.dispatch('selectFrequency', value);
                 this.close();
             }
         },

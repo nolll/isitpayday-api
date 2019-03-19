@@ -15,7 +15,7 @@ export default {
                 return this.$store.getters.timezone;
             },
             set(value) {
-                this.$store.commit('selectTimezone', value);
+                this.$store.dispatch('selectTimezone', value);
                 this.close();
             }
         },

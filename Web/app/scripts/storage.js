@@ -1,59 +1,55 @@
-var cookie = require("js-cookie");
-var frequencies = require("./frequencies");
+import cookie from 'js-cookie';
+import frequencies from './frequencies';
 
 var defaultPayday = 25;
-var defaultTimezone = "W. Europe Standard Time";
-var defaultFrequency = "monthly";
-var defaultCountry = "SE";
+var defaultTimezone = 'W. Europe Standard Time';
+var defaultFrequency = frequencies.monthly;
+var defaultCountry = 'SE';
 
 function getPayday() {
-    var payday = cookie.get("payday");
-    return payday ? payday : defaultPayday;
+    const payday = cookie.get('payday');
+    return payday ? Number(payday) : defaultPayday;
 }
 
 function savePayday(payday) {
-    setCookie("payday", payday);
+    setCookie('payday', payday);
 }
 
 function getTimezone() {
-    var timezone = cookie.get("timezone");
+    const timezone = cookie.get('timezone');
     return timezone ? timezone : defaultTimezone;
 }
 
 function saveTimezone(timezone) {
-    setCookie("timezone", timezone);
+    setCookie('timezone', timezone);
 }
 
 function getFrequency() {
-    var frequency = cookie.get("frequency");
+    const frequency = cookie.get('frequency');
     if (frequency) {
-        if (frequency === "1")
-            return frequencies.monthly;
-        if (frequency === "2")
-            return frequencies.weekly;
         return frequency;
     }
     return defaultFrequency;
 }
 
 function saveFrequency(frequency) {
-    setCookie("frequency", frequency);
+    setCookie('frequency', frequency);
 }
 
 function getCountry() {
-    var country = cookie.get("country");
+    const country = cookie.get('country');
     return country ? country : defaultCountry;
 }
 
 function saveCountry(country) {
-    setCookie("country", country);
+    setCookie('country', country);
 }
 
 function setCookie(name, value) {
     cookie.set(name, value, { expires: 3650 });
 }
 
-module.exports = {
+export default {
     getPayday: getPayday,
     getTimezone: getTimezone,
     getFrequency: getFrequency,
@@ -62,4 +58,4 @@ module.exports = {
     saveTimezone: saveTimezone,
     saveFrequency: saveFrequency,
     saveCountry: saveCountry
-}
+};

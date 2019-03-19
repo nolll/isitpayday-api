@@ -12,7 +12,7 @@ export default {
                 return this.$store.getters.country;
             },
             set(value) {
-                this.$store.commit('selectCountry', value);
+                this.$store.dispatch('selectCountry', value);
                 this.close();
             }
         },

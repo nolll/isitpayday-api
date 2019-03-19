@@ -20,7 +20,7 @@ export default {
                 return this.$store.getters.payday;
             },
             set(value) {
-                this.$store.commit('selectPayday', value);
+                this.$store.dispatch('selectPayday', value);
                 this.close();
             }
         },
@@ -38,14 +38,31 @@ export default {
         close() { 
             this.showForm = false;
         }
+    },
+    mounted() {
+        var x = 0;
     }
 };
 
 function getPayDays(frequency) {
+    if (frequency === frequencies.weekly)
+        return getWeeklyPaydays(frequency);
+    return getMonthlyPaydays(frequency);
+}
+
+function getWeeklyPaydays(frequency) {
+    return getPaydaysArray(frequency, 7);
+}
+
+function getMonthlyPaydays(frequency) {
+    return getPaydaysArray(frequency, 31);
+}
+
+function getPaydaysArray(frequency, upperBound) {
     var paydays = [],
         i;
 
-    for (i = 1; i <= 31; i++) {
+    for (i = 1; i <= upperBound; i++) {
         paydays.push({ id: i, name: format(frequency, i) });
     }
     return paydays;

@@ -5,11 +5,11 @@
             <select v-model.number="timezone">
                 <option v-for="t in timezones" :value="t.id">{{t.id}}</option>
             </select>
-            <a href="#" v-on:click="close">Cancel</a>
+            <a href="#" @click.prevent="close">Cancel</a>
         </p>
         <p v-show="!showForm">
             {{timezone}}
-            <a href="#" v-on:click="open">Change</a>
+            <a href="#" @click.prevent="open">Change</a>
         </p>
     </div>
 </div>

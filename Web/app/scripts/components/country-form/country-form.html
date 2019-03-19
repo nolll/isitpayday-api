@@ -5,11 +5,11 @@
             <select v-model.number="country">
                 <option v-for="c in countries" :value="c.id">{{c.name}}</option>
             </select>
-            <a href="#" v-on:click="close">Cancel</a>
+            <a href="#" @click.prevent="close">Cancel</a>
         </p>
         <p v-show="!showForm">
             <span v-text="countryName"></span>
-            <a href="#" v-on:click="open">Change</a>
+            <a href="#" @click.prevent="open">Change</a>
         </p>
     </div>
 </div>

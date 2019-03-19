@@ -67,7 +67,7 @@ export default new vuex.Store({
             ajax.load(
                 url,
                 function (data) {
-                    context.commit('setIsPayday', data.isPayday);
+                    context.commit('setIsPayday', data.isPayDay);
                     context.commit('setLocalTime', data.localTime);
                     context.commit('setIsPaydayReady', true);
                     context.commit('setIsPaydayError', false);

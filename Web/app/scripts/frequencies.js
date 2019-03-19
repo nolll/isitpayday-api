@@ -1,4 +1,4 @@
-module.exports = {
-    monthly: "monthly",
-    weekly: "weekly"
-}
+export default {
+    monthly: 'monthly',
+    weekly: 'weekly'
+};

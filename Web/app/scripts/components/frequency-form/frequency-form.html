@@ -5,11 +5,11 @@
             <select v-model.number="frequency">
                 <option v-for="f in frequencies" :value="f.id">{{f.name}}</option>
             </select>
-            <a href="#" v-on:click="close">Cancel</a>
+            <a href="#" @click.prevent="close">Cancel</a>
         </p>
         <p v-show="!showForm">
             {{frequencyName}}
-            <a href="#" v-on:click="open">Change</a>
+            <a href="#" @click.prevent="open">Change</a>
         </p>
     </div>
 </div>
