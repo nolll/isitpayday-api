@@ -139,7 +139,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="app\scripts\index.js" />
+    <Content Include="app\scripts\main.js" />
     <Content Include="app\scripts\store.js" />
     <Content Include="app\templates\script-template.txt" />
     <Content Include="app\templates\style-template.txt" />
@@ -156,18 +156,12 @@
     <Content Include="app\scripts\frequencies.js" />
     <Content Include="app\scripts\storage.js" />
     <Content Include="app\scripts\ajax.js" />
-    <Content Include="app\scripts\components\timezone-form\timezone-form.html" />
-    <Content Include="app\scripts\components\timezone-form\timezone-form.js" />
-    <Content Include="app\scripts\components\country-form\country-form.html" />
-    <Content Include="app\scripts\components\country-form\country-form.js" />
-    <Content Include="app\scripts\components\payday-form\payday-form.html" />
-    <Content Include="app\scripts\components\payday-form\payday-form.js" />
-    <Content Include="app\scripts\components\frequency-form\frequency-form.html" />
-    <Content Include="app\scripts\components\frequency-form\frequency-form.js" />
-    <Content Include="app\scripts\components\settings\settings.html" />
-    <Content Include="app\scripts\components\settings\settings.js" />
+    <None Include="app\scripts\components\TimezoneForm.vue" />
+    <None Include="app\scripts\components\CountryForm.vue" />
+    <None Include="app\scripts\components\PaydayForm.vue" />
+    <None Include="app\scripts\components\FrequencyForm.vue" />
+    <None Include="app\scripts\components\Settings.vue" />
     <Content Include="webpack.config.js" />
-    <Content Include="app\scripts\app.js" />
     <Content Include="app\styles\styles.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

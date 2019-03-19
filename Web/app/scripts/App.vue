@@ -9,7 +9,7 @@
 <script>
     import moment from 'moment';
     import { mapGetters } from 'vuex';
-    import Settings from './components/settings/settings';
+    import Settings from './components/Settings';
 
     export default {
         mounted: function () {

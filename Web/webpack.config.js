@@ -30,10 +30,6 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
-            },
-            {
-                test: /\.html$/,
-                use: 'html-loader'
             }
         ]
     },
@@ -60,7 +56,7 @@ module.exports = {
             vue: 'vue/dist/vue.esm.js',
             '@': path.resolve(__dirname, './app/scripts')
         },
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js', '.vue']
     },
     optimization: {
         splitChunks: {
