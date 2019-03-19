@@ -64,29 +64,27 @@ export default new vuex.Store({
         },
         loadPayday(context) {
             const url = getPaydayUrl(context.state._payday, context.state._frequency, context.state._timezone, context.state._country);
-            ajax.load(
-                url,
-                function (data) {
-                    context.commit('setIsPayday', data.isPayDay);
-                    context.commit('setLocalTime', data.localTime);
+            ajax.get(url)
+                .then(function (response) {
+                    context.commit('setIsPayday', response.data.isPayDay);
+                    context.commit('setLocalTime', response.data.localTime);
                     context.commit('setIsPaydayReady', true);
                     context.commit('setIsPaydayError', false);
-                },
-                function() {
+                })
+                .catch(function () {
                     context.commit('setIsPaydayReady', true);
                     context.commit('setIsPaydayError', true);
                 });
         },
         loadOptions(context) {
-            ajax.load(
-                urls.getOptionsUrl(),
-                function (data) {
-                    context.commit('setCountries', data.countries);
-                    context.commit('setTimezones', data.timezones);
+            ajax.get(urls.getOptionsUrl())
+                .then(function (response) {
+                    context.commit('setCountries', response.data.countries);
+                    context.commit('setTimezones', response.data.timezones);
                     context.commit('setIsOptionsReady', true);
                     context.commit('setIsOptionsError', false);
-                },
-                function () {
+                })
+                .catch(function () {
                     context.commit('setIsOptionsReady', true);
                     context.commit('setIsOptionsError', true);
                 });
