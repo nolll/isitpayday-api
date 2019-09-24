@@ -5,7 +5,7 @@ using Tests.Common;
 
 namespace Core.Tests.UseCases
 {
-    public class WeeklyPayDayTests : MockContainer
+    public class WeeklyPayDayTests
     {
         [Test]
         public void Execute_TodayIsPayDay_IsTrue()

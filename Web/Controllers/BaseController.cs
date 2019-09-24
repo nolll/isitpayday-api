@@ -1,20 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Text;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Web.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Web.Plumbing;
 using Environment = Web.Extensions.Environment;
 
 namespace Web.Controllers
 {
-    [EnsureHttps]
     public abstract class BaseController : Controller
     {
         protected bool IsInProduction => Environment.IsProd(Host);
-        private string Host => Request?.Url?.Host ?? "";
+        private string Host => Request?.Host.Host ?? "";
         private readonly Bootstrapper _bootstrapper;
         protected UseCaseContainer UseCase => _bootstrapper.UseCases;
 
@@ -22,19 +17,13 @@ namespace Web.Controllers
         {
             _bootstrapper = new Bootstrapper();
         }
-
-        protected ActionResult JsonView(object data, JsonRequestBehavior jsonRequestBehavior = JsonRequestBehavior.AllowGet)
-        {
-            return new JsonResult(data, jsonRequestBehavior);
-        }
     }
 
     public class JsonResult : ActionResult
     {
-        public JsonResult(object data, JsonRequestBehavior jsonRequestBehavior)
+        public JsonResult(object data)
         {
             Data = data;
-            JsonRequestBehavior = jsonRequestBehavior;
         }
 
         [UsedImplicitly]
@@ -45,45 +34,5 @@ namespace Web.Controllers
 
         [UsedImplicitly]
         public object Data { get; set; }
-
-        [UsedImplicitly]
-        public JsonRequestBehavior JsonRequestBehavior { get; set; }
-
-        public override void ExecuteResult(ControllerContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-            if (JsonRequestBehavior == JsonRequestBehavior.DenyGet && string.Equals(context.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
-            {
-                throw new InvalidOperationException("This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.");
-            }
-
-            var response = context.HttpContext.Response;
-
-            response.ContentType = !string.IsNullOrEmpty(ContentType) ? ContentType : "application/json";
-            if (ContentEncoding != null)
-            {
-                response.ContentEncoding = ContentEncoding;
-            }
-            if (Data == null)
-                return;
-
-            response.Write(JsonHelper.Serialize(Data));
-        }
-    }
-
-    public static class JsonHelper
-    {
-        public static string Serialize(object data)
-        {
-            return JsonConvert.SerializeObject(data, Settings);
-        }
-
-        private static JsonSerializerSettings Settings => new JsonSerializerSettings
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver()
-        };
     }
 }

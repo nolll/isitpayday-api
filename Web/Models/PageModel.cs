@@ -1,4 +1,6 @@
-﻿namespace Web.Models
+﻿using Web.Settings;
+
+namespace Web.Models
 {
     public class PageModel
     {
@@ -7,10 +9,10 @@
         public static string StyleView => "~/Views/Generated/Style.cshtml";
         public static string ScriptView => "~/Views/Generated/Script.cshtml";
 
-        public PageModel(bool isInProduction)
+        public PageModel(bool isInProduction, AppSettings appSettings)
         {
             GoogleAnalyticsModel = new GoogleAnalyticsModel(isInProduction);
-            Version = AppSettings.Version;
+            Version = appSettings.Version;
         }
     }
 }
