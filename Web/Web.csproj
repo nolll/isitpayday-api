@@ -7,51 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="app\package.json" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="app\scripts\ajax.js" />
-    <None Remove="app\scripts\App.vue" />
-    <None Remove="app\scripts\frequencies.js" />
-    <None Remove="app\scripts\main.js" />
-    <None Remove="app\scripts\nth-formatter.js" />
-    <None Remove="app\scripts\storage.js" />
-    <None Remove="app\scripts\store.js" />
-    <None Remove="app\scripts\urls.js" />
-    <None Remove="app\scripts\weekdays.js" />
-    <None Remove="app\styles\styles.css" />
-    <None Remove="app\templates\script-template.txt" />
-    <None Remove="app\templates\style-template.txt" />
-    <None Remove="app\webpack.config.js" />
-    <None Remove="app\webpack.dev.js" />
-    <None Remove="app\webpack.prod.js" />
-    <None Remove="Images\favicon.png" />
-    <None Remove="Images\money.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="app\scripts\ajax.js" />
-    <Content Include="app\scripts\App.vue" />
-    <Content Include="app\scripts\frequencies.js" />
-    <Content Include="app\scripts\main.js" />
-    <Content Include="app\scripts\nth-formatter.js" />
-    <Content Include="app\scripts\storage.js" />
-    <Content Include="app\scripts\store.js" />
-    <Content Include="app\scripts\urls.js" />
-    <Content Include="app\scripts\weekdays.js" />
-    <Content Include="app\styles\styles.css" />
-    <Content Include="app\templates\script-template.txt" />
-    <Content Include="app\templates\style-template.txt" />
-    <Content Include="app\webpack.config.js" />
-    <Content Include="app\webpack.dev.js" />
-    <Content Include="app\webpack.prod.js" />
-    <Content Include="Images\favicon.png" />
-    <Content Include="Images\money.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="app\package.json" />
+    <Content Remove="app\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,10 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
