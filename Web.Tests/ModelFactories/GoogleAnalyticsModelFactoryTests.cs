@@ -1,9 +1,10 @@
 ﻿using NUnit.Framework;
+using Tests.Common;
 using Web.Models;
 
 namespace Web.Tests.ModelFactories
 {
-    public class GoogleAnalyticsModelFactoryTests
+    public class GoogleAnalyticsModelFactoryTests : MockContainer
     {
         [Test]
         public void Code_IsSetToCorrectCode()

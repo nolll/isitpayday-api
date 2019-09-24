@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Web.Mvc;
 using Web.Models;
 
 namespace Web.Controllers
@@ -11,7 +11,7 @@ namespace Web.Controllers
         {
             var optionsResult = UseCase.Options.Execute();
 
-            return Json(new OptionsModel(optionsResult));
+            return JsonView(new OptionsModel(optionsResult));
         }
     }
 }

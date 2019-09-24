@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Web.Mvc;
 using Web.Models;
-using Web.Settings;
 
 namespace Web.Controllers
 {
@@ -8,9 +7,9 @@ namespace Web.Controllers
     {
         [HttpGet]
         [Route(Routes.Home)]
-        public ActionResult Index(AppSettings appSettings)
+        public ActionResult Index()
         {
-            var pageModel = new PageModel(IsInProduction, appSettings);
+            var pageModel = new PageModel(IsInProduction);
             return View("~/Views/Home/Index.cshtml", pageModel);
         }
     }

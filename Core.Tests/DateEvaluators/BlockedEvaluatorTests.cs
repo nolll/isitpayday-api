@@ -2,11 +2,12 @@
 using Core.Classes;
 using Core.DateEvaluators;  
 using NUnit.Framework;
+using Tests.Common;
 using Tests.Common.FakeClasses;
 
 namespace Core.Tests.DateEvaluators
 {
-    public class BlockedEvaluatorTests
+    public class BlockedEvaluatorTests : MockContainer
     {
         private readonly Country _defaultCountry = new CountryInTest();
         private readonly Country _sweden = new CountryInTest(CountryCode.Sweden);

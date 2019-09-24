@@ -8,9 +8,9 @@ _NCrunch_*/
 *.suo
 **/obj/
 **/bin/
-**/*.user
-/Web/app/node_modules
-/Web/wwwroot
+**/*proj.user
+/Web/node_modules
+/Web/assets
+/Web/dist
 /Web/Properties/PublishProfiles
 /Web/Views/Generated
-/Web/appsettings.Development.json

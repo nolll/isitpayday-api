@@ -6,10 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './scripts/main.js',
+    entry: './app/scripts/main.js',
     output: {
         filename: '[name]-[contenthash].js',
-        path: path.resolve(__dirname, '../wwwroot/dist'),
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/'
     },
     devtool: 'source-map',
@@ -41,20 +41,20 @@ module.exports = {
         new VueLoaderPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new HtmlWebpackPlugin({
-            filename: path.resolve(__dirname, '../Views/Generated/Script.cshtml'),
-            template: path.resolve(__dirname, './templates/script-template.txt'),
+            filename: path.resolve(__dirname, './Views/Generated/Script.cshtml'),
+            template: path.resolve(__dirname, './app/templates/script-template.txt'),
             inject: false
         }),
         new HtmlWebpackPlugin({
-            filename: path.resolve(__dirname, '../Views/Generated/Style.cshtml'),
-            template: path.resolve(__dirname, './templates/style-template.txt'),
+            filename: path.resolve(__dirname, './Views/Generated/Style.cshtml'),
+            template: path.resolve(__dirname, './app/templates/style-template.txt'),
             inject: false
         })
     ],
     resolve: {
         alias: {
             vue: 'vue/dist/vue.esm.js',
-            '@': path.resolve(__dirname, './scripts')
+            '@': path.resolve(__dirname, './app/scripts')
         },
         extensions: ['.ts', '.js', '.vue']
     },

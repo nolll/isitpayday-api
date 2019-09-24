@@ -5,7 +5,7 @@ using Tests.Common;
 
 namespace Core.Tests.UseCases
 {
-    public class MonthlyPayDayTests
+    public class MonthlyPayDayTests : MockContainer
     {
         [Test]
         public void Execute_TodayIsPayDay_IsTrue()
@@ -34,7 +34,7 @@ namespace Core.Tests.UseCases
         [Test]
         public void Execute_TodayIsNotPayDayButMonthIsTooShortAndFallbacks_IsTrue()
         {
-            var request = new MonthlyPayday.Request(31, "SE", "UTC", TestData.Dates.LeapYearFeb29);
+            var request = new MonthlyPayday.Request(31, "SE", "UTC", TestData.Dates.LeapYearFeb29th);
 
             var sut = GetSut();
             var result = sut.Execute(request);

@@ -1,6 +1,6 @@
 using System;
+using System.Web.Mvc;
 using Core.UseCases;
-using Microsoft.AspNetCore.Mvc;
 using Web.Models;
 
 namespace Web.Controllers
@@ -14,7 +14,7 @@ namespace Web.Controllers
             var payDayRequest = new MonthlyPayday.Request(payday, country, timezone, DateTime.UtcNow);
             var showPayDayResult = UseCase.MonthlyPayday.Execute(payDayRequest);
 
-            return Json(new PayDayModel(showPayDayResult));
+            return JsonView(new PayDayModel(showPayDayResult));
         }
     }
 }
