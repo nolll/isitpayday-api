@@ -6,11 +6,18 @@ namespace Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly AppSettings _appSettings;
+
+        public HomeController(AppSettings appSettings)
+        {
+            _appSettings = appSettings;
+        }
+
         [HttpGet]
         [Route(Routes.Home)]
-        public ActionResult Index(AppSettings appSettings)
+        public ActionResult Index()
         {
-            var pageModel = new PageModel(IsInProduction, appSettings);
+            var pageModel = new PageModel(IsInProduction, _appSettings);
             return View("~/Views/Home/Index.cshtml", pageModel);
         }
     }
