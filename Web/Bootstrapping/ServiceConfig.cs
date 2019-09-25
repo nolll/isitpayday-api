@@ -134,7 +134,7 @@ namespace Web.Bootstrapping
 
         private void AddMvc()
         {
-            _services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            _services.AddMvc();
         }
 
         private void AddCors()
