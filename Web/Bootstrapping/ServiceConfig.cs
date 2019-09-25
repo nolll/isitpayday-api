@@ -57,7 +57,10 @@ namespace Web.Bootstrapping
 
         private void AddMvc()
         {
-            _services.AddMvc();
+            _services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
         }
 
         private void AddCors()
@@ -67,8 +70,7 @@ namespace Web.Bootstrapping
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+                        .AllowAnyHeader());
             });
         }
     }
