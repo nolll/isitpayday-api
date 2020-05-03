@@ -10,7 +10,7 @@ _NCrunch_*/
 **/bin/
 **/*.user
 /Web/app/node_modules
-/Web/wwwroot
+/Web/wwwroot/dist
 /Web/Properties/PublishProfiles
 /Web/Views/Generated
 /Web/appsettings.Development.json
