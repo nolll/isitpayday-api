@@ -10,7 +10,7 @@
     <meta name="description" content="Find out if today is payday" />
     <meta http-equiv="imagetoolbar" content="no" />
     <link rel="image_src" href="/images/money.jpg" />
-    @Html.Partial(PageModel.StyleView)
+    @Html.PartialAsync(PageModel.StyleView)
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
 </head>
 <body>
@@ -21,9 +21,9 @@
         Bugs and suggestions: <a href="mailto:info@isitpayday.com">info@isitpayday.com</a>
     </p>
 
-    @Html.Partial(PageModel.ScriptView)
+    @Html.PartialAsync(PageModel.ScriptView)
 
-    @Html.Partial("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
+    @Html.PartialAsync("~/Views/GoogleAnalytics.cshtml", Model.GoogleAnalyticsModel)
 
 </body>
 </html>

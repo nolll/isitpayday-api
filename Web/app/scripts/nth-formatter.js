@@ -28,4 +28,4 @@ export default {
             return n + 'rd';
         return n + 'th';
     }
-}
+};
