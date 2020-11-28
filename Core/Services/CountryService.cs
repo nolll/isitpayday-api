@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Core.Classes;
+using Core.DateEvaluators;
 using Core.Exceptions;
 
 namespace Core.Services
@@ -16,7 +17,12 @@ namespace Core.Services
                             select new RegionInfo(ci.Name)
                             group ri by ri.TwoLetterISORegionName into g
                             select new Country(g.Key, g.First().DisplayName);
-            return countries.OrderBy(o => o.Name);
+            return countries.Where(IsEnabled).OrderBy(o => o.Name);
+        }
+
+        private static bool IsEnabled(Country country)
+        {
+            return HolidayEvaluator.Evaluators.ContainsKey(country.Id);
         }
 
         public static Country GetCountry(string countryCode)

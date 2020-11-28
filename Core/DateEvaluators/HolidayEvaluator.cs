@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using Core.Classes;
 using Core.DateEvaluators.CountrySpecific;
@@ -26,7 +27,7 @@ namespace Core.DateEvaluators
             return Evaluators.TryGetValue(country.Id, out var evaluator) ? evaluator : new DefaultHolidayEvaluator();
         }
 
-        private static readonly Dictionary<string, HolidayEvaluator> Evaluators = new Dictionary<string, HolidayEvaluator>
+        public static readonly Dictionary<string, HolidayEvaluator> Evaluators = new Dictionary<string, HolidayEvaluator>
         {
             { CountryCode.Denmark, new DenmarkHolidayEvaluator() },
             { CountryCode.Norway, new NorwayHolidayEvaluator() },
