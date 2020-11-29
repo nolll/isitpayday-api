@@ -1,7 +1,7 @@
 ﻿<template>
     <div v-if="isReady">
         <p class="status"><span v-text="message"></span></p>
-        <settings />
+        <Settings />
         <p class="footer" v-text="formattedLocalTime"></p>
     </div>
 </template>
@@ -12,6 +12,9 @@
     import Settings from './components/Settings';
 
     export default {
+        components: {
+            Settings
+        },
         mounted: function () {
             this.$store.dispatch('loadSettings');
             this.$store.dispatch('loadPayday');
@@ -31,9 +34,6 @@
                     return moment(this.localTime).format('MMMM Do YYYY, HH:mm:ss');
                 return '';
             }
-        },
-        components: {
-            Settings
         }
     }
 </script>

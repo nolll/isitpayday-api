@@ -4,7 +4,7 @@
         <div class="payday-info">
             <p v-show="showForm">
                 <select v-model.number="payday">
-                    <option v-for="p in paydays" :value="p.id">{{p.name}}</option>
+                    <option v-for="p in paydays" :value="p.id" :key="p.id">{{p.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
