@@ -1,11 +1,11 @@
 export default {
-    getMonthlyUrl: function(payday, timezone, country) {
+    getMonthlyUrl(payday: number, timezone: string, country: string) {
         return `/api/monthly?payday=${payday}&country=${country}&timezone=${timezone}`;
     },
-    getWeeklyUrl: function(payday, timezone, country) {
+    getWeeklyUrl(payday: number, timezone: string, country: string) {
         return `/api/weekly?payday=${payday}&country=${country}&timezone=${timezone}`;
     },
-    getOptionsUrl: function() {
+    getOptionsUrl() {
         return '/api/options';
     }
 };
