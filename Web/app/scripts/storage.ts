@@ -11,8 +11,8 @@ function getPayday() {
     return payday ? Number(payday) : defaultPayday;
 }
 
-function savePayday(payday) {
-    setCookie('payday', payday);
+function savePayday(payday: number) {
+    setCookie('payday', payday.toString());
 }
 
 function getTimezone() {
@@ -20,7 +20,7 @@ function getTimezone() {
     return timezone ? timezone : defaultTimezone;
 }
 
-function saveTimezone(timezone) {
+function saveTimezone(timezone: string) {
     setCookie('timezone', timezone);
 }
 
@@ -32,7 +32,7 @@ function getFrequency() {
     return defaultFrequency;
 }
 
-function saveFrequency(frequency) {
+function saveFrequency(frequency: string) {
     setCookie('frequency', frequency);
 }
 
@@ -41,11 +41,11 @@ function getCountry() {
     return country ? country : defaultCountry;
 }
 
-function saveCountry(country) {
+function saveCountry(country: string) {
     setCookie('country', country);
 }
 
-function setCookie(name, value) {
+function setCookie(name: string, value: string) {
     cookie.set(name, value, { expires: 3650 });
 }
 
