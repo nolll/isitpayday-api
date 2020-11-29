@@ -2,19 +2,21 @@
 import vuex from 'vuex';
 import store from './store';
 import App from './App.vue';
-import Styles from '../styles/styles.css'; // needed for style import
+import './styles';
 
 vue.use(vuex);
 
-function domReady(callback) {
+function domReady(callback: () => void) {
     document.readyState === 'interactive' || document.readyState === 'complete'
         ? callback()
         : document.addEventListener('DOMContentLoaded', callback);
 }
 
-domReady(function () {
+function init(){
     new vue({
         store: new vuex.Store(store),
         render: h => h(App)
     }).$mount('#app');
-});
+}
+
+domReady(init);

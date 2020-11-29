@@ -25,7 +25,8 @@
         "./scripts/*.ts",
         "./scripts/**/*.ts",
         "./scripts/*.vue",
-        "./scripts/**/*.vue"
+        "./scripts/**/*.vue",
+        "./global-shim.d.ts",
     ],
     "exclude": [
         "node_modules"
