@@ -1,14 +1,9 @@
 import cookie from 'js-cookie';
-import frequencies from './frequencies';
-
-var defaultPayday = 25;
-var defaultTimezone = 'W. Europe Standard Time';
-var defaultFrequency = frequencies.monthly;
-var defaultCountry = 'SE';
+import defaults from './defaults';
 
 function getPayday() {
     const payday = cookie.get('payday');
-    return payday ? Number(payday) : defaultPayday;
+    return payday ? Number(payday) : defaults.payday;
 }
 
 function savePayday(payday: number) {
@@ -17,7 +12,7 @@ function savePayday(payday: number) {
 
 function getTimezone() {
     const timezone = cookie.get('timezone');
-    return timezone ? timezone : defaultTimezone;
+    return timezone ? timezone : defaults.timezone;
 }
 
 function saveTimezone(timezone: string) {
@@ -29,7 +24,7 @@ function getFrequency() {
     if (frequency) {
         return frequency;
     }
-    return defaultFrequency;
+    return defaults.frequency;
 }
 
 function saveFrequency(frequency: string) {
@@ -38,7 +33,7 @@ function saveFrequency(frequency: string) {
 
 function getCountry() {
     const country = cookie.get('country');
-    return country ? country : defaultCountry;
+    return country ? country : defaults.country;
 }
 
 function saveCountry(country: string) {

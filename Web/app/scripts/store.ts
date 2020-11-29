@@ -1,22 +1,20 @@
-﻿import vue from 'vue';
-import vuex from 'vuex';
+﻿import { StoreOptions } from 'vuex';
 import ajax from './ajax';
 import urls from './urls';
 import frequencies from './frequencies';
 import storage from './storage';
+import defaults from './defaults';
 
-vue.use(vuex);
-
-export default new vuex.Store({
+export default {
     strict: true,
     state: {
         _isPaydayReady: false,
         _isOptionsReady: false,
         _isPayday: false,
-        _payday: null,
-        _timezone: null,
-        _frequency: null,
-        _country: null,
+        _payday: defaults.payday,
+        _timezone: defaults.timezone,
+        _frequency: defaults.frequency,
+        _country: defaults.country,
         _countries: [],
         _timezones: [],
         _localTime: null,
@@ -151,10 +149,25 @@ export default new vuex.Store({
             state._isOptionsError = isOptionsError;
         }
     }
-});
+} as StoreOptions<StoreState>;
 
-function getPaydayUrl (payday, frequency, timezone, country) {
+function getPaydayUrl (payday: number, frequency: string, timezone: string, country: string) {
     if (frequency === frequencies.weekly)
         return urls.getWeeklyUrl(payday, timezone, country);
     return urls.getMonthlyUrl(payday, timezone, country);
+}
+
+export interface StoreState{
+    _isPaydayReady: boolean,
+    _isOptionsReady: boolean,
+    _isPayday: boolean,
+    _payday: number,
+    _timezone: string,
+    _frequency: string,
+    _country: string,
+    _countries: string[],
+    _timezones: string[],
+    _localTime: Date | null,
+    _isPaydayError: boolean,
+    _isOptionsError: boolean
 }
