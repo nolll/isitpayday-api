@@ -18,14 +18,6 @@ export class StoreMixin extends Vue {
         return this.$store.getters['localTime'];
     }
 
-    protected get $_timezones(): Timezone[]{
-        return this.$store.getters['timezones'];
-    }
-
-    protected get $_countries(): Country[]{
-        return this.$store.getters['countries'];
-    }
-
     protected get $_countryId(): string{
         return this.$store.getters['country'];
     }
@@ -48,10 +40,6 @@ export class StoreMixin extends Vue {
 
     protected $_loadPayday() {
         this.$store.dispatch('loadPayday');
-    }
-
-    protected $_loadOptions() {
-        this.$store.dispatch('loadOptions');
     }
 
     protected $_selectCountry(id: string){

@@ -4,24 +4,18 @@ import urls from './urls';
 import frequencies from './frequencies';
 import storage from './storage';
 import defaults from './defaults';
-import { Timezone } from './types/Timezone';
-import { Country } from './types/Country';
 
 export default {
     strict: true,
     state: {
         _isPaydayReady: false,
-        _isOptionsReady: false,
         _isPayday: false,
         _payday: defaults.payday,
         _timezone: defaults.timezone,
         _frequency: defaults.frequency,
         _country: defaults.country,
-        _countries: [],
-        _timezones: [],
         _localTime: null,
-        _isPaydayError: false,
-        _isOptionsError: false
+        _isPaydayError: false
     },
     getters: {
         isPayday(state) {
@@ -39,20 +33,14 @@ export default {
         country(state) {
             return state._country;
         },
-        countries(state) {
-            return state._countries;
-        },
-        timezones(state) {
-            return state._timezones;
-        },
         localTime(state) {
             return state._localTime;
         },
         isReady(state) {
-            return state._isPaydayReady || state._isOptionsReady;
+            return state._isPaydayReady;
         },
         isError(state) {
-            return state._isPaydayError || state._isOptionsError;
+            return state._isPaydayError;
         }
     },
     actions: {
@@ -74,18 +62,6 @@ export default {
             catch(error){
                 context.commit('setIsPaydayReady', true);
                 context.commit('setIsPaydayError', true);
-            }
-        },
-        async loadOptions(context) {
-            try{
-                const response = await ajax.get(urls.getOptionsUrl());
-                context.commit('setCountries', response.data.countries);
-                context.commit('setTimezones', response.data.timezones);
-                context.commit('setIsOptionsReady', true);
-                context.commit('setIsOptionsError', false);
-            } catch(error){
-                context.commit('setIsOptionsReady', true);
-                context.commit('setIsOptionsError', true);
             }
         },
         selectCountry(context, country) {
@@ -131,23 +107,11 @@ export default {
         setLocalTime(state, localTime) {
             state._localTime = localTime;
         },
-        setCountries(state, countries) {
-            state._countries = countries;
-        },
-        setTimezones(state, timezones) {
-            state._timezones = timezones;
-        },
         setIsPaydayReady(state, isPaydayReady) {
             state._isPaydayReady = isPaydayReady;
         },
-        setIsOptionsReady(state, isOptionsReady) {
-            state._isOptionsReady = isOptionsReady;
-        },
         setIsPaydayError(state, isPaydayError) {
             state._isPaydayError = isPaydayError;
-        },
-        setIsOptionsError(state, isOptionsError) {
-            state._isOptionsError = isOptionsError;
         }
     }
 } as StoreOptions<StoreState>;
@@ -160,15 +124,11 @@ function getPaydayUrl (payday: number, frequency: string, timezone: string, coun
 
 export interface StoreState{
     _isPaydayReady: boolean,
-    _isOptionsReady: boolean,
     _isPayday: boolean,
     _payday: number,
     _timezone: string,
     _frequency: string,
     _country: string,
-    _countries: Country[],
-    _timezones: Timezone[],
     _localTime: Date | null,
-    _isPaydayError: boolean,
-    _isOptionsError: boolean
+    _isPaydayError: boolean
 }
