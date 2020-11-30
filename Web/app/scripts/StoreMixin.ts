@@ -30,6 +30,10 @@ export class StoreMixin extends Vue {
         return this.$store.getters['country'];
     }
 
+    protected get $_timezoneId(): string{
+        return this.$store.getters['timezone'];
+    }
+
     protected get $_frequencyId(): string{
         return this.$store.getters['frequency'];
     }
@@ -52,6 +56,10 @@ export class StoreMixin extends Vue {
 
     protected $_selectCountry(id: string){
         this.$store.dispatch('selectCountry', id);
+    }
+
+    protected $_selectTimezone(id: string){
+        this.$store.dispatch('selectTimezone', id);
     }
 
     protected $_selectFrequency(id: string){

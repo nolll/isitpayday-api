@@ -4,7 +4,7 @@
         <div class="timezone-info">
             <p v-show="showForm">
                 <select v-model.number="timezone">
-                    <option v-for="t in timezones" :value="t.id">{{t.id}}</option>
+                    <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.id}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
@@ -16,34 +16,35 @@
     </div>
 </template>
 
-<script>
-    import { mapGetters } from 'vuex';
+<script lang="ts">
+    import { Component, Mixins } from 'vue-property-decorator';
+    import { StoreMixin} from '../StoreMixin';
+    
+    @Component
+    export default class TimezoneForm extends Mixins(
+        StoreMixin
+    ) {
+        showForm = false;
 
-    export default {
-        data: function () {
-            return {
-                showForm: false
-            };
-        },
-        computed: {
-            ...mapGetters(['timezones']),
-            timezone: {
-                get() {
-                    return this.$store.getters.timezone;
-                },
-                set(value) {
-                    this.$store.dispatch('selectTimezone', value);
-                    this.close();
-                }
-            },
-        },
-        methods: {
-            open: function () {
-                this.showForm = true;
-            },
-            close: function () {
-                this.showForm = false;
-            }
+        get timezoneId() {
+            return this.$_timezoneId;
         }
-    };
+        
+        set timezoneId(value) {
+            this.$_selectTimezone(value);
+            this.close();
+        }
+
+        get timezones(){
+            return this.$_timezones;
+        }
+
+        open() {
+            this.showForm = true;
+        }
+
+        close() {
+            this.showForm = false;
+        }
+    }
 </script>
