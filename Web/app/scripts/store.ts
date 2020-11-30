@@ -60,32 +60,31 @@ export default {
             context.commit('setFrequency', storage.getFrequency());
             context.commit('setCountry', storage.getCountry());
         },
-        loadPayday(context) {
+        async loadPayday(context) {
             const url = getPaydayUrl(context.state._payday, context.state._frequency, context.state._timezone, context.state._country);
-            ajax.get(url)
-                .then(function (response) {
-                    context.commit('setIsPayday', response.data.isPayDay);
-                    context.commit('setLocalTime', response.data.localTime);
-                    context.commit('setIsPaydayReady', true);
-                    context.commit('setIsPaydayError', false);
-                })
-                .catch(function () {
-                    context.commit('setIsPaydayReady', true);
-                    context.commit('setIsPaydayError', true);
-                });
+            try{
+                const response = await ajax.get(url);
+                context.commit('setIsPayday', response.data.isPayDay);
+                context.commit('setLocalTime', response.data.localTime);
+                context.commit('setIsPaydayReady', true);
+                context.commit('setIsPaydayError', false);
+            }
+            catch(error){
+                context.commit('setIsPaydayReady', true);
+                context.commit('setIsPaydayError', true);
+            }
         },
-        loadOptions(context) {
-            ajax.get(urls.getOptionsUrl())
-                .then(function (response) {
-                    context.commit('setCountries', response.data.countries);
-                    context.commit('setTimezones', response.data.timezones);
-                    context.commit('setIsOptionsReady', true);
-                    context.commit('setIsOptionsError', false);
-                })
-                .catch(function () {
-                    context.commit('setIsOptionsReady', true);
-                    context.commit('setIsOptionsError', true);
-                });
+        async loadOptions(context) {
+            try{
+                const response = await ajax.get(urls.getOptionsUrl())
+                context.commit('setCountries', response.data.countries);
+                context.commit('setTimezones', response.data.timezones);
+                context.commit('setIsOptionsReady', true);
+                context.commit('setIsOptionsError', false);
+            } catch(error){
+                context.commit('setIsOptionsReady', true);
+                context.commit('setIsOptionsError', true);
+            }
         },
         selectCountry(context, country) {
             context.commit('setCountry', country);
