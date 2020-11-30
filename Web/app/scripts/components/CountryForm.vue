@@ -16,46 +16,52 @@
     </div>
 </template>
 
-<script>
-    import { mapGetters } from 'vuex';
+<script lang="ts">
+    import { Component, Mixins } from 'vue-property-decorator';
+    import { StoreMixin} from '../StoreMixin';
+    
+    @Component
+    export default class App extends Mixins(
+        StoreMixin
+    ) {
+        showForm = false;
 
-    export default {
-        computed: {
-            ...mapGetters([
-                'countries'
-            ]),
-            country: {
-                get() {
-                    return this.$store.getters.country;
-                },
-                set(value) {
-                    this.$store.dispatch('selectCountry', value);
-                    this.close();
+        get countryName() {
+            var i;
+            for (i = 0; i < this.countries.length; i++) {
+                const c = this.countries[i];
+                if (c.id === this.country) {
+                    return c.name;
                 }
-            },
-            countryName: function () {
-                var i;
-                for (i = 0; i < this.countries.length; i++) {
-                    const c = this.countries[i];
-                    if (c.id === this.country) {
-                        return c.name;
-                    }
-                }
-                return '';
             }
-        },
-        methods: {
-            open: function () {
-                this.showForm = true;
-            },
-            close: function () {
-                this.showForm = false;
-            }
-        },
-        data: function () {
-            return {
-                showForm: false
-            };
+            return '';
         }
-    };
+
+        get country() {
+            return this.$store.getters.country;
+        }
+        
+        set country(value) {
+            this.$_selectCountry(value);
+            this.close();
+        }
+
+        get countries(){
+            return this.$_countries;
+        }
+
+        open() {
+            this.showForm = true;
+        }
+
+        close() {
+            this.showForm = false;
+        }
+
+        mounted() {
+            this.$_loadSettings();
+            this.$_loadPayday();
+            this.$_loadOptions();
+        }
+    }
 </script>
