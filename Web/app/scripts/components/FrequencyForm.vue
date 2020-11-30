@@ -58,11 +58,5 @@
         close() {
             this.showForm = false;
         }
-
-        mounted() {
-            this.$_loadSettings();
-            this.$_loadPayday();
-            this.$_loadOptions();
-        }
     }
 </script>

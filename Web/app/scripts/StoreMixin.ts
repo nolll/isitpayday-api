@@ -34,6 +34,10 @@ export class StoreMixin extends Vue {
         return this.$store.getters['frequency'];
     }
 
+    protected get $_payday(): number{
+        return this.$store.getters['payday'];
+    }
+
     protected $_loadSettings() {
         this.$store.dispatch('loadSettings');
     }
@@ -52,6 +56,10 @@ export class StoreMixin extends Vue {
 
     protected $_selectFrequency(id: string){
         this.$store.dispatch('selectFrequency', id);
+    }
+
+    protected $_selectPayday(id: number){
+        this.$store.dispatch('selectPayday', id);
     }
 
     $store: any;
