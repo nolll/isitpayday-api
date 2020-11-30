@@ -3,8 +3,8 @@
         <h3>Frequency</h3>
         <div class="frequency-info">
             <p v-show="showForm">
-                <select v-model.number="frequency">
-                    <option v-for="f in frequencies" :value="f.id">{{f.name}}</option>
+                <select v-model="frequencyId">
+                    <option v-for="f in frequencies" :value="f.id" :key="f.id">{{f.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
@@ -16,47 +16,53 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { Component, Mixins } from 'vue-property-decorator';
+    import { StoreMixin} from '../StoreMixin';
     import frequencies from '../frequencies';
 
-    export default {
-        data: function () {
-            return {
-                showForm: false,
-                frequencies: [
-                    { id: frequencies.monthly, name: 'Monthly' },
-                    { id: frequencies.weekly, name: 'Weekly' }
-                ]
-            };
-        },
-        computed: {
-            frequency: {
-                get() {
-                    return this.$store.getters.frequency;
-                },
-                set(value) {
-                    this.$store.dispatch('selectFrequency', value);
-                    this.close();
-                }
-            },
-            frequencyName: function () {
-                var i;
-                for (i = 0; i < this.frequencies.length; i++) {
-                    var f = this.frequencies[i];
-                    if (f.id === this.frequency) {
-                        return f.name;
-                    }
-                }
-                return "";
-            }
-        },
-        methods: {
-            open: function () {
-                this.showForm = true;
-            },
-            close: function () {
-                this.showForm = false;
-            }
+    @Component
+    export default class FrequencyForm extends Mixins(
+        StoreMixin
+    ) {
+        showForm = false;
+        frequencies = [
+            { id: frequencies.monthly, name: 'Monthly' },
+            { id: frequencies.weekly, name: 'Weekly' }
+        ];
+
+        get frequencyId() {
+            return this.$_frequencyId;
         }
-    };
+
+        set frequencyId(id: string) {
+            this.$_selectFrequency(id);
+            this.close();
+        }
+
+        get frequencyName() {
+            var i;
+            for (i = 0; i < this.frequencies.length; i++) {
+                var f = this.frequencies[i];
+                if (f.id === this.frequencyId) {
+                    return f.name;
+                }
+            }
+            return "";
+        }
+
+        open() {
+            this.showForm = true;
+        }
+
+        close() {
+            this.showForm = false;
+        }
+
+        mounted() {
+            this.$_loadSettings();
+            this.$_loadPayday();
+            this.$_loadOptions();
+        }
+    }
 </script>

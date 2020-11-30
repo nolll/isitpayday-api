@@ -3,7 +3,7 @@
         <h3>Country</h3>
         <div class="country-info">
             <p v-show="showForm">
-                <select v-model.number="country">
+                <select v-model="countryId">
                     <option v-for="c in countries" :value="c.id" :key="c.id">{{c.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
@@ -21,7 +21,7 @@
     import { StoreMixin} from '../StoreMixin';
     
     @Component
-    export default class App extends Mixins(
+    export default class CountryForm extends Mixins(
         StoreMixin
     ) {
         showForm = false;
@@ -30,18 +30,18 @@
             var i;
             for (i = 0; i < this.countries.length; i++) {
                 const c = this.countries[i];
-                if (c.id === this.country) {
+                if (c.id === this.countryId) {
                     return c.name;
                 }
             }
             return '';
         }
 
-        get country() {
-            return this.$store.getters.country;
+        get countryId() {
+            return this.$_countryId;
         }
         
-        set country(value) {
+        set countryId(value) {
             this.$_selectCountry(value);
             this.close();
         }

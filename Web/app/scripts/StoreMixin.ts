@@ -1,5 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Country } from './types/Country';
+import { Frequency } from './types/Frequency';
 import { Timezone } from './types/Timezone';
 
 @Component
@@ -25,6 +26,14 @@ export class StoreMixin extends Vue {
         return this.$store.getters['countries'];
     }
 
+    protected get $_countryId(): string{
+        return this.$store.getters['country'];
+    }
+
+    protected get $_frequencyId(): string{
+        return this.$store.getters['frequency'];
+    }
+
     protected $_loadSettings() {
         this.$store.dispatch('loadSettings');
     }
@@ -39,6 +48,10 @@ export class StoreMixin extends Vue {
 
     protected $_selectCountry(id: string){
         this.$store.dispatch('selectCountry', id);
+    }
+
+    protected $_selectFrequency(id: string){
+        this.$store.dispatch('selectFrequency', id);
     }
 
     $store: any;
