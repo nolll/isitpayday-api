@@ -3,9 +3,9 @@
         <p class="status"><span>{{message}}</span></p>
         <div class="settings">
             <h2>Settings</h2>
-            <CountryForm />
+            <CountryForm :countries="countries" />
             <FrequencyForm />
-            <TimezoneForm />
+            <TimezoneForm :timezones="timezones" />
             <PaydayForm />
         </div>
         <p class="footer">{{formattedLocalTime}}</p>
@@ -21,6 +21,10 @@
     import TimezoneForm from './components/TimezoneForm.vue';
     import FrequencyForm from './components/FrequencyForm.vue';
     import PaydayForm from './components/PaydayForm.vue';
+    import { Country } from '@/types/Country';
+    import { Timezone } from '@/types/Timezone';
+    import ajax from './ajax';
+    import urls from './urls';
 
     @Component({
         components: {
@@ -33,7 +37,9 @@
     export default class App extends Mixins(
         StoreMixin
     ) {
-        
+        countries: Country[] = [];
+        timezones: Timezone[] = [];
+
         get isReady(){
             return this.$_isReady;
         }
@@ -56,10 +62,20 @@
             return '';
         }
 
+        private async loadOptions(){
+            try{
+                const response = await ajax.get(urls.getOptionsUrl());
+                this.countries = response.data.countries;
+                this.timezones = response.data.timezones;
+            } catch(error) {
+                
+            }
+        }
+
         mounted() {
             this.$_loadSettings();
             this.$_loadPayday();
-            this.$_loadOptions();
+            this.loadOptions();
         }
     }
 </script>

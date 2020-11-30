@@ -1,15 +1,15 @@
 ﻿<template>
-    <div>
+    <div v-if="isReady">
         <h3>Timezone</h3>
         <div class="timezone-info">
             <p v-show="showForm">
-                <select v-model.number="timezone">
+                <select v-model="timezoneId">
                     <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.id}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
             <p v-show="!showForm">
-                {{timezone}}
+                {{timezoneId}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
         </div>
@@ -17,13 +17,15 @@
 </template>
 
 <script lang="ts">
-    import { Component, Mixins } from 'vue-property-decorator';
+    import { Timezone } from '@/types/Timezone';
+    import { Component, Mixins, Prop } from 'vue-property-decorator';
     import { StoreMixin} from '../StoreMixin';
     
     @Component
     export default class TimezoneForm extends Mixins(
         StoreMixin
     ) {
+        @Prop() readonly timezones!: Timezone[];
         showForm = false;
 
         get timezoneId() {
@@ -35,8 +37,8 @@
             this.close();
         }
 
-        get timezones(){
-            return this.$_timezones;
+        get isReady(){
+            return this.timezones.length;
         }
 
         open() {

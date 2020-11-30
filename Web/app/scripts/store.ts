@@ -4,6 +4,8 @@ import urls from './urls';
 import frequencies from './frequencies';
 import storage from './storage';
 import defaults from './defaults';
+import { Timezone } from './types/Timezone';
+import { Country } from './types/Country';
 
 export default {
     strict: true,
@@ -76,7 +78,7 @@ export default {
         },
         async loadOptions(context) {
             try{
-                const response = await ajax.get(urls.getOptionsUrl())
+                const response = await ajax.get(urls.getOptionsUrl());
                 context.commit('setCountries', response.data.countries);
                 context.commit('setTimezones', response.data.timezones);
                 context.commit('setIsOptionsReady', true);
@@ -164,8 +166,8 @@ export interface StoreState{
     _timezone: string,
     _frequency: string,
     _country: string,
-    _countries: string[],
-    _timezones: string[],
+    _countries: Country[],
+    _timezones: Timezone[],
     _localTime: Date | null,
     _isPaydayError: boolean,
     _isOptionsError: boolean

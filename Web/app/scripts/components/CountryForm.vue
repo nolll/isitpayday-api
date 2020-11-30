@@ -17,13 +17,15 @@
 </template>
 
 <script lang="ts">
-    import { Component, Mixins } from 'vue-property-decorator';
+    import { Country } from '@/types/Country';
+    import { Component, Mixins, Prop } from 'vue-property-decorator';
     import { StoreMixin} from '../StoreMixin';
     
     @Component
     export default class CountryForm extends Mixins(
         StoreMixin
     ) {
+        @Prop() readonly countries!: Country[];
         showForm = false;
 
         get countryName() {
@@ -44,10 +46,6 @@
         set countryId(value) {
             this.$_selectCountry(value);
             this.close();
-        }
-
-        get countries(){
-            return this.$_countries;
         }
 
         open() {
