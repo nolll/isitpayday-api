@@ -17,15 +17,12 @@
 </template>
 
 <script lang="ts">
-    import { Component, Mixins, Prop } from 'vue-property-decorator';
-    import { StoreMixin} from '../StoreMixin';
+    import { Component, Prop, Vue } from 'vue-property-decorator';
     import frequencies from '../frequencies';
     import { Frequency } from '@/types/Frequency';
 
     @Component
-    export default class FrequencyForm extends Mixins(
-        StoreMixin
-    ) {
+    export default class FrequencyForm extends Vue {
         @Prop() value!: string;
         @Prop() readonly frequencies!: Frequency[];
         isFormVisible = false;

@@ -18,13 +18,10 @@
 
 <script lang="ts">
     import { Timezone } from '@/types/Timezone';
-    import { Component, Mixins, Prop } from 'vue-property-decorator';
-    import { StoreMixin} from '../StoreMixin';
+    import { Component, Prop, Vue } from 'vue-property-decorator';
     
     @Component
-    export default class TimezoneForm extends Mixins(
-        StoreMixin
-    ) {
+    export default class TimezoneForm extends Vue {
         @Prop() value!: string;
         @Prop() readonly timezones!: Timezone[];
         showForm = false;

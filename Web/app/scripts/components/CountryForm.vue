@@ -18,13 +18,10 @@
 
 <script lang="ts">
     import { Country } from '@/types/Country';
-    import { Component, Mixins, Prop } from 'vue-property-decorator';
-    import { StoreMixin} from '../StoreMixin';
+    import { Component, Prop, Vue } from 'vue-property-decorator';
     
     @Component
-    export default class CountryForm extends Mixins(
-        StoreMixin
-    ) {
+    export default class CountryForm extends Vue {
         @Prop() value!: string;
         @Prop() readonly countries!: Country[];
         isFormVisible = false;

@@ -21,13 +21,10 @@
     import nthFormatter from '@/nth-formatter';
     import weekdays from '@/weekdays';
     import { Payday } from '@/types/Payday';
-    import { Component, Mixins, Prop } from 'vue-property-decorator';
-    import { StoreMixin} from '@/StoreMixin';
+    import { Component, Prop, Vue } from 'vue-property-decorator';
 
     @Component
-    export default class PaydayForm extends Mixins(
-        StoreMixin
-    ) {
+    export default class PaydayForm extends Vue {
         @Prop() value!: number;
         @Prop() readonly frequencyId!: string;
         isFormVisible = false;

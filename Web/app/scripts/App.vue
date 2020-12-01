@@ -13,10 +13,8 @@
 </template>
 
 <script lang="ts">
-    import { Component, Mixins, Watch } from 'vue-property-decorator';
-    import { StoreMixin} from './StoreMixin';
+    import { Component, Vue, Watch } from 'vue-property-decorator';
     import moment from 'moment';
-    import { mapGetters } from 'vuex';
     import CountryForm from './components/CountryForm.vue';
     import TimezoneForm from './components/TimezoneForm.vue';
     import FrequencyForm from './components/FrequencyForm.vue';
@@ -38,10 +36,11 @@
             PaydayForm
         }
     })
-    export default class App extends Mixins(
-        StoreMixin
-    ) {
-        private isLocalReady = false;
+    export default class App extends Vue {
+        private isOptionsReady = false;
+        private isPaydayReady = false;
+        private isPayday = false;
+        private localTime = new Date();
         private payday = defaults.payday;
         private timezone = defaults.timezone;
         private frequency = defaults.frequency;
@@ -51,15 +50,7 @@
         private frequencies: Frequency[] = [];
 
         get isReady(){
-            return this.$_isReady && this.isLocalReady;
-        }
-
-        get isPayday(){
-            return this.$_isPayday;
-        }
-
-        get localTime(){
-            return this.$_localTime;
+            return this.isPaydayReady && this.isOptionsReady;
         }
 
         get message() {
@@ -88,7 +79,7 @@
                     { id: frequencies.monthly, name: 'Monthly' },
                     { id: frequencies.weekly, name: 'Weekly' }
                 ];
-                this.isLocalReady = true;
+                this.isOptionsReady = true;
             } catch(error) {
                 
             }
@@ -119,8 +110,21 @@
             this.loadPayday();
         }
 
-        loadPayday(){
-            this.$_loadPayday({country: this.country, frequency: this.frequency, timezone: this.timezone, payday: this.payday});
+        async loadPayday(){
+            try{
+                const response = await ajax.get(this.paydayUrl);
+                this.isPayday = response.data.isPayDay;
+                this.localTime = response.data.localTime;
+                this.isPaydayReady = true;
+            }
+            catch(error){
+            }
+        }
+
+        private get paydayUrl() {
+            if (this.frequency === frequencies.weekly)
+                return urls.getWeeklyUrl(this.payday, this.timezone, this.country);
+            return urls.getMonthlyUrl(this.payday, this.timezone, this.country);
         }
 
         mounted() {
