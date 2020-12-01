@@ -15,7 +15,7 @@
 
 <script lang="ts">
     import { Component, Vue, Watch } from 'vue-property-decorator';
-    import moment from 'moment';
+    import dayjs from 'dayjs';
     import CountryForm from './components/CountryForm.vue';
     import TimezoneForm from './components/TimezoneForm.vue';
     import FrequencyForm from './components/FrequencyForm.vue';
@@ -28,6 +28,8 @@
     import defaults from './defaults';
     import storage from './storage';
     import frequencies from './frequencies';
+    import advancedFormat from 'dayjs/plugin/advancedFormat';
+    dayjs.extend(advancedFormat);
 
     @Component({
         components: {
@@ -64,7 +66,7 @@
 
         private get formattedLocalTime() {
             if (this.localTime)
-                return moment(this.localTime).format('MMMM Do YYYY, HH:mm:ss');
+                return dayjs(this.localTime).format('MMMM Do YYYY, HH:mm:ss');
             return '';
         }
 

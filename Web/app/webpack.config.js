@@ -58,7 +58,6 @@ module.exports = {
             filename: 'main-[contenthash].css'
         }),
         new VueLoaderPlugin(),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../Views/Generated/Script.cshtml'),
             template: path.resolve(__dirname, './templates/script-template.txt'),
