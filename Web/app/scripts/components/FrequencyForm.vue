@@ -2,13 +2,13 @@
     <div>
         <h3>Frequency</h3>
         <div class="frequency-info">
-            <p v-show="showForm">
-                <select v-model="frequencyId">
+            <p v-show="isFormVisible">
+                <select :value="value" v-on:input="updateValue">
                     <option v-for="f in frequencies" :value="f.id" :key="f.id">{{f.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
-            <p v-show="!showForm">
+            <p v-show="!isFormVisible">
                 {{frequencyName}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
@@ -17,34 +17,28 @@
 </template>
 
 <script lang="ts">
-    import { Component, Mixins } from 'vue-property-decorator';
+    import { Component, Mixins, Prop } from 'vue-property-decorator';
     import { StoreMixin} from '../StoreMixin';
     import frequencies from '../frequencies';
+    import { Frequency } from '@/types/Frequency';
 
     @Component
     export default class FrequencyForm extends Mixins(
         StoreMixin
     ) {
-        showForm = false;
-        frequencies = [
-            { id: frequencies.monthly, name: 'Monthly' },
-            { id: frequencies.weekly, name: 'Weekly' }
-        ];
+        @Prop() value!: string;
+        @Prop() readonly frequencies!: Frequency[];
+        isFormVisible = false;
 
-        get frequencyId() {
-            return this.$_frequencyId;
-        }
-
-        set frequencyId(id: string) {
-            this.$_selectFrequency(id);
+        updateValue(event: any){
             this.close();
+            this.$emit('input', event.target.value);
         }
 
         get frequencyName() {
-            var i;
-            for (i = 0; i < this.frequencies.length; i++) {
+            for (let i = 0; i < this.frequencies.length; i++) {
                 var f = this.frequencies[i];
-                if (f.id === this.frequencyId) {
+                if (f.id === this.value) {
                     return f.name;
                 }
             }
@@ -52,11 +46,11 @@
         }
 
         open() {
-            this.showForm = true;
+            this.isFormVisible = true;
         }
 
         close() {
-            this.showForm = false;
+            this.isFormVisible = false;
         }
     }
 </script>

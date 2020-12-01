@@ -4,9 +4,9 @@
         <div class="settings">
             <h2>Settings</h2>
             <CountryForm v-model="country" :countries="countries" />
-            <FrequencyForm />
-            <TimezoneForm :timezones="timezones" />
-            <PaydayForm />
+            <FrequencyForm v-model="frequency" :frequencies="frequencies" />
+            <TimezoneForm v-model="timezone" :timezones="timezones" />
+            <PaydayForm v-model="payday" :frequencyId="frequency" />
         </div>
         <p class="footer">{{formattedLocalTime}}</p>
     </div>
@@ -22,11 +22,13 @@
     import FrequencyForm from './components/FrequencyForm.vue';
     import PaydayForm from './components/PaydayForm.vue';
     import { Country } from '@/types/Country';
+    import { Frequency } from '@/types/Frequency';
     import { Timezone } from '@/types/Timezone';
     import ajax from './ajax';
     import urls from './urls';
     import defaults from './defaults';
     import storage from './storage';
+    import frequencies from './frequencies';
 
     @Component({
         components: {
@@ -39,15 +41,17 @@
     export default class App extends Mixins(
         StoreMixin
     ) {
+        private isLocalReady = false;
         private payday = defaults.payday;
         private timezone = defaults.timezone;
         private frequency = defaults.frequency;
         private country = defaults.country;
         private countries: Country[] = [];
         private timezones: Timezone[] = [];
+        private frequencies: Frequency[] = [];
 
         get isReady(){
-            return this.$_isReady;
+            return this.$_isReady && this.isLocalReady;
         }
 
         get isPayday(){
@@ -69,10 +73,10 @@
         }
 
         private loadSettings(){
-            this.payday = storage.getPayday();
-            this.timezone = storage.getTimezone();
-            this.frequency = storage.getFrequency();
             this.country = storage.getCountry();
+            this.frequency = storage.getFrequency();
+            this.timezone = storage.getTimezone();
+            this.payday = storage.getPayday();
         }
 
         private async loadOptions(){
@@ -80,6 +84,11 @@
                 const response = await ajax.get(urls.getOptionsUrl());
                 this.countries = response.data.countries;
                 this.timezones = response.data.timezones;
+                this.frequencies = [
+                    { id: frequencies.monthly, name: 'Monthly' },
+                    { id: frequencies.weekly, name: 'Weekly' }
+                ];
+                this.isLocalReady = true;
             } catch(error) {
                 
             }
@@ -91,8 +100,27 @@
             this.loadPayday();
         }
 
+        @Watch('frequency')
+        frequencyChanged(){
+            storage.saveFrequency(this.frequency);
+            this.payday = this.frequency === frequencies.weekly ? 5 : 25;
+            this.loadPayday();
+        }
+
+        @Watch('timezone')
+        timezoneChanged(){
+            storage.saveTimezone(this.timezone);
+            this.loadPayday();
+        }
+
+        @Watch('payday')
+        paydayChanged(){
+            storage.savePayday(this.payday);
+            this.loadPayday();
+        }
+
         loadPayday(){
-            this.$_loadPayday();
+            this.$_loadPayday({country: this.country, frequency: this.frequency, timezone: this.timezone, payday: this.payday});
         }
 
         mounted() {

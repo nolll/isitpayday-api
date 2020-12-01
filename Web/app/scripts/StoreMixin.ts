@@ -1,4 +1,5 @@
 import { Component, Vue } from 'vue-property-decorator';
+import { PaydayRequest } from './types/PaydayRequest';
 
 @Component
 export class StoreMixin extends Vue {
@@ -15,32 +16,12 @@ export class StoreMixin extends Vue {
         return this.$store.getters['localTime'];
     }
 
-    protected get $_timezoneId(): string{
-        return this.$store.getters['timezone'];
-    }
-
-    protected get $_frequencyId(): string{
-        return this.$store.getters['frequency'];
-    }
-
     protected get $_payday(): number{
         return this.$store.getters['payday'];
     }
 
-    protected $_loadSettings() {
-        this.$store.dispatch('loadSettings');
-    }
-
-    protected $_loadPayday() {
-        this.$store.dispatch('loadPayday');
-    }
-
-    protected $_selectTimezone(id: string){
-        this.$store.dispatch('selectTimezone', id);
-    }
-
-    protected $_selectFrequency(id: string){
-        this.$store.dispatch('selectFrequency', id);
+    protected $_loadPayday(data: PaydayRequest) {
+        this.$store.dispatch('loadPayday', data);
     }
 
     protected $_selectPayday(id: number){

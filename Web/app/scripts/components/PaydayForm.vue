@@ -2,13 +2,13 @@
     <div>
         <h3>Payday</h3>
         <div class="payday-info">
-            <p v-show="showForm">
-                <select v-model.number="payday">
+            <p v-show="isFormVisible">
+                <select :value="value" v-on:input="updateValue">
                     <option v-for="p in paydays" :value="p.id" :key="p.id">{{p.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
-            <p v-show="!showForm">
+            <p v-show="!isFormVisible">
                 {{paydayName}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
@@ -21,46 +21,36 @@
     import nthFormatter from '@/nth-formatter';
     import weekdays from '@/weekdays';
     import { Payday } from '@/types/Payday';
-    import { Component, Mixins } from 'vue-property-decorator';
+    import { Component, Mixins, Prop } from 'vue-property-decorator';
     import { StoreMixin} from '@/StoreMixin';
 
     @Component
     export default class PaydayForm extends Mixins(
         StoreMixin
     ) {
-        showForm = false;
-        frequencies = [
-            { id: frequencies.monthly, name: 'Monthly' },
-            { id: frequencies.weekly, name: 'Weekly' }
-        ];
+        @Prop() value!: number;
+        @Prop() readonly frequencyId!: string;
+        isFormVisible = false;
 
         get paydayName() {
-            return this.format(this.frequencyId, this.payday);
+            return this.format(this.frequencyId, this.value);
         }
 
         get paydays() {
             return this.getPayDays(this.frequencyId);
         }
 
-        get payday(){
-            return this.$_payday;
-        }
-
-        set payday(value) {
-            this.$_selectPayday(value);
+        updateValue(event: any){
             this.close();
-        }
-
-        get frequencyId(){
-            return this.$_frequencyId;
+            this.$emit('input', event.target.value);
         }
 
         open() {
-            this.showForm = true;
+            this.isFormVisible = true;
         }
 
         close() {
-            this.showForm = false;
+            this.isFormVisible = false;
         }
 
         private getPayDays(frequencyId: string) {

@@ -3,13 +3,13 @@
         <h3>Timezone</h3>
         <div class="timezone-info">
             <p v-show="showForm">
-                <select v-model="timezoneId">
+                <select :value="value" v-on:input="updateValue">
                     <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.id}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
             <p v-show="!showForm">
-                {{timezoneId}}
+                {{value}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
         </div>
@@ -25,16 +25,13 @@
     export default class TimezoneForm extends Mixins(
         StoreMixin
     ) {
+        @Prop() value!: string;
         @Prop() readonly timezones!: Timezone[];
         showForm = false;
-
-        get timezoneId() {
-            return this.$_timezoneId;
-        }
         
-        set timezoneId(value) {
-            this.$_selectTimezone(value);
+        updateValue(event: any){
             this.close();
+            this.$emit('input', event.target.value);
         }
 
         get isReady(){
