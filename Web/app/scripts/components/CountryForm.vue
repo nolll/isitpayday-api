@@ -2,13 +2,13 @@
     <div>
         <h3>Country</h3>
         <div class="country-info">
-            <p v-show="showForm">
-                <select v-model="countryId">
+            <p v-show="isFormVisible">
+                <select :value="value" v-on:input="updateValue" >
                     <option v-for="c in countries" :value="c.id" :key="c.id">{{c.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
-            <p v-show="!showForm">
+            <p v-show="!isFormVisible">
                 <span v-text="countryName"></span>
                 <a href="#" @click.prevent="open">Change</a>
             </p>
@@ -25,35 +25,31 @@
     export default class CountryForm extends Mixins(
         StoreMixin
     ) {
+        @Prop() value!: string;
         @Prop() readonly countries!: Country[];
-        showForm = false;
+        isFormVisible = false;
 
         get countryName() {
-            var i;
-            for (i = 0; i < this.countries.length; i++) {
+            for (let i = 0; i < this.countries.length; i++) {
                 const c = this.countries[i];
-                if (c.id === this.countryId) {
+                if (c.id === this.value) {
                     return c.name;
                 }
             }
             return '';
         }
 
-        get countryId() {
-            return this.$_countryId;
-        }
-        
-        set countryId(value) {
-            this.$_selectCountry(value);
+        updateValue(event: any){
             this.close();
+            this.$emit('input', event.target.value);
         }
 
         open() {
-            this.showForm = true;
+            this.isFormVisible = true;
         }
 
         close() {
-            this.showForm = false;
+            this.isFormVisible = false;
         }
     }
 </script>

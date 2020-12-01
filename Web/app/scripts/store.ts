@@ -13,9 +13,7 @@ export default {
         _payday: defaults.payday,
         _timezone: defaults.timezone,
         _frequency: defaults.frequency,
-        _country: defaults.country,
-        _localTime: null,
-        _isPaydayError: false
+        _localTime: null
     },
     getters: {
         isPayday(state) {
@@ -30,17 +28,11 @@ export default {
         frequency(state) {
             return state._frequency;
         },
-        country(state) {
-            return state._country;
-        },
         localTime(state) {
             return state._localTime;
         },
         isReady(state) {
             return state._isPaydayReady;
-        },
-        isError(state) {
-            return state._isPaydayError;
         }
     },
     actions: {
@@ -48,7 +40,6 @@ export default {
             context.commit('setPayday', storage.getPayday());
             context.commit('setTimezone', storage.getTimezone());
             context.commit('setFrequency', storage.getFrequency());
-            context.commit('setCountry', storage.getCountry());
         },
         async loadPayday(context) {
             const url = getPaydayUrl(context.state._payday, context.state._frequency, context.state._timezone, context.state._country);
@@ -57,15 +48,11 @@ export default {
                 context.commit('setIsPayday', response.data.isPayDay);
                 context.commit('setLocalTime', response.data.localTime);
                 context.commit('setIsPaydayReady', true);
-                context.commit('setIsPaydayError', false);
             }
             catch(error){
-                context.commit('setIsPaydayReady', true);
-                context.commit('setIsPaydayError', true);
             }
         },
         selectCountry(context, country) {
-            context.commit('setCountry', country);
             storage.saveCountry(country);
             context.dispatch('loadPayday');
         },
@@ -98,9 +85,6 @@ export default {
         setFrequency(state, frequency) {
             state._frequency = frequency;
         },
-        setCountry(state, country) {
-            state._country = country;
-        },
         setIsPayday(state, isPayday) {
             state._isPayday = isPayday;
         },
@@ -109,9 +93,6 @@ export default {
         },
         setIsPaydayReady(state, isPaydayReady) {
             state._isPaydayReady = isPaydayReady;
-        },
-        setIsPaydayError(state, isPaydayError) {
-            state._isPaydayError = isPaydayError;
         }
     }
 } as StoreOptions<StoreState>;
@@ -128,7 +109,5 @@ export interface StoreState{
     _payday: number,
     _timezone: string,
     _frequency: string,
-    _country: string,
     _localTime: Date | null,
-    _isPaydayError: boolean
 }

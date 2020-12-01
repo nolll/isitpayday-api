@@ -3,7 +3,7 @@
         <p class="status"><span>{{message}}</span></p>
         <div class="settings">
             <h2>Settings</h2>
-            <CountryForm :countries="countries" />
+            <CountryForm v-model="country" :countries="countries" />
             <FrequencyForm />
             <TimezoneForm :timezones="timezones" />
             <PaydayForm />
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-    import { Component, Mixins } from 'vue-property-decorator';
+    import { Component, Mixins, Watch } from 'vue-property-decorator';
     import { StoreMixin} from './StoreMixin';
     import moment from 'moment';
     import { mapGetters } from 'vuex';
@@ -25,6 +25,8 @@
     import { Timezone } from '@/types/Timezone';
     import ajax from './ajax';
     import urls from './urls';
+    import defaults from './defaults';
+    import storage from './storage';
 
     @Component({
         components: {
@@ -37,8 +39,12 @@
     export default class App extends Mixins(
         StoreMixin
     ) {
-        countries: Country[] = [];
-        timezones: Timezone[] = [];
+        private payday = defaults.payday;
+        private timezone = defaults.timezone;
+        private frequency = defaults.frequency;
+        private country = defaults.country;
+        private countries: Country[] = [];
+        private timezones: Timezone[] = [];
 
         get isReady(){
             return this.$_isReady;
@@ -62,6 +68,13 @@
             return '';
         }
 
+        private loadSettings(){
+            this.payday = storage.getPayday();
+            this.timezone = storage.getTimezone();
+            this.frequency = storage.getFrequency();
+            this.country = storage.getCountry();
+        }
+
         private async loadOptions(){
             try{
                 const response = await ajax.get(urls.getOptionsUrl());
@@ -72,9 +85,19 @@
             }
         }
 
-        mounted() {
-            this.$_loadSettings();
+        @Watch('country')
+        countryChanged(){
+            storage.saveCountry(this.country);
+            this.loadPayday();
+        }
+
+        loadPayday(){
             this.$_loadPayday();
+        }
+
+        mounted() {
+            this.loadSettings();
+            this.loadPayday();
             this.loadOptions();
         }
     }

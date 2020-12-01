@@ -1,7 +1,4 @@
 import { Component, Vue } from 'vue-property-decorator';
-import { Country } from './types/Country';
-import { Frequency } from './types/Frequency';
-import { Timezone } from './types/Timezone';
 
 @Component
 export class StoreMixin extends Vue {
@@ -16,10 +13,6 @@ export class StoreMixin extends Vue {
 
     protected get $_localTime(): Date{
         return this.$store.getters['localTime'];
-    }
-
-    protected get $_countryId(): string{
-        return this.$store.getters['country'];
     }
 
     protected get $_timezoneId(): string{
@@ -40,10 +33,6 @@ export class StoreMixin extends Vue {
 
     protected $_loadPayday() {
         this.$store.dispatch('loadPayday');
-    }
-
-    protected $_selectCountry(id: string){
-        this.$store.dispatch('selectCountry', id);
     }
 
     protected $_selectTimezone(id: string){
