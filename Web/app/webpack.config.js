@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './scripts/main.js',
+    entry: './scripts/main.ts',
     output: {
         filename: '[name]-[contenthash].js',
         path: path.resolve(__dirname, '../wwwroot/dist'),
@@ -24,11 +24,30 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                use: [{
+                    loader: 'vue-loader',
+                    options: {
+                        appendExtension: true
+                    }
+                }],
+                exclude: /node_modules/
             },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.ts$/,
+                use: [
+                    { loader: 'babel-loader' },
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            appendTsSuffixTo: [/\.vue$/]
+                        }
+                    }
+                ],
                 exclude: /node_modules/
             }
         ]
@@ -39,7 +58,6 @@ module.exports = {
             filename: 'main-[contenthash].css'
         }),
         new VueLoaderPlugin(),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../Views/Generated/Script.cshtml'),
             template: path.resolve(__dirname, './templates/script-template.txt'),

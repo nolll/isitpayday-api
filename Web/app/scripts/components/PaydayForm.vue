@@ -2,13 +2,13 @@
     <div>
         <h3>Payday</h3>
         <div class="payday-info">
-            <p v-show="showForm">
-                <select v-model.number="payday">
-                    <option v-for="p in paydays" :value="p.id">{{p.name}}</option>
+            <p v-show="isFormVisible">
+                <select :value="value" v-on:input="updateValue">
+                    <option v-for="p in paydays" :value="p.id" :key="p.id">{{p.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
-            <p v-show="!showForm">
+            <p v-show="!isFormVisible">
                 {{paydayName}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
@@ -16,78 +16,67 @@
     </div>
 </template>
 
-<script>
-    import frequencies from '../frequencies';
-    import weekdays from '../weekdays';
-    import nthFormatter from '../nth-formatter';
-    import { mapGetters } from 'vuex';
+<script lang="ts">
+    import frequencies from '@/frequencies';
+    import nthFormatter from '@/nth-formatter';
+    import weekdays from '@/weekdays';
+    import { Payday } from '@/types/Payday';
+    import { Component, Prop, Vue } from 'vue-property-decorator';
 
-    export default {
-        data: function () {
-            return {
-                showForm: false
-            };
-        },
-        computed: {
-            ...mapGetters([
-                'frequency'
-            ]),
-            payday: {
-                get() {
-                    return this.$store.getters.payday;
-                },
-                set(value) {
-                    this.$store.dispatch('selectPayday', value);
-                    this.close();
-                }
-            },
-            paydayName() {
-                return format(this.frequency, this.payday);
-            },
-            paydays() {
-                return getPayDays(this.frequency);
-            }
-        },
-        methods: {
-            open() {
-                this.showForm = true;
-            },
-            close() {
-                this.showForm = false;
-            }
-        },
-        mounted() {
-            var x = 0;
+    @Component
+    export default class PaydayForm extends Vue {
+        @Prop() value!: number;
+        @Prop() readonly frequencyId!: string;
+        isFormVisible = false;
+
+        get paydayName() {
+            return this.format(this.frequencyId, this.value);
         }
-    };
 
-    function getPayDays(frequency) {
-        if (frequency === frequencies.weekly)
-            return getWeeklyPaydays(frequency);
-        return getMonthlyPaydays(frequency);
-    }
-
-    function getWeeklyPaydays(frequency) {
-        return getPaydaysArray(frequency, 7);
-    }
-
-    function getMonthlyPaydays(frequency) {
-        return getPaydaysArray(frequency, 31);
-    }
-
-    function getPaydaysArray(frequency, upperBound) {
-        var paydays = [],
-            i;
-
-        for (i = 1; i <= upperBound; i++) {
-            paydays.push({ id: i, name: format(frequency, i) });
+        get paydays() {
+            return this.getPayDays(this.frequencyId);
         }
-        return paydays;
-    }
 
-    function format(frequency, payday) {
-        if (frequency === frequencies.weekly)
-            return weekdays.getName(payday);
-        return nthFormatter.format(payday);
+        updateValue(event: any){
+            this.close();
+            this.$emit('input', event.target.value);
+        }
+
+        open() {
+            this.isFormVisible = true;
+        }
+
+        close() {
+            this.isFormVisible = false;
+        }
+
+        private getPayDays(frequencyId: string) {
+            if (frequencyId === frequencies.weekly)
+                return this.getWeeklyPaydays(frequencyId);
+            return this.getMonthlyPaydays(frequencyId);
+        }
+
+        private getWeeklyPaydays(frequencyId: string) {
+            return this.getPaydaysArray(frequencyId, 7);
+        }
+
+        private getMonthlyPaydays(frequencyId: string) {
+            return this.getPaydaysArray(frequencyId, 31);
+        }
+
+        private getPaydaysArray(frequencyId: string, upperBound: number): Payday[] {
+            const paydays: Payday[] = [];
+
+            for (let i = 1; i <= upperBound; i++) {
+                paydays.push({ id: i, name: this.format(frequencyId, i) });
+            }
+            return paydays;
+        }
+
+        private format(frequencyId: string, payday: number) {
+            if (frequencyId === frequencies.weekly)
+                return weekdays.getName(payday);
+            return nthFormatter.format(payday);
+        }
     }
 </script>

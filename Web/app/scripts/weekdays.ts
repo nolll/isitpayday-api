@@ -1,5 +1,5 @@
 export default {
-    getName(payday) {
+    getName(payday: number) {
         if (payday === 1)
             return 'Monday';
         if (payday === 2)

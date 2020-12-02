@@ -2,13 +2,13 @@
     <div>
         <h3>Frequency</h3>
         <div class="frequency-info">
-            <p v-show="showForm">
-                <select v-model.number="frequency">
-                    <option v-for="f in frequencies" :value="f.id">{{f.name}}</option>
+            <p v-show="isFormVisible">
+                <select :value="value" v-on:input="updateValue">
+                    <option v-for="f in frequencies" :value="f.id" :key="f.id">{{f.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
-            <p v-show="!showForm">
+            <p v-show="!isFormVisible">
                 {{frequencyName}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
@@ -16,47 +16,37 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { Component, Prop, Vue } from 'vue-property-decorator';
     import frequencies from '../frequencies';
+    import { Frequency } from '@/types/Frequency';
 
-    export default {
-        data: function () {
-            return {
-                showForm: false,
-                frequencies: [
-                    { id: frequencies.monthly, name: 'Monthly' },
-                    { id: frequencies.weekly, name: 'Weekly' }
-                ]
-            };
-        },
-        computed: {
-            frequency: {
-                get() {
-                    return this.$store.getters.frequency;
-                },
-                set(value) {
-                    this.$store.dispatch('selectFrequency', value);
-                    this.close();
-                }
-            },
-            frequencyName: function () {
-                var i;
-                for (i = 0; i < this.frequencies.length; i++) {
-                    var f = this.frequencies[i];
-                    if (f.id === this.frequency) {
-                        return f.name;
-                    }
-                }
-                return "";
-            }
-        },
-        methods: {
-            open: function () {
-                this.showForm = true;
-            },
-            close: function () {
-                this.showForm = false;
-            }
+    @Component
+    export default class FrequencyForm extends Vue {
+        @Prop() value!: string;
+        @Prop() readonly frequencies!: Frequency[];
+        isFormVisible = false;
+
+        updateValue(event: any){
+            this.close();
+            this.$emit('input', event.target.value);
         }
-    };
+
+        get frequencyName() {
+            for (const f of this.frequencies) {
+                if (f.id === this.value) {
+                    return f.name;
+                }
+            }
+            return "";
+        }
+
+        open() {
+            this.isFormVisible = true;
+        }
+
+        close() {
+            this.isFormVisible = false;
+        }
+    }
 </script>
