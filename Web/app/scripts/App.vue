@@ -1,7 +1,7 @@
 ﻿<template>
     <div v-if="isReady">
         <p class="message"><span>{{message}}</span></p>
-        <p class="error"><span>{{error}}</span></p>
+        <p class="error" v-if="hasError"><span>{{error}}</span></p>
         <div class="settings">
             <h2>Settings</h2>
             <CountryForm v-model="country" :countries="countries" />
@@ -61,13 +61,17 @@
             if(this.error)
                 return 'Error';
 
-            return this.isPayday ? 'YES!!1!' : 'No =(';
+            return this.isPayday ? 'YES!!1!___' : 'No =(';
         }
 
         private get formattedLocalTime() {
             if (this.localTime)
                 return dayjs(this.localTime).format('MMMM Do YYYY, HH:mm:ss');
             return '';
+        }
+
+        private get hasError(){
+            return !!this.error;
         }
 
         private loadSettings(){

@@ -2,13 +2,13 @@
     <div v-if="isReady">
         <h3>Timezone</h3>
         <div class="timezone-info">
-            <p v-show="showForm">
+            <p v-show="isFormVisible">
                 <select :value="value" v-on:input="updateValue">
                     <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.id}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
-            <p v-show="!showForm">
+            <p v-show="!isFormVisible">
                 {{value}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
@@ -24,7 +24,7 @@
     export default class TimezoneForm extends Vue {
         @Prop() value!: string;
         @Prop() readonly timezones!: Timezone[];
-        showForm = false;
+        isFormVisible = false;
         
         updateValue(event: any){
             this.close();
@@ -36,11 +36,11 @@
         }
 
         open() {
-            this.showForm = true;
+            this.isFormVisible = true;
         }
 
         close() {
-            this.showForm = false;
+            this.isFormVisible = false;
         }
     }
 </script>

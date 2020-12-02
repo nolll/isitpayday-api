@@ -27,8 +27,7 @@
         isFormVisible = false;
 
         get countryName() {
-            for (let i = 0; i < this.countries.length; i++) {
-                const c = this.countries[i];
+            for (const c of this.countries) {
                 if (c.id === this.value) {
                     return c.name;
                 }

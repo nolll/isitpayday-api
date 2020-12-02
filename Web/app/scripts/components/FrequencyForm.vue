@@ -33,8 +33,7 @@
         }
 
         get frequencyName() {
-            for (let i = 0; i < this.frequencies.length; i++) {
-                var f = this.frequencies[i];
+            for (const f of this.frequencies) {
                 if (f.id === this.value) {
                     return f.name;
                 }

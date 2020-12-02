@@ -6,8 +6,6 @@ namespace Web.Models
     {
         public GoogleAnalyticsModel GoogleAnalyticsModel { get; }
         public string Version { get; }
-        public static string StyleView => "~/Views/Generated/Style.cshtml";
-        public static string ScriptView => "~/Views/Generated/Script.cshtml";
 
         public PageModel(bool isInProduction, AppSettings appSettings)
         {

@@ -1,5 +1,4 @@
-﻿@using Web.Models
-@model Web.Models.PageModel
+﻿@model Web.Models.PageModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +9,8 @@
     <meta name="description" content="Find out if today is payday" />
     <meta http-equiv="imagetoolbar" content="no" />
     <link rel="image_src" href="/images/money.jpg" />
-    @Html.Partial(PageModel.ScriptView)
-    @Html.Partial(PageModel.StyleView)
+    @Html.Partial("~/Views/Generated/Script.cshtml")
+    @Html.Partial("~/Views/Generated/Style.cshtml")
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
 </head>
 <body>
