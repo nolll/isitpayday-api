@@ -4,10 +4,10 @@
         <p class="error" v-if="hasError"><span>{{error}}</span></p>
         <div class="settings">
             <h2>Settings</h2>
-            <CountryForm v-model="country" :countries="countries" />
             <FrequencyForm v-model="frequency" :frequencies="frequencies" />
-            <TimezoneForm v-model="timezone" :timezones="timezones" />
             <PaydayForm v-model="payday" :frequencyId="frequency" />
+            <CountryForm v-model="country" :countries="countries" />
+            <TimezoneForm v-model="timezone" :timezones="timezones" />
         </div>
         <p class="footer">{{formattedLocalTime}}</p>
         <p class="contact">
@@ -92,6 +92,7 @@
         private frequencyChanged(){
             storage.saveFrequency(this.frequency);
             this.payday = this.frequency === frequencies.weekly ? defaults.weeklyPayday : defaults.monthlyPayday;
+            storage.savePayday(this.payday);
             this.loadPayday();
         }
 
@@ -131,10 +132,7 @@
                 const response = await ajax.get(urls.optionsUrl);
                 this.countries = response.data.countries;
                 this.timezones = response.data.timezones;
-                this.frequencies = [
-                    { id: frequencies.monthly, name: 'Monthly' },
-                    { id: frequencies.weekly, name: 'Weekly' }
-                ];
+                this.frequencies = response.data.frequencies;
                 this.isOptionsReady = true;
             } catch(error) {
                 this.error = 'Error loading options';

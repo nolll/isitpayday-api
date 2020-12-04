@@ -4,12 +4,12 @@
         <div class="timezone-info">
             <p v-show="isFormVisible">
                 <select :value="value" v-on:input="updateValue">
-                    <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.id}}</option>
+                    <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
             </p>
             <p v-show="!isFormVisible">
-                {{value}}
+                {{timezoneName}}
                 <a href="#" @click.prevent="open">Change</a>
             </p>
         </div>
@@ -26,6 +26,15 @@
         @Prop() readonly timezones!: Timezone[];
         isFormVisible = false;
         
+        get timezoneName() {
+            for (const t of this.timezones) {
+                if (t.id === this.value) {
+                    return t.name;
+                }
+            }
+            return '';
+        }
+
         updateValue(event: any){
             this.close();
             this.$emit('input', event.target.value);

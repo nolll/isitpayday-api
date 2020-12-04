@@ -1,7 +1,7 @@
 import frequencies from './frequencies';
 
 const monthlyPayday = 25;
-const weeklyPayday = 25;
+const weeklyPayday = 5;
 
 export default {
     monthlyPayday: monthlyPayday,
