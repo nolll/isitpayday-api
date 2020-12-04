@@ -10,6 +10,9 @@
             <PaydayForm v-model="payday" :frequencyId="frequency" />
         </div>
         <p class="footer">{{formattedLocalTime}}</p>
+        <p class="contact">
+            Bugs and suggestions: <a :href="mailtoUrl">{{email}}</a>
+        </p>
     </div>
 </template>
 
@@ -52,6 +55,7 @@
         private countries: Country[] = [];
         private timezones: Timezone[] = [];
         private frequencies: Frequency[] = [];
+        private email = 'info@isitpayday.com';
 
         private get isReady(){
             return this.isPaydayReady && this.isOptionsReady;
@@ -61,7 +65,7 @@
             if(this.error)
                 return 'Error';
 
-            return this.isPayday ? 'YES!!1!___' : 'No =(';
+            return this.isPayday ? 'YES!!1!' : 'No =(';
         }
 
         private get formattedLocalTime() {
@@ -74,11 +78,8 @@
             return !!this.error;
         }
 
-        private loadSettings(){
-            this.country = storage.getCountry();
-            this.frequency = storage.getFrequency();
-            this.timezone = storage.getTimezone();
-            this.payday = storage.getPayday();
+        private get mailtoUrl(){
+            return `mailto:${this.email}`;
         }
 
         @Watch('country')
@@ -104,6 +105,13 @@
         private paydayChanged(){
             storage.savePayday(this.payday);
             this.loadPayday();
+        }
+
+        private loadSettings(){
+            this.country = storage.getCountry();
+            this.frequency = storage.getFrequency();
+            this.timezone = storage.getTimezone();
+            this.payday = storage.getPayday();
         }
 
         private async loadPayday(){

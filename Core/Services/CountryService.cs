@@ -12,17 +12,11 @@ namespace Core.Services
     {
         public static IEnumerable<Country> GetCountries()
         {
-            var countries = from ri in
-                            from ci in CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-                            select new RegionInfo(ci.Name)
-                            group ri by ri.TwoLetterISORegionName into g
-                            select new Country(g.Key, g.First().DisplayName);
-            return countries.Where(IsEnabled).OrderBy(o => o.Name);
-        }
-
-        private static bool IsEnabled(Country country)
-        {
-            return HolidayEvaluator.Evaluators.ContainsKey(country.Id);
+            return HolidayEvaluator.Evaluators.Select(o =>
+            {
+                var region = new RegionInfo(o.Key);
+                return new Country(region.TwoLetterISORegionName, o.Key, region.DisplayName);
+            });
         }
 
         public static Country GetCountry(string countryCode)

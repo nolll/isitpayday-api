@@ -5,6 +5,7 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
     public class GivenDenmark : Arrange
     {
         protected override string CountryCode => "DK";
+        protected override string CultureName => "da-DK";
 
         [TestCase("2014-01-01")]
         [TestCase("2015-01-01")]

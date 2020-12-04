@@ -10,11 +10,12 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators
     {
         private Country _country;
         protected virtual string CountryCode => "";
-        
+        protected virtual string CultureName => "";
+
         [SetUp]
         public void Setup()
         {
-            _country = new CountryInTest(CountryCode);
+            _country = new CountryInTest(CountryCode, CultureName);
         }
 
         protected bool IsHoliday(string date)

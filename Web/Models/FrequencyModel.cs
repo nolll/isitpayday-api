@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 
 namespace Web.Models
 {
-    public class TimezoneModel
+    public class FrequencyModel
     {
         [UsedImplicitly]
         public string Id { get; }
@@ -10,7 +10,7 @@ namespace Web.Models
         [UsedImplicitly]
         public string Name { get; }
 
-        public TimezoneModel(string id, string name)
+        public FrequencyModel(string id, string name)
         {
             Id = id;
             Name = name;

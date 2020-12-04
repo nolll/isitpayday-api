@@ -5,6 +5,8 @@ namespace Core.DateEvaluators.CountrySpecific
 {
     public class SwedenHolidayEvaluator : HolidayEvaluator
     {
+        public override string CountryCode => "SE";
+
         protected override IEnumerable<HolidayRule> HolidayRules => new List<HolidayRule>
         {
             new NewYearsDayRule(),

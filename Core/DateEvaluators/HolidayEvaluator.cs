@@ -10,6 +10,7 @@ namespace Core.DateEvaluators
 {
     public abstract class HolidayEvaluator
     {
+        public abstract string CountryCode { get; }
         protected abstract IEnumerable<HolidayRule> HolidayRules { get; }
 
         public bool IsHoliday(DateTime userTime)
@@ -24,15 +25,15 @@ namespace Core.DateEvaluators
 
         public static HolidayEvaluator Create(Country country)
         {
-            return Evaluators.TryGetValue(country.Id, out var evaluator) ? evaluator : new DefaultHolidayEvaluator();
+            return Evaluators.TryGetValue(country.CultureName, out var evaluator) ? evaluator : new DefaultHolidayEvaluator();
         }
 
         public static readonly Dictionary<string, HolidayEvaluator> Evaluators = new Dictionary<string, HolidayEvaluator>
         {
-            { CountryCode.Denmark, new DenmarkHolidayEvaluator() },
-            { CountryCode.Norway, new NorwayHolidayEvaluator() },
-            { CountryCode.Sweden, new SwedenHolidayEvaluator() },
-            { CountryCode.UnitedStates, new UnitedStatesHolidayEvaluator() }
+            { CultureCode.Denmark, new DenmarkHolidayEvaluator() },
+            { CultureCode.Norway, new NorwayHolidayEvaluator() },
+            { CultureCode.Sweden, new SwedenHolidayEvaluator() },
+            { CultureCode.UnitedStates, new UnitedStatesHolidayEvaluator() }
         };
     }
 }
