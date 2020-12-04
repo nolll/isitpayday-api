@@ -12,11 +12,7 @@ namespace Core.Services
     {
         public static IEnumerable<Country> GetCountries()
         {
-            return HolidayEvaluator.Evaluators.Select(o =>
-            {
-                var region = new RegionInfo(o.Key);
-                return new Country(region.TwoLetterISORegionName, o.Key, region.DisplayName);
-            });
+            return HolidayEvaluator.Evaluators.Select(o => CreateCountry(o.Key)).OrderBy(o => o.Name);
         }
 
         public static Country GetCountry(string countryCode)
@@ -29,6 +25,12 @@ namespace Core.Services
             {
                 throw new CountryNotFoundException(countryCode);
             }
+        }
+
+        private static Country CreateCountry(string name)
+        {
+            var region = new RegionInfo(name);
+            return new Country(region.TwoLetterISORegionName, name, region.DisplayName);
         }
     }
 }
