@@ -28,7 +28,7 @@ namespace Web.Middleware
 
         private static void SetDefaultSecurityHeaders(HttpContext httpContext)
         {
-            //httpContext.AddHeader("X-Content-Type-Options", "nosniff");
+            httpContext.AddHeader("X-Content-Type-Options", "nosniff");
             //httpContext.AddHeader("X-DNS-Prefetch-Control", "off");
             //httpContext.AddHeader("X-Download-Options", "noopen");
             httpContext.AddHeader("X-Frame-Options", "DENY");
