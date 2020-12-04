@@ -9,7 +9,7 @@ namespace Core.Tests.DateEvaluators
     public class BlockedEvaluatorTests
     {
         private readonly Country _defaultCountry = new CountryInTest();
-        private readonly Country _sweden = new CountryInTest(CountryCode.Sweden);
+        private readonly Country _sweden = new CountryInTest(CountryCode.Sweden, CultureCode.Sweden);
 
         [Test]
         public void IsBlocked_WithWeekDayThatIsNotExcluded_ReturnsFalse()

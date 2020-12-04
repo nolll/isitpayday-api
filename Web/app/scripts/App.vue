@@ -4,12 +4,15 @@
         <p class="error" v-if="hasError"><span>{{error}}</span></p>
         <div class="settings">
             <h2>Settings</h2>
-            <CountryForm v-model="country" :countries="countries" />
             <FrequencyForm v-model="frequency" :frequencies="frequencies" />
-            <TimezoneForm v-model="timezone" :timezones="timezones" />
             <PaydayForm v-model="payday" :frequencyId="frequency" />
+            <CountryForm v-model="country" :countries="countries" />
+            <TimezoneForm v-model="timezone" :timezones="timezones" />
         </div>
         <p class="footer">{{formattedLocalTime}}</p>
+        <p class="contact">
+            Bugs and suggestions: <a :href="mailtoUrl">{{email}}</a>
+        </p>
     </div>
 </template>
 
@@ -52,6 +55,7 @@
         private countries: Country[] = [];
         private timezones: Timezone[] = [];
         private frequencies: Frequency[] = [];
+        private email = 'info@isitpayday.com';
 
         private get isReady(){
             return this.isPaydayReady && this.isOptionsReady;
@@ -61,7 +65,7 @@
             if(this.error)
                 return 'Error';
 
-            return this.isPayday ? 'YES!!1!___' : 'No =(';
+            return this.isPayday ? 'YES!!1!' : 'No =(';
         }
 
         private get formattedLocalTime() {
@@ -74,11 +78,8 @@
             return !!this.error;
         }
 
-        private loadSettings(){
-            this.country = storage.getCountry();
-            this.frequency = storage.getFrequency();
-            this.timezone = storage.getTimezone();
-            this.payday = storage.getPayday();
+        private get mailtoUrl(){
+            return `mailto:${this.email}`;
         }
 
         @Watch('country')
@@ -91,6 +92,7 @@
         private frequencyChanged(){
             storage.saveFrequency(this.frequency);
             this.payday = this.frequency === frequencies.weekly ? defaults.weeklyPayday : defaults.monthlyPayday;
+            storage.savePayday(this.payday);
             this.loadPayday();
         }
 
@@ -104,6 +106,13 @@
         private paydayChanged(){
             storage.savePayday(this.payday);
             this.loadPayday();
+        }
+
+        private loadSettings(){
+            this.country = storage.getCountry();
+            this.frequency = storage.getFrequency();
+            this.timezone = storage.getTimezone();
+            this.payday = storage.getPayday();
         }
 
         private async loadPayday(){
@@ -123,10 +132,7 @@
                 const response = await ajax.get(urls.optionsUrl);
                 this.countries = response.data.countries;
                 this.timezones = response.data.timezones;
-                this.frequencies = [
-                    { id: frequencies.monthly, name: 'Monthly' },
-                    { id: frequencies.weekly, name: 'Weekly' }
-                ];
+                this.frequencies = response.data.frequencies;
                 this.isOptionsReady = true;
             } catch(error) {
                 this.error = 'Error loading options';
