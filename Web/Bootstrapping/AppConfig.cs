@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Web.Middleware;
 
 namespace Web.Bootstrapping
 {
@@ -24,6 +25,7 @@ namespace Web.Bootstrapping
             ConfigureExceptions();
             ConfigureHttps();
             ConfigureErrors();
+            ConfigureCustomHeaders();
             ConfigureCors();
             ConfigureMvc();
             ConfigureStaticFiles();
@@ -49,6 +51,22 @@ namespace Web.Bootstrapping
             }
         }
 
+        private void ConfigureErrors()
+        {
+            if (IsDev)
+            {
+                //var errorUrl = $"/{Routes.Error}";
+                //_app.UseStatusCodePagesWithReExecute(errorUrl);
+                //_app.UseExceptionHandler(errorUrl);
+                //_app.UseMiddleware<ExceptionLoggingMiddleware>();
+            }
+        }
+
+        private void ConfigureCustomHeaders()
+        {
+            _app.UseMiddleware<SecurityHeadersMiddleware>();
+        }
+
         private void ConfigureCors()
         {
             _app.UseCors("CorsPolicy");
@@ -62,17 +80,6 @@ namespace Web.Bootstrapping
         private void ConfigureStaticFiles()
         {
             _app.UseStaticFiles();
-        }
-
-        private void ConfigureErrors()
-        {
-            if (IsDev)
-            {
-                //var errorUrl = $"/{Routes.Error}";
-                //_app.UseStatusCodePagesWithReExecute(errorUrl);
-                //_app.UseExceptionHandler(errorUrl);
-                //_app.UseMiddleware<ExceptionLoggingMiddleware>();
-            }
         }
     }
 }
