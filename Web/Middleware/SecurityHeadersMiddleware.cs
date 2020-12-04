@@ -33,6 +33,7 @@ namespace Web.Middleware
             //httpContext.AddHeader("X-Download-Options", "noopen");
             httpContext.AddHeader("X-Frame-Options", "DENY");
             httpContext.AddHeader("X-XSS-Protection", "1; mode=block");
+            httpContext.AddHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains");
         }
 
         private static void SetCspSecurityHeaders(HttpContext httpContext)
