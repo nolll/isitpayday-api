@@ -22,7 +22,7 @@ namespace Web.Middleware
         public async Task InvokeAsync(HttpContext httpContext)
         {
             SetDefaultSecurityHeaders(httpContext);
-            //SetCspSecurityHeaders(httpContext);
+            SetCspSecurityHeaders(httpContext);
             await _next(httpContext);
         }
 
@@ -51,17 +51,17 @@ namespace Web.Middleware
         {
             return new List<string>
             {
-                "default-src 'none'",
-                "frame-ancestors 'none'",
-                "frame-src 'none'",
-                "base-uri 'none'",
-                "form-action 'none'",
-                "script-src 'self' 'unsafe-inline' blob:",
-                "style-src 'self' 'unsafe-inline'",
-                "worker-src blob:",
-                "child-src blob:",
-                "connect-src 'self'",
-                "img-src 'self' data:"
+                "default-src 'self'"
+                //"frame-ancestors 'none'",
+                //"frame-src 'none'",
+                //"base-uri 'none'",
+                //"form-action 'none'",
+                //"script-src 'self' 'unsafe-inline' blob:",
+                //"style-src 'self' 'unsafe-inline'",
+                //"worker-src blob:",
+                //"child-src blob:",
+                //"connect-src 'self'",
+                //"img-src 'self' data:"
             };
         }
     }
