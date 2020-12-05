@@ -53,7 +53,7 @@ namespace Web.Middleware
             return new List<string>
             {
                 "default-src 'self'",
-                $"script-src 'self' *.google-analytics.com 'sha256-{GaScriptService.Sha256Hash}'",
+                $"script-src 'self' *.google-analytics.com 'sha256-{GaScriptService.ComputedSha256Hash}'",
                 "img-src 'self' *.google-analytics.com",
                 "connect-src 'self' *.google-analytics.com",
             };

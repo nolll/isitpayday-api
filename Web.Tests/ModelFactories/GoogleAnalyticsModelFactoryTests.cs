@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Web.Models;
+using Web.Services;
 
 namespace Web.Tests.ModelFactories
 {
@@ -29,6 +30,12 @@ namespace Web.Tests.ModelFactories
             var result = new GoogleAnalyticsModel(true);
 
             Assert.IsTrue(result.Enabled);
+        }
+
+        [Test]
+        public void Sha256HashIsCorrect()
+        {
+            Assert.That(GaScriptService.ComputedSha256Hash, Is.EqualTo("k59mZP6VC5mV76DXo+499OqnycIZLp0YneM/hAnfgCg="));
         }
     }
 }
