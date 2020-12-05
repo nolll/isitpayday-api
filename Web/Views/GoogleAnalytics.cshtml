@@ -1,9 +1,5 @@
 ﻿@model Web.Models.GoogleAnalyticsModel
 @if(@Model.Enabled){
-    <script>
-        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-        ga('create', '@Model.Code', 'auto');
-        ga('send', 'pageview');
-    </script>
+    @Html.Raw(Model.Script)
     <script async src='https://www.google-analytics.com/analytics.js'></script>
 }
