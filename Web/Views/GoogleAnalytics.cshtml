@@ -1,5 +1,5 @@
 ﻿@model Web.Models.GoogleAnalyticsModel
 @if(@Model.Enabled){
     @Html.Raw(Model.Script)
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script async src='https://www.google-analytics.com/analytics.js' nonce="@Model.Nonce"></script>
 }

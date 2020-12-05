@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Web.Services;
 using Web.Settings;
 
 namespace Web.Bootstrapping
@@ -52,6 +53,7 @@ namespace Web.Bootstrapping
         private void AddDependencies()
         {
             _services.AddSingleton(_settings);
+            _services.AddScoped<INonceProvider, NonceProvider>();
         }
 
         private void AddMvc()

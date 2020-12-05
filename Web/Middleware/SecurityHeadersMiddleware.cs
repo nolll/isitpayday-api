@@ -20,10 +20,10 @@ namespace Web.Middleware
         }
 
         [UsedImplicitly]
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext httpContext, INonceProvider nonceProvider)
         {
             SetDefaultSecurityHeaders(httpContext);
-            SetCspSecurityHeaders(httpContext);
+            SetCspSecurityHeaders(httpContext, nonceProvider);
             await _next(httpContext);
         }
 
@@ -37,23 +37,25 @@ namespace Web.Middleware
             httpContext.AddHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains");
         }
 
-        private static void SetCspSecurityHeaders(HttpContext httpContext)
+        private static void SetCspSecurityHeaders(HttpContext httpContext, INonceProvider nonceProvider)
         {
-            var csp = GetCsp();
+            var csp = GetCsp(nonceProvider);
             httpContext.AddHeader("Content-Security-Policy", csp);
         }
 
-        private static string  GetCsp()
+        private static string GetCsp(INonceProvider nonceProvider)
         {
-            return string.Join("; ", GetDefaultCspValues());
+            return string.Join("; ", GetDefaultCspValues(nonceProvider));
         }
 
-        private static IEnumerable<string> GetDefaultCspValues()
+        private static IEnumerable<string> GetDefaultCspValues(INonceProvider nonceProvider)
         {
+            var gaNonce = nonceProvider.GetGaNonce();
+
             return new List<string>
             {
                 "default-src 'self'",
-                $"script-src 'self' *.google-analytics.com 'sha256-{GaScriptService.ComputedSha256Hash}'",
+                $"script-src 'self' *.google-analytics.com 'sha256-{GaScriptService.ComputedSha256Hash}' 'nonce-{gaNonce}'",
                 "img-src 'self' *.google-analytics.com",
                 "connect-src 'self' *.google-analytics.com",
             };
