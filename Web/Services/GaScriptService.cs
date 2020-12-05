@@ -8,7 +8,7 @@ namespace Web.Services
         public const string Code = "UA-8453410-4";
         private static string Script => $"window.ga=window.ga||function(){{(ga.q=ga.q||[]).push(arguments)}};ga.l=+new Date;ga('create', '{Code}', 'auto');ga('send', 'pageview');";
         public static string ScriptTag => $"<script>{Script}</script>";
-        public static string Sha256Hash => ComputeHash(Script);
+        public static string Sha256Hash => "k59mZP6VC5mV76DXo+499OqnycIZLp0YneM/hAnfgCg="; //ComputeHash(Script);
 
         private static string ComputeHash(string s)
         {
