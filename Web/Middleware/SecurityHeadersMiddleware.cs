@@ -51,12 +51,12 @@ namespace Web.Middleware
         {
             return new List<string>
             {
-                "default-src 'self'"
+                "default-src 'self'",
                 //"frame-ancestors 'none'",
                 //"frame-src 'none'",
                 //"base-uri 'none'",
                 //"form-action 'none'",
-                //"script-src 'self' 'unsafe-inline' blob:",
+                "script-src 'self' 'unsafe-inline'",
                 //"style-src 'self' 'unsafe-inline'",
                 //"worker-src blob:",
                 //"child-src blob:",
