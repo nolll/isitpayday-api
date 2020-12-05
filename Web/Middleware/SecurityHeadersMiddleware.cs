@@ -52,16 +52,8 @@ namespace Web.Middleware
             return new List<string>
             {
                 "default-src 'self'",
-                //"frame-ancestors 'none'",
-                //"frame-src 'none'",
-                //"base-uri 'none'",
-                //"form-action 'none'",
-                "script-src 'self' 'unsafe-inline'",
-                //"style-src 'self' 'unsafe-inline'",
-                //"worker-src blob:",
-                //"child-src blob:",
-                //"connect-src 'self'",
-                //"img-src 'self' data:"
+                "script-src 'self' *.google-analytics.com 'unsafe-inline'",
+                "img-src 'self' *.google-analytics.com"
             };
         }
     }
