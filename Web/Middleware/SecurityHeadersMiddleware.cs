@@ -53,7 +53,8 @@ namespace Web.Middleware
             {
                 "default-src 'self'",
                 "script-src 'self' *.google-analytics.com 'unsafe-inline'",
-                "img-src 'self' *.google-analytics.com"
+                "img-src 'self' *.google-analytics.com",
+                "connect-src 'self' *.google-analytics.com",
             };
         }
     }
