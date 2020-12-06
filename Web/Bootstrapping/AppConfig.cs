@@ -26,7 +26,6 @@ namespace Web.Bootstrapping
             ConfigureHttps();
             ConfigureErrors();
             ConfigureCustomHeaders();
-            ConfigureCors();
             ConfigureMvc();
             ConfigureStaticFiles();
         }
@@ -65,11 +64,6 @@ namespace Web.Bootstrapping
         private void ConfigureCustomHeaders()
         {
             _app.UseMiddleware<SecurityHeadersMiddleware>();
-        }
-
-        private void ConfigureCors()
-        {
-            _app.UseCors("CorsPolicy");
         }
 
         private void ConfigureMvc()

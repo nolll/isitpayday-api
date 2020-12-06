@@ -30,11 +30,10 @@ namespace Web.Middleware
         private static void SetDefaultSecurityHeaders(HttpContext httpContext)
         {
             httpContext.AddHeader("X-Content-Type-Options", "nosniff");
-            //httpContext.AddHeader("X-DNS-Prefetch-Control", "off");
-            //httpContext.AddHeader("X-Download-Options", "noopen");
             httpContext.AddHeader("X-Frame-Options", "DENY");
             httpContext.AddHeader("X-XSS-Protection", "1; mode=block");
             httpContext.AddHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains");
+            httpContext.AddHeader("Access-Control-Allow-Origin", "*");
         }
 
         private static void SetCspSecurityHeaders(HttpContext httpContext)

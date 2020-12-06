@@ -21,7 +21,7 @@ namespace Web.Tests.ModelFactories
         {
             var result = new GoogleAnalyticsModel(false);
 
-            Assert.IsFalse(result.Enabled);
+            Assert.IsFalse(result.IsEnabled);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace Web.Tests.ModelFactories
         {
             var result = new GoogleAnalyticsModel(true);
 
-            Assert.IsTrue(result.Enabled);
+            Assert.IsTrue(result.IsEnabled);
         }
 
         [Test]

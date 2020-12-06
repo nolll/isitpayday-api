@@ -6,13 +6,13 @@ namespace Web.Models
     {
         public string Code { get; }
         public string Script { get; }
-        public bool Enabled { get; }
+        public bool IsEnabled { get; }
 
-        public GoogleAnalyticsModel(bool enabled)
+        public GoogleAnalyticsModel(bool isEnabled)
         {
             Code = GaScriptService.Code;
             Script = GaScriptService.ScriptTag;
-            Enabled = enabled;
+            IsEnabled = isEnabled;
         }
     }
 }

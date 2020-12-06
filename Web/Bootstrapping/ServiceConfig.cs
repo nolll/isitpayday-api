@@ -24,7 +24,6 @@ namespace Web.Bootstrapping
             AddLogging();
             AddDependencies();
             AddMvc();
-            AddCors();
         }
 
         private void AddCompression()
@@ -60,17 +59,6 @@ namespace Web.Bootstrapping
             _services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
-            });
-        }
-
-        private void AddCors()
-        {
-            _services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
             });
         }
     }
