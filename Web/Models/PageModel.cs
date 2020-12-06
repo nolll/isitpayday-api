@@ -1,5 +1,4 @@
-﻿using Web.Services;
-using Web.Settings;
+﻿using Web.Settings;
 
 namespace Web.Models
 {
@@ -8,9 +7,9 @@ namespace Web.Models
         public GoogleAnalyticsModel GoogleAnalyticsModel { get; }
         public string Version { get; }
 
-        public PageModel(bool isInProduction, AppSettings appSettings, INonceProvider nonceProvider)
+        public PageModel(bool isInProduction, AppSettings appSettings)
         {
-            GoogleAnalyticsModel = new GoogleAnalyticsModel(isInProduction, nonceProvider);
+            GoogleAnalyticsModel = new GoogleAnalyticsModel(isInProduction);
             Version = appSettings.Version;
         }
     }

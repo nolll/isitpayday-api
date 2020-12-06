@@ -11,7 +11,7 @@ namespace Web.Tests.ModelFactories
         {
             const string expected = "UA-8453410-4";
 
-            var result = new GoogleAnalyticsModel(true, "nonce");
+            var result = new GoogleAnalyticsModel(true);
 
             Assert.AreEqual(expected, result.Code);
         }
@@ -19,7 +19,7 @@ namespace Web.Tests.ModelFactories
         [Test]
         public void Enabled_IsNotInProduction_ReturnsFalse()
         {
-            var result = new GoogleAnalyticsModel(false, "nonce");
+            var result = new GoogleAnalyticsModel(false);
 
             Assert.IsFalse(result.Enabled);
         }
@@ -27,7 +27,7 @@ namespace Web.Tests.ModelFactories
         [Test]
         public void Enabled_IsInProduction_ReturnsTrue()
         {
-            var result = new GoogleAnalyticsModel(true, "nonce");
+            var result = new GoogleAnalyticsModel(true);
 
             Assert.IsTrue(result.Enabled);
         }

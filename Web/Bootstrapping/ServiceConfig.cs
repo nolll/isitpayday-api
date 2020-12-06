@@ -53,7 +53,6 @@ namespace Web.Bootstrapping
         private void AddDependencies()
         {
             _services.AddSingleton(_settings);
-            _services.AddScoped<INonceProvider, NonceProvider>();
         }
 
         private void AddMvc()
