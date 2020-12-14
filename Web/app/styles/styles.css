@@ -1,4 +1,6 @@
 ﻿body{
+    background-color: #fff;
+    color: #000;
     font-family: courier new,verdana;
 }
 
@@ -90,4 +92,57 @@ p.contact{
     bottom: 10px;
     width: 49%;
     text-align: right;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    body{
+        background-color: #000;
+        color: #ccc;
+    }
+
+    h1{
+        background-color: #ccc;
+        color: #000;
+    }
+
+    a{
+        color: #ccc;
+    }
+
+    button{
+        background: #ccc;
+        color: #000;
+    }
+    
+    p.footer,
+    p.contact{
+        color: #777;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body{
+        background-color: #fff;
+        color: #000;
+    }
+
+    h1{
+        background-color: #000;
+        color: #fff;
+    }
+
+    a{
+        color: #000;
+    }
+
+    button{
+        background: #000;
+        color: #fff;
+    }
+    
+    p.footer,
+    p.contact{
+        color: #bbb;
+    }
 }
