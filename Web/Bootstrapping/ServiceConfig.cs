@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Web.Services;
 using Web.Settings;
 
 namespace Web.Bootstrapping

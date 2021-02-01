@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Web.Extensions;
-using Web.Services;
-using Web.Settings;
 
 namespace Web.Middleware
 {
@@ -52,9 +49,7 @@ namespace Web.Middleware
             return new List<string>
             {
                 "default-src 'self'",
-                $"script-src 'self' *.google-analytics.com 'sha256-{GaScriptService.ComputedSha256Hash}'",
-                "img-src 'self' *.google-analytics.com",
-                "connect-src 'self' *.google-analytics.com",
+                "script-src 'self'"
             };
         }
     }
