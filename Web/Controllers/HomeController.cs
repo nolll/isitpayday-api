@@ -17,7 +17,7 @@ namespace Web.Controllers
         [Route(Routes.Home)]
         public ActionResult Index()
         {
-            var pageModel = new PageModel(IsInProduction, _appSettings);
+            var pageModel = new PageModel(_appSettings);
             return View("~/Views/Home/Index.cshtml", pageModel);
         }
     }
