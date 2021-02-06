@@ -37,6 +37,10 @@ p.message{
     text-align: center;
 }
 
+p.next-payday{
+    text-align: center;
+}
+
 p.error{
     font-size: 1em;
     text-align: center;

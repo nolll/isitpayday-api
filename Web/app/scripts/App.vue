@@ -1,6 +1,7 @@
 ﻿<template>
     <div v-if="isReady">
         <p class="message"><span>{{message}}</span></p>
+        <p class="next-payday" v-if="!isPayday">{{nextPaydayMessage}}</p> 
         <p class="error" v-if="hasError"><span>{{error}}</span></p>
         <div class="settings">
             <h2>Settings</h2>
@@ -47,6 +48,7 @@
         private isOptionsReady = false;
         private isPaydayReady = false;
         private isPayday = false;
+        private nextPayday: Date | null = null;
         private localTime = '';
         private payday = defaults.payday;
         private timezone = defaults.timezone;
@@ -68,9 +70,17 @@
             return this.isPayday ? 'YES!!1!' : 'No =(';
         }
 
+        private get nextPaydayMessage(){
+            if(this.nextPayday === null)
+                return '';
+            
+            var formattedDate = dayjs(this.nextPayday).format('MMM D');
+            return `Next payday is ${formattedDate}`;
+        }
+
         private get formattedLocalTime() {
             if (this.localTime)
-                return dayjs(this.localTime).format('MMMM Do YYYY, HH:mm:ss');
+                return dayjs(this.localTime).format('MMM D YYYY, HH:mm:ss');
             return '';
         }
 
@@ -119,6 +129,7 @@
             try{
                 const response = await ajax.get(this.paydayUrl);
                 this.isPayday = response.data.isPayDay;
+                this.nextPayday = new Date(response.data.nextPayDay);
                 this.localTime = response.data.localTime;
                 this.isPaydayReady = true;
             }
