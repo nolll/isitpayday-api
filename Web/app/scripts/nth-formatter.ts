@@ -1,31 +1,24 @@
-function shouldFormatsAsFirst(n: number) {
-    return endsWith(n, '1') && !endsWith(n, '11');
+function shouldFormatsAsFirst(s: string) {
+    return s.endsWith('1') && !s.endsWith('11');
 }
 
-function shouldFormatsAsSecond(n: number) {
-    return endsWith(n, '2') && !endsWith(n, '12');
+function shouldFormatsAsSecond(s: string) {
+    return s.endsWith('2') && !s.endsWith('12');
 }
 
-function shouldFormatsAsThird(n: number) {
-    return endsWith(n, '3') && !endsWith(n, '13');
-}
-
-function endsWith(n: number, lookFor: string) {
-    return lastChar(n) === lookFor;
-}
-
-function lastChar(n: number) {
-    return n.toString().slice(-1);
+function shouldFormatsAsThird(s: string) {
+    return s.endsWith('3') && !s.endsWith('13');
 }
 
 export default {
     format(n: number) {
-        if (shouldFormatsAsFirst(n))
-            return `${n}st`;
-        if (shouldFormatsAsSecond(n))
-            return `${n}nd`;
-        if (shouldFormatsAsThird(n))
-            return `${n}rd`;
-        return `${n}th`;
+        const s = n.toString();
+        if (shouldFormatsAsFirst(s))
+            return `${s}st`;
+        if (shouldFormatsAsSecond(s))
+            return `${s}nd`;
+        if (shouldFormatsAsThird(s))
+            return `${s}rd`;
+        return `${s}th`;
     }
 };
