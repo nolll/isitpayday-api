@@ -3,7 +3,7 @@
         <h3>Payday</h3>
         <div class="payday-info">
             <p v-show="isFormVisible">
-                <select :value="value" v-on:input="updateValue">
+                <select :value="modelValue" v-on:input="updateValue">
                     <option v-for="p in paydays" :value="p.id" :key="p.id">{{p.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
@@ -16,67 +16,70 @@
     </div>
 </template>
 
-<script lang="ts">
-    import frequencies from '@/frequencies';
+<script setup lang="ts">
+    import frequencyTypes from '@/frequencyTypes';
     import nthFormatter from '@/nth-formatter';
     import weekdays from '@/weekdays';
     import { Payday } from '@/types/Payday';
-    import { Component, Prop, Vue } from 'vue-property-decorator';
+    import { computed, ref } from 'vue';
 
-    @Component
-    export default class PaydayForm extends Vue {
-        @Prop() value!: number;
-        @Prop() readonly frequencyId!: string;
-        isFormVisible = false;
+    const props = defineProps<{
+        modelValue: number,
+        frequencyId: string
+    }>();
 
-        get paydayName() {
-            return this.format(this.frequencyId, this.value);
+    const emit = defineEmits(['update:modelValue']);
+
+    const isFormVisible = ref(false);
+
+    const paydayName = computed(() => {
+        return format(props.frequencyId, props.modelValue);
+    });
+
+    const paydays = computed(() => {
+        return getPayDays(props.frequencyId);
+    });
+
+    const getPayDays = (frequencyId: string) => {
+        if (frequencyId === frequencyTypes.weekly)
+            return getWeeklyPaydays(frequencyId);
+        return getMonthlyPaydays(frequencyId);
+    }
+
+    const getWeeklyPaydays = (frequencyId: string) => {
+        return getPaydaysArray(frequencyId, 7);
+    }
+
+    const getMonthlyPaydays = (frequencyId: string) => {
+        return getPaydaysArray(frequencyId, 31);
+    }
+
+    const getPaydaysArray = (frequencyId: string, upperBound: number): Payday[] => {
+        const paydays: Payday[] = [];
+
+        for (let i = 1; i <= upperBound; i++) {
+            paydays.push({ id: i, name: format(frequencyId, i) });
         }
+        return paydays;
+    }
 
-        get paydays() {
-            return this.getPayDays(this.frequencyId);
-        }
+    const format = (frequencyId: string, payday: number) => {
+        if (frequencyId === frequencyTypes.weekly)
+            return weekdays.getName(payday);
+        return nthFormatter.format(payday);
+    }
 
-        updateValue(event: any){
-            this.close();
-            this.$emit('input', event.target.value);
-        }
+    const open = (): void => {
+        isFormVisible.value = true;
+    };
 
-        open() {
-            this.isFormVisible = true;
-        }
+    const close = (): void => {
+        isFormVisible.value = false;
+    };
 
-        close() {
-            this.isFormVisible = false;
-        }
-
-        private getPayDays(frequencyId: string) {
-            if (frequencyId === frequencies.weekly)
-                return this.getWeeklyPaydays(frequencyId);
-            return this.getMonthlyPaydays(frequencyId);
-        }
-
-        private getWeeklyPaydays(frequencyId: string) {
-            return this.getPaydaysArray(frequencyId, 7);
-        }
-
-        private getMonthlyPaydays(frequencyId: string) {
-            return this.getPaydaysArray(frequencyId, 31);
-        }
-
-        private getPaydaysArray(frequencyId: string, upperBound: number): Payday[] {
-            const paydays: Payday[] = [];
-
-            for (let i = 1; i <= upperBound; i++) {
-                paydays.push({ id: i, name: this.format(frequencyId, i) });
-            }
-            return paydays;
-        }
-
-        private format(frequencyId: string, payday: number) {
-            if (frequencyId === frequencies.weekly)
-                return weekdays.getName(payday);
-            return nthFormatter.format(payday);
-        }
+    const updateValue = (event: Event) => {
+        close();
+        const value = (event.target as HTMLInputElement).value;
+        emit('update:modelValue', value);
     }
 </script>

@@ -3,7 +3,7 @@
         <h3>Timezone</h3>
         <div class="timezone-info">
             <p v-show="isFormVisible">
-                <select :value="value" v-on:input="updateValue">
+                <select :value="modelValue" v-on:input="updateValue">
                     <option v-for="t in timezones" :value="t.id" :key="t.id">{{t.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
@@ -16,40 +16,43 @@
     </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
     import { Timezone } from '@/types/Timezone';
-    import { Component, Prop, Vue } from 'vue-property-decorator';
-    
-    @Component
-    export default class TimezoneForm extends Vue {
-        @Prop() value!: string;
-        @Prop() readonly timezones!: Timezone[];
-        isFormVisible = false;
-        
-        get timezoneName() {
-            for (const t of this.timezones) {
-                if (t.id === this.value) {
-                    return t.name;
-                }
+    import { computed, ref } from 'vue';
+
+    const props = defineProps<{
+        modelValue: string,
+        timezones: Timezone[]
+    }>();
+
+    const emit = defineEmits(['update:modelValue']);
+
+    const isFormVisible = ref(false);
+
+    const timezoneName = computed(() => {
+        for (const c of props.timezones) {
+            if (c.id === props.modelValue) {
+                return c.name;
             }
-            return '';
         }
+        return '';
+    });
 
-        updateValue(event: any){
-            this.close();
-            this.$emit('input', event.target.value);
-        }
+    const isReady = computed(() => {
+        return !!props.timezones.length;
+    });
 
-        get isReady(){
-            return this.timezones.length;
-        }
+    const open = (): void => {
+        isFormVisible.value = true;
+    };
 
-        open() {
-            this.isFormVisible = true;
-        }
+    const close = (): void => {
+        isFormVisible.value = false;
+    };
 
-        close() {
-            this.isFormVisible = false;
-        }
+    const updateValue = (event: Event) => {
+        close();
+        const value = (event.target as HTMLInputElement).value;
+        emit('update:modelValue', value);
     }
 </script>

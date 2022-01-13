@@ -3,7 +3,7 @@
         <h3>Frequency</h3>
         <div class="frequency-info">
             <p v-show="isFormVisible">
-                <select :value="value" v-on:input="updateValue">
+                <select :value="modelValue" v-on:input="updateValue">
                     <option v-for="f in frequencies" :value="f.id" :key="f.id">{{f.name}}</option>
                 </select>
                 <a href="#" @click.prevent="close">Cancel</a>
@@ -16,37 +16,39 @@
     </div>
 </template>
 
-<script lang="ts">
-    import { Component, Prop, Vue } from 'vue-property-decorator';
-    import frequencies from '../frequencies';
+<script setup lang="ts">
     import { Frequency } from '@/types/Frequency';
+    import { computed, ref } from 'vue';
 
-    @Component
-    export default class FrequencyForm extends Vue {
-        @Prop() value!: string;
-        @Prop() readonly frequencies!: Frequency[];
-        isFormVisible = false;
+    const props = defineProps<{
+        modelValue: string,
+        frequencies: Frequency[]
+    }>();
 
-        updateValue(event: any){
-            this.close();
-            this.$emit('input', event.target.value);
-        }
+    const emit = defineEmits(['update:modelValue']);
 
-        get frequencyName() {
-            for (const f of this.frequencies) {
-                if (f.id === this.value) {
-                    return f.name;
-                }
+    const isFormVisible = ref(false);
+
+    const frequencyName = computed(() => {
+        for (const c of props.frequencies) {
+            if (c.id === props.modelValue) {
+                return c.name;
             }
-            return "";
         }
+        return '';
+    });
 
-        open() {
-            this.isFormVisible = true;
-        }
+    const open = (): void => {
+        isFormVisible.value = true;
+    };
 
-        close() {
-            this.isFormVisible = false;
-        }
+    const close = (): void => {
+        isFormVisible.value = false;
+    };
+
+    const updateValue = (event: Event) => {
+        close();
+        const value = (event.target as HTMLInputElement).value;
+        emit('update:modelValue', value);
     }
 </script>
