@@ -65,6 +65,10 @@ p.error{
     padding: 0;
 }
 
+.settings select{
+    margin-right: 8px;
+}
+
 button{
     border: none;
     background: #000;
