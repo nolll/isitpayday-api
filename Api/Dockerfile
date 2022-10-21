@@ -1,11 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
     
-COPY Api/*.csproj ./Api
-RUN dotnet restore Api/Api.csproj
+COPY *.csproj ./
+RUN dotnet restore
     
 COPY . ./
-RUN dotnet publish Api/Api.csproj -c Release -o out
+RUN dotnet publish -c Release -o out
     
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
