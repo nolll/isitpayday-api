@@ -4,7 +4,7 @@ WORKDIR /app
     
 # Copy csproj and restore as distinct layers
 COPY Api/*.csproj ./Api
-RUN dotnet restore
+RUN dotnet restore Api/Api.csproj
     
 COPY . ./
 RUN dotnet publish Api/Api.csproj -c Release -o out
