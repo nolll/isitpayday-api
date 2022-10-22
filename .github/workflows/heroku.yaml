@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      # Check-out your repository.
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -19,5 +18,5 @@ jobs:
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          dockerfile_directory: ./Api/
+          dockerfile_directory: ./
           dockerfile_name: Dockerfile
