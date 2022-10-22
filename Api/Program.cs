@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Web;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+builder.WebHost.ConfigureKestrel(options =>
 {
-    public static void Main(string[] args)
+    var strPort = System.Environment.GetEnvironmentVariable("PORT");
+    if(!string.IsNullOrEmpty(strPort))
     {
-        CreateWebHostBuilder(args).Build().Run();
+        var port = int.Parse(strPort);
+        options.ListenAnyIP(port);
     }
+});
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>();
-}
+var app = builder.Build();
