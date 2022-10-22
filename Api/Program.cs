@@ -1,16 +1,25 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace Web;
 
-builder.WebHost.ConfigureKestrel(options =>
+public class Program
 {
-    var strPort = System.Environment.GetEnvironmentVariable("PORT");
-    if(!string.IsNullOrEmpty(strPort))
+    public static void Main(string[] args)
     {
-        var port = int.Parse(strPort);
-        options.ListenAnyIP(port);
+        CreateWebHostBuilder(args).Build().Run();
     }
-});
 
-var app = builder.Build();
+    public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    var port = Environment.GetEnvironmentVariable("PORT");
+
+                    if(!string.IsNullOrEmpty(port))
+                        webBuilder.UseStartup<Startup>().UseUrls("http://*:" + port);
+                    else
+                        webBuilder.UseStartup<Startup>();
+                });
+}
