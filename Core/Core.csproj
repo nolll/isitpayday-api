@@ -5,8 +5,4 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="TimeZoneConverter" Version="6.0.1" />
-  </ItemGroup>
-
 </Project>
