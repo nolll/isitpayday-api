@@ -1,9 +1,9 @@
 ﻿using System;
+using Api.Models;
 using Core.UseCases;
 using Microsoft.AspNetCore.Mvc;
-using Web.Models;
 
-namespace Web.Controllers;
+namespace Api.Controllers;
 
 public class WeeklyController : BaseController
 {

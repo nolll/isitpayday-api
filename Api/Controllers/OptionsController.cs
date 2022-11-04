@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web.Models;
+﻿using Api.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers;
+namespace Api.Controllers;
 
 public class OptionsController : BaseController
 {

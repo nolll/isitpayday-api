@@ -3,7 +3,7 @@ using System.Linq;
 using Core.UseCases;
 using JetBrains.Annotations;
 
-namespace Web.Models;
+namespace Api.Models;
 
 public class OptionsModel
 {

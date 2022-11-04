@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Web.Models;
+namespace Api.Models;
 
 public class CountryModel
 {

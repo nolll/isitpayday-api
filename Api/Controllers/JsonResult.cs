@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers;
+namespace Api.Controllers;
 
 public class JsonResult : ActionResult
 {

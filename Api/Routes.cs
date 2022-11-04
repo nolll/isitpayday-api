@@ -1,4 +1,4 @@
-﻿namespace Web;
+﻿namespace Api;
 
 public static class Routes
 {

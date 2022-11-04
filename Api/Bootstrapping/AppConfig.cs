@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Api.Middleware;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Web.Middleware;
 
-namespace Web.Bootstrapping;
+namespace Api.Bootstrapping;
 
 public class AppConfig
 {

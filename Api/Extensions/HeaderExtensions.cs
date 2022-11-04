@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Web.Extensions;
+namespace Api.Extensions;
 
 public static class HeaderExtensions
 {

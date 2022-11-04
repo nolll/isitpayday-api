@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Api.Settings;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Web.Settings;
 
-namespace Web.Bootstrapping;
+namespace Api.Bootstrapping;
 
 public class ServiceConfig
 {

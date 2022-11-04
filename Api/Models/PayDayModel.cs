@@ -2,7 +2,7 @@ using System;
 using Core.UseCases.Shared;
 using JetBrains.Annotations;
 
-namespace Web.Models;
+namespace Api.Models;
 
 public class PayDayModel
 {

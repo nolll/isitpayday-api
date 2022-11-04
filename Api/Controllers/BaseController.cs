@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web.Plumbing;
+﻿using Api.Plumbing;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers;
+namespace Api.Controllers;
 
 public abstract class BaseController : Controller
 {

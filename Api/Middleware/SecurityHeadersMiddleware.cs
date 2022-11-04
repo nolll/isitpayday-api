@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.Extensions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
-using Web.Extensions;
 
-namespace Web.Middleware;
+namespace Api.Middleware;
 
 [UsedImplicitly]
 public class SecurityHeadersMiddleware

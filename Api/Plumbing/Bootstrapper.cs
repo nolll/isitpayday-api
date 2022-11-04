@@ -1,4 +1,4 @@
-namespace Web.Plumbing;
+namespace Api.Plumbing;
 
 public class Bootstrapper
 {

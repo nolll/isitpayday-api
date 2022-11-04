@@ -1,4 +1,4 @@
-﻿namespace Web.Settings;
+﻿namespace Api.Settings;
 
 public class AppSettings
 {
