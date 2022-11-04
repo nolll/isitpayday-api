@@ -6,9 +6,9 @@ public static class TestData
 {
     public static class Dates
     {
-        public static DateTime UnblockedFriday = new DateTime(2015, 12, 18, 12, 0, 0, DateTimeKind.Utc);
-        public static DateTime DayBeforeChristmasEve = new DateTime(2015, 12, 23, 12, 0, 0, DateTimeKind.Utc);
-        public static DateTime LeapYearFeb29 = new DateTime(2016, 2, 29, 12, 0, 0, DateTimeKind.Utc);
+        public static DateTime UnblockedFriday = new(2015, 12, 18, 12, 0, 0, DateTimeKind.Utc);
+        public static DateTime DayBeforeChristmasEve = new(2015, 12, 23, 12, 0, 0, DateTimeKind.Utc);
+        public static DateTime LeapYearFeb29 = new(2016, 2, 29, 12, 0, 0, DateTimeKind.Utc);
     }
 
     public static class Timezones

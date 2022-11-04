@@ -1,4 +1,5 @@
-﻿using Core.Exceptions;
+﻿using System;
+using Core.Exceptions;
 using Core.Services;
 using NUnit.Framework;
 using Tests.Common;
@@ -12,20 +13,20 @@ public class TimezoneServiceTests
     {
         var timezone = TimezoneService.GetTimezone(TestData.Timezones.WindowsWesternEurope);
 
-        Assert.AreEqual(TestData.Timezones.WindowsWesternEurope, timezone.Id);
+        Assert.AreEqual("01:00:00", timezone.BaseUtcOffset.ToString());
     }
 
     [Test]
-    public void GetTimezone_IanaTimezoneId_ReturnTimezone()
+    public void GetTimezone_IanaTimezoneId_ReturnsIanaTimezone()
     {
         var timezone = TimezoneService.GetTimezone(TestData.Timezones.IanaEuropeStockholm);
 
-        Assert.AreEqual(TestData.Timezones.WindowsWesternEurope, timezone.Id);
+        Assert.AreEqual("01:00:00", timezone.BaseUtcOffset.ToString());
     }
 
     [Test]
     public void GetTimezone_InvalidTimezoneId_ThrowsException()
     {
-        Assert.Throws<TimezoneNotFoundException>(() => TimezoneService.GetTimezone(TestData.Timezones.Invalid));
+        Assert.Throws<TimeZoneNotFoundException>(() => TimezoneService.GetTimezone(TestData.Timezones.Invalid));
     }
 }
