@@ -8,28 +8,16 @@ COPY Core/*.csproj ./Core/
 COPY Api/*.csproj ./Api/
 COPY Tests.Common/*.csproj ./Tests.Common/
 COPY Core.Tests/*.csproj ./Core.Tests/
-
 RUN dotnet restore .
-COPY . .
-WORKDIR /Core
-RUN dotnet build -c Release -o /app
 
-WORKDIR /Api
-RUN dotnet build -c Release -o /app
-
-WORKDIR /Tests.Common
-RUN dotnet build -c Release -o /app
-
-WORKDIR /Core.Tests
-RUN dotnet build -c Release -o /app
-
-FROM build AS publish
-RUN dotnet publish -c Release -o /app
+COPY . ./
+RUN dotnet test Core.Tests -c Release
+RUN dotnet publish Api -c Release -o /out
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=build /out .
 ENTRYPOINT ["dotnet", "Api.dll"]
 
-#docker build --t isitpayday-api .
+#docker build -t isitpayday-api .
 #docker run -d -p 8080:80 isitpayday-api
