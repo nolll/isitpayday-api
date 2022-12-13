@@ -12,10 +12,10 @@ public class JsonResult : ActionResult
     }
 
     [UsedImplicitly]
-    public Encoding ContentEncoding { get; set; }
+    public Encoding? ContentEncoding { get; set; }
 
     [UsedImplicitly]
-    public string ContentType { get; set; }
+    public string? ContentType { get; set; }
 
     [UsedImplicitly]
     public object Data { get; set; }

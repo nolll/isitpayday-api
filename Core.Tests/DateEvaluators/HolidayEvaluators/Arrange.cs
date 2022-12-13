@@ -8,7 +8,7 @@ namespace Core.Tests.DateEvaluators.HolidayEvaluators;
 
 public class Arrange
 {
-    private Country _country;
+    private Country? _country;
     protected virtual string CountryCode => "";
     protected virtual string CultureName => "";
 

@@ -37,26 +37,26 @@ public class MonthlyPayday
         }
     }
 
-    private void ValidateRequestOrThrow(Request request)
+    private static void ValidateRequestOrThrow(Request request)
     {
         ValidatePaydayOrThrow(request.PayDay);
         ValidateCountryOrThrow(request.CountryCode);
         ValidateTimezoneOrThrow(request.TimezoneId);
     }
 
-    private void ValidatePaydayOrThrow(int payday)
+    private static void ValidatePaydayOrThrow(int payday)
     {
         if (payday < 1 || payday > 31)
             throw new ArgumentOutOfRangeException(nameof(payday), payday, "Payday has to be between 1 and 31");
     }
 
-    private void ValidateCountryOrThrow(string countryCode)
+    private static void ValidateCountryOrThrow(string countryCode)
     {
         if (string.IsNullOrEmpty(countryCode))
             throw new ArgumentException("No country code provided", nameof(countryCode));
     }
 
-    private void ValidateTimezoneOrThrow(string timezoneId)
+    private static void ValidateTimezoneOrThrow(string timezoneId)
     {
         if (string.IsNullOrEmpty(timezoneId))
             throw new ArgumentException("No timezone provided", nameof(timezoneId));
