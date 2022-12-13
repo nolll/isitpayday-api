@@ -2,7 +2,7 @@ using System;
 
 namespace Core.WeekendRules;
 
-public class WeekendRule
+public static class WeekendRule
 {
     public static bool IsWeekend(DateTime userTime)
     {
