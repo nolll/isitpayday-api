@@ -9,7 +9,7 @@ public class OptionsController : BaseController
     [HttpGet]
     [Route(Routes.ApiOptions)]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public ActionResult Index()
+    public ActionResult Options()
     {
         var optionsResult = UseCase.Options.Execute();
 
@@ -42,5 +42,13 @@ public class OptionsController : BaseController
         var models = optionsResult.FrequencyOptions.Select(o => new FrequencyModel(o.Id, o.Name)).ToList();
 
         return Json(models);
+    }
+
+    [HttpGet]
+    [Route(Routes.ApiOptionsOld)]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public ActionResult OptionsOld()
+    {
+        return Options();
     }
 }
