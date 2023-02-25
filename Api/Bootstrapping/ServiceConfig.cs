@@ -1,8 +1,12 @@
-﻿using Api.Settings;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Api.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace Api.Bootstrapping;
 
@@ -23,6 +27,7 @@ public class ServiceConfig
         AddLogging();
         AddDependencies();
         AddMvc();
+        AddSwagger();
     }
 
     private void AddCompression()
@@ -58,6 +63,18 @@ public class ServiceConfig
         _services.AddMvc(options =>
         {
             options.EnableEndpointRouting = false;
+        });
+    }
+
+    private void AddSwagger()
+    {
+        _services.AddSwaggerGen(c =>
+        {
+            var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+            var xmlFile = $"{assemblyName}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "IsItPayday Api", Version = "v1" });
+            c.IncludeXmlComments(xmlPath);
         });
     }
 }
