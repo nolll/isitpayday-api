@@ -17,7 +17,7 @@ public class OptionsController : BaseController
     }
 
     /// <summary>
-    /// Get all possible countries.
+    /// Get all implemented countries.
     /// </summary>
     /// <returns>A list of countries.</returns>
     [HttpGet]
@@ -31,7 +31,7 @@ public class OptionsController : BaseController
     }
 
     /// <summary>
-    /// Get all payday frequencies.
+    /// Get all implemented payday frequencies.
     /// </summary>
     /// <returns>A list of frequencies.</returns>
     [HttpGet]
