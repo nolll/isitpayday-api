@@ -25,6 +25,7 @@ public class AppConfig
         ConfigureExceptions();
         ConfigureHttps();
         ConfigureErrors();
+        ConfigureSwagger();
         ConfigureCustomHeaders();
         ConfigureMvc();
         ConfigureStaticFiles();
@@ -59,6 +60,12 @@ public class AppConfig
             //_app.UseExceptionHandler(errorUrl);
             //_app.UseMiddleware<ExceptionLoggingMiddleware>();
         }
+    }
+
+    private void ConfigureSwagger()
+    {
+        _app.UseSwagger();
+        _app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1"); });
     }
 
     private void ConfigureCustomHeaders()

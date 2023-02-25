@@ -6,8 +6,9 @@ public class HomeController : BaseController
 {
     [HttpGet]
     [Route(Routes.Home)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public ActionResult Index()
     {
-        return Redirect("/api");
+        return Redirect("/swagger");
     }
 }
