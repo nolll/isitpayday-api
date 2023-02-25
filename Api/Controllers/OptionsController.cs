@@ -51,4 +51,20 @@ public class OptionsController : BaseController
     {
         return Options();
     }
+
+    [HttpGet]
+    [Route(Routes.ApiCountriesOld)]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public ActionResult CountriesOld()
+    {
+        return Countries();
+    }
+
+    [HttpGet]
+    [Route(Routes.ApiFrequenciesOld)]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public ActionResult FrequenciesOld()
+    {
+        return Frequencies();
+    }
 }

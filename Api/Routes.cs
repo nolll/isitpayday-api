@@ -14,4 +14,6 @@ public static class Routes
     public const string ApiWeeklyOld = "api/weekly";
     public const string ApiMonthlyOld = "api/monthly";
     public const string ApiOptionsOld = "api/options";
+    public const string ApiFrequenciesOld = "api/frequencies";
+    public const string ApiCountriesOld = "api/countries";
 }
