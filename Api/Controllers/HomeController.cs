@@ -9,6 +9,6 @@ public class HomeController : BaseController
     [ApiExplorerSettings(IgnoreApi = true)]
     public ActionResult Index()
     {
-        return Redirect("/swagger");
+        return Redirect("/swagger/index.html");
     }
 }
