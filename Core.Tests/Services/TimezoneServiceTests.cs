@@ -13,7 +13,7 @@ public class TimezoneServiceTests
     {
         var timezone = TimezoneService.GetTimezone(TestData.Timezones.WindowsWesternEurope);
 
-        Assert.AreEqual("01:00:00", timezone.BaseUtcOffset.ToString());
+        Assert.That(timezone.BaseUtcOffset.ToString(), Is.EqualTo("01:00:00"));
     }
 
     [Test]
@@ -21,7 +21,7 @@ public class TimezoneServiceTests
     {
         var timezone = TimezoneService.GetTimezone(TestData.Timezones.IanaEuropeStockholm);
 
-        Assert.AreEqual("01:00:00", timezone.BaseUtcOffset.ToString());
+        Assert.That(timezone.BaseUtcOffset.ToString(), Is.EqualTo("01:00:00"));
     }
 
     [Test]

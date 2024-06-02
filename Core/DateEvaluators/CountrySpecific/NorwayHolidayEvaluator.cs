@@ -5,8 +5,7 @@ namespace Core.DateEvaluators.CountrySpecific;
 
 public class NorwayHolidayEvaluator : HolidayEvaluator
 {
-    protected override IEnumerable<HolidayRule> HolidayRules => new List<HolidayRule>
-    {
+    protected override IEnumerable<HolidayRule> HolidayRules => [
         new NewYearsDayRule(),
         new MaundyThursdayRule(),
         new GoodFridayRule(),
@@ -19,5 +18,5 @@ public class NorwayHolidayEvaluator : HolidayEvaluator
         new ChristmasDayRule(),
         new BoxingDayRule(),
         new NewYearsEveRule()
-    };
+    ];
 }

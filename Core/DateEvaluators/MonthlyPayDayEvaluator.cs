@@ -3,22 +3,11 @@ using Core.Classes;
 
 namespace Core.DateEvaluators;
 
-public class MonthlyPayDayEvaluator
+public class MonthlyPayDayEvaluator(Country country, DateTime utcTime, TimeZoneInfo timezone, int day)
 {
-    private readonly DateTime _utcTime;
-    private readonly TimeZoneInfo _timezone;
-    private readonly int _payDay;
-    private readonly BlockedEvaluator _blockedEvaluator;
+    private readonly BlockedEvaluator _blockedEvaluator = new(country);
 
-    public MonthlyPayDayEvaluator(Country country, DateTime utcTime, TimeZoneInfo timezone, int payDay)
-    {
-        _utcTime = utcTime;
-        _timezone = timezone;
-        _payDay = payDay;
-        _blockedEvaluator = new BlockedEvaluator(country);
-    }
-
-    private DateTime LocalTime => TimeZoneInfo.ConvertTime(_utcTime, _timezone);
+    private DateTime LocalTime => TimeZoneInfo.ConvertTime(utcTime, timezone);
     public bool IsPayDay => LocalTime.Date == NextPayDay;
 
     public DateTime NextPayDay
@@ -46,7 +35,7 @@ public class MonthlyPayDayEvaluator
 
     private int AdjustPayDayForShortMonths(DateTime localTime)
     {
-        var payDay = _payDay;
+        var payDay = day;
         while (!IsMonthLongEnough(localTime, payDay))
         {
             payDay--;
@@ -54,7 +43,7 @@ public class MonthlyPayDayEvaluator
         return payDay;
     }
 
-    private bool IsMonthLongEnough(DateTime time, int payDay)
+    private static bool IsMonthLongEnough(DateTime time, int payDay)
     {
         try
         {

@@ -3,10 +3,7 @@ using Core.WeekendRules;
 
 namespace Core.DateEvaluators;
 
-public class WeekendEvaluator
+public static class WeekendEvaluator
 {
-    public static bool IsWeekend(DateTime userTime)
-    {
-        return WeekendRule.IsWeekend(userTime);
-    }
+    public static bool IsWeekend(DateTime userTime) => WeekendRule.IsWeekend(userTime);
 }

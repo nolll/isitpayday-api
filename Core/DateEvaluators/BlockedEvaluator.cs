@@ -3,14 +3,9 @@ using Core.Classes;
 
 namespace Core.DateEvaluators;
 
-public class BlockedEvaluator
+public class BlockedEvaluator(Country country)
 {
-    private readonly HolidayEvaluator _holidayEvaluator;
-
-    public BlockedEvaluator(Country country)
-    {
-        _holidayEvaluator = HolidayEvaluator.Create(country);
-    }
+    private readonly HolidayEvaluator _holidayEvaluator = HolidayEvaluator.Create(country);
 
     public bool IsBlocked(DateTime userTime)
     {

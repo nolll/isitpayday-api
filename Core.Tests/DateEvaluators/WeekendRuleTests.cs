@@ -14,7 +14,7 @@ public class WeekendRuleTests
 
         var result = WeekendRule.IsWeekend(friday);
 
-        Assert.IsFalse(result);
+        Assert.That(result, Is.False);
     }
 
     [Test]
@@ -24,7 +24,7 @@ public class WeekendRuleTests
 
         var result = WeekendRule.IsWeekend(saturday);
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -34,7 +34,7 @@ public class WeekendRuleTests
 
         var result = WeekendRule.IsWeekend(sunday);
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -44,6 +44,6 @@ public class WeekendRuleTests
 
         var result = WeekendRule.IsWeekend(monday);
 
-        Assert.IsFalse(result);
+        Assert.That(result, Is.False);
     }
 }

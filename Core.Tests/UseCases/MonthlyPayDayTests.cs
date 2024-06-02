@@ -16,7 +16,7 @@ public class MonthlyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.IsTrue(result.IsPayDay);
+        Assert.That(result.IsPayDay, Is.True);
     }
 
     [Test]
@@ -28,7 +28,7 @@ public class MonthlyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.IsFalse(result.IsPayDay);
+        Assert.That(result.IsPayDay, Is.False);
     }
 
     [Test]
@@ -39,7 +39,7 @@ public class MonthlyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.IsTrue(result.IsPayDay);
+        Assert.That(result.IsPayDay, Is.True);
     }
 
     [Test]
@@ -52,7 +52,7 @@ public class MonthlyPayDayTests
         var result = sut.Execute(request);
 
         // todo: test one more time zone
-        Assert.AreEqual(time, result.LocalTime);
+        Assert.That(result.LocalTime, Is.EqualTo(time));
     }
 
     private MonthlyPayday GetSut()

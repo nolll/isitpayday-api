@@ -18,7 +18,7 @@ public class BlockedEvaluatorTests
 
         var result = new BlockedEvaluator(_defaultCountry).IsBlocked(notBlockedDate);
 
-        Assert.IsFalse(result);
+        Assert.That(result, Is.False);
     }
 
     [Test]
@@ -28,7 +28,7 @@ public class BlockedEvaluatorTests
 
         var result = new BlockedEvaluator(_sweden).IsBlocked(excludedDate);
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -38,7 +38,7 @@ public class BlockedEvaluatorTests
 
         var result = new BlockedEvaluator(_defaultCountry).IsBlocked(weekendDate);
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 
     [Test]
@@ -48,6 +48,6 @@ public class BlockedEvaluatorTests
 
         var result = new BlockedEvaluator(_defaultCountry).IsBlocked(blockedWeekendDate);
 
-        Assert.IsTrue(result);
+        Assert.That(result, Is.True);
     }
 }

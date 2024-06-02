@@ -15,7 +15,7 @@ public class WeeklyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.IsTrue(result.IsPayDay);
+        Assert.That(result.IsPayDay, Is.True);
     }
 
     [Test]
@@ -26,7 +26,7 @@ public class WeeklyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.IsFalse(result.IsPayDay);
+        Assert.That(result.IsPayDay, Is.False);
     }
 
     [Test]
@@ -37,7 +37,7 @@ public class WeeklyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.IsTrue(result.IsPayDay);
+        Assert.That(result.IsPayDay, Is.True);
     }
 
     private WeeklyPayday GetSut()

@@ -2,16 +2,11 @@
 
 namespace Tests.Common.FakeClasses;
 
-public class CountryInTest : Country
-{
-    public CountryInTest(
-        string id = "",
-        string cultureName = "",
-        string name = "") : 
-        base(
-            id, 
-            cultureName,
-            name)
-    {
-    }
-}
+public record CountryInTest(
+    string Id = "",
+    string CultureName = "",
+    string Name = "")
+    : Country(
+        Id,
+        CultureName,
+        Name);

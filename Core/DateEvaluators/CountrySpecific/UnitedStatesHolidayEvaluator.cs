@@ -6,8 +6,7 @@ namespace Core.DateEvaluators.CountrySpecific;
 
 public class UnitedStatesHolidayEvaluator : HolidayEvaluator
 {
-    protected override IEnumerable<HolidayRule> HolidayRules => new List<HolidayRule>
-    {
+    protected override IEnumerable<HolidayRule> HolidayRules => [
         new NewYearsDayRule().Adjust(Adjust.SundayToMonday),
         new MartinLutherKingJrsBirthdayRule(),
         new PresidentsDayRule(),
@@ -18,5 +17,5 @@ public class UnitedStatesHolidayEvaluator : HolidayEvaluator
         new VeteransDayRule().Adjust(Adjust.SaturdayToFriday).Adjust(Adjust.SundayToMonday),
         new ThanksgivingDayRule(),
         new ChristmasDayRule().Adjust(Adjust.SundayToMonday)
-    };
+    ];
 }
