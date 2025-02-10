@@ -2,17 +2,11 @@ using JetBrains.Annotations;
 
 namespace Api.Models;
 
-public class FrequencyModel
+public class FrequencyModel(string id, string name)
 {
     [UsedImplicitly]
-    public string Id { get; }
+    public string Id { get; } = id;
 
     [UsedImplicitly]
-    public string Name { get; }
-
-    public FrequencyModel(string id, string name)
-    {
-        Id = id;
-        Name = name;
-    }
+    public string Name { get; } = name;
 }

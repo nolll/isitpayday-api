@@ -5,11 +5,6 @@ namespace Api.Controllers;
 
 public abstract class BaseController : Controller
 {
-    private readonly Bootstrapper _bootstrapper;
+    private readonly Bootstrapper _bootstrapper = new();
     protected UseCaseContainer UseCase => _bootstrapper.UseCases;
-
-    protected BaseController()
-    {
-        _bootstrapper = new Bootstrapper();
-    }
 }

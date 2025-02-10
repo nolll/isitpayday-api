@@ -4,13 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-public class JsonResult : ActionResult
+public class JsonResult(object data) : ActionResult
 {
-    public JsonResult(object data)
-    {
-        Data = data;
-    }
-
     [UsedImplicitly]
     public Encoding? ContentEncoding { get; set; }
 
@@ -18,5 +13,5 @@ public class JsonResult : ActionResult
     public string? ContentType { get; set; }
 
     [UsedImplicitly]
-    public object Data { get; set; }
+    public object Data { get; set; } = data;
 }

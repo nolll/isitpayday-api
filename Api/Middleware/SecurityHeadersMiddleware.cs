@@ -7,21 +7,14 @@ using Microsoft.AspNetCore.Http;
 namespace Api.Middleware;
 
 [UsedImplicitly]
-public class SecurityHeadersMiddleware
+public class SecurityHeadersMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public SecurityHeadersMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
     [UsedImplicitly]
     public async Task InvokeAsync(HttpContext httpContext)
     {
         SetDefaultSecurityHeaders(httpContext);
         SetCspSecurityHeaders(httpContext);
-        await _next(httpContext);
+        await next(httpContext);
     }
 
     private static void SetDefaultSecurityHeaders(HttpContext httpContext)
@@ -33,23 +26,14 @@ public class SecurityHeadersMiddleware
         httpContext.AddHeader("Access-Control-Allow-Origin", "*");
     }
 
-    private static void SetCspSecurityHeaders(HttpContext httpContext)
-    {
-        var csp = GetCsp();
-        httpContext.AddHeader("Content-Security-Policy", csp);
-    }
+    private static void SetCspSecurityHeaders(HttpContext httpContext) => 
+        httpContext.AddHeader("Content-Security-Policy", Csp);
 
-    private static string GetCsp()
-    {
-        return string.Join("; ", GetDefaultCspValues());
-    }
+    private static string Csp => string.Join("; ", DefaultCspValues);
 
-    private static IEnumerable<string> GetDefaultCspValues()
+    private static IEnumerable<string> DefaultCspValues => new List<string>
     {
-        return new List<string>
-        {
-            "default-src 'self'",
-            "script-src 'self'"
-        };
-    }
+        "default-src 'self'",
+        "script-src 'self'"
+    };
 }

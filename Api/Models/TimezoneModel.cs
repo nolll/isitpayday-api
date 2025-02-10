@@ -2,17 +2,11 @@ using JetBrains.Annotations;
 
 namespace Api.Models;
 
-public class TimezoneModel
+public class TimezoneModel(string id, string name)
 {
     [UsedImplicitly]
-    public string Id { get; }
+    public string Id { get; } = id;
 
     [UsedImplicitly]
-    public string Name { get; }
-
-    public TimezoneModel(string id, string name)
-    {
-        Id = id;
-        Name = name;
-    }
+    public string Name { get; } = name;
 }

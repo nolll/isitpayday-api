@@ -4,7 +4,7 @@ namespace Api.Plumbing;
 
 public class UseCaseContainer
 {
-    public MonthlyPayday MonthlyPayday => new MonthlyPayday();
-    public WeeklyPayday WeeklyPayday => new WeeklyPayday();
-    public Options Options => new Options();
+    public MonthlyPayday MonthlyPayday => new();
+    public WeeklyPayday WeeklyPayday => new();
+    public Options Options => new();
 }

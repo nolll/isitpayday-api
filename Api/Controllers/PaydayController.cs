@@ -52,44 +52,26 @@ public class PaydayController : BaseController
     [HttpGet]
     [Route(Routes.ApiMonthlyOld)]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public ActionResult MonthlyOld(int? payday, string country, string timezone)
-    {
-        return Monthly(payday, country, timezone);
-    }
+    public ActionResult MonthlyOld(int? payday, string country, string timezone) => Monthly(payday, country, timezone);
 
     [HttpGet]
     [Route(Routes.ApiWeeklyOld)]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public ActionResult WeeklyOld(int? payday, string country, string timezone)
-    {
-        return Weekly(payday, country, timezone);
-    }
+    public ActionResult WeeklyOld(int? payday, string country, string timezone) => Weekly(payday, country, timezone);
 
-    private static int GetMonthlyPaydayParam(int? payday)
-    {
-        return payday is null or < 1 or > 31
-            ? 25
-            : payday.Value;
-    }
+    private static int GetMonthlyPaydayParam(int? payday) => payday is null or < 1 or > 31
+        ? 25
+        : payday.Value;
 
-    private static int GetWeeklyPaydayParam(int? payday)
-    {
-        return payday is null or < 1 or > 7
-            ? 5
-            : payday.Value;
-    }
+    private static int GetWeeklyPaydayParam(int? payday) => payday is null or < 1 or > 7
+        ? 5
+        : payday.Value;
 
-    private static string GetCountryParam(string country)
-    {
-        return string.IsNullOrEmpty(country)
-            ? "SE"
-            : country.ToUpper();
-    }
+    private static string GetCountryParam(string country) => string.IsNullOrEmpty(country)
+        ? "SE"
+        : country.ToUpper();
 
-    private static string GetTimezoneParam(string timezone)
-    {
-        return string.IsNullOrEmpty(timezone)
-            ? "Europe/Stockholm"
-            : timezone;
-    }
+    private static string GetTimezoneParam(string timezone) => string.IsNullOrEmpty(timezone)
+        ? "Europe/Stockholm"
+        : timezone;
 }
