@@ -1,13 +1,14 @@
 ﻿using System;
+using AwesomeAssertions;
 using Core.UseCases;
-using NUnit.Framework;
 using Tests.Common;
+using Xunit;
 
 namespace Core.Tests.UseCases;
 
 public class MonthlyPayDayTests
 {
-    [Test]
+    [Fact]
     public void Execute_TodayIsPayDay_IsTrue()
     {
         var time = new DateTime(2000, 1, 25, 12, 0, 0, DateTimeKind.Utc);
@@ -16,10 +17,10 @@ public class MonthlyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.That(result.IsPayDay, Is.True);
+        result.IsPayDay.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Execute_TodayIsNotPayDay_IsFalse()
     {
         var time = new DateTime(2000, 1, 24, 12, 0, 0, DateTimeKind.Utc);
@@ -28,10 +29,10 @@ public class MonthlyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.That(result.IsPayDay, Is.False);
+        result.IsPayDay.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void Execute_TodayIsNotPayDayButMonthIsTooShortAndFallbacks_IsTrue()
     {
         var request = new MonthlyPayday.Request(31, "SE", "UTC", TestData.Dates.LeapYearFeb29);
@@ -39,10 +40,10 @@ public class MonthlyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.That(result.IsPayDay, Is.True);
+        result.IsPayDay.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Execute_UserTimeIsSet()
     {
         var time = new DateTime(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
@@ -52,7 +53,7 @@ public class MonthlyPayDayTests
         var result = sut.Execute(request);
 
         // todo: test one more time zone
-        Assert.That(result.LocalTime, Is.EqualTo(time));
+        result.LocalTime.Should().Be(time);
     }
 
     private MonthlyPayday GetSut()

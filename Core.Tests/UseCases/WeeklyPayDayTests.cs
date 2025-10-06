@@ -1,13 +1,14 @@
-﻿using Core.Classes;
+﻿using AwesomeAssertions;
+using Core.Classes;
 using Core.UseCases;
-using NUnit.Framework;
 using Tests.Common;
+using Xunit;
 
 namespace Core.Tests.UseCases;
 
 public class WeeklyPayDayTests
 {
-    [Test]
+    [Fact]
     public void Execute_TodayIsPayDay_IsTrue()
     {
         var request = new WeeklyPayday.Request((int)Weekday.Friday, "SE", TestData.Timezones.Utc, TestData.Dates.UnblockedFriday);
@@ -15,10 +16,10 @@ public class WeeklyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.That(result.IsPayDay, Is.True);
+        result.IsPayDay.Should().BeTrue();
     }
 
-    [Test]
+    [Fact]
     public void Execute_TodayIsNotPayDay_IsFalse()
     {
         var request = new WeeklyPayday.Request((int)Weekday.Thursday, "SE", TestData.Timezones.Utc, TestData.Dates.UnblockedFriday);
@@ -26,10 +27,10 @@ public class WeeklyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.That(result.IsPayDay, Is.False);
+        result.IsPayDay.Should().BeFalse();
     }
 
-    [Test]
+    [Fact]
     public void Execute_TomorrowIsChristmasEve_TodayIsPayday()
     {
         var request = new WeeklyPayday.Request((int)Weekday.Thursday, "SE", TestData.Timezones.Utc, TestData.Dates.DayBeforeChristmasEve);
@@ -37,7 +38,7 @@ public class WeeklyPayDayTests
         var sut = GetSut();
         var result = sut.Execute(request);
 
-        Assert.That(result.IsPayDay, Is.True);
+        result.IsPayDay.Should().BeTrue();
     }
 
     private WeeklyPayday GetSut()
